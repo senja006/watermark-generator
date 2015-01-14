@@ -1,3 +1,9 @@
+// Module watermark
+
+// Require 	JQuery-1.11.0.min.js,
+// 					jquery-ui.min.js
+
+
 'use strict';
 
 var watermark = (function(){
@@ -11,7 +17,7 @@ var watermark = (function(){
 			$backgroundURL = $('#backgroundURL'),
 			$watermarkURL = $('#watermarkURL');
 
-	var app = {
+	var module = {
 		
 		// инициализация
 		initialize: function(){
@@ -21,9 +27,9 @@ var watermark = (function(){
 			$dragBoxes.draggable({
 				cursor: 'move',
 				snap: '.result',
-				drag: app.onDragWatermark // событие 'drag'
+				drag: module.onDragWatermark // событие 'drag'
 			});
-			app.setupListeners();
+			module.setupListeners();
 		},
 
 
@@ -50,7 +56,7 @@ var watermark = (function(){
 	};
 
 	return {
-		init: app.initialize
+		init: module.initialize
 	};
 
 }());
