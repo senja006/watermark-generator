@@ -1,6 +1,6 @@
 'use strict';
 
-(function(){
+var watermark = (function(){
 
 	var $dragBoxes = $('.drag'),
 			$opacityField = $('#opacity-field'),
@@ -21,19 +21,19 @@
 			$dragBoxes.draggable({
 				cursor: 'move',
 				snap: '.result',
-				drag: app.updateCoordFields
+				drag: app.onDragWatermark // событие 'drag'
 			});
-			this.setupListeners();
+			app.setupListeners();
 		},
 
 
-		// установка обрабртчиков
+		// установка обработчиков
 		setupListeners: function(){
-			$opacity.on('change', this.opacityChange);
+			$opacity.on('change', this.onOpacityChange);
 		},
 
-		// обработчик изменения Opacity watermark
-		opacityChange: function(e){
+		// обработчик изменения контрола Opacity watermark
+		onOpacityChange: function(e){
 			var opacity = $(e.target).val() / 100; 
 			$dragBoxes.css({
 				'opacity': opacity
@@ -42,14 +42,18 @@
 		},
 
 		// обработчик события 'drag' плагина 'draggable'
-		updateCoordFields: function(e, ui){
+		onDragWatermark: function(e, ui){
 			$xVal.text(ui.position.left  + 1);
 			$yVal.text(ui.position.top + 1);
 		}
 
 	};
 
-	app.initialize();
+	return {
+		init: app.initialize
+	};
 
 }());
+
+watermark.init();
 
