@@ -1,0 +1,42 @@
+.container {
+  width: 960px;
+  margin: 0 auto;
+}
+.result,
+.controls {
+  float: left;
+  box-shadow: 0 0 30px 0 rgba(0,0,0,0.3);
+  border: 1px solid #888;
+  min-height: 200px;
+  min-width: 300px;
+  text-align: center;
+}
+.result {
+  position: relative;
+  width: 600px;
+  height: 400px;
+  overflow: hidden;
+}
+.controls {
+  width: 300px;
+  margin-left: 30px;
+}
+.drag {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+  z-index: 9999;
+}
+.drag:hover {
+  cursor: move;
+}
+.image-table,
+.coord-table {
+  padding: 0 20px 20px;
+  font: 14px verdana;
+  text-align: left;
+  text-wrap: wrap;
+}

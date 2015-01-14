@@ -7,7 +7,46 @@
 </head>
 <body>
   
-  <script src="js/jquery-1.11.0.min"></script>
+  <div class="container">
+    <div class="result"><img id="bg__img" src="http://lorempixel.com/600/400/people/9"/>
+      <div class="drag"><img id="drag__img" src="http://lorempixel.com/100/100/nature/"/></div>
+    </div>
+    <div class="controls">
+      <h3>Controls</h3>
+      <label id="opacity-field" class="controls__label">Opacity
+        <input type="range" id="opacity"/>
+        <p id="opacity-val"></p>
+      </label>
+      <div class="coord-table">
+        <h3>Coordinates</h3>
+        <table>
+          <tr> 
+            <td class="table__name">X</td>
+            <td id="xVal" class="table__val"></td>
+          </tr>
+          <tr>
+            <td class="table__name">Y</td>
+            <td id="yVal" class="table__val"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="image-table">
+        <h3>Images URL's</h3>
+        <table>
+          <tr>
+            <td class="table__name">Background</td>
+            <td id="backgroundURL" class="table__val"></td>
+          </tr>
+          <tr>
+            <td class="table__name">Watermark</td>
+            <td id="watermarkURL" class="table__val"></td>
+          </tr>
+        </table>
+      </div>
+      <div class="features"></div>
+    </div>
+  </div>
+  <script src="js/jquery-1.11.0.min.js"></script>
   <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
   <script src="js/main.js"></script>
 </body>
