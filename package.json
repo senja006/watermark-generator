@@ -1,5 +1,5 @@
 {
-  "name": "testicola-project",
+  "name": "watermark-generator-project",
   "version": "0.1.0",
   "description": "blank template for productive work",
   "devDependencies": {
@@ -13,6 +13,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/wowua/_blank-template.git"
+    "url": "https://github.com/senja006/watermark-generator.git"
   }
 }
