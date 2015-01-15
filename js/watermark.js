@@ -19,8 +19,6 @@ var watermark = (function() {
 
 	var watermarkWidth = 0,  	// пригодится
 		watermarkHeight = 0,	//
-		watermarLeft = 0,		//
-		watermarTop = 0,		//
 		fixedPositions = {},
 		
 		currPos = {
@@ -90,6 +88,8 @@ var watermark = (function() {
 		var id = $(e.target).attr('id');
 
 		e.preventDefault();
+		$('.position__b-link').removeClass('position__b-link__active');
+		$(this).addClass('position__b-link__active');
 		moveFixed(id);
 		onPosChange();
 	}

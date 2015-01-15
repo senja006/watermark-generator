@@ -83,20 +83,24 @@ h3 {
   background-color: #aaa;
 }
 .position__b-link:active {
-  background-color: #f97e76;
+  background-color: #888;
 }
-
+.position__b-link__active{
+  background-color: #f97e76; 
+}
 .pos__adjust{
   float: left;
   width: 100px;
+  padding: 10px;
 }
 
 .pos__adjust *{
   box-sizing: border-box;
-
 }
+
 .pos__row{
   display: block;
+  margin-bottom: 10px;
 }
 
 .pos__spin{
@@ -106,3 +110,4 @@ h3 {
   float: left;
   width: 50px;
 }
+
