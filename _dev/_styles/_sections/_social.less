@@ -1,0 +1,58 @@
+@import "../_misc/mixins";
+
+.language{
+  position: absolute;
+  top:100px;
+  left:0;
+  .segoe-ui-light;
+  font-size: 20px;
+  line-height: 35px;
+  background-color:  rgba(241, 241, 245, 0.7);
+  margin: 0 auto;
+  &__rus-link, &__eng-link{
+    color: #8e9298;
+    text-decoration: none;
+    height: 35px;
+    width: 43px;
+    display: block;
+    text-align: center;
+    &:hover{
+      color:  #444a53;
+    }
+  }
+  &__rus-link{
+    border-bottom: 1px solid #a5a7ac;
+  }
+}
+.social{
+  position: absolute;
+  top:190px;
+  left:0;
+  &__list{
+    list-style-type: none;
+    &-item{
+      background-color:  rgba(241, 241, 245, 0.7);
+      display: block;
+      &-link{
+        display: inline-block;
+        overflow: hidden;
+        width:43px;
+        height:42px;
+        text-indent: -9999px;
+        background: url(/img/icons/sprite.png);
+      }
+    }
+  }
+}
+.fb{
+  background: url(/img/icons/sprite.png) 12px 8px no-repeat;
+}
+.vk{
+  background: url(/img/icons/sprite.png) 5px -175px no-repeat;
+}
+.twitter{
+  background: url(/img/icons/sprite.png) 5px -143px no-repeat;
+  &:hover{
+    background-position: 5px -111px;
+  }
+}
