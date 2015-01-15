@@ -54,9 +54,12 @@ var watermark = (function() {
 	};
 
 	function onDragWatermark(e, ui){
-		refreshPosVal(ui.position.left + 1, ui.position.top + 1);
+		currPos.x = ui.position.left + 1 + "px";
+		currPos.y = ui.position.top + 1 + "px";
+		refreshPosVal(currPos.x, currPos.y);
 	};
 
+	// рендер позиций
 	function refreshPosVal(x, y){
 		$xVal.text(x);
 		$yVal.text(y);
@@ -69,7 +72,7 @@ var watermark = (function() {
 		moveFixed(id);
 	};
 
-
+	// перемещение ватермарки по фиксированым позициям
 	function moveFixed(pos){
 		switch (pos) {
 			case 'lt':
@@ -113,7 +116,7 @@ var watermark = (function() {
 		};
 	};
 
-	// вычисление размеров основных элементов
+	// вычисление фиксированых позиций
 	function calcPositions(){
 		watermarkWidth = $watermark.width();
 		watermarkHeight = $watermark.height();
@@ -126,7 +129,7 @@ var watermark = (function() {
 				top: 0
 			},
 			ct: {
-				left: (bgWidth - watermarkWidth) / 2 + "px",
+				left: parseInt((bgWidth - watermarkWidth) / 2) + "px",
 				top: 0
 			},
 			rt: {
@@ -135,22 +138,22 @@ var watermark = (function() {
 			},
 			lm: {
 				left: 0,
-				top: (bgHeight - watermarkHeight) / 2 + "px",
+				top: parseInt((bgHeight - watermarkHeight)) / 2 + "px",
 			},
 			cm: {
-				left: (bgWidth - watermarkWidth) / 2 + "px",
-				top: (bgHeight - watermarkHeight) / 2 + "px"
+				left: parseInt((bgWidth - watermarkWidth) / 2) + "px",
+				top: parseInt((bgHeight - watermarkHeight) / 2) + "px"
 			},
 			rm: {
 				left: bgWidth - watermarkWidth + "px",
-				top: (bgHeight - watermarkHeight) / 2 + "px"
+				top: parseInt((bgHeight - watermarkHeight) / 2) + "px"
 			},
 			lb: {
 				left: 0,
 				top: bgHeight - watermarkHeight + "px",
 			},
 			cb: {
-				left: (bgWidth - watermarkWidth) / 2 + "px",
+				left: parseInt((bgWidth - watermarkWidth) / 2) + "px",
 				top: bgHeight - watermarkHeight + "px"
 			},
 			rb: {
