@@ -214,6 +214,14 @@ var watermark = (function() {
 		}
 	}
 
+	// геттеры
+	function getPos(){
+		return currPos;
+	}
+	function getOpacity(){
+		return currOpacity;
+	}
+
 	// !!!!!!!!!! ТОЛЬКО В ТАКОМ ПОРЯДКЕ   !!!!!!!!!!
 	return {
 		init: function() {
@@ -223,8 +231,8 @@ var watermark = (function() {
 			setStartPos();
 			addEventListeners();
 		},
-		position: currPos,
-		opacity: currOpacity
+		position: getPos,
+		opacity: getOpacity
 	};
 
 }());
