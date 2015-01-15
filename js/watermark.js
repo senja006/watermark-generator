@@ -7,6 +7,7 @@ var watermark = (function() {
 		$opacityVal = $('#opacity-val'),
 		$xVal = $('#xVal'),
 		$yVal = $('#yVal'),
+		$spinners = $('.pos__spin'),
 		$btnLeftTop = $('#lt'),
 		$btnCentTop = $('#ct'),
 		$btnRightTop = $('#rt'),
@@ -23,98 +24,144 @@ var watermark = (function() {
 		watermarTop = 0,
 		fixedPositions = {},
 		currPos = {
-			left: 0,
-			top: 0
-		};
+			left: 0 + "px",
+			top: 0 + "px"
+		},
+		currOpacity = 0.5;
 
 
 	function addEventListeners() {
 		$opacity.on('change', onOpacityChange);
 		$('.position__b-link').on('click', onClickFixedButt);
-	};
+	}
 
-	function onOpacityChange(e){
-		var opacity = $(e.target).val() / 100;
-		$watermark.css({
-			'opacity': opacity
-		});
-		$opacityVal.text(opacity);
-	};
-
-	function setStartOpacity() {
-		$opacityVal.text($watermark.css('opacity'));
-	};
-
-	function addDragAndDrop() {
+	// инициализация плагинов
+	function initPlugins() {
 		$watermark.draggable({
 			cursor: 'move',
 			snap: '.result',
 			drag: onDragWatermark // событие 'drag'
 		});
-	};
+		$xVal = $xVal.spinner({
+			change: onSpinX
+		});
+		$yVal = $yVal.spinner({
+			change: onSpinY
+		});
+	}
 
+	// установка начальной прозрачности
+	function setStartOpacity() {
+		refreshOpacityVal(currOpacity);
+	}
+
+	// установка начальной позиции
+	function setStartPos() {
+		refreshPosVal(currPos)
+	}
+
+	// обработчик смены прозрачности
+	function onOpacityChange(e){
+		var currOpacity = $(e.target).val() / 100;
+
+		$watermark.css({
+			'opacity': currOpacity
+		});
+
+		refreshOpacityVal(currOpacity);
+	}
+
+	// обработчик изменения позиции
+	function onPosChange(){
+		refreshPosVal(currPos);
+	}
+
+	// обработчик изменения позиций drag'n'drop
 	function onDragWatermark(e, ui){
 		currPos.x = ui.position.left + 1 + "px";
 		currPos.y = ui.position.top + 1 + "px";
-		refreshPosVal(currPos.x, currPos.y);
-	};
-
-	// рендер позиций
-	function refreshPosVal(x, y){
-		$xVal.text(x);
-		$yVal.text(y);
+		refreshPosVal(currPos);
 	}
 
+	// обработчик клика по кнопке с фиксированой позицией
 	function onClickFixedButt(e){
 		var id = $(e.target).attr('id');
 
 		e.preventDefault();
 		moveFixed(id);
-	};
+		onPosChange();
+	}
+
+	
+	// обработчики клика по спину
+	function onSpinX(){
+		currPos.x = $xVal.spinner('value');
+		setPos(currPos);
+	}
+
+	function onSpinY(){
+		currPos.y = $yVal.spinner('value');
+		setPos(currPos);
+	}
+
+	function setPos(position){
+		$watermark.css(position);
+	}
+
+	// рендер позиций
+	function refreshPosVal(position){
+		$xVal.spinner('value', parseInt(position.x));
+		$yVal.spinner('value', parseInt(position.y));
+	}
+
+	// рендер прозрачности
+	function refreshOpacityVal(opacity){
+		$opacityVal.text(opacity);
+	}
 
 	// перемещение ватермарки по фиксированым позициям
 	function moveFixed(pos){
 		switch (pos) {
 			case 'lt':
 				$watermark.css(fixedPositions.lt);
-				refreshPosVal($watermark.css('left'), $watermark.css('top'));
+				currPos = fixedPositions.lt;
 				break
 			case 'ct':
 				$watermark.css(fixedPositions.ct);
-				refreshPosVal($watermark.css('left'), $watermark.css('top'));
+				currPos = fixedPositions.ct;
 				break
 			case 'rt':
 				$watermark.css(fixedPositions.rt);
-				refreshPosVal($watermark.css('left'), $watermark.css('top'));
+				currPos = fixedPositions.rt;
 				break
 			case 'lm':
 				$watermark.css(fixedPositions.lm);
-				refreshPosVal($watermark.css('left'), $watermark.css('top'));
+				currPos = fixedPositions.lm;
 				break
 			case 'cm':
 				$watermark.css(fixedPositions.cm);
-				refreshPosVal($watermark.css('left'), $watermark.css('top'));
+				currPos = fixedPositions.cm;
 				break
 			case 'rm':
 				$watermark.css(fixedPositions.rm);
-				refreshPosVal($watermark.css('left'), $watermark.css('top'));
+				currPos = fixedPositions.rm;
 				break
 			case 'lb':
 				$watermark.css(fixedPositions.lb);
-				refreshPosVal($watermark.css('left'), $watermark.css('top'));
+				currPos = fixedPositions.lb;
 				break
 			case 'cb':
 				$watermark.css(fixedPositions.cb);
-				refreshPosVal($watermark.css('left'), $watermark.css('top'));
+				currPos = fixedPositions.cb;
 				break
 			case 'rb':
 				$watermark.css(fixedPositions.rb);
-				refreshPosVal($watermark.css('left'), $watermark.css('top'));
+				currPos = fixedPositions.rb;
 				break
 			default:
 				break
 		};
-	};
+	}
 
 	// вычисление фиксированых позиций
 	function calcPositions(){
@@ -164,11 +211,13 @@ var watermark = (function() {
 	}
 
 	// здесь только запуск нужных функций
+	// !!!!!!!!!! ТОЛЬКО В ТАКОМ ПОРЯДКЕ   !!!!!!!!!!
 	return {
 		init: function() {
 			calcPositions();
+			initPlugins();
 			setStartOpacity();
-			addDragAndDrop();
+			setStartPos();
 			addEventListeners();
 		},
 	};

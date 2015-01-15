@@ -15,25 +15,13 @@
       </div>
     </div>
     <div class="controls">
-      <h3>Controls</h3>
-      <label id="opacity-field" class="controls__label">Opacity
+      <h2>Управление</h2>
+      <div class="opacity">
+        <h3>Прозрачность</h3>
         <input type="range" id="opacity"/>
         <p id="opacity-val"></p>
-      </label>
-      <div class="coord-table">
-        <h3>Coordinates position</h3>
-        <table>
-          <tr> 
-            <td class="table__name">X</td>
-            <td id="xVal" class="table__val"></td>
-          </tr>
-          <tr>
-            <td class="table__name">Y</td>
-            <td id="yVal" class="table__val"></td>
-          </tr>
-        </table>
       </div>
-      <div class="position">
+      <div class="position cf">
         <h3>Положение</h3>
         <div class="pos__pad">
           <ul class="position__buttons cf">
@@ -48,12 +36,21 @@
             <li class="position__btn"><a href="" class="position__b-link" id="rb"></a></li>
           </ul>
         </div>
-      </div>
+        <div class="pos__adjust">
+          <label class="pos__row cf">X
+                <input class="pos__spin" name="value" id="xVal">
+          </label>
+          <label class="pos__row cf">Y
+                <input class="pos__spin" name="value" id="yVal">
+          </label>
+        </div>
+     </div>
+
     </div>
   </div>
   <script src="js/jquery-1.11.0.min.js"></script>
   <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
   <script src="js/watermark.js"></script>
-  <script src="js/main-new.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

@@ -13,7 +13,7 @@ body{
   font-family: verdana;
 }
 .container {
-  width: 1000px;
+  width: 1050px;
   margin: 0 auto;
 }
 h3 {
@@ -38,6 +38,7 @@ h3 {
 .controls {
   width: 300px;
   margin-left: 30px;
+  padding: 20px;
 }
 .drag {
   position: absolute;
@@ -50,18 +51,15 @@ h3 {
   cursor: move;
 }
 
-.coord-table {
-  padding: 0 20px 20px;
-  font: 14px verdana;
-  text-align: left;
-  text-wrap: wrap;
-}
-
 .position{
 
 }
+
 .pos__pad{
-  margin: 0 0 20px 20px;
+  margin: 0;
+  width: 66px;
+  float: left;
+  padding: 10px;
 }
 .position__buttons{
   padding: 0px;
@@ -83,4 +81,25 @@ h3 {
 }
 .position__b-link:hover {
   background-color: #aaa;
+}
+
+.pos__adjust{
+  float: right;
+  width: 50px;
+}
+
+.pos__adjust *{
+  box-sizing: border-box;
+
+}
+.pos__row{
+  display: block;
+}
+
+.pos__spin{
+  position:; absolute;
+  top: 0;
+  display: inline-block;
+  float: left;
+  width: 50px;
 }
