@@ -2,13 +2,12 @@ var watermark = (function() {
 
 	var	$watermark = $('#watermark'),			// watermark
 		$bg = $('#bg'),							// original image
-		$opacityField = $('#opacity-field'),
-		$opacity = $('#opacity'),
-		$opacityVal = $('#opacity-val'),
-		$xVal = $('#xVal'),
-		$yVal = $('#yVal'),
-		$spinners = $('.pos__spin'),
-		$btnLeftTop = $('#lt'),
+		$opacityVal = $('#opacity-val'),		// поле значения прозрачности
+		$opacity = $('#opacity'),				// ползунок прозрачности		
+		$xVal = $('#xVal'),						// поле left spinner
+		$yVal = $('#yVal'),						// поле top spinner
+
+		$btnLeftTop = $('#lt'),					// кнопки фиксированых позиций
 		$btnCentTop = $('#ct'),
 		$btnRightTop = $('#rt'),
 		$btnLeftMiddle = $('#lm'),
@@ -30,10 +29,6 @@ var watermark = (function() {
 		currOpacity = 0.5;
 
 
-	function addEventListeners() {
-		$opacity.on('change', onOpacityChange);
-		$('.position__b-link').on('click', onClickFixedButt);
-	}
 
 	// инициализация плагинов
 	function initPlugins() {
@@ -42,12 +37,18 @@ var watermark = (function() {
 			snap: '.result',
 			drag: onDragWatermark // событие 'drag'
 		});
-		$xVal = $xVal.spinner({
-			change: onSpinX
-		});
-		$yVal = $yVal.spinner({
-			change: onSpinY
-		});
+		$xVal.spinner();
+		$yVal.spinner();
+	}
+
+	// установка обработчиков
+	function addEventListeners() {
+		$opacity.on('change', onOpacityChange);
+		$('.position__b-link').on('click', onClickFixedButt);
+		$xVal.on('spinchange', onSpinX);
+		$yVal.on('spinchange', onSpinY);
+		$xVal.on('spin', onSpinX);
+		$yVal.on('spin', onSpinY);
 	}
 
 	// установка начальной прозрачности
@@ -62,7 +63,7 @@ var watermark = (function() {
 
 	// обработчик смены прозрачности
 	function onOpacityChange(e){
-		var currOpacity = $(e.target).val() / 100;
+		currOpacity = $(e.target).val() / 100;
 
 		$watermark.css({
 			'opacity': currOpacity
@@ -78,8 +79,8 @@ var watermark = (function() {
 
 	// обработчик изменения позиций drag'n'drop
 	function onDragWatermark(e, ui){
-		currPos.x = ui.position.left + 1 + "px";
-		currPos.y = ui.position.top + 1 + "px";
+		currPos.left = ui.position.left + 1 + "px";
+		currPos.top = ui.position.top + 1 + "px";
 		refreshPosVal(currPos);
 	}
 
@@ -95,23 +96,27 @@ var watermark = (function() {
 	
 	// обработчики клика по спину
 	function onSpinX(){
-		currPos.x = $xVal.spinner('value');
+		currPos.left = $xVal.spinner('value');
 		setPos(currPos);
 	}
 
 	function onSpinY(){
-		currPos.y = $yVal.spinner('value');
+		currPos.top = $yVal.spinner('value');
 		setPos(currPos);
 	}
 
+	// установка ватермарки в нужную позицию
 	function setPos(position){
 		$watermark.css(position);
 	}
 
 	// рендер позиций
-	function refreshPosVal(position){
-		$xVal.spinner('value', parseInt(position.x));
-		$yVal.spinner('value', parseInt(position.y));
+	function refreshPosVal(){
+		var left = parseInt(currPos.left),
+			top = parseInt(currPos.top);
+
+		$xVal.spinner('value', left);
+		$yVal.spinner('value', top);
 	}
 
 	// рендер прозрачности
