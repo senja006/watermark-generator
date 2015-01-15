@@ -57,7 +57,7 @@ h3 {
 
 .pos__pad{
   margin: 0;
-  width: 66px;
+  width: 126px;
   float: left;
   padding: 10px;
 }
@@ -65,7 +65,7 @@ h3 {
   padding: 0px;
   margin: 0px;
   list-style: none;
-  width: 66px;
+  width: 126px;
 }
 .position__btn{
   float: left;
@@ -76,16 +76,19 @@ h3 {
 .position__b-link{
   display: block;
   background-color: #ccc;
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
 }
 .position__b-link:hover {
   background-color: #aaa;
 }
+.position__b-link:active {
+  background-color: #f97e76;
+}
 
 .pos__adjust{
-  float: right;
-  width: 50px;
+  float: left;
+  width: 100px;
 }
 
 .pos__adjust *{
@@ -97,7 +100,7 @@ h3 {
 }
 
 .pos__spin{
-  position:; absolute;
+  font-size: 18px;
   top: 0;
   display: inline-block;
   float: left;

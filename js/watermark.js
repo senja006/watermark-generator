@@ -17,11 +17,12 @@ var watermark = (function() {
 		$btnCentBottom = $('#cb'),
 		$btnRightBottom = $('#rb');
 
-	var watermarkWidth = 0,
-		watermarkHeight = 0,
-		watermarLeft = 0,
-		watermarTop = 0,
+	var watermarkWidth = 0,  	// пригодится
+		watermarkHeight = 0,	//
+		watermarLeft = 0,		//
+		watermarTop = 0,		//
 		fixedPositions = {},
+		
 		currPos = {
 			left: 0 + "px",
 			top: 0 + "px"
@@ -93,13 +94,11 @@ var watermark = (function() {
 		onPosChange();
 	}
 
-	
 	// обработчики клика по спину
 	function onSpinX(){
 		currPos.left = $xVal.spinner('value');
 		setPos(currPos);
 	}
-
 	function onSpinY(){
 		currPos.top = $yVal.spinner('value');
 		setPos(currPos);
@@ -215,7 +214,6 @@ var watermark = (function() {
 		}
 	}
 
-	// здесь только запуск нужных функций
 	// !!!!!!!!!! ТОЛЬКО В ТАКОМ ПОРЯДКЕ   !!!!!!!!!!
 	return {
 		init: function() {
@@ -225,6 +223,8 @@ var watermark = (function() {
 			setStartPos();
 			addEventListeners();
 		},
+		position: currPos,
+		opacity: currOpacity
 	};
 
 }());
