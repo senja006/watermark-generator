@@ -18,8 +18,48 @@
     <div class="wrapper">
       <div class="maincontent">
         <div class="container">
-          <!-- content here-->
-          
+          <div class="result">
+            <h1 class="result__title"></h1><img src="img/bg-source-simple.png" id="bg__img">
+            <div id="watermark" class="drag"><img src="img/watermark-simple.png" id="drag__img"></div>
+          </div>
+          <div class="controls">
+            <h3 class="controls__title">Настройки</h3>
+            <label id="opacity-field" class="controls__label">Прозрачность
+              <input type="range" id="opacity">
+              <p id="opacity-val"></p>
+            </label>
+            <div class="coord-table">
+              <h3 class="coord-table-title">
+                <table>
+                  <tr>
+                    <td class="table__name"></td>
+                    <td class="table__val"></td>
+                  </tr>
+                  <tr>
+                    <td class="table__name"></td>
+                    <td class="table__val"></td>
+                  </tr>
+                </table>
+              </h3>
+            </div>
+            <div class="position">
+              <h3 class="position__title"></h3>
+              <div class="pos__pad">
+                <ul class="position__list clearfix">
+                  <li class="position__list-item"><a href="" id="lt" class="position__list-item-link"></a></li>
+                  <li class="position__list-item"><a href="" id="ct" class="position__list-item-link"></a></li>
+                  <li class="position__list-item"><a href="" id="rt" class="position__list-item-link"></a></li>
+                  <li class="position__list-item"><a href="" id="lm" class="position__list-item-link"></a></li>
+                  <li class="position__list-item"><a href="" id="cm" class="position__list-item-link"></a></li>
+                  <li class="position__list-item"><a href="" id="cm" class="position__list-item-link"></a></li>
+                  <li class="position__list-item"><a href="" id="rm" class="position__list-item-link"></a></li>
+                  <li class="position__list-item"><a href="" id="lb" class="position__list-item-link"></a></li>
+                  <li class="position__list-item"><a href="" id="cb" class="position__list-item-link"></a></li>
+                  <li class="position__list-item"><a href="" id="rb" class="position__list-item-link"></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

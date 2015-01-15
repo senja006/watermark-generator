@@ -7,6 +7,29 @@ block content
     .wrapper
         .maincontent
             .container
-                // content here
-
-
+                .result
+                    h1.result__title
+                    img(src="img/bg-source-simple.png")#bg__img
+                    .drag#watermark
+                        img(src="img/watermark-simple.png")#drag__img
+                .controls
+                    h3.controls__title Настройки
+                    label#opacity-field.controls__label Прозрачность
+                        input(type="range")#opacity
+                        p#opacity-val
+                    .coord-table
+                        h3.coord-table-title
+                            table
+                                tr
+                                    td.table__name
+                                    td.table__val
+                                tr
+                                    td.table__name
+                                    td.table__val
+                    .position
+                        h3.position__title
+                        .pos__pad
+                            ul.position__list.clearfix
+                                each val in ['lt', 'ct', 'rt', 'lm', 'cm', 'cm', 'rm', 'lb', 'cb', 'rb']
+                                    li.position__list-item
+                                        a(href="" id=val).position__list-item-link
