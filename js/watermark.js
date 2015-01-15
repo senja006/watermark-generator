@@ -52,7 +52,8 @@ var watermark = (function() {
 		e.preventDefault();
 	};
 
-	moveFixed: function(pos){
+
+	function moveFixed(pos){
 		switch (pos) {
 			case 'lt':
 				$watermark.css({top: 0, left: 0});
