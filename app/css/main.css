@@ -114,8 +114,24 @@ footer{position:relative;min-width:980px}
 @font-face{font-family:fira_sanslight;src:url(/fonts/firasans-light-webfont.eot);src:url(/fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/firasans-light-webfont.woff) format('woff'),url(/fonts/firasans-light-webfont.ttf) format('truetype'),url(/fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
 body{background-image:url(../../img/bg/page-bg.jpg)}
 .maincontent{padding-bottom:56px;overflow:auto;margin:60px 10px 0 50px}
-.some-div__child{width:200px;height:300px;background:#00f;border:1px solid #000}
-.result{width:700px;height:670px}
+.result{background-color:rgba(46,54,65,.64);width:700px;height:670px;float:left;display:inline-block;position:relative}
+.result__title{font-family:SegoeUILight;font-weight:400;font-style:normal;color:#fff;font-size:36px;margin:20px 25px 40px}
+.result__imagebox{margin:0 25px;position:relative;background-color:#fff;width:650px;height:534px}
+.result__imagebox .drag{position:absolute;top:0;left:0;opacity:.5;z-index:9999}
+.result__imagebox .drag:hover{cursor:move}
+.controls{background-color:#f1f1f5;width:260px;height:670px;float:left;display:inline-block}
+.controls__title{font-family:robotolight;font-weight:400;font-style:normal;color:#2e3641;font-size:26px;margin:0 auto}
+.pos__pad{margin:0;width:126px;float:left;padding:10px}
+.position__buttons{padding:0;margin:0;list-style:none;width:126px}
+.position__btn{float:left;margin:0;border:1px solid #888}
+.position__b-link{display:block;background-color:#ccc;width:40px;height:40px}
+.position__b-link:hover{background-color:#aaa}
+.position__b-link:active{background-color:#888}
+.position__b-link__active{background-color:#f97e76}
+.pos__adjust{float:left;width:100px;padding:10px}
+.pos__adjust *{box-sizing:border-box}
+.pos__row{display:block;margin-bottom:10px}
+.pos__spin{font-size:18px;top:0;display:inline-block;float:left;width:50px}
 @font-face{font-family:robotothin;src:url(/fonts/roboto-thin-webfont.eot);src:url(/fonts/roboto-thin-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/roboto-thin-webfont.woff2) format('woff2'),url(/fonts/roboto-thin-webfont.woff) format('woff'),url(/fonts/roboto-thin-webfont.ttf) format('truetype'),url(/fonts/roboto-thin-webfont.svg#robotothin) format('svg');font-weight:400;font-style:normal}
 @font-face{font-family:robotothin_italic;src:url(/fonts/roboto-thinitalic-webfont.eot);src:url(/fonts/roboto-thinitalic-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/roboto-thinitalic-webfont.woff2) format('woff2'),url(/fonts/roboto-thinitalic-webfont.woff) format('woff'),url(/fonts/roboto-thinitalic-webfont.ttf) format('truetype'),url(/fonts/roboto-thinitalic-webfont.svg#robotothin_italic) format('svg');font-weight:400;font-style:normal}
 @font-face{font-family:robotomedium_italic;src:url(/fonts/roboto-mediumitalic-webfont.eot);src:url(/fonts/roboto-mediumitalic-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/roboto-mediumitalic-webfont.woff2) format('woff2'),url(/fonts/roboto-mediumitalic-webfont.woff) format('woff'),url(/fonts/roboto-mediumitalic-webfont.ttf) format('truetype'),url(/fonts/roboto-mediumitalic-webfont.svg#robotomedium_italic) format('svg');font-weight:400;font-style:normal}
@@ -134,7 +150,7 @@ body{background-image:url(../../img/bg/page-bg.jpg)}
 @font-face{font-family:roboto_condensedregular;src:url(/fonts/robotocondensed-regular-webfont.eot);src:url(/fonts/robotocondensed-regular-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/robotocondensed-regular-webfont.woff2) format('woff2'),url(/fonts/robotocondensed-regular-webfont.woff) format('woff'),url(/fonts/robotocondensed-regular-webfont.ttf) format('truetype'),url(/fonts/robotocondensed-regular-webfont.svg#roboto_condensedregular) format('svg');font-weight:400;font-style:normal}
 @font-face{font-family:SegoeUILight;src:url(/fonts/SegoeUILight.eot);src:url(/fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(/fonts/SegoeUILight.woff) format("woff"),url(/fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
 @font-face{font-family:fira_sanslight;src:url(/fonts/firasans-light-webfont.eot);src:url(/fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/firasans-light-webfont.woff) format('woff'),url(/fonts/firasans-light-webfont.ttf) format('truetype'),url(/fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
-.language{position:absolute;top:100px;left:0;font-family:SegoeUILight;font-size:20px;line-height:35px;background-color:rgba(241,241,245,.7);margin:0 auto}
+.language{position:absolute;top:100px;left:0;font-family:SegoeUILight;font-weight:400;font-style:normal;font-size:20px;line-height:35px;background-color:rgba(241,241,245,.7);margin:0 auto}
 .language__eng-link,.language__rus-link{color:#8e9298;text-decoration:none;height:35px;width:43px;display:block;text-align:center}
 .language__eng-link:hover,.language__rus-link:hover{color:#444a53}
 .language__rus-link{border-bottom:1px solid #a5a7ac}
@@ -164,15 +180,15 @@ body{background-image:url(../../img/bg/page-bg.jpg)}
 @font-face{font-family:roboto_condensedregular;src:url(/fonts/robotocondensed-regular-webfont.eot);src:url(/fonts/robotocondensed-regular-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/robotocondensed-regular-webfont.woff2) format('woff2'),url(/fonts/robotocondensed-regular-webfont.woff) format('woff'),url(/fonts/robotocondensed-regular-webfont.ttf) format('truetype'),url(/fonts/robotocondensed-regular-webfont.svg#roboto_condensedregular) format('svg');font-weight:400;font-style:normal}
 @font-face{font-family:SegoeUILight;src:url(/fonts/SegoeUILight.eot);src:url(/fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(/fonts/SegoeUILight.woff) format("woff"),url(/fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
 @font-face{font-family:fira_sanslight;src:url(/fonts/firasans-light-webfont.eot);src:url(/fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/firasans-light-webfont.woff) format('woff'),url(/fonts/firasans-light-webfont.ttf) format('truetype'),url(/fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
-.fira_sans_light{font-family:fira_sanslight}
-.segoe-ui-light{font-family:SegoeUILight}
+.fira_sans_light{font-family:fira_sanslight;font-weight:400;font-style:normal}
+.segoe-ui-light{font-family:SegoeUILight;font-weight:400;font-style:normal}
 .robotothin{font-family:robotothin}
 .roboto-thin-italic{font-family:robotothin_italic}
 .roboto-medium-italic{font-family:robotomedium_italic}
 .roboto-medium{font-family:robotomedium}
 .roboto-light-italic{font-family:robotolight_italic}
 .roboto-bold-italic{font-family:robotobold_italic}
-.roboto-light{font-family:robotolight}
+.roboto-light{font-family:robotolight;font-weight:400;font-style:normal}
 .roboto-bold{font-family:robotobold}
 .roboto-black-italic{font-family:robotoblack_italic}
 .roboto-black{font-family:robotoblack}
@@ -188,4 +204,4 @@ body{background-image:url(../../img/bg/page-bg.jpg)}
 .clearfix:after{clear:both}
 footer{margin-top:-56px;height:56px}
 footer .container{text-align:center}
-footer p{font-family:fira_sanslight;color:#fff;font-size:12px;line-height:56px}
+footer p{font-family:fira_sanslight;font-weight:400;font-style:normal;color:#fff;font-size:12px;line-height:56px}

@@ -129,9 +129,13 @@
 }
 .fira_sans_light {
   font-family: 'fira_sanslight';
+  font-weight: normal;
+  font-style: normal;
 }
 .segoe-ui-light {
   font-family: 'SegoeUILight';
+  font-weight: normal;
+  font-style: normal;
 }
 .robotothin {
   font-family: 'robotothin';
@@ -153,6 +157,8 @@
 }
 .roboto-light {
   font-family: 'robotolight';
+  font-weight: normal;
+  font-style: normal;
 }
 .roboto-bold {
   font-family: 'robotobold';
@@ -209,13 +215,102 @@ body {
   overflow: auto;
   margin: 60px 10px 0 50px;
 }
-.some-div__child {
-  width: 200px;
-  height: 300px;
-  background: blue;
-  border: 1px solid #000;
-}
 .result {
+  background-color: rgba(46, 54, 65, 0.64);
   width: 700px;
   height: 670px;
+  float: left;
+  display: inline-block;
+  position: relative;
+}
+.result__title {
+  font-family: 'SegoeUILight';
+  font-weight: normal;
+  font-style: normal;
+  color: #ffffff;
+  font-size: 36px;
+  margin: 20px 25px 40px 25px;
+}
+.result__imagebox {
+  margin: 0 25px;
+  position: relative;
+  background-color: #fff;
+  width: 650px;
+  height: 534px;
+}
+.result__imagebox .drag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+  z-index: 9999;
+}
+.result__imagebox .drag:hover {
+  cursor: move;
+}
+.controls {
+  background-color: #f1f1f5;
+  width: 260px;
+  height: 670px;
+  float: left;
+  display: inline-block;
+}
+.controls__title {
+  font-family: 'robotolight';
+  font-weight: normal;
+  font-style: normal;
+  color: #2e3641;
+  font-size: 26px;
+  margin: 0 auto;
+}
+.pos__pad {
+  margin: 0;
+  width: 126px;
+  float: left;
+  padding: 10px;
+}
+.position__buttons {
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+  width: 126px;
+}
+.position__btn {
+  float: left;
+  margin: 0;
+  border: 1px solid #888;
+}
+.position__b-link {
+  display: block;
+  background-color: #ccc;
+  width: 40px;
+  height: 40px;
+}
+.position__b-link:hover {
+  background-color: #aaa;
+}
+.position__b-link:active {
+  background-color: #888;
+}
+.position__b-link__active {
+  background-color: #f97e76;
+}
+.pos__adjust {
+  float: left;
+  width: 100px;
+  padding: 10px;
+}
+.pos__adjust * {
+  box-sizing: border-box;
+}
+.pos__row {
+  display: block;
+  margin-bottom: 10px;
+}
+.pos__spin {
+  font-size: 18px;
+  top: 0;
+  display: inline-block;
+  float: left;
+  width: 50px;
 }
