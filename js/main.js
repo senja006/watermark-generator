@@ -1,6 +1,7 @@
-'use strict';
+$(document).ready(function() {
+	// это главный файл. в нем производится инициализация всех модулей
+	// здесь нет переменных
 
-var $watermark = $('#watermark');
+	watermark.init(); // управление водяным знаком
 
-opacity.init();
-position.init();
+});
