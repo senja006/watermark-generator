@@ -15,6 +15,29 @@ block content
                             img(src="http://lorempixel.com/100/100/nature/")#drag__img.drug__watermark
                 .controls
                     h3.controls__title Настройки
+                    .controls__file-inputs-group
+                        label.controls__file-title Исходное изображение
+                            .controls__file
+                                input.controls__file-input(
+                                type="file"
+                                name="source-image"
+                                placeholder="Загрузите изображение"
+                                id="source-image"
+                                )
+                                span#file_name.controls__file-input--fake Загрузите изображение
+                                button.controls__file-input--btn Загрузить
+                    .controls__file-inputs-group
+                        label.controls__file-title Водяной знак
+                            .controls__file
+                                input.controls__file-input(
+                                type="file"
+                                name="watermark-image"
+                                placeholder="Загрузите изображение"
+                                id="watermark-image"
+                                )
+                                span#file_name.controls__file-input--fake Загрузите изображение
+                                button.controls__file-input--btn Загрузить
+                    .controls__hr
                     label#opacity-field.controls__label Прозрачность
                         input(type="range")#opacity
                         p#opacity-val
