@@ -48,7 +48,7 @@ h3 {
   left: 0;
   opacity: 0.5;
   z-index: 9999;
-  transition: all 0.1s ease 0;
+
 }
 .drag:hover {
   cursor: move;
