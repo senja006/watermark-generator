@@ -27,8 +27,6 @@ var watermark = (function() {
 		},
 		currOpacity = 0.5;
 
-
-
 	// инициализация плагинов
 	function initPlugins() {
 		$watermark.draggable({
@@ -67,7 +65,6 @@ var watermark = (function() {
 		$watermark.css({
 			'opacity': currOpacity
 		});
-
 		refreshOpacityVal(currOpacity);
 	}
 
@@ -230,6 +227,7 @@ var watermark = (function() {
 			setStartOpacity();
 			setStartPos();
 			addEventListeners();
+			console.log('<watermark> init!');
 		},
 		position: getPos,
 		opacity: getOpacity

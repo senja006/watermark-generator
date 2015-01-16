@@ -18,6 +18,8 @@ body{
 }
 h3 {
   font-size: 18px;
+  font-style: italic;
+  color: #333;
   text-align: center;
 }
 .result,
@@ -46,6 +48,7 @@ h3 {
   left: 0;
   opacity: 0.5;
   z-index: 9999;
+  transition: all 0.1s ease 0;
 }
 .drag:hover {
   cursor: move;
@@ -111,3 +114,16 @@ h3 {
   width: 50px;
 }
 
+.ctrl__input {
+  display: block;
+  width: 300px;
+}
+
+.button {
+  display: block;
+  width: 100px;
+  height: 30px;
+  font: 16px Verdana;
+  background-color: #08f;
+  color: #fff;
+}
