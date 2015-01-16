@@ -9,7 +9,7 @@ body{
   overflow: auto;
   margin: 60px 10px 0 50px;
 }
-
+/* --------- RESULT --------- */
 .result{
   background-color:  rgba(46, 54, 65, 0.64);
   width: 700px;
@@ -45,6 +45,9 @@ body{
   }
   }
 }
+
+/* --------- CONTROLS --------- */
+
 .controls{
   background-color:  #f1f1f5;
   width: 260px;
@@ -58,8 +61,10 @@ body{
     margin:20px 60px;
   }
 }
-.controls__file-inputs-group{
+.controls__inputs-group{
   margin: 0 18px 20px 18px;
+  position: relative;
+  display: block;
 }
 .controls__file-title{
   display: block;
@@ -116,7 +121,9 @@ body{
   z-index: 10;
   text-indent: -9999px;
 }
-// line
+
+/* --------- HR --------- */
+
 .controls__hr{
   background: url("/img/bg/hr-bg.png");
   height: 11px;
@@ -125,7 +132,10 @@ body{
   margin: 30px 0 10px 0;
   .clearfix;
 }
-.position{
+
+/* --------- POSITION --------- */
+.coord-table{
+ float: right;
 
 }
 
@@ -152,15 +162,15 @@ body{
   background-color: #ccc;
   width: 40px;
   height: 40px;
-}
-.position__b-link:hover {
+&:hover {
   background-color: #aaa;
 }
-.position__b-link:active {
+&:active {
   background-color: #888;
 }
-.position__b-link__active{
+&__active{
   background-color: #f97e76;
+}
 }
 .pos__adjust{
   float: left;

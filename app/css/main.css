@@ -78,7 +78,7 @@ body{background-image:url(../../img/bg/page-bg.jpg)}
 .result__imagebox .drag:hover{cursor:move}
 .controls{background-color:#f1f1f5;width:260px;height:670px;float:left;display:inline-block}
 .controls__title{font-family:Roboto;font-weight:300;font-style:normal;color:#2e3641;font-size:26px;margin:20px 60px}
-.controls__file-inputs-group{margin:0 18px 20px}
+.controls__inputs-group{margin:0 18px 20px;position:relative;display:block}
 .controls__file-title{display:block;color:#2e3641;font-size:14px;line-height:40px;font-family:Roboto;font-weight:300;font-style:normal}
 .controls__file{position:relative;width:100%}
 .controls__file:after{clear:both;content:''}
@@ -88,6 +88,7 @@ body{background-image:url(../../img/bg/page-bg.jpg)}
 .controls__hr{background:url(/img/bg/hr-bg.png);height:11px;width:100%;display:block;margin:30px 0 10px;zoom:1!ie}
 .controls__hr:after,.controls__hr:before{content:"";display:table}
 .controls__hr:after{clear:both}
+.coord-table{float:right}
 .pos__pad{margin:0;width:126px;float:left;padding:10px}
 .position__buttons{padding:0;margin:0;list-style:none;width:126px}
 .position__btn{float:left;margin:0;border:1px solid #888}

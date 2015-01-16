@@ -26,7 +26,7 @@
           </div>
           <div class="controls">
             <h3 class="controls__title">Настройки</h3>
-            <div class="controls__file-inputs-group">
+            <div class="controls__inputs-group">
               <label class="controls__file-title">Исходное изображение
                 <div class="controls__file">
                   <input type="file" name="source-image" placeholder="Загрузите изображение" id="source-image" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
@@ -34,7 +34,7 @@
                 </div>
               </label>
             </div>
-            <div class="controls__file-inputs-group">
+            <div class="controls__inputs-group">
               <label class="controls__file-title">Водяной знак
                 <div class="controls__file">
                   <input type="file" name="watermark-image" placeholder="Загрузите изображение" id="watermark-image" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
@@ -43,26 +43,26 @@
               </label>
             </div>
             <div class="controls__hr"></div>
+            <div class="controls__inputs-group">
+              <label class="controls__file-title">Положение</label>
+            </div>
             <label id="opacity-field" class="controls__label">Прозрачность
               <input type="range" id="opacity">
               <p id="opacity-val"></p>
             </label>
             <div class="coord-table">
-              <h3 class="coord-table-title">
-                <table>
-                  <tr>
-                    <td class="table__name"></td>
-                    <td class="table__val"></td>
-                  </tr>
-                  <tr>
-                    <td class="table__name"></td>
-                    <td class="table__val"></td>
-                  </tr>
-                </table>
-              </h3>
+              <table>
+                <tr>
+                  <td class="table__name"></td>
+                  <td class="table__val"></td>
+                </tr>
+                <tr>
+                  <td class="table__name"></td>
+                  <td class="table__val"></td>
+                </tr>
+              </table>
             </div>
             <div class="position">
-              <h3 class="position__title"></h3>
               <div class="pos__pad">
                 <ul class="position__list clearfix">
                   <li class="position__list-item"><a href="" id="lt" class="position__list-item-link"></a></li>

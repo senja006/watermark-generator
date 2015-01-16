@@ -64,6 +64,7 @@ body {
   overflow: auto;
   margin: 60px 10px 0 50px;
 }
+/* --------- RESULT --------- */
 .result {
   background-color: rgba(46, 54, 65, 0.64);
   width: 700px;
@@ -97,6 +98,7 @@ body {
 .result__imagebox .drag:hover {
   cursor: move;
 }
+/* --------- CONTROLS --------- */
 .controls {
   background-color: #f1f1f5;
   width: 260px;
@@ -112,8 +114,10 @@ body {
   font-size: 26px;
   margin: 20px 60px;
 }
-.controls__file-inputs-group {
+.controls__inputs-group {
   margin: 0 18px 20px 18px;
+  position: relative;
+  display: block;
 }
 .controls__file-title {
   display: block;
@@ -173,6 +177,7 @@ body {
   z-index: 10;
   text-indent: -9999px;
 }
+/* --------- HR --------- */
 .controls__hr {
   background: url("/img/bg/hr-bg.png");
   height: 11px;
@@ -189,6 +194,10 @@ body {
 }
 .controls__hr:after {
   clear: both;
+}
+/* --------- POSITION --------- */
+.coord-table {
+  float: right;
 }
 .pos__pad {
   margin: 0;

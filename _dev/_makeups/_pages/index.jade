@@ -15,7 +15,7 @@ block content
                             img(src="http://lorempixel.com/100/100/nature/")#drag__img.drug__watermark
                 .controls
                     h3.controls__title Настройки
-                    .controls__file-inputs-group
+                    .controls__inputs-group
                         label.controls__file-title Исходное изображение
                             .controls__file
                                 input.controls__file-input(
@@ -26,7 +26,7 @@ block content
                                 )
                                 span#file_name.controls__file-input--fake Загрузите изображение
                                 button.controls__file-input--btn Загрузить
-                    .controls__file-inputs-group
+                    .controls__inputs-group
                         label.controls__file-title Водяной знак
                             .controls__file
                                 input.controls__file-input(
@@ -38,11 +38,13 @@ block content
                                 span#file_name.controls__file-input--fake Загрузите изображение
                                 button.controls__file-input--btn Загрузить
                     .controls__hr
+                    .controls__inputs-group
+                        label.controls__file-title Положение
+
                     label#opacity-field.controls__label Прозрачность
                         input(type="range")#opacity
                         p#opacity-val
                     .coord-table
-                        h3.coord-table-title
                             table
                                 tr
                                     td.table__name
@@ -51,7 +53,6 @@ block content
                                     td.table__name
                                     td.table__val
                     .position
-                        h3.position__title
                         .pos__pad
                             ul.position__list.clearfix
                                 each val in ['lt', 'ct', 'rt', 'lm', 'cm', 'cm', 'rm', 'lb', 'cb', 'rb']
