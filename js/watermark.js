@@ -71,7 +71,6 @@ var watermark = (function() {
 
 	// обработчик изменения позиции
 	function onPosChange(){
-		$('.position__b-link').removeClass('position__b-link__active');
 		setPos(currPos);
 	}
 
@@ -105,6 +104,7 @@ var watermark = (function() {
 
 	// установка ватермарки в нужную позицию
 	function setPos(position){
+		$('.position__b-link').removeClass('position__b-link__active');
 		$watermark.css({
 			left: position.left,
 			top: position.top
@@ -227,7 +227,8 @@ var watermark = (function() {
 		},
 		calcPositions: calcPositions,
 		position: getPos,
-		opacity: getOpacity
+		opacity: getOpacity,
+		setPos: setPos
 	};
 
 }());

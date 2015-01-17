@@ -2,7 +2,7 @@ var images = (function() {
 
 	var $imgSource = $('#img-source'),
 			$imgWatermark = $('#img-watermark'),
-      $formImg = $('#form-control'),
+      // $formImg = $('#form-control'),
       $result = $('#result'),
 			$bgImg = $('#bg__img'),
 			$bgImgWrapper = $('#bg__wrapper'),
@@ -108,6 +108,7 @@ var images = (function() {
 	function insertWmImg($image){
 		rescaleWmImg($image).appendTo($watermark);
 		watermark.calcPositions();
+		watermark.setPos({left: 0, top: 0});
 	}
 
 	return {
