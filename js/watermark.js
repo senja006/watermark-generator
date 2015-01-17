@@ -1,7 +1,7 @@
 var watermark = (function() {
 
 	var	$watermark = $('#watermark'),			// watermark
-		$bg = $('#bg'),							// original image
+		$bg = $('#bg__wrapper'),							// original image
 		$opacityVal = $('#opacity-val'),		// поле значения прозрачности
 		$opacity = $('#opacity'),				// ползунок прозрачности		
 		$xVal = $('#xVal'),						// поле left spinner
@@ -22,16 +22,17 @@ var watermark = (function() {
 		fixedPositions = {},
 		
 		currPos = {
-			left: 0 + "px",
-			top: 0 + "px"
+			left: 0,
+			top: 0
 		},
+
 		currOpacity = 0.5;
 
 	// инициализация плагинов
 	function initPlugins() {
 		$watermark.draggable({
 			cursor: 'move',
-			snap: '.result',
+			snap: '#bg__wrapper',
 			drag: onDragWatermark // событие 'drag'
 		});
 		$xVal.spinner();
@@ -55,7 +56,7 @@ var watermark = (function() {
 
 	// установка начальной позиции
 	function setStartPos() {
-		refreshPosVal(currPos)
+		onPosChange();
 	}
 
 	// обработчик смены прозрачности
@@ -70,14 +71,17 @@ var watermark = (function() {
 
 	// обработчик изменения позиции
 	function onPosChange(){
-		refreshPosVal(currPos);
+		$('.position__b-link').removeClass('position__b-link__active');
+		setPos(currPos);
 	}
 
 	// обработчик изменения позиций drag'n'drop
 	function onDragWatermark(e, ui){
-		currPos.left = ui.position.left + 1 + "px";
-		currPos.top = ui.position.top + 1 + "px";
-		refreshPosVal(currPos);
+		currPos = {
+			left: ui.position.left,
+			top: ui.position.top
+		};
+		onPosChange();
 	}
 
 	// обработчик клика по кнопке с фиксированой позицией
@@ -85,34 +89,33 @@ var watermark = (function() {
 		var id = $(e.target).attr('id');
 
 		e.preventDefault();
-		$('.position__b-link').removeClass('position__b-link__active');
-		$(this).addClass('position__b-link__active');
 		moveFixed(id);
-		onPosChange();
+		$(this).addClass('position__b-link__active');
 	}
 
 	// обработчики клика по спину
 	function onSpinX(){
-		currPos.left = $xVal.spinner('value');
-		setPos(currPos);
+		currPos.left = $xVal.spinner('value') * images.getScale();
+		onPosChange();
 	}
 	function onSpinY(){
-		currPos.top = $yVal.spinner('value');
-		setPos(currPos);
+		currPos.top = $yVal.spinner('value') * images.getScale();
+		onPosChange();
 	}
 
 	// установка ватермарки в нужную позицию
 	function setPos(position){
-		$watermark.css(position);
+		$watermark.css({
+			left: position.left,
+			top: position.top
+		});
+		refreshPosVal(currPos);
 	}
 
 	// рендер позиций
 	function refreshPosVal(){
-		var left = parseInt(currPos.left),
-			top = parseInt(currPos.top);
-
-		$xVal.spinner('value', left);
-		$yVal.spinner('value', top);
+		$xVal.spinner('value', parseInt(currPos.left / images.getScale()));
+		$yVal.spinner('value', parseInt(currPos.top / images.getScale()));
 	}
 
 	// рендер прозрачности
@@ -124,52 +127,45 @@ var watermark = (function() {
 	function moveFixed(pos){
 		switch (pos) {
 			case 'lt':
-				$watermark.css(fixedPositions.lt);
 				currPos = fixedPositions.lt;
 				break
 			case 'ct':
-				$watermark.css(fixedPositions.ct);
 				currPos = fixedPositions.ct;
 				break
 			case 'rt':
-				$watermark.css(fixedPositions.rt);
 				currPos = fixedPositions.rt;
 				break
 			case 'lm':
-				$watermark.css(fixedPositions.lm);
 				currPos = fixedPositions.lm;
 				break
 			case 'cm':
-				$watermark.css(fixedPositions.cm);
 				currPos = fixedPositions.cm;
 				break
 			case 'rm':
-				$watermark.css(fixedPositions.rm);
 				currPos = fixedPositions.rm;
 				break
 			case 'lb':
-				$watermark.css(fixedPositions.lb);
 				currPos = fixedPositions.lb;
 				break
 			case 'cb':
-				$watermark.css(fixedPositions.cb);
 				currPos = fixedPositions.cb;
 				break
 			case 'rb':
-				$watermark.css(fixedPositions.rb);
 				currPos = fixedPositions.rb;
 				break
 			default:
 				break
 		};
+
+		onPosChange();
 	}
 
 	// вычисление фиксированых позиций
 	function calcPositions(){
-		watermarkWidth = $watermark.width();
-		watermarkHeight = $watermark.height();
-		bgWidth = $bg.width();
-		bgHeight = $bg.height();
+		var	watermarkWidth = $('#watermark').width(),
+			watermarkHeight = $('#watermark').height(),
+			bgWidth = $('#bg__wrapper').width(),
+			bgHeight = $('#bg__wrapper').height();
 
 		fixedPositions = {
 			lt: {
@@ -177,36 +173,36 @@ var watermark = (function() {
 				top: 0
 			},
 			ct: {
-				left: parseInt((bgWidth - watermarkWidth) / 2) + "px",
+				left: parseInt((bgWidth - watermarkWidth) / 2),
 				top: 0
 			},
 			rt: {
-				left: bgWidth - watermarkWidth + "px",
+				left: bgWidth - watermarkWidth,
 				top: 0
 			},
 			lm: {
 				left: 0,
-				top: parseInt((bgHeight - watermarkHeight)) / 2 + "px",
+				top: parseInt((bgHeight - watermarkHeight)) / 2,
 			},
 			cm: {
-				left: parseInt((bgWidth - watermarkWidth) / 2) + "px",
-				top: parseInt((bgHeight - watermarkHeight) / 2) + "px"
+				left: parseInt((bgWidth - watermarkWidth) / 2),
+				top: parseInt((bgHeight - watermarkHeight) / 2)
 			},
 			rm: {
-				left: bgWidth - watermarkWidth + "px",
-				top: parseInt((bgHeight - watermarkHeight) / 2) + "px"
+				left: bgWidth - watermarkWidth,
+				top: parseInt((bgHeight - watermarkHeight) / 2)
 			},
 			lb: {
 				left: 0,
-				top: bgHeight - watermarkHeight + "px",
+				top: bgHeight - watermarkHeight,
 			},
 			cb: {
-				left: parseInt((bgWidth - watermarkWidth) / 2) + "px",
-				top: bgHeight - watermarkHeight + "px"
+				left: parseInt((bgWidth - watermarkWidth) / 2),
+				top: bgHeight - watermarkHeight
 			},
 			rb: {
-				left: bgWidth - watermarkWidth + "px",
-				top: bgHeight - watermarkHeight + "px"
+				left: bgWidth - watermarkWidth,
+				top: bgHeight - watermarkHeight
 			}
 		}
 	}
@@ -229,6 +225,7 @@ var watermark = (function() {
 			addEventListeners();
 			console.log('<watermark> init!');
 		},
+		calcPositions: calcPositions,
 		position: getPos,
 		opacity: getOpacity
 	};

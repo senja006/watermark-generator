@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Watermar generator</title>
+  <title>Watermark generator</title>
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="css/main.css">
@@ -10,12 +10,13 @@
 <body>
   
   <div class="container">
-    <div class="result">
-      <div id="bg">
-       <img id="bg__img" src="img/bg-source-simple.png"/>
-       <div class="drag" id="watermark">
-         <img id="drag__img" src="img/watermark-simple.png"/>
-       </div>
+    <div class="result" id="result">
+        <div id="bg__wrapper">
+          <!-- <img id="bg__img" src="img/bg-source-simple.png"/> -->
+        </div>
+        <div class="drag" id="watermark">
+         <!-- <img id="drag__img" src="img/watermark-simple.png"/> -->
+        </div>
       </div>
     </div> 
     <div class="controls">

@@ -14,7 +14,7 @@ body{
 }
 .container {
   width: 1050px;
-  margin: 0 auto;
+  margin: 30px auto;
 }
 h3 {
   font-size: 18px;
@@ -27,14 +27,17 @@ h3 {
   float: left;
   box-shadow: 0 0 30px 0 rgba(0,0,0,0.3);
   border: 1px solid #888;
-  min-height: 200px;
   min-width: 300px;
   text-align: center;
 }
 .result {
   position: relative;
+  min-height: 500px;
   width: 651px;
-  height: 534px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+#bg__wrapper {
   overflow: hidden;
 }
 .controls {
@@ -91,9 +94,12 @@ h3 {
 .position__b-link__active{
   background-color: #f97e76; 
 }
+.position__b-link__active:hover{
+  background-color: #f97e76; 
+}
 .pos__adjust{
   float: left;
-  width: 100px;
+  width: 125px;
   padding: 10px;
 }
 
@@ -111,7 +117,7 @@ h3 {
   top: 0;
   display: inline-block;
   float: left;
-  width: 50px;
+  width: 60px;
 }
 
 .ctrl__input {
