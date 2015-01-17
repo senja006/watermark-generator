@@ -58,6 +58,27 @@ block content
                                         .controls__switch-group
                                             button(class="four") 4 watermarks
                                             button(class="one") 1 watermark
+                                .position__property
+                                    .position__property-block
+                                //                        span X
+                                //                        input(
+                                //    <input id="x-cord" class="form__input input--switch" type="text" name="xValue" value="0">
+                                //    <div class="switch__controls controls--cords">
+                                //    <button data-direction="x-up" class="btn--up js-move-obj">Больше</button>
+                                //    <button data-direction="x-down" class="btn--down js-move-obj">Меньше</button>
+                                //    </div>
+                                //    </div>
+                                //    <div class="switch__block">
+                                //    <p class="p p--big">Y</p>
+                                //    <input id="y-cord" class="form__input input--switch" type="text" name="yValue" value="0">
+                                //    <div class="switch__controls controls--cords">
+                                //    <button data-direction="y-up" class="btn--up js-move-obj">Больше</button>
+                                //    <button data-direction="y-down" class="btn--down js-move-obj">Меньше	</button>
+                                //    </div>
+                                //    </div>
+                                //</div>
+
+
                                 .position
                                     table.position__table
                                         tr.position__row
@@ -79,9 +100,11 @@ block content
                                     tr
                                         td.table__name
                                         td.table__val
-                    label#opacity-field.controls__label Прозрачность
-                        input(type="range")#opacity
+                    .slider__box
+                        label#opacity-field.slider__box-title Прозрачность
+                        #opacity
                         p#opacity-val
+
 
                     //.position
                     //    .pos__pad

@@ -94,7 +94,7 @@ footer{position:relative;min-width:980px}
 .controls__hr{background:url(/img/bg/hr-bg.png);height:11px;width:100%;display:block;margin:30px 0 0;zoom:1!ie}
 .controls__hr:after,.controls__hr:before{content:"";display:table}
 .controls__hr:after{clear:both}
-.controls__switch{position:relative;height:20px;margin-bottom:37px;margin-top:17px}
+.controls__switch{position:relative;height:20px;margin-bottom:30px;margin-top:17px}
 .controls__switch-title{display:block;color:#2e3641;font-size:14px;line-height:1em;font-family:Roboto;font-weight:300;font-style:normal}
 .controls__switch-group{position:absolute;top:0;right:0;overflow:hidden;height:20px;margin:0 0 -10px}
 .four,.one{float:left;width:20px;height:inherit;margin:0 10px 0 0;background-image:url(/img/icons/controls.png);background-repeat:no-repeat;text-indent:-9999px;background-color:transparent;border:0;cursor:pointer}
@@ -113,6 +113,18 @@ footer{position:relative;min-width:980px}
 .pos__adjust *{box-sizing:border-box}
 .pos__row{display:block;margin-bottom:10px}
 .pos__spin{font-size:18px;top:0;display:inline-block;float:left;width:50px}
+.slider__box{position:relative;height:20px;margin-top:17px;margin-bottom:15px;padding:0 20px 30px}
+.slider__box-group{position:absolute;top:0;right:0;overflow:hidden;height:20px;margin:0 0 -10px}
+.slider__box-title{display:block;color:#2e3641;font-size:14px;line-height:1em;font-family:Roboto;font-weight:300;font-style:normal}
+.ui-slider{position:relative;width:218px;height:3px;margin:25px 0 30px;border-radius:3px;background-color:#dbe1e8}
+.ui-slider .ui-slider-range{position:absolute;z-index:1;font-size:.7em;display:block;border:0;background-position:0 0}
+.ui-slider-horizontal{background-color:#dbe1e8;height:3px}
+.ui-slider-horizontal .ui-slider-handle{top:-.3em;margin-left:-.6em}
+.ui-slider-horizontal .ui-slider-range{top:0;height:100%}
+.ui-slider-horizontal .ui-slider-range-min{left:0;background-color:#9eb2c0;height:3px}
+.ui-slider-horizontal .ui-slider-range-max{right:0}
+.ui-slider .ui-slider-handle{position:absolute;z-index:100;top:0;bottom:0;margin:auto 0 auto -10px;cursor:pointer;outline:0;border-radius:50%;border-width:7px;border-color:#dbe1e8;border-style:solid;background-color:#9eb2c0;box-shadow:0 1px 1px 0 rgba(0,0,0,.38);width:8px;height:8px}
+.ui-slider .ui-slider-handle:hover{background-color:#f97e76}
 @font-face{font-family:SegoeUILight;src:url(/fonts/SegoeUILight.eot);src:url(/fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(/fonts/SegoeUILight.woff) format("woff"),url(/fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
 @font-face{font-family:fira_sanslight;src:url(/fonts/firasans-light-webfont.eot);src:url(/fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/firasans-light-webfont.woff) format('woff'),url(/fonts/firasans-light-webfont.ttf) format('truetype'),url(/fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
 .language{position:absolute;top:100px;left:0;font-family:SegoeUILight;font-weight:400;font-style:normal;font-size:20px;line-height:35px;background-color:rgba(241,241,245,.7);margin:0 auto}

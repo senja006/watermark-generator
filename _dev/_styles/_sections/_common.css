@@ -258,7 +258,7 @@
 .controls__switch {
   position: relative;
   height: 20px;
-  margin-bottom: 37px;
+  margin-bottom: 30px;
   margin-top: 17px;
 }
 .controls__switch-title {
@@ -373,4 +373,101 @@
   display: inline-block;
   float: left;
   width: 50px;
+}
+.slider__box {
+  position: relative;
+  height: 20px;
+  margin-bottom: 30px;
+  margin-top: 17px;
+  margin-bottom: 15px;
+  padding: 0 20px 30px;
+}
+.slider__box-title {
+  display: block;
+  color: #2e3641;
+  font-size: 14px;
+  line-height: 1em;
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-style: normal;
+}
+.slider__box-group {
+  position: absolute;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+  height: 20px;
+  margin: 0 0 -10px;
+}
+.slider__box-title {
+  display: block;
+  color: #2e3641;
+  font-size: 14px;
+  line-height: 1em;
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-style: normal;
+}
+.ui-slider {
+  position: relative;
+  width: 218px;
+  height: 3px;
+  margin: 25px 0 30px;
+  border-radius: 3px;
+  background-color: #dbe1e8;
+}
+.ui-slider .ui-slider-handle {
+  position: absolute;
+  z-index: 2;
+  width: 1.2em;
+  height: 1.2em;
+  cursor: default;
+}
+.ui-slider .ui-slider-range {
+  position: absolute;
+  z-index: 1;
+  font-size: .7em;
+  display: block;
+  border: 0;
+  background-position: 0 0;
+}
+.ui-slider-horizontal {
+  background-color: #dbe1e8;
+  height: 3px;
+}
+.ui-slider-horizontal .ui-slider-handle {
+  top: -0.3em;
+  margin-left: -0.6em;
+}
+.ui-slider-horizontal .ui-slider-range {
+  top: 0;
+  height: 100%;
+}
+.ui-slider-horizontal .ui-slider-range-min {
+  left: 0;
+  background-color: #9eb2c0;
+  height: 3px;
+}
+.ui-slider-horizontal .ui-slider-range-max {
+  right: 0;
+}
+.ui-slider .ui-slider-handle {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  bottom: 0;
+  margin: auto 0 auto -10px;
+  cursor: pointer;
+  outline: none;
+  border-radius: 50%;
+  border-width: 7px;
+  border-color: #dbe1e8;
+  border-style: solid;
+  background-color: #9eb2c0;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.38);
+  width: 8px;
+  height: 8px;
+}
+.ui-slider .ui-slider-handle:hover {
+  background-color: #f97e76;
 }

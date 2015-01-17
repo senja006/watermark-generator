@@ -93,7 +93,7 @@ gulp.task('images', function () {
 gulp.task('watch', function(){
 	gulp.watch('_dev/_styles/**/*.css', ['concat']);
 	gulp.watch('_dev/_makeups/**/*.html', ['jade']);
-	gulp.watch('_dev/_scripts/_modules/*.js', ['js', 'uglify']);
+	gulp.watch('_dev/_scripts/_modules/*.js', ['js', 'compress-plugins']);
 	gulp.watch('_dev/_scripts/_plugins/*.js', ['compress-plugins', 'uglify-plugins']);
 });
 

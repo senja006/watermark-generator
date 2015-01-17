@@ -59,6 +59,27 @@
                       </div>
                     </label>
                   </div>
+                  <div class="position__property">
+                    <div class="position__property-block"></div>
+                  </div>
+                  <!--                        span X-->
+                  <!--                        input(-->
+                  <!--    <input id="x-cord" class="form__input input--switch" type="text" name="xValue" value="0">-->
+                  <!--    <div class="switch__controls controls--cords">-->
+                  <!--    <button data-direction="x-up" class="btn--up js-move-obj">Больше</button>-->
+                  <!--    <button data-direction="x-down" class="btn--down js-move-obj">Меньше</button>-->
+                  <!--    </div>-->
+                  <!--    </div>-->
+                  <!--    <div class="switch__block">-->
+                  <!--    <p class="p p--big">Y</p>-->
+                  <!--    <input id="y-cord" class="form__input input--switch" type="text" name="yValue" value="0">-->
+                  <!--    <div class="switch__controls controls--cords">-->
+                  <!--    <button data-direction="y-up" class="btn--up js-move-obj">Больше</button>-->
+                  <!--    <button data-direction="y-down" class="btn--down js-move-obj">Меньше	</button>-->
+                  <!--    </div>-->
+                  <!--    </div>-->
+                  <!--</div>-->
+                  
                   <div class="position">
                     <table class="position__table">
                       <tr class="position__row">
@@ -91,10 +112,11 @@
                 </fieldset>
               </form>
             </div>
-            <label id="opacity-field" class="controls__label">Прозрачность
-              <input type="range" id="opacity">
+            <div class="slider__box">
+              <label id="opacity-field" class="slider__box-title">Прозрачность</label>
+              <div id="opacity"></div>
               <p id="opacity-val"></p>
-            </label>
+            </div>
             <!--.position-->
             <!--    .pos__pad-->
             <!--        ul.position__list.clearfix-->
@@ -126,10 +148,8 @@
       </ul>
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script>
-      window.jQuery || document.write('<script src="/js/_vendor/jquery-1.11.0.min.js"><\/script>');
-      
-    </script>
+    <script>window.jQuery || document.write('<script src="/js/_vendor/jquery-1.11.0.min.js"><\/script>');</script>
+    <script src="https://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
     <script src="/js/_vendor/html5shiv.min.js"></script>
     <script src="/js/plugins.min.js"></script>
     <script src="/js/main.min.js"></script>
