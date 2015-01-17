@@ -1,5 +1,7 @@
 var images = (function() {
 
+	var MAX_FILE_SIZE = 10485760; // 10 Mb
+
 	var $imgSource = $('#img-source'),
 			$imgWatermark = $('#img-watermark'),
       // $formImg = $('#form-control'),
@@ -15,18 +17,21 @@ var images = (function() {
 			wmImgHeight,
 			bgImgScale = 1;
 
-	
-
 	// установка обработчиков
 	function addEventListeners() {
 		$imgSource.on('change', onChangeImageSource);
 		$imgWatermark.on('change', onChangeImageWatermark);
+		$('.modal').on('click', function(){
+			$(this).fadeOut('fast');
+		});
 	}
 
 	// обработчик смены исходного изображения
 	function onChangeImageSource(e){
 		var file = this.files[0],
 				fr = new FileReader();
+
+		if(!validationImg(file)) return;
 
 		fr.onload = function(event) {
 				var $image = $(new Image());
@@ -36,6 +41,7 @@ var images = (function() {
 					src: event.target.result,
 					id: 'bg__img'
 				});
+
 				bgImgWidth = $image[0].width;
 				bgImgHeight = $image[0].height;
 				bgImgScale = $bgImgWrapper.width() / bgImgWidth;
@@ -62,12 +68,15 @@ var images = (function() {
 			height: $bgImgWrapper.height() - 4
 		});
 		watermark.calcPositions();
+		watermark.setPos({left: 0, top: 0});
 	}
 
 	// обработчик смены изображения ватермарки
 	function onChangeImageWatermark(e){
 		var file = this.files[0],
 				fr = new FileReader();
+
+		if(!validationImg(file)) return;
 
 		fr.onload = function(event) {
 			var $image = $(new Image());
@@ -93,15 +102,13 @@ var images = (function() {
 	function rescaleWmImg($image) {
 		var scaleWidth = 0;
 
-		if ($image) {
-			scaleWidth = $image[0].width * bgImgScale;
+		scaleWidth = $image[0].width * bgImgScale;
 
-			$image.css({
-				width: scaleWidth
-			});
+		$image.css({
+			width: scaleWidth
+		});
 
-			return $image;
-		}
+		return $image;
 	}
 
 	// функция вставки изображения ватермарки
@@ -109,6 +116,24 @@ var images = (function() {
 		rescaleWmImg($image).appendTo($watermark);
 		watermark.calcPositions();
 		watermark.setPos({left: 0, top: 0});
+	}
+
+	// валидация изображения
+	function validationImg(file){
+		var errorMessage;
+
+		if (!file.type.match('image.*')) {
+			errorMessage = 'Файл должен быть изображением!';
+		}
+		if (file.size > MAX_FILE_SIZE) {
+			errorMessage = 'Размер файла не может быть больше ' + MAX_FILE_SIZE + ' байт (у этого - ' + file.size + ')';
+		}
+		if (errorMessage) {
+			$('.modal-error').text(errorMessage);
+			$('.modal').fadeIn('fast');
+			return false;
+		}
+		return true;
 	}
 
 	return {

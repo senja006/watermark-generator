@@ -24,9 +24,9 @@
         <h2>Управление</h2>
         <div class="ctrl-images">
             <h3>Исходное изображение</h3>
-            <input type="file" class="ctrl__input" id="img-source">
+            <input type="file" class="ctrl__input" id="img-source" accept="image/*">
             <h3>Водяной знак</h3>
-            <input type="file" class="ctrl__input" id="img-watermark">
+            <input type="file" class="ctrl__input" id="img-watermark" accept="image/*">
 
         </div>
         <div class="opacity">
@@ -64,6 +64,9 @@
         </form>
       </div>
     </div>
+  </div>
+  <div class="modal">
+    <div class="modal-error">ghfhgfhg</div>
   </div>
   <script src="js/jquery-1.11.0.min.js"></script>
   <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
