@@ -59,7 +59,7 @@
           </div>
         <div class="buttons cf">
           
-          <input class="button" type="submit" value="Загрузить">
+          <input class="button" type="submit" value="Загрузить" id="get-image">
         </div>
         </form>
       </div>

@@ -3,63 +3,65 @@ var images = (function() {
 	var MAX_FILE_SIZE = 10485760; // 10 Mb
 
 	var $imgSource = $('#img-source'),
-			$imgWatermark = $('#img-watermark'),
-      // $formImg = $('#form-control'),
-      $result = $('#result'),
-			$bgImg = $('#bg__img'),
-			$bgImgWrapper = $('#bg__wrapper'),
-			$watermark = $('#watermark'),
-			$wmImg = $('#drag__img');
+		$imgWatermark = $('#img-watermark'),
+		// $formImg = $('#form-control'),
+		$result = $('#result'),
+		$bgImg = $('#bg__img'),
+		$bgImgWrapper = $('#bg__wrapper'),
+		$watermark = $('#watermark'),
+		$wmImg = $('#drag__img'),
+		$butGetImage = $('#get-image');
 
-	var	bgImgWidth,
-			bgImgHeight,
-			wmImgWidth,
-			wmImgHeight,
-			bgImgScale = 1;
+	var bgImgWidth,
+		bgImgHeight,
+		wmImgWidth,
+		wmImgHeight,
+		bgImgScale = 1;
 
 	// установка обработчиков
 	function addEventListeners() {
 		$imgSource.on('change', onChangeImageSource);
 		$imgWatermark.on('change', onChangeImageWatermark);
-		$('.modal').on('click', function(){
+		$('.modal').on('click', function() {
 			$(this).fadeOut('fast');
 		});
+		$butGetImage.on('click', onSubmitImage);
 	}
 
 	// обработчик смены исходного изображения
-	function onChangeImageSource(e){
+	function onChangeImageSource(e) {
 		var file = this.files[0],
-				fr = new FileReader();
+			fr = new FileReader();
 
-		if(!validationImg(file)) return;
+		if (!validationImg(file)) return;
 
 		fr.onload = function(event) {
-				var $image = $(new Image());
-				
-				$('#bg__img').remove();
-				$image.attr({
-					src: event.target.result,
-					id: 'bg__img'
-				});
+			var $image = $(new Image());
 
-				bgImgWidth = $image[0].width;
-				bgImgHeight = $image[0].height;
-				bgImgScale = $bgImgWrapper.width() / bgImgWidth;
-				if ($('#drag__img').length) {
-					rescaleWmImg($('#drag__img'));
-				}
-				insertBgImg($image);
+			$('#bg__img').remove();
+			$image.attr({
+				src: event.target.result,
+				id: 'bg__img'
+			});
+
+			bgImgWidth = $image[0].width;
+			bgImgHeight = $image[0].height;
+			bgImgScale = $bgImgWrapper.width() / bgImgWidth;
+			if ($('#drag__img').length) {
+				rescaleWmImg($('#drag__img'));
+			}
+			insertBgImg($image);
 		}
 
 		fr.onerror = function(event) {
-				console.error("Error: " + event.target.error.code);
+			console.error("Error: " + event.target.error.code);
 		};
 
 		fr.readAsDataURL(file);
 	}
 
 	// функция вставки исходного изображения
-	function insertBgImg($image){
+	function insertBgImg($image) {
 		$image.css({
 			width: '100%'
 		}).appendTo($bgImgWrapper);
@@ -68,31 +70,34 @@ var images = (function() {
 			height: $bgImgWrapper.height() - 4
 		});
 		watermark.calcPositions();
-		watermark.setPos({left: 0, top: 0});
+		watermark.setPos({
+			left: 0,
+			top: 0
+		});
 	}
 
 	// обработчик смены изображения ватермарки
-	function onChangeImageWatermark(e){
+	function onChangeImageWatermark(e) {
 		var file = this.files[0],
-				fr = new FileReader();
+			fr = new FileReader();
 
-		if(!validationImg(file)) return;
+		if (!validationImg(file)) return;
 
 		fr.onload = function(event) {
 			var $image = $(new Image());
 
-				$('#drag__img').remove();
-				$image.attr({
-					src: event.target.result,
-					id: 'drag__img'
-				});
-				wmImgWidth = $image[0].width;
-				wmImgHeight = $image[0].height;
-				insertWmImg($image);
+			$('#drag__img').remove();
+			$image.attr({
+				src: event.target.result,
+				id: 'drag__img'
+			});
+			wmImgWidth = $image[0].width;
+			wmImgHeight = $image[0].height;
+			insertWmImg($image);
 		}
 
 		fr.onerror = function(event) {
-				console.error("Error: " + event.target.error.code);
+			console.error("Error: " + event.target.error.code);
 		};
 
 		fr.readAsDataURL(file);
@@ -112,14 +117,17 @@ var images = (function() {
 	}
 
 	// функция вставки изображения ватермарки
-	function insertWmImg($image){
+	function insertWmImg($image) {
 		rescaleWmImg($image).appendTo($watermark);
 		watermark.calcPositions();
-		watermark.setPos({left: 0, top: 0});
+		watermark.setPos({
+			left: 0,
+			top: 0
+		});
 	}
 
 	// валидация изображения
-	function validationImg(file){
+	function validationImg(file) {
 		var errorMessage;
 
 		if (!file.type.match('image.*')) {
@@ -136,12 +144,17 @@ var images = (function() {
 		return true;
 	}
 
+	function onSubmitImage(e){
+		e.preventDefault();
+		console.log('Здесь отправляется ajax');
+	}
+
 	return {
 		init: function() {
 			addEventListeners();
 			console.log('<images> init!'); // дебаг
 		},
-		getScale: function(){
+		getScale: function() {
 			return bgImgScale;
 		}
 	};
