@@ -7,54 +7,85 @@ block content
     .wrapper
         .maincontent
             .container
-                .result
-                    h1.result__title Генератор водных знаков
+                section.result
+                    h1.result__title Генератор водяных знаков
                     .result__imagebox
                         img(src="img/photo/photo1.jpg")#bg__img.result__imagebox-image
                         .drag#watermark
                             img(src="http://lorempixel.com/100/100/nature/")#drag__img.drug__watermark
-                .controls
+                section.controls
                     h3.controls__title Настройки
                     .controls__inputs-group
-                        label.controls__file-title Исходное изображение
-                            .controls__file
-                                input.controls__file-input(
-                                type="file"
-                                name="source-image"
-                                placeholder="Загрузите изображение"
-                                id="source-image"
-                                )
-                                span#file_name.controls__file-input--fake Загрузите изображение
-                                button.controls__file-input--btn Загрузить
+                        form(
+                        action=""
+                        method="post"
+                        enctype="multipart/form-data"
+                        )
+                            fieldset
+                                label.controls__file-title Исходное изображение
+                                    .controls__file
+                                        input.controls__file-input(
+                                        type="file"
+                                        name="source-image"
+                                        placeholder="Загрузите изображение"
+                                        id="source-image"
+                                        )
+                                        span#file_name.controls__file-input--fake Загрузите изображение
+                                        button.controls__file-input--btn Загрузить
+                                        span.error text text
+                        form(
+                        action=""
+                        method="post"
+                        enctype="multipart/form-data"
+                        )
+                            fieldset
+                                label.controls__file-title Водяной знак
+                                    .controls__file
+                                        input.controls__file-input(
+                                        type="file"
+                                        name="watermark-image"
+                                        placeholder="Загрузите изображение"
+                                        id="watermark-image"
+                                        )
+                                        span#file_name.controls__file-input--fake Загрузите изображение
+                                        button.controls__file-input--btn Загрузить
+                                        span.error error
                     .controls__inputs-group
-                        label.controls__file-title Водяной знак
-                            .controls__file
-                                input.controls__file-input(
-                                type="file"
-                                name="watermark-image"
-                                placeholder="Загрузите изображение"
-                                id="watermark-image"
-                                )
-                                span#file_name.controls__file-input--fake Загрузите изображение
-                                button.controls__file-input--btn Загрузить
-                    .controls__hr
-                    .controls__inputs-group
-                        label.controls__file-title Положение
-
+                        form
+                            fieldset
+                                .controls__switch
+                                    label.controls__switch-title Положение
+                                        .controls__switch-group
+                                            button(class="four") 4 watermarks
+                                            button(class="one") 1 watermark
+                                .position
+                                    table.position__table
+                                        tr.position__row
+                                            each val in ['lt', 'ct', 'rt']
+                                                td.position__col
+                                                    a(href="" id=val).position__col-link
+                                        tr.position__row
+                                            each val in['lm', 'cm', 'rm']
+                                                td.position__col
+                                                    a(href="" id=val).position__col-link
+                                        tr.position__row
+                                            each val in['lb', 'cb', 'rb']
+                                                td.position__col
+                                                    a(href="" id=val).position__col-link
+                                table.coordinate__table
+                                    tr
+                                        td.table__name
+                                        td.table__val
+                                    tr
+                                        td.table__name
+                                        td.table__val
                     label#opacity-field.controls__label Прозрачность
                         input(type="range")#opacity
                         p#opacity-val
-                    .coord-table
-                            table
-                                tr
-                                    td.table__name
-                                    td.table__val
-                                tr
-                                    td.table__name
-                                    td.table__val
-                    .position
-                        .pos__pad
-                            ul.position__list.clearfix
-                                each val in ['lt', 'ct', 'rt', 'lm', 'cm', 'cm', 'rm', 'lb', 'cb', 'rb']
-                                    li.position__list-item
-                                        a(href="" id=val).position__list-item-link
+
+                    //.position
+                    //    .pos__pad
+                    //        ul.position__list.clearfix
+                    //            each val in ['lt', 'ct', 'rt', 'lm', 'cm', 'cm', 'rm', 'lb', 'cb', 'rb']
+                    //                li.position__list-item
+                    //                    a(href="" id=val).position__list-item-link

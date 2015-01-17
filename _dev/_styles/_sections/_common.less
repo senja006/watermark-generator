@@ -1,9 +1,7 @@
 @import "../_misc/mixins";
 
 /* --------- common --------- */
-body{
-  background-image: url("../../../img/bg/page-bg.jpg");
-}
+
 .maincontent{
   padding-bottom: 56px;
   overflow: auto;
@@ -19,12 +17,13 @@ body{
   position: relative;
   &__title{
     .segoe-ui-light;
-    color:  #ffffff;
+    color: #fff;
     font-size: 36px;
-    margin: 20px 25px 40px 25px;
+    line-height: 1em;
+    margin: 15px 22px 60px;
   }
   &__imagebox{
-    margin: 0 25px;
+    margin: 0 24px;
     position: relative;
     background-color: #fff;
     width: 650px;
@@ -56,28 +55,90 @@ body{
   display: inline-block;
   &__title{
     .roboto-light;
-    color:  #2e3641;
+    text-align: center;
+    line-height: 1em;
     font-size: 26px;
-    margin:20px 60px;
+    margin: 27px 0 35px;
+  }
+  form{
+    margin: 0;
+    padding: 0;
+    .error {
+      .roboto-light;
+      font-size: 12px;
+      line-height: 25px;
+      position: absolute;
+      top: 0;
+      right: 100%;
+      height: 25px;
+      margin-right: 20px;
+      padding: 0 10px;
+      white-space: nowrap;
+      color: #fff;
+      background-color: #f97e76;
+
+    }
+
+    .error:after {
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 0;
+      height: 0;
+      content: '';
+      border-width: 13px 0 12px 12px;
+      border-style: solid;
+      border-color: transparent transparent transparent #f97e76;
+    }
+    fieldset{
+      margin: 0;
+      padding: 0 20px;
+      border: none;
+    }
   }
 }
 .controls__inputs-group{
-  margin: 0 18px 20px 18px;
+  padding: 0 0 7px;
   position: relative;
   display: block;
+  border-bottom: 1px solid rgba(249, 126, 118, 0.4);
+  &:after {
+    position: absolute;
+    z-index: 2;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -9px;
+    content: '';
+    border-top: 10px solid rgba(249, 126, 118, 0.4);
+    border-right: 9px solid transparent;
+    border-left: 9px solid transparent;
+  }
+  &:before {
+    position: absolute;
+    z-index: 5;
+    bottom: -9px;
+    left: 50%;
+    margin-left: -9px;
+    content: '';
+    border-top: 10px solid #f1f1f5;
+    border-right: 9px solid transparent;
+    border-left: 9px solid transparent;
+  }
 }
 .controls__file-title{
   display: block;
-  color:  #2e3641;
+  color: #2e3641;
   font-size: 14px;
-  line-height: 40px;
+  line-height: 1em;
   .roboto-light;
 }
 .controls__file{
   position: relative;
   width: 100%;
+  margin-top: 10px;
+  margin-bottom: 24px;
   &:after{
-    clear: both;
+//    clear: both;
     content: '';
   }
 }
@@ -89,19 +150,21 @@ body{
   -o-border-radius: 3px;
   border-radius: 3px;
   border: 1px solid #9eb2c0;
-  width: 192px;
-  height: 25px;
-  .segoe-ui-light;
-  color:  #9eb2c0;
-  font-size: 12px;
+  width: 185px;
+  height: 27px;
+  font-family: SegoeUILight;
+  font-weight: 400;
+  font-style: normal;
+  color: #9eb2c0;
+  font-size: 14px;
   padding-left: 4px;
   padding-right: 4px;
-  line-height: 25px;
+  line-height: 1.5em;
   box-sizing: border-box;
 }
 .controls__file-input {
   cursor: pointer;
-  height: 25px;
+  height: 27px;
   opacity: 0;
   position: absolute;
   top: 0;
@@ -110,11 +173,11 @@ body{
 }
 
 .controls__file-input--btn {
-  height: 25px;
+  height: 27px;
   position: absolute;
   width: 39px;
   border: none;
-  background: url("/img/icons/download-btn.png") no-repeat;
+  background: url(/img/icons/controls.png)  0 0 no-repeat;
   display: block;
   top: 0;
   right: 0;
@@ -129,48 +192,115 @@ body{
   height: 11px;
   width: 100%;
   display: block;
-  margin: 30px 0 10px 0;
+  margin: 30px 0 0 0;
   .clearfix;
 }
 
 /* --------- POSITION --------- */
-.coord-table{
- float: right;
+.controls__switch{
+  position: relative;
+  height: 20px;
+  margin-bottom: 37px;
+  margin-top: 17px;
+  &-title{
+    .controls__file-title;
 
+  }
+  &-group{
+    position: absolute;
+    top: 0;
+    right: 0;
+    overflow: hidden;
+    height: 20px;
+    margin: 0 0 -10px;
+  }
 }
-
-.pos__pad{
-  margin: 0;
-  width: 126px;
+// Кнопки выбора 1 или 4 watermark
+.one,
+.four{
   float: left;
-  padding: 10px;
+  width: 20px;
+  height: inherit;
+  margin: 0 10px 0 0;
+  background-image: url(/img/icons/controls.png);
+  background-repeat: no-repeat;
+  text-indent: -9999px;
+  background-color: rgba(0, 0, 0, 0);
+  border:0;
+  cursor: pointer;
 }
-.position__buttons{
-  padding: 0px;
-  margin: 0px;
-  list-style: none;
-  width: 126px;
+.four{
+  background-position: -47px -15px;
+  &:hover{
+    background-position: -86px -15px;
+  }
+  &.active{
+    background-position: -66px -15px;
+  }
 }
-.position__btn{
-  float: left;
-  margin: 0;
-  border: 1px solid #888;
+.one{
+  background-position: -47px -41px;
+  &:hover{
+    background-position: -86px -41px;
+  }
+  &.active{
+    background-position: -66px -41px;
+  }
 }
 
-.position__b-link{
-  display: block;
-  background-color: #ccc;
-  width: 40px;
-  height: 40px;
-&:hover {
-  background-color: #aaa;
+.coordinate__table{
+  width:100px;
+  height: 100px;
+  border: 1px solid #9eb2c0;
+  margin:20px 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  display: inline-block;
+  background-color:  rgba(193, 207, 217, 0.46)
 }
-&:active {
-  background-color: #888;
+
+
+
+.coordinate__number{
+  
 }
-&__active{
-  background-color: #f97e76;
+.position__table{
+  overflow: hidden;
+  width:100px;
+  height: 100px;
+  border: 1px solid #9eb2c0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  background-color:  rgba(193, 207, 217, 0.46);
+  margin: 0;
+  padding: 0;
 }
+.position__row{
+}
+.position__col{
+  width: 33px;
+  height: 33px;
+  max-height: 33px;
+  border: 1px solid #9eb2c0;
+  margin: 0;
+  padding: 0;
+  &-link{
+    width:100%;
+    height: 100%;
+    display: block;
+    &:hover{
+      background-color:  #f97e76;
+    }
+    &.active{
+      background-color: #f97e76;
+    }
+  }
 }
 .pos__adjust{
   float: left;

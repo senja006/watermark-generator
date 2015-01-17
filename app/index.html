@@ -18,67 +18,90 @@
     <div class="wrapper">
       <div class="maincontent">
         <div class="container">
-          <div class="result">
-            <h1 class="result__title">Генератор водных знаков</h1>
+          <section class="result">
+            <h1 class="result__title">Генератор водяных знаков</h1>
             <div class="result__imagebox"><img src="img/photo/photo1.jpg" id="bg__img" class="result__imagebox-image">
               <div id="watermark" class="drag"><img src="http://lorempixel.com/100/100/nature/" id="drag__img" class="drug__watermark"></div>
             </div>
-          </div>
-          <div class="controls">
+          </section>
+          <section class="controls">
             <h3 class="controls__title">Настройки</h3>
             <div class="controls__inputs-group">
-              <label class="controls__file-title">Исходное изображение
-                <div class="controls__file">
-                  <input type="file" name="source-image" placeholder="Загрузите изображение" id="source-image" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
-                  <button class="controls__file-input--btn">Загрузить</button>
-                </div>
-              </label>
+              <form action="" method="post" enctype="multipart/form-data">
+                <fieldset>
+                  <label class="controls__file-title">Исходное изображение
+                    <div class="controls__file">
+                      <input type="file" name="source-image" placeholder="Загрузите изображение" id="source-image" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
+                      <button class="controls__file-input--btn">Загрузить</button><span class="error">text text</span>
+                    </div>
+                  </label>
+                </fieldset>
+              </form>
+              <form action="" method="post" enctype="multipart/form-data">
+                <fieldset>
+                  <label class="controls__file-title">Водяной знак
+                    <div class="controls__file">
+                      <input type="file" name="watermark-image" placeholder="Загрузите изображение" id="watermark-image" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
+                      <button class="controls__file-input--btn">Загрузить</button><span class="error">error</span>
+                    </div>
+                  </label>
+                </fieldset>
+              </form>
             </div>
             <div class="controls__inputs-group">
-              <label class="controls__file-title">Водяной знак
-                <div class="controls__file">
-                  <input type="file" name="watermark-image" placeholder="Загрузите изображение" id="watermark-image" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
-                  <button class="controls__file-input--btn">Загрузить</button>
-                </div>
-              </label>
-            </div>
-            <div class="controls__hr"></div>
-            <div class="controls__inputs-group">
-              <label class="controls__file-title">Положение</label>
+              <form>
+                <fieldset>
+                  <div class="controls__switch">
+                    <label class="controls__switch-title">Положение
+                      <div class="controls__switch-group">
+                        <button class="four">4 watermarks</button>
+                        <button class="one">1 watermark</button>
+                      </div>
+                    </label>
+                  </div>
+                  <div class="position">
+                    <table class="position__table">
+                      <tr class="position__row">
+                        <td class="position__col"><a href="" id="lt" class="position__col-link"></a></td>
+                        <td class="position__col"><a href="" id="ct" class="position__col-link"></a></td>
+                        <td class="position__col"><a href="" id="rt" class="position__col-link"></a></td>
+                      </tr>
+                      <tr class="position__row">
+                        <td class="position__col"><a href="" id="lm" class="position__col-link"></a></td>
+                        <td class="position__col"><a href="" id="cm" class="position__col-link"></a></td>
+                        <td class="position__col"><a href="" id="rm" class="position__col-link"></a></td>
+                      </tr>
+                      <tr class="position__row">
+                        <td class="position__col"><a href="" id="lb" class="position__col-link"></a></td>
+                        <td class="position__col"><a href="" id="cb" class="position__col-link"></a></td>
+                        <td class="position__col"><a href="" id="rb" class="position__col-link"></a></td>
+                      </tr>
+                    </table>
+                  </div>
+                  <table class="coordinate__table">
+                    <tr>
+                      <td class="table__name"></td>
+                      <td class="table__val"></td>
+                    </tr>
+                    <tr>
+                      <td class="table__name"></td>
+                      <td class="table__val"></td>
+                    </tr>
+                  </table>
+                </fieldset>
+              </form>
             </div>
             <label id="opacity-field" class="controls__label">Прозрачность
               <input type="range" id="opacity">
               <p id="opacity-val"></p>
             </label>
-            <div class="coord-table">
-              <table>
-                <tr>
-                  <td class="table__name"></td>
-                  <td class="table__val"></td>
-                </tr>
-                <tr>
-                  <td class="table__name"></td>
-                  <td class="table__val"></td>
-                </tr>
-              </table>
-            </div>
-            <div class="position">
-              <div class="pos__pad">
-                <ul class="position__list clearfix">
-                  <li class="position__list-item"><a href="" id="lt" class="position__list-item-link"></a></li>
-                  <li class="position__list-item"><a href="" id="ct" class="position__list-item-link"></a></li>
-                  <li class="position__list-item"><a href="" id="rt" class="position__list-item-link"></a></li>
-                  <li class="position__list-item"><a href="" id="lm" class="position__list-item-link"></a></li>
-                  <li class="position__list-item"><a href="" id="cm" class="position__list-item-link"></a></li>
-                  <li class="position__list-item"><a href="" id="cm" class="position__list-item-link"></a></li>
-                  <li class="position__list-item"><a href="" id="rm" class="position__list-item-link"></a></li>
-                  <li class="position__list-item"><a href="" id="lb" class="position__list-item-link"></a></li>
-                  <li class="position__list-item"><a href="" id="cb" class="position__list-item-link"></a></li>
-                  <li class="position__list-item"><a href="" id="rb" class="position__list-item-link"></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
+            <!--.position-->
+            <!--    .pos__pad-->
+            <!--        ul.position__list.clearfix-->
+            <!--            each val in ['lt', 'ct', 'rt', 'lm', 'cm', 'cm', 'rm', 'lb', 'cb', 'rb']-->
+            <!--                li.position__list-item-->
+            <!--                    a(href="" id=val).position__list-item-link-->
+          </section>
         </div>
       </div>
     </div>
