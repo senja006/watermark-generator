@@ -15,51 +15,51 @@ block content
                             img(src="http://lorempixel.com/100/100/nature/")#drag__img.drug__watermark
                 section.controls
                     h3.controls__title Настройка
-                        form(
-                        action=""
-                        method="post"
-                        enctype="multipart/form-data"
-                        )
-                            fieldset.noborder
-                                .controls__inputs-group
-                                    label.controls__file-title Исходное изображение
-                                        .controls__file
-                                            input.controls__file-input(
-                                            type="file"
-                                            name="source-image"
-                                            placeholder="Загрузите изображение"
-                                            id="source-image"
-                                            )
-                                            span#file_name.controls__file-input--fake Загрузите изображение
-                                            button.controls__file-input--btn Загрузить
-                                            span.error text text
-                        form(
-                        action=""
-                        method="post"
-                        enctype="multipart/form-data"
-                        )
-                            fieldset
-                                .controls__inputs-group
-                                    label.controls__file-title Водяной знак
-                                        .controls__file
-                                            input.controls__file-input(
-                                            type="file"
-                                            name="watermark-image"
-                                            placeholder="Загрузите изображение"
-                                            id="watermark-image"
-                                            )
-                                            span#file_name.controls__file-input--fake Загрузите изображение
-                                            button.controls__file-input--btn Загрузить
-                                            span.error error
-                    .controls__inputs-group
-                        form
-                            fieldset
+                    form(
+                    action=""
+                    method="post"
+                    enctype="multipart/form-data"
+                    )
+                        fieldset.noborder
+                            .controls__inputs-group
+                                label.controls__file-title Исходное изображение
+                                    .controls__file
+                                        input.controls__file-input(
+                                        type="file"
+                                        name="source-image"
+                                        placeholder="Загрузите изображение"
+                                        id="source-image"
+                                        )
+                                        span#file_name.controls__file-input--fake Загрузите изображение
+                                        button.controls__file-input--btn Загрузить
+                                        span.error text text
+                    form(
+                    action=""
+                    method="post"
+                    enctype="multipart/form-data"
+                    )
+                        fieldset
+                            .controls__inputs-group
+                                label.controls__file-title Водяной знак
+                                    .controls__file
+                                        input.controls__file-input(
+                                        type="file"
+                                        name="watermark-image"
+                                        placeholder="Загрузите изображение"
+                                        id="watermark-image"
+                                        )
+                                        span#file_name.controls__file-input--fake Загрузите изображение
+                                        button.controls__file-input--btn Загрузить
+                                        span.error error
+                    form
+                        fieldset
+                            .controls__inputs-group
                                 .controls__switch
                                     label.controls__switch-title Положение
                                         .controls__switch-group
-                                            button(class="four") 4 watermarks
-                                            button(class="one") 1 watermark
-                                .position__four-watermark.clearfix
+                                            a(class="four" href="#four") 4 watermarks
+                                            a(class="one" href="#one").active 1 watermark
+                                .position__four-watermark.clearfix#four
                                     .four-watermark__wrapper
                                         .margin-line.horizontal
                                         .margin-line.vertical
@@ -89,7 +89,7 @@ block content
                                             .margin__property-control
                                                 a.margin__property-btn.plus
                                                 a.margin__property-btn.minus
-                                .position__one-watermark.clearfix
+                                .position__one-watermark.clearfix#one
                                     .one-watermark__wrapper
                                         .one-watermark__table
                                             .one-watermark__row
@@ -117,10 +117,12 @@ block content
                                             .coordinate__property-control
                                                 a.coordinate__property-btn.plus
                                                 a.coordinate__property-btn.minus
-                            fieldset
-                                .slider__box
-                                    label#opacity-field.slider__box-title Прозрачность
-                                    #opacity
-                                    p#opacity-val
-                            fieldset
-                                .button
+                        fieldset
+                            .slider__box
+                                label#opacity-field.slider__box-title Прозрачность
+                                #opacity
+                                p#opacity-val
+                        fieldset.noborder
+                            .controls__inputs-group
+                                button(type="reset" id="reset").button--reset Сброс
+                                button(type="submit" id="reset").button--submit скачать

@@ -63,6 +63,7 @@
   form{
     margin: 0;
     padding: 0;
+    .noborder,.noborder:after,.noborder:before {border: 0;}
     .error {
       .roboto-light;
       font-size: 12px;
@@ -119,7 +120,7 @@
         border-right: 9px solid transparent;
         border-left: 9px solid transparent;
       }
-      .noborder{border: none;}
+
     }
   }
 }
@@ -370,6 +371,7 @@
 }
 .position__four-watermark{
   padding-bottom: 20px;
+  display:none;
 // POSITION TABLE 4 watermark
   .four-watermark__wrapper{
     float: left;
@@ -551,4 +553,19 @@
   &:hover{
     background-color:  #f97e76;
   }
+}
+//BUTTONS
+.button--reset{
+  border-radius: 3px;
+  background-color:  #c1cfd9;
+  width: 99px;
+  height: 42px;
+  float:left;
+}
+.button--submit{
+  border-radius: 3px;
+  background-color:  #c1cfd9;
+  width: 99px;
+  height: 42px;
+  float:right;
 }

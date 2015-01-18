@@ -79,12 +79,12 @@ footer{position:relative;min-width:980px}
 .controls{background-color:#f1f1f5;width:260px;height:670px;float:left;display:inline-block}
 .controls__title{font-family:Roboto;font-weight:300;font-style:normal;text-align:center;line-height:1em;font-size:26px;margin:27px 0 35px}
 .controls form{margin:0;padding:0}
+.controls form .noborder,.controls form .noborder:after,.controls form .noborder:before{border:0}
 .controls form .error{font-family:Roboto;font-weight:300;font-style:normal;font-size:12px;line-height:25px;position:absolute;top:0;right:100%;height:25px;margin-right:20px;padding:0 10px;white-space:nowrap;color:#fff;background-color:#f97e76}
 .controls form .error:after{position:absolute;top:0;left:100%;width:0;height:0;content:'';border-width:13px 0 12px 12px;border-style:solid;border-color:transparent transparent transparent #f97e76}
 .controls form fieldset{margin:0;padding:0 0 7px;border:none;position:relative;display:block;border-bottom:1px solid rgba(249,126,118,.4)}
 .controls form fieldset:after{position:absolute;z-index:2;bottom:-10px;left:50%;margin-left:-9px;content:'';border-top:10px solid rgba(249,126,118,.4);border-right:9px solid transparent;border-left:9px solid transparent}
 .controls form fieldset:before{position:absolute;z-index:5;bottom:-9px;left:50%;margin-left:-9px;content:'';border-top:10px solid #f1f1f5;border-right:9px solid transparent;border-left:9px solid transparent}
-.controls form fieldset .noborder{border:none}
 .controls__inputs-group{padding:0 20px;text-align:left}
 .noborder,.noborder:after,.noborder:before{border:none}
 .controls__file-title{display:block;color:#2e3641;font-size:14px;line-height:1em;font-family:Roboto;font-weight:300;font-style:normal}
@@ -123,7 +123,7 @@ footer{position:relative;min-width:980px}
 .position__one-watermark .coordinate__property-btn.plus:hover{background-position:-28px -36px}
 .position__one-watermark .coordinate__property-btn.minus{bottom:5px;background-position:-8px -66px}
 .position__one-watermark .coordinate__property-btn.minus:hover{background-position:-28px -66px}
-.position__four-watermark{padding-bottom:20px}
+.position__four-watermark{padding-bottom:20px;display:none}
 .position__four-watermark .four-watermark__wrapper{float:left;border:1px solid #9eb2c0;width:99px;height:99px;overflow:hidden;-webkit-border-radius:3px;-moz-border-radius:3px;-ms-border-radius:3px;-o-border-radius:3px;border-radius:3px;position:relative}
 .position__four-watermark .margin-line{line-height:0;position:absolute;overflow:hidden;text-indent:-9999px;background-color:#f97e76}
 .position__four-watermark .margin-line.horizontal{top:0;bottom:0;width:100%;height:1px;margin:auto}
@@ -154,6 +154,8 @@ footer{position:relative;min-width:980px}
 .ui-slider-horizontal .ui-slider-range-max{right:0}
 .ui-slider .ui-slider-handle{position:absolute;z-index:100;top:0;bottom:0;margin:auto 0 auto -10px;cursor:pointer;outline:0;border-radius:50%;border-width:7px;border-color:#dbe1e8;border-style:solid;background-color:#9eb2c0;box-shadow:0 1px 1px 0 rgba(0,0,0,.38);width:8px;height:8px}
 .ui-slider .ui-slider-handle:hover{background-color:#f97e76}
+.button--reset{border-radius:3px;background-color:#c1cfd9;width:99px;height:42px;float:left}
+.button--submit{border-radius:3px;background-color:#c1cfd9;width:99px;height:42px;float:right}
 @font-face{font-family:SegoeUILight;src:url(/fonts/SegoeUILight.eot);src:url(/fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(/fonts/SegoeUILight.woff) format("woff"),url(/fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
 @font-face{font-family:fira_sanslight;src:url(/fonts/firasans-light-webfont.eot);src:url(/fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/firasans-light-webfont.woff) format('woff'),url(/fonts/firasans-light-webfont.ttf) format('truetype'),url(/fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
 .language{position:absolute;top:100px;left:0;font-family:SegoeUILight;font-weight:400;font-style:normal;font-size:20px;line-height:35px;background-color:rgba(241,241,245,.7);margin:0 auto}

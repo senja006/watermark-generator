@@ -25,44 +25,40 @@
             </div>
           </section>
           <section class="controls">
-            <h3 class="controls__title">Настройка
-              <form action="" method="post" enctype="multipart/form-data">
-                <fieldset class="noborder">
-                  <div class="controls__inputs-group">
-                    <label class="controls__file-title">Исходное изображение
-                      <div class="controls__file">
-                        <input type="file" name="source-image" placeholder="Загрузите изображение" id="source-image" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
-                        <button class="controls__file-input--btn">Загрузить</button><span class="error">text text</span>
-                      </div>
-                    </label>
-                  </div>
-                </fieldset>
-              </form>
-              <form action="" method="post" enctype="multipart/form-data">
-                <fieldset>
-                  <div class="controls__inputs-group">
-                    <label class="controls__file-title">Водяной знак
-                      <div class="controls__file">
-                        <input type="file" name="watermark-image" placeholder="Загрузите изображение" id="watermark-image" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
-                        <button class="controls__file-input--btn">Загрузить</button><span class="error">error</span>
-                      </div>
-                    </label>
-                  </div>
-                </fieldset>
-              </form>
-            </h3>
-            <div class="controls__inputs-group">
-              <form>
-                <fieldset>
+            <h3 class="controls__title">Настройка</h3>
+            <form action="" method="post" enctype="multipart/form-data">
+              <fieldset class="noborder">
+                <div class="controls__inputs-group">
+                  <label class="controls__file-title">Исходное изображение
+                    <div class="controls__file">
+                      <input type="file" name="source-image" placeholder="Загрузите изображение" id="source-image" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
+                      <button class="controls__file-input--btn">Загрузить</button><span class="error">text text</span>
+                    </div>
+                  </label>
+                </div>
+              </fieldset>
+            </form>
+            <form action="" method="post" enctype="multipart/form-data">
+              <fieldset>
+                <div class="controls__inputs-group">
+                  <label class="controls__file-title">Водяной знак
+                    <div class="controls__file">
+                      <input type="file" name="watermark-image" placeholder="Загрузите изображение" id="watermark-image" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
+                      <button class="controls__file-input--btn">Загрузить</button><span class="error">error</span>
+                    </div>
+                  </label>
+                </div>
+              </fieldset>
+            </form>
+            <form>
+              <fieldset>
+                <div class="controls__inputs-group">
                   <div class="controls__switch">
                     <label class="controls__switch-title">Положение
-                      <div class="controls__switch-group">
-                        <button class="four">4 watermarks</button>
-                        <button class="one">1 watermark</button>
-                      </div>
+                      <div class="controls__switch-group"><a href="#four" class="four">4 watermarks</a><a href="#one" class="one active">1 watermark</a></div>
                     </label>
                   </div>
-                  <div class="position__four-watermark clearfix">
+                  <div id="four" class="position__four-watermark clearfix">
                     <div class="four-watermark__wrapper">
                       <div class="margin-line horizontal"></div>
                       <div class="margin-line vertical"></div>
@@ -95,7 +91,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="position__one-watermark clearfix">
+                  <div id="one" class="position__one-watermark clearfix">
                     <div class="one-watermark__wrapper">
                       <div class="one-watermark__table">
                         <div class="one-watermark__row">
@@ -126,19 +122,22 @@
                       </div>
                     </div>
                   </div>
-                </fieldset>
-                <fieldset>
-                  <div class="slider__box">
-                    <label id="opacity-field" class="slider__box-title">Прозрачность</label>
-                    <div id="opacity"></div>
-                    <p id="opacity-val"></p>
-                  </div>
-                </fieldset>
-                <fieldset>
-                  <div class="button"></div>
-                </fieldset>
-              </form>
-            </div>
+                </div>
+              </fieldset>
+              <fieldset>
+                <div class="slider__box">
+                  <label id="opacity-field" class="slider__box-title">Прозрачность</label>
+                  <div id="opacity"></div>
+                  <p id="opacity-val"></p>
+                </div>
+              </fieldset>
+              <fieldset class="noborder">
+                <div class="controls__inputs-group">
+                  <button type="reset" id="reset" class="button--reset">Сброс</button>
+                  <button type="submit" id="reset" class="button--submit">скачать</button>
+                </div>
+              </fieldset>
+            </form>
           </section>
         </div>
       </div>
