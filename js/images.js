@@ -4,11 +4,11 @@ var images = (function() {
 
 	var $imgSource = $('#img-source'),
 		$imgWatermark = $('#img-watermark'),
-		// $formImg = $('#form-control'),
+		$formImg = $('#form-control'),
 		$result = $('#result'),
-		$bgImg = $('#bg__img'),
 		$bgImgWrapper = $('#bg__wrapper'),
 		$watermark = $('#watermark'),
+		$bgImg = $('#bg__img'),
 		$wmImg = $('#drag__img'),
 		$butGetImage = $('#but-send'),
 		$butReset = $('#but-reset');
@@ -35,7 +35,7 @@ var images = (function() {
 		var file = this.files[0],
 			fr = new FileReader();
 
-		if (!validationImg(file)) return;
+		if (!file || !validationImg(file)) return;
 
 		fr.onload = function(event) {
 			var $image = $(new Image());
@@ -60,6 +60,8 @@ var images = (function() {
 		};
 
 		fr.readAsDataURL(file);
+
+		verifyDisable();
 	}
 
 	// функция вставки исходного изображения
@@ -103,6 +105,7 @@ var images = (function() {
 		};
 
 		fr.readAsDataURL(file);
+		verifyDisable();
 	}
 
 	// массштабирование ватермарки относительно исходного изображения
@@ -139,26 +142,54 @@ var images = (function() {
 			errorMessage = 'Размер файла не может быть больше ' + MAX_FILE_SIZE + ' байт (у этого - ' + file.size + ')';
 		}
 		if (errorMessage) {
-			$('.modal-error').text(errorMessage);
-			$('.modal').fadeIn('fast');
+			onErrorMessage(errorMessage);
 			return false;
 		}
 		return true;
 	}
 
+	function onErrorMessage (message) {
+		$('.modal-error').text(message);
+		$('.modal').fadeIn('fast');
+	}
+
 	function onSubmitImage(e) {
 		e.preventDefault();
-		console.log('Здесь отправляется ajax');
+		onErrorMessage('Форма передана');
 	}
 
 	function onResetForm(e) {
 		e.preventDefault();
-		console.log('Форма очищается');
+		$('#bg__img').remove();
+		$('#drag__img').remove();
+		$imgSource.val('');
+		$imgWatermark.val('');
+
+		verifyDisable();
+		onErrorMessage('Форма очищена');
 	}
+
+	function verifyDisable() {
+		var $options = $('.options'),
+			$source = $('.source');
+
+		if (typeof $('#img-watermark')[0].files[0] === 'object' && typeof $('#img-source')[0].files[0]) {
+			$options.show();
+			$source.hide();
+			return false;
+		}
+		else {
+			$options.hide();
+			$source.show();
+			return true;
+		}
+	}
+
 
 	return {
 		init: function() {
 			addEventListeners();
+			verifyDisable();
 			console.log('<images> init!'); // дебаг
 		},
 		getScale: function() {

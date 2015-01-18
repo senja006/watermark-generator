@@ -23,48 +23,63 @@
       <div class="controls">
         <form id="form-control" method="post" enctype="multipart/form-data">
           <h2>Настройки</h2>
-          <div class="ctrl-images block">
-            <h3>Исходное изображение</h3>
-            <input type="file" class="ctrl__input" id="img-source" accept="image/*">
-            <h3>Водяной знак</h3>
-            <input type="file" class="ctrl__input" id="img-watermark" accept="image/*">
-          </div>
-          <div class="position cf block">
-            <h3>Положение</h3>
-            <div class="pos__pad">
-              <ul class="position__buttons cf">
-                <li class="position__btn"><a href="" class="position__b-link" id="lt"></a></li>
-                <li class="position__btn"><a href="" class="position__b-link" id="ct"></a></li>
-                <li class="position__btn"><a href="" class="position__b-link" id="rt"></a></li>
-                <li class="position__btn"><a href="" class="position__b-link" id="lm"></a></li>
-                <li class="position__btn"><a href="" class="position__b-link" id="cm"></a></li>
-                <li class="position__btn"><a href="" class="position__b-link" id="rm"></a></li>
-                <li class="position__btn"><a href="" class="position__b-link" id="lb"></a></li>
-                <li class="position__btn"><a href="" class="position__b-link" id="cb"></a></li>
-                <li class="position__btn"><a href="" class="position__b-link" id="rb"></a></li>
-              </ul>
-            </div>
-            <div class="pos__adjust cf">
-              <label class="pos__row cf">X
-                <input class="pos__spin" name="value" id="xVal">
-              </label>
-              <label class="pos__row cf">Y
-                <input class="pos__spin" name="value" id="yVal">
-              </label>
+          <div class="source">
+            <div class="ctrl-images block">
+              <h3>Исходное изображение</h3>
+              <input type="file" class="ctrl__input" id="img-source" accept="image/*" name="file_bg">
+              <h3>Водяной знак</h3>
+              <input type="file" class="ctrl__input" id="img-watermark" accept="image/*" name="file_wm">
             </div>
           </div>
-          <div class="opacity block">
-            <h3>Прозрачность</h3>
-            <input type="range" id="opacity"/>
-            <p id="opacity-val">0.5</p>
-          </div>
-          <div class="buttons cf block">
-            <input class="control__btn control__btn__clear" type="button" value="Сброс" id="but-reset">
-            <input class="control__btn control__btn__send" type="submit" value="Скачать" id="but-send">
+          <div class="options">
+            <div class="position cf block">
+              <h3>Положение</h3>
+              <div class="pos__pad">
+                <ul class="position__buttons cf">
+                  <li class="position__btn"><a href="" class="position__b-link" id="lt"></a></li>
+                  <li class="position__btn"><a href="" class="position__b-link" id="ct"></a></li>
+                  <li class="position__btn"><a href="" class="position__b-link" id="rt"></a></li>
+                  <li class="position__btn"><a href="" class="position__b-link" id="lm"></a></li>
+                  <li class="position__btn"><a href="" class="position__b-link" id="cm"></a></li>
+                  <li class="position__btn"><a href="" class="position__b-link" id="rm"></a></li>
+                  <li class="position__btn"><a href="" class="position__b-link" id="lb"></a></li>
+                  <li class="position__btn"><a href="" class="position__b-link" id="cb"></a></li>
+                  <li class="position__btn"><a href="" class="position__b-link" id="rb"></a></li>
+                </ul>
+              </div>
+              <div class="pos__adjust cf">
+                <label class="pos__row cf">X
+                  <input class="pos__spin" name="value" id="xVal" name="file_bg">
+                </label>
+                <label class="pos__row cf">Y
+                  <input class="pos__spin" name="value" id="yVal" name="file_wm">
+                </label>
+              </div>
+            </div>
+            <div class="opacity block">
+              <h3>Прозрачность</h3>
+              <input type="range" id="opacity" name="opacity"/>
+              <p id="opacity-val">0.5</p>
+            </div>
+            <div class="buttons cf block">
+              <input class="control__btn control__btn__clear" type="button" value="Сброс" id="but-reset">
+              <input class="control__btn control__btn__send" type="submit" value="Скачать" id="but-send">
+            </div>
           </div>
         </form>
       </div>
     </div>
+  </div>
+  <div class="service">
+    <ul class="list">
+      <li class="list__item list__item__rus"></li>
+      <li class="list__item list__item__eng"></li>
+    </ul>
+    <ul class="list">
+      <li class="list__item list__item__fb"></li>
+      <li class="list__item list__item__tw"></li>
+      <li class="list__item list__item__vk"></li>
+    </ul>
   </div>
   <div class="modal">
     <div class="modal-error"></div>
@@ -76,3 +91,4 @@
   <script src="js/main.js"></script>
 </body>
 </html>
+

@@ -208,6 +208,7 @@ input#opacity {
   bottom: 0;
   overflow: hidden;
   background-color: rgba(0,0,0,0.3);
+  z-index: 10000;
 }
 
 .modal-error {
@@ -219,10 +220,62 @@ input#opacity {
   color: #f97e76;
   background-color: #eee;
   box-shadow: 0 0 30px 0 rgba(0,0,0,0.5);
+  z-index: 10001;
 }
 
 
 .ui-button-text:hover {
   color: #f97e76;
   cursor: pointer;
+}
+
+.service {
+  position: fixed;
+  left: 0;
+  top: 100px;
+  width: 200px;
+  height: 100%;
+}
+
+.list {
+  margin-left: -40px;
+  list-style: none;
+  padding: 0;
+  transition: all 0.3s ease 0;
+}
+
+.list__item {
+  width: 50px;
+  height: 50px;
+  margin: 0;
+  border-top: 1px solid #a5a7ac;
+  cursor: pointer;
+}
+
+.list__item:hover {
+
+}
+
+.list__item:first-child {
+  border-top: none;
+}
+
+.service:hover .list {
+  margin-left: 0;
+}
+
+.list__item__rus {
+  background: no-repeat url('../img/rus.png') #EFEFEF center;
+}
+.list__item__eng {
+  background: no-repeat url('../img/eng.png') #EFEFEF center;
+}
+.list__item__tw {
+  background: no-repeat url('../img/tw.png') #fff center;
+}
+.list__item__fb {
+  background: no-repeat url('../img/fb.png') #fff center;
+}
+.list__item__vk {
+  background: no-repeat url('../img/vk.png') #fff center;
 }
