@@ -17,8 +17,8 @@ var watermark = (function() {
 		$btnCentBottom = $('#cb'),
 		$btnRightBottom = $('#rb');
 
-	var watermarkWidth = 0, // пригодится
-		watermarkHeight = 0, //
+	var watermarkWidth = 0, 
+		watermarkHeight = 0,
 		fixedPositions = {},
 
 		currPos = {

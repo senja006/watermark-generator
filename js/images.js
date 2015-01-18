@@ -10,7 +10,8 @@ var images = (function() {
 		$bgImgWrapper = $('#bg__wrapper'),
 		$watermark = $('#watermark'),
 		$wmImg = $('#drag__img'),
-		$butGetImage = $('#get-image');
+		$butGetImage = $('#but-send'),
+		$butReset = $('#but-reset');
 
 	var bgImgWidth,
 		bgImgHeight,
@@ -26,6 +27,7 @@ var images = (function() {
 			$(this).fadeOut('fast');
 		});
 		$butGetImage.on('click', onSubmitImage);
+		$butReset.on('click', onResetForm);
 	}
 
 	// обработчик смены исходного изображения
@@ -144,9 +146,14 @@ var images = (function() {
 		return true;
 	}
 
-	function onSubmitImage(e){
+	function onSubmitImage(e) {
 		e.preventDefault();
 		console.log('Здесь отправляется ajax');
+	}
+
+	function onResetForm(e) {
+		e.preventDefault();
+		console.log('Форма очищается');
 	}
 
 	return {

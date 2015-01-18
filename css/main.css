@@ -11,17 +11,50 @@
 }
 body{
   font-family: verdana;
+  color: #2e3641;
+  background-color: #E4E4E4;
 }
+
+input{
+  color: #838383;
+}
+.wrapper {
+  padding: 20px 0;
+}
+
 .container {
   width: 1050px;
+  min-width: 1050px;
   margin: 30px auto;
 }
+
+h1 {
+  font: 36px Arial;
+  text-align: center;
+  width: 900px;
+  margin: 0 auto;
+  letter-spacing: 0.1em;
+}
+
+h2 {
+  font: 28px Arial;
+  margin: 0 0 30px 0;
+}
+
 h3 {
+  font-family: Arial;
   font-size: 18px;
   font-style: italic;
-  color: #333;
-  text-align: center;
+  color: #2e3641;
+  text-align: left;
 }
+.block {
+  border-top: 1px solid #f97e76;
+  padding:  0 0 20px;
+}
+/*.block:first-child {
+  border-bottom: none;
+}*/
 .result,
 .controls {
   float: left;
@@ -35,7 +68,7 @@ h3 {
   min-height: 500px;
   width: 651px;
   overflow: hidden;
-  margin-bottom: 30px;
+  background-color: #FFFFED;
 }
 #bg__wrapper {
   overflow: hidden;
@@ -43,7 +76,8 @@ h3 {
 .controls {
   width: 300px;
   margin-left: 30px;
-  padding: 20px;
+  padding: 20px 20px 0;
+  background-color: #f1f1f5;
 }
 .drag {
   position: absolute;
@@ -77,6 +111,11 @@ h3 {
   float: left;
   margin: 0;
   border: 1px solid #888;
+}
+input#opacity {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
 }
 
 .position__b-link{
@@ -114,24 +153,50 @@ h3 {
 
 .pos__spin{
   font-size: 18px;
+  line-height: 52px;
   top: 0;
   display: inline-block;
   float: left;
   width: 60px;
+  text-align: center;
 }
 
 .ctrl__input {
   display: block;
   width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
-.button {
+.buttons {
+  padding-top: 20px;
+}
+.control__btn {
   display: block;
   width: 100px;
-  height: 30px;
+  height: 42px;
   font: 16px Verdana;
-  background-color: #08f;
+  background-color: #fff;
+  border: 2px solid transparent;
   color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease 0;
+}
+.control__btn:hover {
+  transform: scale(1.1);
+}
+.control__btn:focus {
+  outline: none;
+}
+
+.control__btn__send{
+  background-color: #f97e76;
+  float: right;
+}
+.control__btn__clear{
+  background-color: #c1cfd9;
+  float: left;
 }
 
 .modal {
@@ -145,7 +210,6 @@ h3 {
   background-color: rgba(0,0,0,0.3);
 }
 
-
 .modal-error {
   width: 500px;
   margin: 200px auto 0;
@@ -155,4 +219,10 @@ h3 {
   color: #f97e76;
   background-color: #eee;
   box-shadow: 0 0 30px 0 rgba(0,0,0,0.5);
+}
+
+
+.ui-button-text:hover {
+  color: #f97e76;
+  cursor: pointer;
 }
