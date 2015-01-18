@@ -10,46 +10,47 @@ block content
                 section.result
                     h1.result__title Генератор водяных знаков
                     .result__imagebox
-                        img(src="img/photo/photo1.jpg")#bg__img.result__imagebox-image
+                        img(src="img/photo/photo2.jpg")#bg__img.result__imagebox-image
                         .drag#watermark
                             img(src="http://lorempixel.com/100/100/nature/")#drag__img.drug__watermark
                 section.controls
-                    h3.controls__title Настройки
-                    .controls__inputs-group
+                    h3.controls__title Настройка
+                        form(
+                        action=""
+                        method="post"
+                        enctype="multipart/form-data"
+                        )
+                            fieldset.noborder
+                                .controls__inputs-group
+                                    label.controls__file-title Исходное изображение
+                                        .controls__file
+                                            input.controls__file-input(
+                                            type="file"
+                                            name="source-image"
+                                            placeholder="Загрузите изображение"
+                                            id="source-image"
+                                            )
+                                            span#file_name.controls__file-input--fake Загрузите изображение
+                                            button.controls__file-input--btn Загрузить
+                                            span.error text text
                         form(
                         action=""
                         method="post"
                         enctype="multipart/form-data"
                         )
                             fieldset
-                                label.controls__file-title Исходное изображение
-                                    .controls__file
-                                        input.controls__file-input(
-                                        type="file"
-                                        name="source-image"
-                                        placeholder="Загрузите изображение"
-                                        id="source-image"
-                                        )
-                                        span#file_name.controls__file-input--fake Загрузите изображение
-                                        button.controls__file-input--btn Загрузить
-                                        span.error text text
-                        form(
-                        action=""
-                        method="post"
-                        enctype="multipart/form-data"
-                        )
-                            fieldset
-                                label.controls__file-title Водяной знак
-                                    .controls__file
-                                        input.controls__file-input(
-                                        type="file"
-                                        name="watermark-image"
-                                        placeholder="Загрузите изображение"
-                                        id="watermark-image"
-                                        )
-                                        span#file_name.controls__file-input--fake Загрузите изображение
-                                        button.controls__file-input--btn Загрузить
-                                        span.error error
+                                .controls__inputs-group
+                                    label.controls__file-title Водяной знак
+                                        .controls__file
+                                            input.controls__file-input(
+                                            type="file"
+                                            name="watermark-image"
+                                            placeholder="Загрузите изображение"
+                                            id="watermark-image"
+                                            )
+                                            span#file_name.controls__file-input--fake Загрузите изображение
+                                            button.controls__file-input--btn Загрузить
+                                            span.error error
                     .controls__inputs-group
                         form
                             fieldset
@@ -58,57 +59,68 @@ block content
                                         .controls__switch-group
                                             button(class="four") 4 watermarks
                                             button(class="one") 1 watermark
-                                .position__property
-                                    .position__property-block
-                                //                        span X
-                                //                        input(
-                                //    <input id="x-cord" class="form__input input--switch" type="text" name="xValue" value="0">
-                                //    <div class="switch__controls controls--cords">
-                                //    <button data-direction="x-up" class="btn--up js-move-obj">Больше</button>
-                                //    <button data-direction="x-down" class="btn--down js-move-obj">Меньше</button>
-                                //    </div>
-                                //    </div>
-                                //    <div class="switch__block">
-                                //    <p class="p p--big">Y</p>
-                                //    <input id="y-cord" class="form__input input--switch" type="text" name="yValue" value="0">
-                                //    <div class="switch__controls controls--cords">
-                                //    <button data-direction="y-up" class="btn--up js-move-obj">Больше</button>
-                                //    <button data-direction="y-down" class="btn--down js-move-obj">Меньше	</button>
-                                //    </div>
-                                //    </div>
-                                //</div>
-
-
-                                .position
-                                    table.position__table
-                                        tr.position__row
-                                            each val in ['lt', 'ct', 'rt']
-                                                td.position__col
-                                                    a(href="" id=val).position__col-link
-                                        tr.position__row
-                                            each val in['lm', 'cm', 'rm']
-                                                td.position__col
-                                                    a(href="" id=val).position__col-link
-                                        tr.position__row
-                                            each val in['lb', 'cb', 'rb']
-                                                td.position__col
-                                                    a(href="" id=val).position__col-link
-                                table.coordinate__table
-                                    tr
-                                        td.table__name
-                                        td.table__val
-                                    tr
-                                        td.table__name
-                                        td.table__val
-                    .slider__box
-                        label#opacity-field.slider__box-title Прозрачность
-                        #opacity
-                        p#opacity-val
-
-
-                    //.position
-                    //    .pos__pad
-                    //        ul.position__list.clearfix
-                    //            each val in ['lt', 'ct', 'rt', 'lm', 'cm', 'cm', 'rm', 'lb', 'cb', 'rb']
-                    //                li.position__list-item
-                    //                    a(href="" id=val).position__list-item-link
+                                .position__four-watermark.clearfix
+                                    .four-watermark__wrapper
+                                        .margin-line.horizontal
+                                        .margin-line.vertical
+                                        .four-watermark__table
+                                            .four-watermark__row
+                                                each val in ['lt', 'ct', 'rt']
+                                                    .four-watermark__col
+                                                        a(href="" id=val).four-watermark__col-link
+                                            .four-watermark__row
+                                                each val in['lm', 'cm', 'rm']
+                                                    .four-watermark__col
+                                                        a(href="" id=val).four-watermark__col-link
+                                            .four-watermark__row
+                                                each val in['lb', 'cb', 'rb']
+                                                    .four-watermark__col
+                                                        a(href="" id=val).four-watermark__col-link
+                                    .margin__property
+                                        .margin__property-block
+                                            span.margin__property-name &nbsp;&#8597;
+                                            input(type="text" id="x-margin" class="margin__property-input" name="x-margin" value="1")
+                                            .margin__property-control
+                                                a.margin__property-btn.plus
+                                                a.margin__property-btn.minus
+                                        .margin__property-block
+                                            span.margin__property-name &#8596;
+                                            input(type="text" id="y-margin" class="margin__property-input" name="y-margin" value="1")
+                                            .margin__property-control
+                                                a.margin__property-btn.plus
+                                                a.margin__property-btn.minus
+                                .position__one-watermark.clearfix
+                                    .one-watermark__wrapper
+                                        .one-watermark__table
+                                            .one-watermark__row
+                                                each val in ['lt', 'ct', 'rt']
+                                                    .one-watermark__col
+                                                        a(href="" id=val).one-watermark__col-link
+                                            .one-watermark__row
+                                                each val in['lm', 'cm', 'rm']
+                                                    .one-watermark__col
+                                                        a(href="" id=val).one-watermark__col-link
+                                            .one-watermark__row
+                                                each val in['lb', 'cb', 'rb']
+                                                    .one-watermark__col
+                                                        a(href="" id=val).one-watermark__col-link
+                                    .coordinate__property
+                                        .coordinate__property-block
+                                            span.coordinate__property-name X
+                                            input(type="text" id="x" class="coordinate__property-input" name="x" value="0")
+                                            .coordinate__property-control
+                                                a.coordinate__property-btn.plus
+                                                a.coordinate__property-btn.minus
+                                        .coordinate__property-block
+                                            span.coordinate__property-name Y
+                                            input(type="text" id="y" class="coordinate__property-input" name="y" value="0")
+                                            .coordinate__property-control
+                                                a.coordinate__property-btn.plus
+                                                a.coordinate__property-btn.minus
+                            fieldset
+                                .slider__box
+                                    label#opacity-field.slider__box-title Прозрачность
+                                    #opacity
+                                    p#opacity-val
+                            fieldset
+                                .button
