@@ -26,9 +26,9 @@ block content
                                     .controls__file
                                         input.controls__file-input(
                                         type="file"
-                                        name="source-image"
+                                        name="img-source"
                                         placeholder="Загрузите изображение"
-                                        id="source-image"
+                                        id="img-source"
                                         )
                                         span#file_name.controls__file-input--fake Загрузите изображение
                                         button.controls__file-input--btn Загрузить
@@ -44,9 +44,9 @@ block content
                                     .controls__file
                                         input.controls__file-input(
                                         type="file"
-                                        name="watermark-image"
+                                        name="img-watermark"
                                         placeholder="Загрузите изображение"
-                                        id="watermark-image"
+                                        id="img-watermark"
                                         )
                                         span#file_name.controls__file-input--fake Загрузите изображение
                                         button.controls__file-input--btn Загрузить
@@ -107,22 +107,22 @@ block content
                                     .coordinate__property
                                         .coordinate__property-block
                                             span.coordinate__property-name X
-                                            input(type="text" id="x" class="coordinate__property-input" name="x" value="0")
+                                            input(type="text" id="xVal" class="coordinate__property-input" name="x" value="0")
                                             .coordinate__property-control
                                                 a.coordinate__property-btn.plus
                                                 a.coordinate__property-btn.minus
                                         .coordinate__property-block
                                             span.coordinate__property-name Y
-                                            input(type="text" id="y" class="coordinate__property-input" name="y" value="0")
+                                            input(type="text" id="yVal" class="coordinate__property-input" name="y" value="0")
                                             .coordinate__property-control
                                                 a.coordinate__property-btn.plus
                                                 a.coordinate__property-btn.minus
                         fieldset
                             .slider__box
                                 label#opacity-field.slider__box-title Прозрачность
-                                #opacity
+                                input(id="opacity" type="range")
                                 p#opacity-val
                         fieldset.noborder
                             .controls__inputs-group
                                 button(type="reset" id="reset").button--reset Сброс
-                                button(type="submit" id="reset").button--submit скачать
+                                button(type="submit" id="reset").button--submit Скачать

@@ -31,7 +31,7 @@
                 <div class="controls__inputs-group">
                   <label class="controls__file-title">Исходное изображение
                     <div class="controls__file">
-                      <input type="file" name="source-image" placeholder="Загрузите изображение" id="source-image" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
+                      <input type="file" name="img-source" placeholder="Загрузите изображение" id="img-source" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
                       <button class="controls__file-input--btn">Загрузить</button><span class="error">text text</span>
                     </div>
                   </label>
@@ -43,7 +43,7 @@
                 <div class="controls__inputs-group">
                   <label class="controls__file-title">Водяной знак
                     <div class="controls__file">
-                      <input type="file" name="watermark-image" placeholder="Загрузите изображение" id="watermark-image" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
+                      <input type="file" name="img-watermark" placeholder="Загрузите изображение" id="img-watermark" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
                       <button class="controls__file-input--btn">Загрузить</button><span class="error">error</span>
                     </div>
                   </label>
@@ -113,11 +113,11 @@
                     </div>
                     <div class="coordinate__property">
                       <div class="coordinate__property-block"><span class="coordinate__property-name">X</span>
-                        <input type="text" id="x" name="x" value="0" class="coordinate__property-input">
+                        <input type="text" id="xVal" name="x" value="0" class="coordinate__property-input">
                         <div class="coordinate__property-control"><a class="coordinate__property-btn plus"></a><a class="coordinate__property-btn minus"></a></div>
                       </div>
                       <div class="coordinate__property-block"><span class="coordinate__property-name">Y</span>
-                        <input type="text" id="y" name="y" value="0" class="coordinate__property-input">
+                        <input type="text" id="yVal" name="y" value="0" class="coordinate__property-input">
                         <div class="coordinate__property-control"><a class="coordinate__property-btn plus"></a><a class="coordinate__property-btn minus"></a></div>
                       </div>
                     </div>
@@ -127,7 +127,7 @@
               <fieldset>
                 <div class="slider__box">
                   <label id="opacity-field" class="slider__box-title">Прозрачность</label>
-                  <div id="opacity"></div>
+                  <input id="opacity" type="range">
                   <p id="opacity-val"></p>
                 </div>
               </fieldset>

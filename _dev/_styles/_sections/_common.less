@@ -190,17 +190,6 @@
   text-indent: -9999px;
 }
 
-/* --------- HR --------- */
-
-.controls__hr{
-  background: url("/img/bg/hr-bg.png");
-  height: 11px;
-  width: 100%;
-  display: block;
-  margin: 30px 0 0 0;
-  .clearfix;
-}
-
 /* --------- POSITION --------- */
 .controls__switch{
   position: relative;
@@ -556,16 +545,38 @@
 }
 //BUTTONS
 .button--reset{
+  margin-top:55px;
+  margin-left: -10px;
   border-radius: 3px;
   background-color:  #c1cfd9;
   width: 99px;
   height: 42px;
   float:left;
+  line-height: 40px;
+  font-size:18px;
+  color:  #f1f1f5;
+  font-weight: 500;
+  border: 0;
+  &:hover{
+    border: 1px solid #a6b2bb;
+    background: -webkit-linear-gradient(90deg, #c1cfd9 0%, #a0acb5 5%, #9eaab3 100%);
+    background: -moz-linear-gradient(90deg, #c1cfd9 0%, #a0acb5 5%, #9eaab3 100%);
+    background: -o-linear-gradient(90deg, #c1cfd9 0%, #a0acb5 5%, #9eaab3 100%);
+    background: -ms-linear-gradient(90deg, #c1cfd9 0%, #a0acb5 5%, #9eaab3 100%);
+    background: linear-gradient(0deg, #c1cfd9 0%, #a0acb5 5%, #9eaab3 100%);
+  }
 }
 .button--submit{
-  border-radius: 3px;
-  background-color:  #c1cfd9;
-  width: 99px;
-  height: 42px;
+  .button--reset;
+  margin-right: -10px;
+  background-color: #f97e76;
   float:right;
+  &:hover{
+    border: 1px solid #e3736c;
+    background: -webkit-linear-gradient(90deg, #f97e76 0%, #e4746c 94%, #e3736c 100%);
+    background: -moz-linear-gradient(90deg, #f97e76 0%, #e4746c 94%, #e3736c 100%);
+    background: -o-linear-gradient(90deg, #f97e76 0%, #e4746c 94%, #e3736c 100%);
+    background: -ms-linear-gradient(90deg, #f97e76 0%, #e4746c 94%, #e3736c 100%);
+    background: linear-gradient(0deg, #f97e76 0%, #e4746c 94%, #e3736c 100%);
+  }
 }
