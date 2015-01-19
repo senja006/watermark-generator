@@ -1,9 +1,11 @@
 @import "../_misc/mixins";
 
-.language{
+.social__container{
   position: absolute;
   top:100px;
   left:0;
+}
+.language{
   .segoe-ui-light;
   font-size: 20px;
   line-height: 35px;
@@ -25,9 +27,7 @@
   }
 }
 .social{
-  position: absolute;
-  top:190px;
-  left:0;
+  margin-top:19px;
   &__list{
     list-style-type: none;
     &-item{
@@ -42,26 +42,26 @@
         height:100%;
         text-indent: -9999px;
         cursor: pointer;
-        background: url(/img/icons/sprite.png);
+        background: url("../../img/icons/sprite.png");
         outline: 0;
       }
     }
   }
 }
 .fb{
-  background: url(/img/icons/sprite.png) 5px 0px no-repeat;
+  background: url("../../img/icons/sprite.png") 5px 0px no-repeat;
   &:hover{
     background-position: 5px -125px;
   }
 }
 .vk{
-  background: url(/img/icons/sprite.png) 3px -80px no-repeat;
+  background: url(/"../../img/icons/sprite.png") 3px -80px no-repeat;
   &:hover{
     background-position: 3px -205px;
   }
 }
 .twitter{
-  background: url(/img/icons/sprite.png) 3px -40px no-repeat;
+  background: url("../../img/icons/sprite.png") 3px -40px no-repeat;
   &:hover{
     background-position: 3px -165px;
   }

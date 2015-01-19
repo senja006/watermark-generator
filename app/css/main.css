@@ -70,14 +70,14 @@ footer{position:relative;min-width:980px}
 @font-face{font-family:fira_sanslight;src:url(/fonts/firasans-light-webfont.eot);src:url(/fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/firasans-light-webfont.woff) format('woff'),url(/fonts/firasans-light-webfont.ttf) format('truetype'),url(/fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
 @font-face{font-family:SegoeUILight;src:url(/fonts/SegoeUILight.eot);src:url(/fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(/fonts/SegoeUILight.woff) format("woff"),url(/fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
 @font-face{font-family:fira_sanslight;src:url(/fonts/firasans-light-webfont.eot);src:url(/fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/firasans-light-webfont.woff) format('woff'),url(/fonts/firasans-light-webfont.ttf) format('truetype'),url(/fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
-.maincontent{padding-bottom:56px;overflow:auto;margin:60px 10px 0 50px}
+.maincontent{padding-bottom:56px;overflow:auto;margin:60px 10px auto}
 .result{background-color:rgba(46,54,65,.64);width:700px;height:670px;float:left;display:inline-block;position:relative}
 .result__title{font-family:SegoeUILight;font-weight:400;font-style:normal;color:#fff;font-size:36px;line-height:1em;margin:15px 22px 60px}
-.result__imagebox{margin:0 24px;position:relative;background-color:#fff;width:650px;height:534px}
+.result__imagebox{margin:0 auto;position:relative;width:650px;height:534px;background:url(../img/bg/result-bg.png) #fff}
 .result__imagebox .drag{position:absolute;top:0;left:0;opacity:.5;z-index:9999}
 .result__imagebox .drag:hover{cursor:move}
 .controls{background-color:#f1f1f5;width:260px;height:670px;float:left;display:inline-block}
-.controls__title{font-family:Roboto;font-weight:300;font-style:normal;text-align:center;line-height:1em;font-size:26px;margin:27px 0 35px}
+.controls__title{font-family:Roboto;font-weight:300;font-style:normal;text-align:center;line-height:1em;font-size:26px;margin:27px 0 auto;padding-bottom:35px}
 .controls form{margin:0;padding:0}
 .controls form .noborder,.controls form .noborder:after,.controls form .noborder:before{border:0}
 .controls form .error{font-family:Roboto;font-weight:300;font-style:normal;font-size:12px;line-height:25px;position:absolute;top:0;right:100%;height:25px;margin-right:20px;padding:0 10px;white-space:nowrap;color:#fff;background-color:#f97e76}
@@ -92,11 +92,11 @@ footer{position:relative;min-width:980px}
 .controls__file:after{content:''}
 .controls__file-input--fake{display:block;-webkit-border-radius:3px;-moz-border-radius:3px;-ms-border-radius:3px;-o-border-radius:3px;border-radius:3px;border:1px solid #9eb2c0;width:185px;height:27px;font-family:SegoeUILight;font-weight:400;font-style:normal;color:#9eb2c0;font-size:14px;padding-left:4px;padding-right:4px;line-height:1.5em;box-sizing:border-box}
 .controls__file-input{cursor:pointer;height:27px;opacity:0;position:absolute;top:0;left:0;width:186px}
-.controls__file-input--btn{height:27px;position:absolute;width:39px;border:none;background:url(/img/icons/controls.png) no-repeat;display:block;top:0;right:0;z-index:10;text-indent:-9999px}
+.controls__file-input--btn{height:27px;position:absolute;width:39px;border:none;background:url(../img/icons/controls.png) no-repeat;display:block;top:0;right:0;z-index:10;text-indent:-9999px}
 .controls__switch{position:relative;height:20px;margin-bottom:30px;margin-top:17px}
 .controls__switch-title{display:block;color:#2e3641;font-size:14px;line-height:1em;font-family:Roboto;font-weight:300;font-style:normal}
 .controls__switch-group{position:absolute;top:0;right:0;overflow:hidden;height:20px;margin:0 0 -10px}
-.four,.one{float:left;width:20px;height:inherit;margin:0 10px 0 0;background-image:url(/img/icons/controls.png);background-repeat:no-repeat;text-indent:-9999px;background-color:transparent;border:0;cursor:pointer}
+.four,.one{float:left;width:20px;height:inherit;margin:0 10px 0 0;background-image:url(../img/icons/controls.png);background-repeat:no-repeat;text-indent:-9999px;background-color:transparent;border:0;cursor:pointer}
 .four{background-position:-47px -15px}
 .four:hover{background-position:-86px -15px}
 .four.active{background-position:-66px -15px}
@@ -115,7 +115,7 @@ footer{position:relative;min-width:980px}
 .position__one-watermark .coordinate__property-name{line-height:44px;font-size:16px;width:10px;font-weight:300;text-transform:uppercase;text-align:center;float:left;margin:0 5px 0 0}
 .position__one-watermark .coordinate__property-control{position:relative;width:15px;height:46px;float:left;margin:0 5px 0 0}
 .position__one-watermark .coordinate__property-input{font-family:SegoeUILight;font-weight:400;font-style:normal;border:1px solid #9eb2c0;border-radius:3px;background-color:#fff;color:#444a53;font-size:24px;width:44px;height:44px;padding:0;text-align:center;float:left;margin:0 5px 0 0}
-.position__one-watermark .coordinate__property-btn{right:0;left:0;width:inherit;height:10px;margin:auto;background-image:url(/img/icons/controls.png);background-repeat:no-repeat;position:absolute;overflow:hidden;text-align:left;text-indent:-9999px;cursor:pointer}
+.position__one-watermark .coordinate__property-btn{right:0;left:0;width:inherit;height:10px;margin:auto;background-image:url(../img/icons/controls.png);background-repeat:no-repeat;position:absolute;overflow:hidden;text-align:left;text-indent:-9999px;cursor:pointer}
 .position__one-watermark .coordinate__property-btn.plus{background-position:-8px -36px;top:5px}
 .position__one-watermark .coordinate__property-btn.plus:hover{background-position:-28px -36px}
 .position__one-watermark .coordinate__property-btn.minus{bottom:5px;background-position:-8px -66px}
@@ -134,7 +134,7 @@ footer{position:relative;min-width:980px}
 .position__four-watermark .margin__property-name{position:absolute;top:15px;right:92px;bottom:0;width:9px;height:29px;font-size:30px}
 .position__four-watermark .margin__property-control{position:relative;width:15px;height:46px;float:left;margin:0 5px 0 0}
 .position__four-watermark .margin__property-input{font-family:SegoeUILight;font-weight:400;font-style:normal;border:1px solid #9eb2c0;border-radius:3px;background-color:#fff;color:#444a53;font-size:24px;width:44px;height:44px;padding:0;text-align:center;float:left;margin:0 5px 0 0}
-.position__four-watermark .margin__property-btn{right:0;left:0;width:inherit;height:10px;margin:auto;background-image:url(/img/icons/controls.png);background-repeat:no-repeat;position:absolute;overflow:hidden;text-align:left;text-indent:-9999px;cursor:pointer}
+.position__four-watermark .margin__property-btn{right:0;left:0;width:inherit;height:10px;margin:auto;background-image:url(../img/icons/controls.png);background-repeat:no-repeat;position:absolute;overflow:hidden;text-align:left;text-indent:-9999px;cursor:pointer}
 .position__four-watermark .margin__property-btn.plus{background-position:-8px -36px;top:5px}
 .position__four-watermark .margin__property-btn.plus:hover{background-position:-28px -36px}
 .position__four-watermark .margin__property-btn.minus{bottom:5px;background-position:-8px -66px}
@@ -157,15 +157,16 @@ footer{position:relative;min-width:980px}
 .button--submit:hover{border:1px solid #e3736c;background:-webkit-linear-gradient(90deg,#f97e76 0,#e4746c 94%,#e3736c 100%);background:-moz-linear-gradient(90deg,#f97e76 0,#e4746c 94%,#e3736c 100%);background:-o-linear-gradient(90deg,#f97e76 0,#e4746c 94%,#e3736c 100%);background:-ms-linear-gradient(90deg,#f97e76 0,#e4746c 94%,#e3736c 100%);background:linear-gradient(0deg,#f97e76 0,#e4746c 94%,#e3736c 100%)}
 @font-face{font-family:SegoeUILight;src:url(/fonts/SegoeUILight.eot);src:url(/fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(/fonts/SegoeUILight.woff) format("woff"),url(/fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
 @font-face{font-family:fira_sanslight;src:url(/fonts/firasans-light-webfont.eot);src:url(/fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/firasans-light-webfont.woff) format('woff'),url(/fonts/firasans-light-webfont.ttf) format('truetype'),url(/fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
-.language{position:absolute;top:100px;left:0;font-family:SegoeUILight;font-weight:400;font-style:normal;font-size:20px;line-height:35px;background-color:rgba(241,241,245,.7);margin:0 auto}
+.social__container{position:absolute;top:100px;left:0}
+.language{font-family:SegoeUILight;font-weight:400;font-style:normal;font-size:20px;line-height:35px;background-color:rgba(241,241,245,.7);margin:0 auto}
 .language__eng-link,.language__rus-link{color:#8e9298;text-decoration:none;height:35px;width:43px;display:block;text-align:center}
 .language__eng-link:hover,.language__rus-link:hover{color:#444a53}
 .language__rus-link{border-bottom:1px solid #a5a7ac}
-.social{position:absolute;top:190px;left:0}
+.social{margin-top:19px}
 .social__list{list-style-type:none}
 .social__list-item{background-color:rgba(241,241,245,.7);display:block;height:45px;width:43px}
 .social__list-item-link{display:inline-block;overflow:hidden;width:100%;height:100%;text-indent:-9999px;cursor:pointer;background:url(/img/icons/sprite.png);outline:0}
-.fb{background:url(/img/icons/sprite.png) 5px 0 no-repeat}
+.fb{background:url(../img/icons/sprite.png) 5px 0 no-repeat}
 .fb:hover{background-position:5px -125px}
 .vk{background:url(/img/icons/sprite.png) 3px -80px no-repeat}
 .vk:hover{background-position:3px -205px}
@@ -186,4 +187,5 @@ footer p{font-family:fira_sanslight;font-weight:400;font-style:normal;color:#fff
 .clearfix{zoom:1!ie}
 .clearfix:after,.clearfix:before{content:"";display:table}
 .clearfix:after{clear:both}
-body{background:url(/img/bg/page-bg.jpg) center center/cover no-repeat fixed #d5b39c;font-family:Roboto;font-weight:500;font-style:normal;line-height:1.5em;position:relative;color:#2e3641;width:100%;height:100%}
+input{outline:0}
+body{background:url(../img/bg/page-bg.jpg) center center/cover no-repeat fixed #d5b39c;font-family:Roboto;font-weight:500;font-style:normal;line-height:1.5em;position:relative;color:#2e3641;width:100%;height:100%}

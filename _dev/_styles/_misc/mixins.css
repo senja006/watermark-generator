@@ -55,3 +55,6 @@
 .clearfix:after {
   clear: both;
 }
+input {
+  outline: none;
+}

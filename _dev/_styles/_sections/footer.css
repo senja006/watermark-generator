@@ -55,6 +55,9 @@
 .clearfix:after {
   clear: both;
 }
+input {
+  outline: none;
+}
 footer {
   margin-top: -56px;
   height: 56px;

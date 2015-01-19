@@ -10,7 +10,7 @@ block content
                 section.result
                     h1.result__title Генератор водяных знаков
                     .result__imagebox
-                        img(src="img/photo/photo2.jpg")#bg__img.result__imagebox-image
+                        img(src="")#bg__img.result__imagebox-image
                         .drag#watermark
                             img(src="http://lorempixel.com/100/100/nature/")#drag__img.drug__watermark
                 section.controls
@@ -120,8 +120,8 @@ block content
                         fieldset
                             .slider__box
                                 label#opacity-field.slider__box-title Прозрачность
-                                input(id="opacity" type="range")
-                                p#opacity-val
+                                div.slider__range
+                                input(id="opacity" type="hidden")
                         fieldset.noborder
                             .controls__inputs-group
                                 button(type="reset" id="reset").button--reset Сброс

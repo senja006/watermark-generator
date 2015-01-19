@@ -55,9 +55,12 @@
 .clearfix:after {
   clear: both;
 }
+input {
+  outline: none;
+}
 /* --------- header --------- */
 body {
-  background: #d5b39c url("/img/bg/page-bg.jpg") no-repeat center center fixed;
+  background: #d5b39c url("../../img/bg/page-bg.jpg") no-repeat center center fixed;
   font-family: 'Roboto';
   font-weight: 500;
   font-style: normal;

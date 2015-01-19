@@ -5,7 +5,7 @@
 .maincontent{
   padding-bottom: 56px;
   overflow: auto;
-  margin: 60px 10px 0 50px;
+  margin: 60px 10px auto;
 }
 /* --------- RESULT --------- */
 .result{
@@ -23,11 +23,12 @@
     margin: 15px 22px 60px;
   }
   &__imagebox{
-    margin: 0 24px;
+    margin: 0 auto;
     position: relative;
     background-color: #fff;
     width: 650px;
     height: 534px;
+    background:#fff url("../../img/bg/result-bg.png");
     .drag{
       position: absolute;
       top: 0;
@@ -58,7 +59,8 @@
     text-align: center;
     line-height: 1em;
     font-size: 26px;
-    margin: 27px 0 35px;
+    margin: 27px 0 auto;
+    padding-bottom: 35px;
   }
   form{
     margin: 0;
@@ -182,7 +184,7 @@
   position: absolute;
   width: 39px;
   border: none;
-  background: url(/img/icons/controls.png)  0 0 no-repeat;
+  background: url("../../img/icons/controls.png")  0 0 no-repeat;
   display: block;
   top: 0;
   right: 0;
@@ -216,7 +218,7 @@
   width: 20px;
   height: inherit;
   margin: 0 10px 0 0;
-  background-image: url(/img/icons/controls.png);
+  background-image: url("../../img/icons/controls.png");
   background-repeat: no-repeat;
   text-indent: -9999px;
   background-color: rgba(0, 0, 0, 0);
@@ -334,7 +336,7 @@
     width: inherit;
     height: 10px;
     margin: auto;
-    background-image: url(/img/icons/controls.png);
+    background-image: url("../../img/icons/controls.png");
     background-repeat: no-repeat;
     position: absolute;
     overflow: hidden;
@@ -470,7 +472,7 @@
       width: inherit;
       height: 10px;
       margin: auto;
-      background-image: url(/img/icons/controls.png);
+      background-image: url("../../img/icons/controls.png");
       background-repeat: no-repeat;
       position: absolute;
       overflow: hidden;
