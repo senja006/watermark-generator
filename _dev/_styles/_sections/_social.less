@@ -9,8 +9,9 @@
   .segoe-ui-light;
   font-size: 20px;
   line-height: 35px;
+  width:43px;
   background-color:  rgba(241, 241, 245, 0.7);
-  margin: 0 auto;
+  margin: 0;
   &__rus-link, &__eng-link{
     color: #8e9298;
     text-decoration: none;
@@ -29,7 +30,9 @@
 .social{
   margin-top:19px;
   &__list{
+    float: left;
     list-style-type: none;
+    display: none;
     &-item{
       background-color:  rgba(241, 241, 245, 0.7);
       display: block;
@@ -43,26 +46,44 @@
         text-indent: -9999px;
         cursor: pointer;
         background: url("../../img/icons/sprite.png");
-        outline: 0;
       }
     }
+  }
+  &:hover .social__list{
+    display: block;
+  }
+  &:hover .social__like{
+    background-position: -40px -122px;
   }
 }
 .fb{
   background: url("../../img/icons/sprite.png") 5px 0px no-repeat;
   &:hover{
-    background-position: 5px -125px;
+    background-position: 5px -124px;
   }
 }
 .vk{
-  background: url(/"../../img/icons/sprite.png") 3px -80px no-repeat;
+  background: url("../../img/icons/sprite.png") 3px -80px no-repeat;
   &:hover{
-    background-position: 3px -205px;
+    background-position: 3px -204px;
   }
 }
 .twitter{
   background: url("../../img/icons/sprite.png") 3px -40px no-repeat;
   &:hover{
-    background-position: 3px -165px;
+    background-position: 3px -164px;
   }
+}
+.social__like{
+  float:right;
+  height: 45px;
+  width: 43px;
+  display: block;
+  text-indent: -9999px;
+  cursor: pointer;
+  background:rgba(241, 241, 245, 0.7) url("../../img/icons/sprite.png") -40px 2px no-repeat;
+  &:hover{
+    background-position: -40px -122px;
+  }
+
 }

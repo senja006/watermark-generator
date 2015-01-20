@@ -4,15 +4,15 @@
 /* font-family: "SegoeUILight"; */
 @font-face {
   font-family: "SegoeUILight";
-  src: url("/fonts/SegoeUILight.eot");
-  src: url("/fonts/SegoeUILight.eot?#iefix") format("embedded-opentype"), url("/fonts/SegoeUILight.woff") format("woff"), url("/fonts/SegoeUILight.ttf") format("truetype");
+  src: url("../../fonts/SegoeUILight.eot");
+  src: url("../../fonts/SegoeUILight.eot?#iefix") format("embedded-opentype"), url("../../fonts/SegoeUILight.woff") format("woff"), url("../../fonts/SegoeUILight.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 @font-face {
   font-family: 'fira_sanslight';
-  src: url('/fonts/firasans-light-webfont.eot');
-  src: url('/fonts/firasans-light-webfont.eot?#iefix') format('embedded-opentype'), url('/fonts/firasans-light-webfont.woff') format('woff'), url('/fonts/firasans-light-webfont.ttf') format('truetype'), url('/fonts/firasans-light-webfont.svg#fira_sanslight');
+  src: url('../../fonts/firasans-light-webfont.eot');
+  src: url('../../fonts/firasans-light-webfont.eot?#iefix') format('embedded-opentype'), url('../../fonts/firasans-light-webfont.woff') format('woff'), url('../../fonts/firasans-light-webfont.ttf') format('truetype'), url('../../fonts/firasans-light-webfont.svg#fira_sanslight');
   font-weight: normal;
   font-style: normal;
 }

@@ -4,15 +4,15 @@
 /* font-family: "SegoeUILight"; */
 @font-face {
   font-family: "SegoeUILight";
-  src: url("/fonts/SegoeUILight.eot");
-  src: url("/fonts/SegoeUILight.eot?#iefix") format("embedded-opentype"), url("/fonts/SegoeUILight.woff") format("woff"), url("/fonts/SegoeUILight.ttf") format("truetype");
+  src: url("../../fonts/SegoeUILight.eot");
+  src: url("../../fonts/SegoeUILight.eot?#iefix") format("embedded-opentype"), url("../../fonts/SegoeUILight.woff") format("woff"), url("../../fonts/SegoeUILight.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
 @font-face {
   font-family: 'fira_sanslight';
-  src: url('/fonts/firasans-light-webfont.eot');
-  src: url('/fonts/firasans-light-webfont.eot?#iefix') format('embedded-opentype'), url('/fonts/firasans-light-webfont.woff') format('woff'), url('/fonts/firasans-light-webfont.ttf') format('truetype'), url('/fonts/firasans-light-webfont.svg#fira_sanslight');
+  src: url('../../fonts/firasans-light-webfont.eot');
+  src: url('../../fonts/firasans-light-webfont.eot?#iefix') format('embedded-opentype'), url('../../fonts/firasans-light-webfont.woff') format('woff'), url('../../fonts/firasans-light-webfont.ttf') format('truetype'), url('../../fonts/firasans-light-webfont.svg#fira_sanslight');
   font-weight: normal;
   font-style: normal;
 }
@@ -69,8 +69,9 @@ input {
   font-style: normal;
   font-size: 20px;
   line-height: 35px;
+  width: 43px;
   background-color: rgba(241, 241, 245, 0.7);
-  margin: 0 auto;
+  margin: 0;
 }
 .language__rus-link,
 .language__eng-link {
@@ -92,7 +93,9 @@ input {
   margin-top: 19px;
 }
 .social__list {
+  float: left;
   list-style-type: none;
+  display: none;
 }
 .social__list-item {
   background-color: rgba(241, 241, 245, 0.7);
@@ -107,24 +110,41 @@ input {
   height: 100%;
   text-indent: -9999px;
   cursor: pointer;
-  background: url(/img/icons/sprite.png);
-  outline: 0;
+  background: url("../../img/icons/sprite.png");
+}
+.social:hover .social__list {
+  display: block;
+}
+.social:hover .social__like {
+  background-position: -40px -122px;
 }
 .fb {
   background: url("../../img/icons/sprite.png") 5px 0px no-repeat;
 }
 .fb:hover {
-  background-position: 5px -125px;
+  background-position: 5px -124px;
 }
 .vk {
-  background: url(/img/icons/sprite.png) 3px -80px no-repeat;
+  background: url("../../img/icons/sprite.png") 3px -80px no-repeat;
 }
 .vk:hover {
-  background-position: 3px -205px;
+  background-position: 3px -204px;
 }
 .twitter {
-  background: url(/img/icons/sprite.png) 3px -40px no-repeat;
+  background: url("../../img/icons/sprite.png") 3px -40px no-repeat;
 }
 .twitter:hover {
-  background-position: 3px -165px;
+  background-position: 3px -164px;
+}
+.social__like {
+  float: right;
+  height: 45px;
+  width: 43px;
+  display: block;
+  text-indent: -9999px;
+  cursor: pointer;
+  background: rgba(241, 241, 245, 0.7) url("../../img/icons/sprite.png") -40px 2px no-repeat;
+}
+.social__like:hover {
+  background-position: -40px -122px;
 }
