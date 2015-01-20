@@ -7,8 +7,8 @@ $(document).ready(function() {
 
 });
 
- * Created by FreeWay on 15.01.15.
- */
+ // * Created by FreeWay on 15.01.15.
+ // */
 $(document).ready(function(){
     $( ".slider__range" ).slider({
         animate: true,
