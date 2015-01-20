@@ -1,4 +1,12 @@
-/**
+'use strict';
+
+$(document).ready(function() {
+
+    watermark.init();       // управление водяным знаком
+    images.init();          // управление картинками
+
+});
+
  * Created by FreeWay on 15.01.15.
  */
 $(document).ready(function(){
