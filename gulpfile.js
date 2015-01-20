@@ -8,6 +8,7 @@ var
     imagemin = require('gulp-imagemin'),
 	uglify = require('gulp-uglify'),
     opn = require('opn'),
+    jade = require('gulp-jade'),
 	rename = require("gulp-rename");
 
 gulp.task('concat', function () {
@@ -18,12 +19,22 @@ gulp.task('concat', function () {
 		.pipe(notify("Watch Complete!"));
 });
 
+// Компилируем Jade
 gulp.task('jade', function () {
-	gulp.src('./_dev/_makeups/_pages/*.html')
-	.pipe(gulp.dest('app/'))
-	.pipe(notify("Jade Complete!"))
-    .pipe(connect.reload()); // даем команду на перезагрузку страницы
+    gulp.src('_dev/_makeups/_pages/*.jade')
+        .pipe(jade({pretty: true}))
+        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .pipe(notify("<%= file.relative %> Jade Complete!"))
+        .pipe(gulp.dest('./app')) // Записываем собранные файлы
+        .pipe(connect.reload()); // даем команду на перезагрузку страницы
 });
+
+//gulp.task('jade', function () {
+//	gulp.src('./_dev/_makeups/_pages/*.html')
+//	.pipe(gulp.dest('app/'))
+//	.pipe(notify("Jade Complete!"))
+//    .pipe(connect.reload()); // даем команду на перезагрузку страницы
+//});
 
 //gulp.task('coffee', function() {
 //	gulp.src('./_dev/_scripts/_modules/*.js')
@@ -92,7 +103,7 @@ gulp.task('images', function () {
 
 gulp.task('watch', function(){
 	gulp.watch('_dev/_styles/**/*.css', ['concat']);
-	gulp.watch('_dev/_makeups/**/*.html', ['jade']);
+	gulp.watch('_dev/_makeups/**/*.jade', ['jade']);
 	gulp.watch('_dev/_scripts/_modules/*.js', ['js', 'compress-plugins']);
 	gulp.watch('_dev/_scripts/_plugins/*.js', ['compress-plugins', 'uglify-plugins']);
 });
