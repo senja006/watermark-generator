@@ -4,8 +4,8 @@ var watermark = (function() {
 		$bg = $('#bg__wrapper'), // original image
 		$opacityVal = $('#opacity-val'), // поле значения прозрачности
 		$opacity = $('#opacity'), // ползунок прозрачности		
-		$xVal = $('#xVal'), // поле left spinner
-		$yVal = $('#yVal'), // поле top spinner
+		$xVal = $('#x-val'), // поле left
+		$yVal = $('#y-val'), // поле top
 
 		$btnLeftTop = $('#lt'), // кнопки фиксированых позиций
 		$btnCentTop = $('#ct'),
@@ -35,18 +35,23 @@ var watermark = (function() {
 			snap: '#bg__wrapper',
 			drag: onDragWatermark // событие 'drag'
 		});
-		$xVal.spinner();
-		$yVal.spinner();
+
+		$(".slider__range").slider({
+			animate: true,
+			range: "min",
+			value: 50,
+			min: 5,
+			max: 100,
+			step: 1,
+			change: onOpacityChange
+		});
 	}
 
 	// установка обработчиков
 	function addEventListeners() {
-		$opacity.on('change', onOpacityChange);
-		$('.position__b-link').on('click', onClickFixedButt);
-		$xVal.on('spinchange', onSpinX);
-		$yVal.on('spinchange', onSpinY);
-		$xVal.on('spin', onSpinX);
-		$yVal.on('spin', onSpinY);
+		$('.one-watermark__col-link').on('click', onClickFixedButt);
+		$xVal.on('change', onSpinX);
+		$yVal.on('change', onSpinY);
 	}
 
 	// установка начальной прозрачности
@@ -89,10 +94,10 @@ var watermark = (function() {
 
 		e.preventDefault();
 		moveFixed(id);
-		$(this).addClass('position__b-link__active');
+		$(this).addClass('one-watermark__col-link__active');
 	}
 
-	// обработчики клика по спину
+	// обработчики изменения позиции кноаками
 	function onSpinX() {
 		currPos.left = $xVal.spinner('value') * images.getScale();
 		onPosChange();
@@ -105,7 +110,7 @@ var watermark = (function() {
 
 	// установка ватермарки в нужную позицию
 	function setPos(position) {
-		$('.position__b-link').removeClass('position__b-link__active');
+		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');
 		$watermark.css({
 			left: position.left,
 			top: position.top
@@ -115,8 +120,8 @@ var watermark = (function() {
 
 	// рендер позиций
 	function refreshPosVal() {
-		$xVal.spinner('value', parseInt(currPos.left / images.getScale()));
-		$yVal.spinner('value', parseInt(currPos.top / images.getScale()));
+		$xVal.val(parseInt(currPos.left / images.getScale()));
+		$yVal.val(parseInt(currPos.top / images.getScale()));
 	}
 
 	// рендер прозрачности
@@ -229,7 +234,8 @@ var watermark = (function() {
 		calcPositions: calcPositions,
 		position: getPos,
 		opacity: getOpacity,
-		setPos: setPos
+		setPos: setPos,
+		getPos: getPos
 	};
 
 }());
