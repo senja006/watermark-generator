@@ -21,11 +21,8 @@ var images = (function() {
 
 	// установка обработчиков
 	function addEventListeners() {
-		$imgSource.on('change', onChangeImageSource);
-		$imgWatermark.on('change', onChangeImageWatermark);
-		$('.modal').on('click', function() {
-			$(this).fadeOut('fast');
-		});
+		$imgSource.on('load', onChangeImageSource);
+		$imgWatermark.on('load', onChangeImageWatermark);
 		$butGetImage.on('click', onSubmitImage);
 		$butReset.on('click', onResetForm);
 	}
@@ -61,7 +58,6 @@ var images = (function() {
 
 		fr.readAsDataURL(file);
 
-		verifyDisable();
 	}
 
 	// функция вставки исходного изображения
@@ -105,7 +101,6 @@ var images = (function() {
 		};
 
 		fr.readAsDataURL(file);
-		verifyDisable();
 	}
 
 	// массштабирование ватермарки относительно исходного изображения
@@ -149,8 +144,7 @@ var images = (function() {
 	}
 
 	function onErrorMessage (message) {
-		$('.modal-error').text(message);
-		$('.modal').fadeIn('fast');
+		console.log(message);
 	}
 
 	function onSubmitImage(e) {
@@ -165,31 +159,13 @@ var images = (function() {
 		$imgSource.val('');
 		$imgWatermark.val('');
 
-		verifyDisable();
 		onErrorMessage('Форма очищена');
-	}
-
-	function verifyDisable() {
-		var $options = $('.options'),
-			$source = $('.source');
-
-		if (typeof $('#img-watermark')[0].files[0] === 'object' && typeof $('#img-source')[0].files[0]) {
-			$options.show();
-			$source.hide();
-			return false;
-		}
-		else {
-			$options.hide();
-			$source.show();
-			return true;
-		}
 	}
 
 
 	return {
 		init: function() {
 			addEventListeners();
-			verifyDisable();
 			console.log('<images> init!'); // дебаг
 		},
 		getScale: function() {
