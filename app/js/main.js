@@ -350,41 +350,26 @@ var watermark = (function() {
 			min: 5,
 			max: 100,
 			step: 1,
-			change: onOpacityChange
+			slide: onOpacityChange
 		});
 	}
 
 	// установка обработчиков
 	function addEventListeners() {
 		$('.one-watermark__col-link').on('click', onClickFixedButt);
-		$xVal.on('change', onSpinX);
-		$yVal.on('change', onSpinY);
 	}
 
-	// установка начальной прозрачности
-	function setStartOpacity() {
-		refreshOpacityVal(currOpacity);
-	}
-
-	// установка начальной позиции
-	function setStartPos() {
-		onPosChange();
-	}
 
 	// обработчик смены прозрачности
-	function onOpacityChange(e) {
-		currOpacity = $(e.target).val() / 100;
+	function onOpacityChange(e, ui) {
+		currOpacity = ui.value;
 
+		console.log(currOpacity);
 		$watermark.css({
-			'opacity': currOpacity
+			'opacity': currOpacity / 100
 		});
-		refreshOpacityVal(currOpacity);
 	}
 
-	// обработчик изменения позиции
-	function onPosChange() {
-		setPos(currPos);
-	}
 
 	// обработчик изменения позиций drag'n'drop
 	function onDragWatermark(e, ui) {
@@ -392,7 +377,9 @@ var watermark = (function() {
 			left: ui.position.left,
 			top: ui.position.top
 		};
-		onPosChange();
+		console.log(currPos);
+		$('#x-val').val(currPos.left);
+		$('#y-val').val(currPos.top);
 	}
 
 	// обработчик клика по кнопке с фиксированой позицией
@@ -405,35 +392,16 @@ var watermark = (function() {
 	}
 
 	// обработчики изменения позиции кноаками
-	function onSpinX() {
-		currPos.left = $xVal.spinner('value') * images.getScale();
-		onPosChange();
+	function onChangeValX() {
+		currPos.left = $xVal.val() * images.getScale();
+		$xVal.slider('value', currPos.left);
+		setPos(currPos);
 	}
 
-	function onSpinY() {
-		currPos.top = $yVal.spinner('value') * images.getScale();
-		onPosChange();
-	}
-
-	// установка ватермарки в нужную позицию
-	function setPos(position) {
-		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');
-		$watermark.css({
-			left: position.left,
-			top: position.top
-		});
-		refreshPosVal(currPos);
-	}
-
-	// рендер позиций
-	function refreshPosVal() {
-		$xVal.val(parseInt(currPos.left / images.getScale()));
-		$yVal.val(parseInt(currPos.top / images.getScale()));
-	}
-
-	// рендер прозрачности
-	function refreshOpacityVal(opacity) {
-		$opacityVal.text(opacity);
+	function onChangeValY() {
+		currPos.top = $yVal.val() * images.getScale();
+		$yVal.slider('value', currPos.top);
+		setPos(currPos);
 	}
 
 	// перемещение ватермарки по фиксированым позициям
@@ -468,9 +436,12 @@ var watermark = (function() {
 				break
 			default:
 				break
-		};
-
-		onPosChange();
+		}
+		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');
+		$watermark.css({
+			left: currPos.left,
+			top: currPos.top
+		});
 	}
 
 	// вычисление фиксированых позиций
@@ -529,12 +500,28 @@ var watermark = (function() {
 		return currOpacity;
 	}
 
+	// установка ватермарки в нужную позицию
+	function setPos(position) {
+		var position = position || {left: 0, top: 0};
+
+		currPos = position;
+		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');
+		$watermark.css({
+			left: position.left,
+			top: position.top
+		});
+	}
+
+	function setOpacity(opacity) {
+		var opacity = opacity || 0.5;
+
+		currOpacity = opacity;
+	}
+
 	return {
 		init: function() {
 			calcPositions();
 			initPlugins();
-			setStartOpacity();
-			setStartPos();
 			addEventListeners();
 			console.log('<watermark> init!');
 		},
