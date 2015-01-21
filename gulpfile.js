@@ -86,7 +86,7 @@ gulp.task('js', function () {
         .pipe(concat('main.js')) // Собираем все JS, кроме тех которые находятся в /app/js/vendor/**
         .pipe(gulp.dest('./app/js'))
         .pipe(rename({suffix: '.min'}))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(gulp.dest('app/js'))
         .pipe(connect.reload()); // даем команду на перезагрузку страницы
 });
