@@ -1,6 +1,7 @@
 var
 	gulp = require('gulp'),
 	concatCss = require('gulp-concat-css'),
+    less = require('gulp-less'),
 	minifyCSS = require('gulp-minify-css'),
 	notify = require("gulp-notify"),
 	concat = require('gulp-concat'),
@@ -11,12 +12,23 @@ var
     jade = require('gulp-jade'),
 	rename = require("gulp-rename");
 
-gulp.task('concat', function () {
-	gulp.src('./_dev/_styles/**/*.css')
-		.pipe(concatCss("main.css"))
-		.pipe(minifyCSS({keepBreaks:true}))
-		.pipe(gulp.dest('app/css/'))
-		.pipe(notify("Watch Complete!"));
+//gulp.task('concat', function () {
+//	gulp.src('./_dev/_styles/**/*.css')
+//		.pipe(concatCss("main.css"))
+//		.pipe(minifyCSS({keepBreaks:true}))
+//		.pipe(gulp.dest('app/css/'))
+//		.pipe(notify("Watch Complete!"));
+//});
+
+// Компилируем LESS
+
+gulp.task('less', function () {
+    gulp.src(['./_dev/_styles/**/*.less'])
+        .pipe(less())
+        .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .pipe(notify("<%= file.relative %> Less Complete!"))
+        .pipe(gulp.dest('app/css'))
+        .pipe(connect.reload());
 });
 
 // Компилируем Jade
@@ -102,8 +114,8 @@ gulp.task('images', function () {
 //})
 
 gulp.task('watch', function(){
-	gulp.watch('_dev/_styles/**/*.css', ['concat']);
-	gulp.watch('_dev/_makeups/**/*.jade', ['jade']);
+	gulp.watch('_dev/_styles/**/*.less', ['less']);
+    gulp.watch('_dev/_makeups/**/*.jade', ['jade']);
 	gulp.watch('_dev/_scripts/_modules/*.js', ['js', 'compress-plugins']);
 	gulp.watch('_dev/_scripts/_plugins/*.js', ['compress-plugins', 'uglify-plugins']);
 });
