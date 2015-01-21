@@ -64,12 +64,12 @@ ul{padding:0;margin:0}
 ul li{padding:0;left:0;list-style:none}
 p{padding:0;margin:0}
 footer{position:relative;min-width:980px}
-@font-face{font-family:SegoeUILight;src:url(/fonts/SegoeUILight.eot);src:url(/fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(/fonts/SegoeUILight.woff) format("woff"),url(/fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
-@font-face{font-family:fira_sanslight;src:url(/fonts/firasans-light-webfont.eot);src:url(/fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/firasans-light-webfont.woff) format('woff'),url(/fonts/firasans-light-webfont.ttf) format('truetype'),url(/fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
-@font-face{font-family:SegoeUILight;src:url(/fonts/SegoeUILight.eot);src:url(/fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(/fonts/SegoeUILight.woff) format("woff"),url(/fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
-@font-face{font-family:fira_sanslight;src:url(/fonts/firasans-light-webfont.eot);src:url(/fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/firasans-light-webfont.woff) format('woff'),url(/fonts/firasans-light-webfont.ttf) format('truetype'),url(/fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
-@font-face{font-family:SegoeUILight;src:url(/fonts/SegoeUILight.eot);src:url(/fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(/fonts/SegoeUILight.woff) format("woff"),url(/fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
-@font-face{font-family:fira_sanslight;src:url(/fonts/firasans-light-webfont.eot);src:url(/fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/firasans-light-webfont.woff) format('woff'),url(/fonts/firasans-light-webfont.ttf) format('truetype'),url(/fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
+@font-face{font-family:SegoeUILight;src:url(../fonts/SegoeUILight.eot);src:url(../fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(../fonts/SegoeUILight.woff) format("woff"),url(../fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
+@font-face{font-family:fira_sanslight;src:url(../fonts/firasans-light-webfont.eot);src:url(../fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(../fonts/firasans-light-webfont.woff) format('woff'),url(../fonts/firasans-light-webfont.ttf) format('truetype'),url(../fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
+@font-face{font-family:SegoeUILight;src:url(../fonts/SegoeUILight.eot);src:url(../fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(../fonts/SegoeUILight.woff) format("woff"),url(../fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
+@font-face{font-family:fira_sanslight;src:url(../fonts/firasans-light-webfont.eot);src:url(../fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(../fonts/firasans-light-webfont.woff) format('woff'),url(../fonts/firasans-light-webfont.ttf) format('truetype'),url(../fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
+@font-face{font-family:SegoeUILight;src:url(../fonts/SegoeUILight.eot);src:url(../fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(../fonts/SegoeUILight.woff) format("woff"),url(../fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
+@font-face{font-family:fira_sanslight;src:url(../fonts/firasans-light-webfont.eot);src:url(../fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(../fonts/firasans-light-webfont.woff) format('woff'),url(../fonts/firasans-light-webfont.ttf) format('truetype'),url(../fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
 .maincontent{padding-bottom:56px;overflow:auto;margin:60px 10px auto}
 .result{background-color:rgba(46,54,65,.64);width:700px;height:670px;float:left;display:inline-block;position:relative}
 .result__title{font-family:SegoeUILight;font-weight:400;font-style:normal;color:#fff;font-size:36px;line-height:1em;margin:15px 22px 60px}
@@ -155,30 +155,34 @@ footer{position:relative;min-width:980px}
 .button--reset:hover{border:1px solid #a6b2bb;background:-webkit-linear-gradient(90deg,#c1cfd9 0,#a0acb5 5%,#9eaab3 100%);background:-moz-linear-gradient(90deg,#c1cfd9 0,#a0acb5 5%,#9eaab3 100%);background:-o-linear-gradient(90deg,#c1cfd9 0,#a0acb5 5%,#9eaab3 100%);background:-ms-linear-gradient(90deg,#c1cfd9 0,#a0acb5 5%,#9eaab3 100%);background:linear-gradient(0deg,#c1cfd9 0,#a0acb5 5%,#9eaab3 100%)}
 .button--submit{margin-top:55px;margin-left:-10px;border-radius:3px;width:99px;height:42px;line-height:40px;font-size:18px;color:#f1f1f5;font-weight:500;border:0;margin-right:-10px;background-color:#f97e76;float:right}
 .button--submit:hover{border:1px solid #e3736c;background:-webkit-linear-gradient(90deg,#f97e76 0,#e4746c 94%,#e3736c 100%);background:-moz-linear-gradient(90deg,#f97e76 0,#e4746c 94%,#e3736c 100%);background:-o-linear-gradient(90deg,#f97e76 0,#e4746c 94%,#e3736c 100%);background:-ms-linear-gradient(90deg,#f97e76 0,#e4746c 94%,#e3736c 100%);background:linear-gradient(0deg,#f97e76 0,#e4746c 94%,#e3736c 100%)}
-@font-face{font-family:SegoeUILight;src:url(/fonts/SegoeUILight.eot);src:url(/fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(/fonts/SegoeUILight.woff) format("woff"),url(/fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
-@font-face{font-family:fira_sanslight;src:url(/fonts/firasans-light-webfont.eot);src:url(/fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/firasans-light-webfont.woff) format('woff'),url(/fonts/firasans-light-webfont.ttf) format('truetype'),url(/fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
+@font-face{font-family:SegoeUILight;src:url(../fonts/SegoeUILight.eot);src:url(../fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(../fonts/SegoeUILight.woff) format("woff"),url(../fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
+@font-face{font-family:fira_sanslight;src:url(../fonts/firasans-light-webfont.eot);src:url(../fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(../fonts/firasans-light-webfont.woff) format('woff'),url(../fonts/firasans-light-webfont.ttf) format('truetype'),url(../fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
 .social__container{position:absolute;top:100px;left:0}
-.language{font-family:SegoeUILight;font-weight:400;font-style:normal;font-size:20px;line-height:35px;background-color:rgba(241,241,245,.7);margin:0 auto}
+.language{font-family:SegoeUILight;font-weight:400;font-style:normal;font-size:20px;line-height:35px;width:43px;background-color:rgba(241,241,245,.7);margin:0}
 .language__eng-link,.language__rus-link{color:#8e9298;text-decoration:none;height:35px;width:43px;display:block;text-align:center}
 .language__eng-link:hover,.language__rus-link:hover{color:#444a53}
 .language__rus-link{border-bottom:1px solid #a5a7ac}
 .social{margin-top:19px}
-.social__list{list-style-type:none}
+.social__list{float:left;list-style-type:none;display:none}
 .social__list-item{background-color:rgba(241,241,245,.7);display:block;height:45px;width:43px}
-.social__list-item-link{display:inline-block;overflow:hidden;width:100%;height:100%;text-indent:-9999px;cursor:pointer;background:url(/img/icons/sprite.png);outline:0}
+.social__list-item-link{display:inline-block;overflow:hidden;width:100%;height:100%;text-indent:-9999px;cursor:pointer;background:url(../img/icons/sprite.png)}
+.social:hover .social__list{display:block}
+.social:hover .social__like{background-position:-40px -122px}
 .fb{background:url(../img/icons/sprite.png) 5px 0 no-repeat}
-.fb:hover{background-position:5px -125px}
-.vk{background:url(/img/icons/sprite.png) 3px -80px no-repeat}
-.vk:hover{background-position:3px -205px}
-.twitter{background:url(/img/icons/sprite.png) 3px -40px no-repeat}
-.twitter:hover{background-position:3px -165px}
-@font-face{font-family:SegoeUILight;src:url(/fonts/SegoeUILight.eot);src:url(/fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(/fonts/SegoeUILight.woff) format("woff"),url(/fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
-@font-face{font-family:fira_sanslight;src:url(/fonts/firasans-light-webfont.eot);src:url(/fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/firasans-light-webfont.woff) format('woff'),url(/fonts/firasans-light-webfont.ttf) format('truetype'),url(/fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
+.fb:hover{background-position:5px -124px}
+.vk{background:url(../img/icons/sprite.png) 3px -80px no-repeat}
+.vk:hover{background-position:3px -204px}
+.twitter{background:url(../img/icons/sprite.png) 3px -40px no-repeat}
+.twitter:hover{background-position:3px -164px}
+.social__like{float:right;height:45px;width:43px;display:block;text-indent:-9999px;cursor:pointer;background:url(../img/icons/sprite.png) -40px 2px no-repeat rgba(241,241,245,.7)}
+.social__like:hover{background-position:-40px -122px}
+@font-face{font-family:SegoeUILight;src:url(../fonts/SegoeUILight.eot);src:url(../fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(../fonts/SegoeUILight.woff) format("woff"),url(../fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
+@font-face{font-family:fira_sanslight;src:url(../fonts/firasans-light-webfont.eot);src:url(../fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(../fonts/firasans-light-webfont.woff) format('woff'),url(../fonts/firasans-light-webfont.ttf) format('truetype'),url(../fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
 footer{margin-top:-56px;height:56px}
 footer .container{text-align:center}
 footer p{font-family:fira_sanslight;font-weight:400;font-style:normal;color:#fff;font-size:12px;line-height:56px}
-@font-face{font-family:SegoeUILight;src:url(/fonts/SegoeUILight.eot);src:url(/fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(/fonts/SegoeUILight.woff) format("woff"),url(/fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
-@font-face{font-family:fira_sanslight;src:url(/fonts/firasans-light-webfont.eot);src:url(/fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(/fonts/firasans-light-webfont.woff) format('woff'),url(/fonts/firasans-light-webfont.ttf) format('truetype'),url(/fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
+@font-face{font-family:SegoeUILight;src:url(../fonts/SegoeUILight.eot);src:url(../fonts/SegoeUILight.eot?#iefix) format("embedded-opentype"),url(../fonts/SegoeUILight.woff) format("woff"),url(../fonts/SegoeUILight.ttf) format("truetype");font-style:normal;font-weight:400}
+@font-face{font-family:fira_sanslight;src:url(../fonts/firasans-light-webfont.eot);src:url(../fonts/firasans-light-webfont.eot?#iefix) format('embedded-opentype'),url(../fonts/firasans-light-webfont.woff) format('woff'),url(../fonts/firasans-light-webfont.ttf) format('truetype'),url(../fonts/firasans-light-webfont.svg#fira_sanslight);font-weight:400;font-style:normal}
 .fira_sans_light{font-family:fira_sanslight;font-weight:400;font-style:normal}
 .segoe-ui-light{font-family:SegoeUILight;font-weight:400;font-style:normal}
 .roboto-medium{font-family:Roboto;font-weight:500;font-style:normal}
