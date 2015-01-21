@@ -26,6 +26,8 @@ gulp.task('less', function () {
     gulp.src(['./_dev/_styles/**/*.less'])
         .pipe(less())
         .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .pipe(concatCss("main.css"))
+		.pipe(minifyCSS({keepBreaks:true}))
         .pipe(notify("<%= file.relative %> Less Complete!"))
         .pipe(gulp.dest('app/css'))
         .pipe(connect.reload());
