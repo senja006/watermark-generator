@@ -27,7 +27,7 @@ gulp.task('less', function () {
         .pipe(less())
         .on('error', console.log) // Если есть ошибки, выводим и продолжаем
         .pipe(concatCss("main.css"))
-		.pipe(minifyCSS({keepBreaks:true}))
+		// .pipe(minifyCSS({keepBreaks:true}))
         .pipe(notify("<%= file.relative %> Less Complete!"))
         .pipe(gulp.dest('app/css'))
         .pipe(connect.reload());
@@ -38,7 +38,7 @@ gulp.task('jade', function () {
     gulp.src('_dev/_makeups/_pages/*.jade')
         .pipe(jade({pretty: true}))
         .on('error', console.log) // Если есть ошибки, выводим и продолжаем
-        .pipe(notify("<%= file.relative %> Jade Complete!"))
+        .pipe(notify("<%= file.relative %> Complete!"))
         .pipe(gulp.dest('./app')) // Записываем собранные файлы
         .pipe(connect.reload()); // даем команду на перезагрузку страницы
 });
@@ -71,22 +71,23 @@ gulp.task('jade', function () {
 //		.pipe(gulp.dest('./js/_source/'))
 //});
 //
-//gulp.task('uglify-plugins', function() {
-//	gulp.src('./js/plugins.js')
-//		.pipe(uglify())
-//		.pipe(rename("plugins.min.js"))
-//		.pipe(gulp.dest('.app/js/'))
-//		.pipe(notify("Plugins.js Optimized!"))
-//        .pipe(connect.reload()); // даем команду на перезагрузку страницы
-//});
+gulp.task('uglify-plugins', function() {
+	gulp.src('./js/plugins.js')
+		.pipe(uglify())
+		.pipe(rename("plugins.min.js"))
+		.pipe(gulp.dest('.app/js/'))
+		.pipe(notify("Plugins.js Optimized!"))
+       .pipe(connect.reload()); // даем команду на перезагрузку страницы
+});
 
 // Собираем JS
 gulp.task('js', function () {
     gulp.src(['./_dev/_scripts/_modules/*.js', '!./_dev/_scripts/vendor/**/*.js'])
         .pipe(concat('main.js')) // Собираем все JS, кроме тех которые находятся в /app/js/vendor/**
+        .on('error', console.log)
         .pipe(gulp.dest('./app/js'))
         .pipe(rename({suffix: '.min'}))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(gulp.dest('app/js'))
         .pipe(connect.reload()); // даем команду на перезагрузку страницы
 });
@@ -115,17 +116,27 @@ gulp.task('images', function () {
 //        .pipe(connect.reload());
 //})
 
+// перемещение php файлов
+gulp.task('move-php', function () {
+    gulp.src('_dev/*.php')
+        .pipe(gulp.dest('./app/'));
+    gulp.src('_dev/upload/**')
+        .pipe(gulp.dest('./app/upload/'));
+});
+
 gulp.task('watch', function(){
 	gulp.watch('_dev/_styles/**/*.less', ['less']);
     gulp.watch('_dev/_makeups/**/*.jade', ['jade']);
 	gulp.watch('_dev/_scripts/_modules/*.js', ['js', 'compress-plugins']);
 	gulp.watch('_dev/_scripts/_plugins/*.js', ['compress-plugins', 'uglify-plugins']);
+    gulp.watch('_dev/*.php', ['move-php']);
 });
 
 // Server
 gulp.task('connect', function () {
     connect.server({
         root: 'app',
+        port: 8800,
         livereload: true
     });
     opn('http://localhost:8080/');

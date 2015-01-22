@@ -13,29 +13,50 @@ var images = (function() {
 		$butGetImage = $('#but-send'),
 		$butReset = $('#but-reset');
 
+
 	var bgImgWidth,
 		bgImgHeight,
 		wmImgWidth,
 		wmImgHeight,
 		bgImgScale = 1;
 
+
 	// установка обработчиков
 	function addEventListeners() {
-		$imgSource.on('change', onChangeImageSource);
-		$imgWatermark.on('change', onChangeImageWatermark);
-		$('.modal').on('click', function() {
-			$(this).fadeOut('fast');
-		});
+		// $imgSource.on('change', onChangeImageSource)
+		// 		  .on('focus', clearError);
+		// $imgWatermark.on('change', onChangeImageWatermark)
+		// 			 .on('focus', clearError);
+		// $('#but-bg-load').on('click', onButBgLoad);
+		// $('#but-wm-load').on('click', onButWmLoad);
 		$butGetImage.on('click', onSubmitImage);
 		$butReset.on('click', onResetForm);
+	}
+	
+	function clearError() {
+		$('.error').hide();
+	}
+
+	function onButBgLoad(e) {
+		e.preventDefault();
+		console.log('bg load')
+	}
+
+	function onButWmLoad(e) {
+		e.preventDefault();
+		console.log('wm load')
 	}
 
 	// обработчик смены исходного изображения
 	function onChangeImageSource(e) {
 		var file = this.files[0],
 			fr = new FileReader();
+			error = errorImg(file);
 
-		if (!file || !validationImg(file)) return;
+		if (error !== '') {
+			onErrorMessage(error, $("#bg-img-control .error"));
+			return;
+		}
 
 		fr.onload = function(event) {
 			var $image = $(new Image());
@@ -61,7 +82,6 @@ var images = (function() {
 
 		fr.readAsDataURL(file);
 
-		verifyDisable();
 	}
 
 	// функция вставки исходного изображения
@@ -83,9 +103,14 @@ var images = (function() {
 	// обработчик смены изображения ватермарки
 	function onChangeImageWatermark(e) {
 		var file = this.files[0],
-			fr = new FileReader();
+			fr = new FileReader(),
+			error = errorImg(file);
 
-		if (!validationImg(file)) return;
+		console.log(error);
+		if (error !== '') {
+			onErrorMessage(error, $("#wm-img-control .error"));
+			return;
+		}
 
 		fr.onload = function(event) {
 			var $image = $(new Image());
@@ -105,7 +130,6 @@ var images = (function() {
 		};
 
 		fr.readAsDataURL(file);
-		verifyDisable();
 	}
 
 	// массштабирование ватермарки относительно исходного изображения
@@ -132,8 +156,8 @@ var images = (function() {
 	}
 
 	// валидация изображения
-	function validationImg(file) {
-		var errorMessage;
+	function errorImg(file) {
+		var errorMessage = '';
 
 		if (!file.type.match('image.*')) {
 			errorMessage = 'Файл должен быть изображением!';
@@ -141,21 +165,17 @@ var images = (function() {
 		if (file.size > MAX_FILE_SIZE) {
 			errorMessage = 'Размер файла не может быть больше ' + MAX_FILE_SIZE + ' байт (у этого - ' + file.size + ')';
 		}
-		if (errorMessage) {
-			onErrorMessage(errorMessage);
-			return false;
-		}
-		return true;
+
+		return errorMessage;
 	}
 
-	function onErrorMessage (message) {
-		$('.modal-error').text(message);
-		$('.modal').fadeIn('fast');
+	function onErrorMessage (message, $element) {
+		$element.text(message);
+		$element.show();
 	}
 
 	function onSubmitImage(e) {
 		e.preventDefault();
-		onErrorMessage('Форма передана');
 	}
 
 	function onResetForm(e) {
@@ -164,37 +184,113 @@ var images = (function() {
 		$('#drag__img').remove();
 		$imgSource.val('');
 		$imgWatermark.val('');
+		watermark.calcSizes();
+		watermark.calcPositions();
 
-		verifyDisable();
-		onErrorMessage('Форма очищена');
-	}
-
-	function verifyDisable() {
-		var $options = $('.options'),
-			$source = $('.source');
-
-		if (typeof $('#img-watermark')[0].files[0] === 'object' && typeof $('#img-source')[0].files[0]) {
-			$options.show();
-			$source.hide();
-			return false;
-		}
-		else {
-			$options.hide();
-			$source.show();
-			return true;
-		}
 	}
 
 
 	return {
 		init: function() {
-			addEventListeners();
-			verifyDisable();
+			// addEventListeners();
 			console.log('<images> init!'); // дебаг
 		},
 		getScale: function() {
 			return bgImgScale;
 		}
+	};
+
+}());
+var images = (function() {
+
+	var IMG_SRC = 'upload/files/';
+
+	function addEventListeners() {
+		$('#download-img').on('submit', controlDownloadImg);
+	};
+
+	function initJqueryFileUpload() {
+		initUploadImg('main');
+		initUploadImg('watermark');
+	};
+
+	function controlDownloadImg() {
+		var $form = $(this);
+		var data = $form.serialize();
+		$.ajax({
+			url: 'create-img.php',
+			type: 'POST',
+			dataType: 'html',
+			data: data,
+			success: function(response) {
+				var response = getObj(response);
+				// console.log(response);
+				downloadResImg(response);
+				// console.log('отправлено');
+			},
+			error: function(response) {
+				// console.log('ошибка');
+			},
+		});
+		// console.log(data);
+		return false;
+	};
+
+	function initUploadImg(endId) {
+		$('#input__file-' + endId).fileupload({
+	        url: 'upload/upload.php',
+	        dataType: 'json',
+	        add: function(e, data) {
+	        	$.each(data.files, function (index, file) {
+	            	addNameFile(file.name, $('.input-file--' + endId));
+	            });
+	        	data.submit();
+	        },
+	        done: function(e, data){
+	         	 $.each(data.result.files, function (index, file) {
+	                addImg(file.name, $('.img-' + endId));
+	                addNameFileWithVersion(file.name, $('.input-file--' + endId));
+	            });
+	        }
+	    });
+	};
+
+	function addNameFile(name, container) {
+		container.find('.input__file-name').val(name);
+		// hideTooltip.apply($inputFile);
+	};
+
+	function addNameFileWithVersion(name, container) {
+		container.find('.input__file-name-version').val(name);
+	};
+
+	function addImg(fileName, container) {
+		// var $img = new Image();
+		// $img.src = IMG_SRC + fileName;
+		var src = IMG_SRC + fileName;
+		container.find('img').attr('src', src);
+		// console.log($('#img-watermark'));
+		// container.empty().append($img);
+	};
+
+	function getObj(json) {
+		var obj = JSON.parse(json);
+		return obj;
+	};
+
+	function downloadResImg(response) {
+		var href = 'download-img.php?file=' + response['src-res'];
+		window.downloadFile = function(url) {
+		    window.open(url, '_self');
+		}
+		window.downloadFile(href);
+	};
+
+	return {
+		init: function() {
+			initJqueryFileUpload();
+			addEventListeners();
+		},
 	};
 
 }());
@@ -210,25 +306,7 @@ $(document).ready(function() {
  // * Created by FreeWay on 15.01.15.
  // */
 $(document).ready(function(){
-    $( ".slider__range" ).slider({
-        animate: true,
-        range: "min",
-        value: 50,
-        min: 5,
-        max: 100,
-        step: 1,
-
-        //Получаем значение и выводим его на странице
-        //slide: function( event, ui ) {
-        //    $( "#slider-result" ).html( ui.value );
-        //},
-
-        //Обновляем скрытое поле формы, так что можно передать данные с помощью формы
-        change: function(event, ui) {
-            $('#opacity').attr('value', ui.value);
-        }
-
-    });
+   
     //tabs
 
 
@@ -329,8 +407,8 @@ var watermark = (function() {
 		$bg = $('#bg__wrapper'), // original image
 		$opacityVal = $('#opacity-val'), // поле значения прозрачности
 		$opacity = $('#opacity'), // ползунок прозрачности		
-		$xVal = $('#xVal'), // поле left spinner
-		$yVal = $('#yVal'), // поле top spinner
+		$xVal = $('#x-val'), // поле left
+		$yVal = $('#y-val'); // поле top
 
 		$btnLeftTop = $('#lt'), // кнопки фиксированых позиций
 		$btnCentTop = $('#ct'),
@@ -340,10 +418,26 @@ var watermark = (function() {
 		$btnRightMiddle = $('#rm'),
 		$btnLeftBottom = $('#lb'),
 		$btnCentBottom = $('#cb'),
-		$btnRightBottom = $('#rb');
+		$btnRightBottom = $('#rb'),
+
+		$btnFour = $('#but-four'),
+		$btnOne = $('#but-one'),
+
+		$hMarginVal = $('#h-margin-val'),
+		$vMarginVal = $('#v-margin-val'),
+		$btnHMarginPlus = $('#h-margin-plus'),
+		$btnHMarginMinus = $('#h-margin-minus'),
+		$btnVMarginPlus = $('#v-margin-plus'),
+		$btnVMarginMinus = $('#v-margin-minus'),
+		$hMarginLine = $('#h-margin-line'),
+		$vMarginLine = $('#v-margin-line');
 
 	var watermarkWidth = 0, 
 		watermarkHeight = 0,
+		bgWidth = 0,
+		bgHeight = 0,
+		scaleImg = 1,
+
 		fixedPositions = {},
 
 		currPos = {
@@ -351,7 +445,10 @@ var watermark = (function() {
 			top: 0
 		},
 
-		currOpacity = 0.5;
+		currOpacity = 0.5,
+
+		vMargin = 0,
+		hMargin = 0;
 
 	// инициализация плагинов
 	function initPlugins() {
@@ -360,44 +457,109 @@ var watermark = (function() {
 			snap: '#bg__wrapper',
 			drag: onDragWatermark // событие 'drag'
 		});
-		$xVal.spinner();
-		$yVal.spinner();
+
+		$(".slider__range").slider({
+			animate: true,
+			range: "min",
+			value: 50,
+			min: 5,
+			max: 100,
+			step: 1,
+			slide: onOpacityChange
+		});
 	}
 
 	// установка обработчиков
 	function addEventListeners() {
-		$opacity.on('change', onOpacityChange);
-		$('.position__b-link').on('click', onClickFixedButt);
-		$xVal.on('spinchange', onSpinX);
-		$yVal.on('spinchange', onSpinY);
-		$xVal.on('spin', onSpinX);
-		$yVal.on('spin', onSpinY);
+		$('.one-watermark__col-link').on('click', onClickFixedButt);
+		$('#drag__img').on('load', function(){
+			calcSizes();
+			calcPositions();
+		});
+		$btnFour.on('click', function(e){
+			e.preventDefault();
+			$('.controls__switch-group-but').removeClass('active');
+			$btnFour.addClass('active');
+			$('#one').hide();
+			$('#four').show();
+			tile();
+		});
+		$btnOne.on('click', function(e){
+			e.preventDefault();
+			$('.controls__switch-group-but').removeClass('active');
+			$btnOne.addClass('active');
+			$('#four').hide();
+			$('#one').show();
+			untile();
+		});
+		$btnHMarginPlus.on('click', function(e){
+			hMargin = hMargin + 1;
+			onChangeHMargin();
+		});
+		$btnHMarginMinus.on('click', function(e){
+			hMargin = hMargin - 1;
+			onChangeHMargin();
+		});
+		$btnVMarginPlus.on('click', function(e){
+			vMargin = vMargin + 1;
+			onChangeVMargin();
+		});
+		$btnVMarginMinus.on('click', function(e){
+			vMargin = vMargin - 1;
+			onChangeVMargin();
+		});
 	}
 
-	// установка начальной прозрачности
-	function setStartOpacity() {
-		refreshOpacityVal(currOpacity);
+	// замостить
+	function tile() {
+		var rows = bgHeight / watermarkHeight + 1,
+			cols = bgWidth / watermarkWidth + 1;
+
+		$('#drag__img').css({
+			'float': 'left',
+			'margin': '0 ' + hMargin + 'px ' + vMargin + 'px ' + '0'
+		});
+
+		for(var i = 0; i < rows * cols; i++) {
+			var img = $('<img/>');
+
+			img.attr('src', $('#drag__img').attr('src'));
+			img.css({
+				'margin': '0 ' + hMargin + 'px ' + vMargin + 'px ' + '0',
+				'width': $('#drag__img').width(),
+				'height': $('#drag__img').height()
+			});
+			img.addClass('drug__watermark');
+			$watermark.append(img);
+		}
+		$watermark.draggable('disable');
 	}
 
-	// установка начальной позиции
-	function setStartPos() {
-		onPosChange();
+	// размостить
+	function untile() {
+
+	}
+
+	function onChangeHMargin() {
+		$hMarginVal.val(hMargin);
+		$('.drug__watermark').css('marginBottom', hMargin);
+		$hMarginLine.css('height', hMargin);
+	}
+
+	function onChangeVMargin() {
+		$vMarginVal.val(vMargin);
+		$('.drug__watermark').css('marginRight', vMargin);
+		$vMarginLine.css('width', vMargin);
 	}
 
 	// обработчик смены прозрачности
-	function onOpacityChange(e) {
-		currOpacity = $(e.target).val() / 100;
-
+	function onOpacityChange(e, ui) {
+		currOpacity = ui.value;
 		$watermark.css({
-			'opacity': currOpacity
+			'opacity': currOpacity / 100
 		});
-		refreshOpacityVal(currOpacity);
 	}
 
-	// обработчик изменения позиции
-	function onPosChange() {
-		setPos(currPos);
-	}
 
 	// обработчик изменения позиций drag'n'drop
 	function onDragWatermark(e, ui) {
@@ -405,7 +567,9 @@ var watermark = (function() {
 			left: ui.position.left,
 			top: ui.position.top
 		};
-		onPosChange();
+		$('#x-val').val(currPos.left);
+		$('#y-val').val(currPos.top);
+		refreshPosInput();
 	}
 
 	// обработчик клика по кнопке с фиксированой позицией
@@ -414,39 +578,25 @@ var watermark = (function() {
 
 		e.preventDefault();
 		moveFixed(id);
-		$(this).addClass('position__b-link__active');
+		$(this).addClass('one-watermark__col-link__active');
 	}
 
-	// обработчики клика по спину
-	function onSpinX() {
-		currPos.left = $xVal.spinner('value') * images.getScale();
-		onPosChange();
+	// обработчики изменения позиции кноаками
+	function onChangeValX() {
+		currPos.left = $xVal.val() * images.getScale();
+		$xVal.value(currPos.left);
+		setPos(currPos);
 	}
 
-	function onSpinY() {
-		currPos.top = $yVal.spinner('value') * images.getScale();
-		onPosChange();
+	function onChangeValY() {
+		currPos.top = $yVal.val() * images.getScale();
+		$yVal.value(currPos.top);
+		setPos(currPos);
 	}
 
-	// установка ватермарки в нужную позицию
-	function setPos(position) {
-		$('.position__b-link').removeClass('position__b-link__active');
-		$watermark.css({
-			left: position.left,
-			top: position.top
-		});
-		refreshPosVal(currPos);
-	}
-
-	// рендер позиций
-	function refreshPosVal() {
-		$xVal.spinner('value', parseInt(currPos.left / images.getScale()));
-		$yVal.spinner('value', parseInt(currPos.top / images.getScale()));
-	}
-
-	// рендер прозрачности
-	function refreshOpacityVal(opacity) {
-		$opacityVal.text(opacity);
+	function refreshPosInput() {
+		$xVal.val(parseInt(currPos.left / scaleImg));
+		$yVal.val(parseInt(currPos.top / scaleImg));
 	}
 
 	// перемещение ватермарки по фиксированым позициям
@@ -481,18 +631,37 @@ var watermark = (function() {
 				break
 			default:
 				break
-		};
+		}
+		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');
+		$watermark.css({
+			left: currPos.left * scaleImg,
+			top: currPos.top * scaleImg
+		});
+		refreshPosInput();
+	}
 
-		onPosChange();
+	function calcSizes() {
+		var resultBoxWidth = $('#result-box').width(),
+			resultBoxHeight = $('#result-box').height(),
+			proportions = resultBoxWidth / resultBoxHeight;
+
+		watermarkWidth = $('#drag__img').width();
+		watermarkHeight = $('#drag__img').height();
+		bgWidth = $('#bg__img').width();
+		bgHeight = $('#bg__img').height();
+
+		if (bgWidth / bgHeight > proportions){
+			scaleImg = resultBoxWidth / bgWidth;
+			$('#bg__img').css('width', resultBoxWidth);
+		} else {
+			scaleimg = resultBoxHeight / bgHeight;
+			$('#bg__img').css('height', resultBoxHeight);
+		}
+		$('#drag__img').css('width', watermarkWidth * scaleImg);
 	}
 
 	// вычисление фиксированых позиций
 	function calcPositions() {
-		var watermarkWidth = $('#watermark').width(),
-			watermarkHeight = $('#watermark').height(),
-			bgWidth = $('#bg__wrapper').width(),
-			bgHeight = $('#bg__wrapper').height();
-
 		fixedPositions = {
 			lt: {
 				left: 0,
@@ -542,19 +711,35 @@ var watermark = (function() {
 		return currOpacity;
 	}
 
+	// установка ватермарки в нужную позицию
+	function setPos(position) {
+		var position = position || {left: 0, top: 0};
+
+		currPos = position;
+		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');
+		$watermark.css({
+			left: position.left / scaleImg,
+			top: position.top / scaleImg
+		});
+	}
+
+	function setOpacity(opacity) {
+		var opacity = opacity || 0.5;
+
+		currOpacity = opacity;
+	}
+
 	return {
 		init: function() {
-			calcPositions();
 			initPlugins();
-			setStartOpacity();
-			setStartPos();
 			addEventListeners();
 			console.log('<watermark> init!');
 		},
 		calcPositions: calcPositions,
 		position: getPos,
 		opacity: getOpacity,
-		setPos: setPos
+		setPos: setPos,
+		getPos: getPos
 	};
 
 }());

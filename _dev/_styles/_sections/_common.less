@@ -28,6 +28,7 @@
     width: 650px;
     height: 534px;
     background: #fff url("../../img/bg/result-bg.png");
+    overflow: hidden;
     .drag{
       position: absolute;
       top: 0;
@@ -282,8 +283,11 @@
     height: 100%;
     display: block;
     &:hover{
-      background-color:  #f97e76;
+      background-color:  darken(#9eb2c0, 20%);
       cursor: pointer;
+    }
+    &__active {
+      background-color:  #f97e76;
     }
   }
 }
@@ -580,4 +584,82 @@
     background: -ms-linear-gradient(90deg, #f97e76 0%, #e4746c 94%, #e3736c 100%);
     background: linear-gradient(0deg, #f97e76 0%, #e4746c 94%, #e3736c 100%);
   }
+}
+
+.input-file {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    overflow: hidden;
+}
+.label__file {
+    font-size: 0;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    cursor: pointer;
+    text-align: center;
+    width: 39px;
+    background-color: #f97e76;
+    border-radius: 0 3px 3px 0;
+}
+.ie-8 .label__file {
+    bottom: 1px;
+}
+.label__file:before {
+    display: inline-block;
+    height: 100%;
+    content: '';
+    vertical-align: middle;
+}
+.label__file .icon {
+  background: url(../../img/icons/icon-upload.png) no-repeat center;
+  width: 21px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+    transition: -webkit-transform .2s ease;
+    transition:         transform .2s ease;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+}
+.label__file:active .icon {
+    -webkit-transform: scale(.9);
+            transform: scale(.9);
+}
+#input__file {
+    position: absolute;
+    z-index: -5;
+    top: -100%;
+    left: 0;
+    visibility: hidden;
+    cursor: pointer;
+    opacity: 0;
+}
+.ie-8 #input__file {
+    visibility: visible;
+}
+.input__file-name {
+    pointer-events: none;
+    color: #9EB2C0;
+    font-size: 12px;
+    font-weight: 300;
+    padding: 0 45px 0 5px;
+    width: 220px;
+    height: 27px;
+    border: 1px solid #9EB2C0;
+    border-radius: 3px;
+    box-sizing: border-box;
+    background: transparent;
+}
+.error {
+  display: none;
+}
+.drug__watermark {
+  float: left;
+  margin: 0;
+  padding: 0;
 }
