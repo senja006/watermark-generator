@@ -13,29 +13,50 @@ var images = (function() {
 		$butGetImage = $('#but-send'),
 		$butReset = $('#but-reset');
 
+
 	var bgImgWidth,
 		bgImgHeight,
 		wmImgWidth,
 		wmImgHeight,
 		bgImgScale = 1;
 
+
 	// установка обработчиков
 	function addEventListeners() {
-		$imgSource.on('change', onChangeImageSource);
-		$imgWatermark.on('change', onChangeImageWatermark);
-		$('.modal').on('click', function() {
-			$(this).fadeOut('fast');
-		});
+		$imgSource.on('change', onChangeImageSource)
+				  .on('focus', clearError);
+		$imgWatermark.on('change', onChangeImageWatermark)
+					 .on('focus', clearError);
+		$('#but-bg-load').on('click', onButBgLoad);
+		$('#but-wm-load').on('click', onButWmLoad);
 		$butGetImage.on('click', onSubmitImage);
 		$butReset.on('click', onResetForm);
+	}
+	
+	function clearError() {
+		$('.error').hide();
+	}
+
+	function onButBgLoad(e) {
+		e.preventDefault();
+		console.log('bg load')
+	}
+
+	function onButWmLoad(e) {
+		e.preventDefault();
+		console.log('wm load')
 	}
 
 	// обработчик смены исходного изображения
 	function onChangeImageSource(e) {
 		var file = this.files[0],
 			fr = new FileReader();
+			error = errorImg(file);
 
-		if (!file || !validationImg(file)) return;
+		if (error !== '') {
+			onErrorMessage(error, $("#bg-img-control .error"));
+			return;
+		}
 
 		fr.onload = function(event) {
 			var $image = $(new Image());
@@ -61,7 +82,6 @@ var images = (function() {
 
 		fr.readAsDataURL(file);
 
-		verifyDisable();
 	}
 
 	// функция вставки исходного изображения
@@ -83,9 +103,14 @@ var images = (function() {
 	// обработчик смены изображения ватермарки
 	function onChangeImageWatermark(e) {
 		var file = this.files[0],
-			fr = new FileReader();
+			fr = new FileReader(),
+			error = errorImg(file);
 
-		if (!validationImg(file)) return;
+		console.log(error);
+		if (error !== '') {
+			onErrorMessage(error, $("#wm-img-control .error"));
+			return;
+		}
 
 		fr.onload = function(event) {
 			var $image = $(new Image());
@@ -105,7 +130,6 @@ var images = (function() {
 		};
 
 		fr.readAsDataURL(file);
-		verifyDisable();
 	}
 
 	// массштабирование ватермарки относительно исходного изображения
@@ -132,8 +156,8 @@ var images = (function() {
 	}
 
 	// валидация изображения
-	function validationImg(file) {
-		var errorMessage;
+	function errorImg(file) {
+		var errorMessage = '';
 
 		if (!file.type.match('image.*')) {
 			errorMessage = 'Файл должен быть изображением!';
@@ -141,21 +165,17 @@ var images = (function() {
 		if (file.size > MAX_FILE_SIZE) {
 			errorMessage = 'Размер файла не может быть больше ' + MAX_FILE_SIZE + ' байт (у этого - ' + file.size + ')';
 		}
-		if (errorMessage) {
-			onErrorMessage(errorMessage);
-			return false;
-		}
-		return true;
+
+		return errorMessage;
 	}
 
-	function onErrorMessage (message) {
-		$('.modal-error').text(message);
-		$('.modal').fadeIn('fast');
+	function onErrorMessage (message, $element) {
+		$element.text(message);
+		$element.show();
 	}
 
 	function onSubmitImage(e) {
 		e.preventDefault();
-		onErrorMessage('Форма передана');
 	}
 
 	function onResetForm(e) {
@@ -164,32 +184,15 @@ var images = (function() {
 		$('#drag__img').remove();
 		$imgSource.val('');
 		$imgWatermark.val('');
+		watermark.calcSizes();
+		watermark.calcPositions();
 
-		verifyDisable();
-		onErrorMessage('Форма очищена');
-	}
-
-	function verifyDisable() {
-		var $options = $('.options'),
-			$source = $('.source');
-
-		if (typeof $('#img-watermark')[0].files[0] === 'object' && typeof $('#img-source')[0].files[0]) {
-			$options.show();
-			$source.hide();
-			return false;
-		}
-		else {
-			$options.hide();
-			$source.show();
-			return true;
-		}
 	}
 
 
 	return {
 		init: function() {
 			addEventListeners();
-			verifyDisable();
 			console.log('<images> init!'); // дебаг
 		},
 		getScale: function() {

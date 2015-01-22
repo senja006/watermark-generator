@@ -20,9 +20,9 @@
         <div class="container">
           <section class="result">
             <h1 class="result__title">Генератор водяных знаков</h1>
-            <div class="result__imagebox">
-              <div id="bg__wrapper"><img src="" id="bg__img" class="result__imagebox-image"></div>
-              <div id="watermark" class="drag"><img src="" id="drag__img" class="drug__watermark"></div>
+            <div id="result-box" class="result__imagebox">
+              <div id="bg__wrapper"><img src="http://lorempixel.com/900/700/nature/8" id="bg__img" class="result__imagebox-image"></div>
+              <div id="watermark" class="drag"><img src="http://lorempixel.com/100/100/nature/9" id="drag__img" class="drug__watermark"></div>
             </div>
           </section>
           <section class="controls">
@@ -31,6 +31,7 @@
               <fieldset class="noborder">
                 <div class="controls__inputs-group">
                   <label class="controls__file-title">Исходное изображение
+<<<<<<< HEAD
                     <div class="controls__file">
                       <div class="input-file input-file--main">
                         <div class="input-wrapper">
@@ -41,6 +42,11 @@
                           <input id="input__file-main" type="file" name="files" class="input__file">
                         </label>
                       </div>
+=======
+                    <div id="bg-img-control" class="controls__file">
+                      <input type="file" name="img-source" placeholder="Загрузите изображение" id="img-source" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
+                      <button id="but-bg-load" class="controls__file-input--btn">Загрузить</button><span class="error">text text</span>
+>>>>>>> js
                     </div>
                   </label>
                 </div>
@@ -48,6 +54,7 @@
               <fieldset>
                 <div class="controls__inputs-group">
                   <label class="controls__file-title">Водяной знак
+<<<<<<< HEAD
                     <div class="controls__file">
                       <div class="input-file input-file--watermark">
                         <div class="input-wrapper">
@@ -58,6 +65,11 @@
                           <input id="input__file-watermark" type="file" name="files" class="input__file">
                         </label>
                       </div>
+=======
+                    <div id="wm-img-control" class="controls__file">
+                      <input type="file" name="img-watermark" placeholder="Загрузите изображение" id="img-watermark" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
+                      <button id="but-wm-load" class="controls__file-input--btn">Загрузить</button><span class="error">error</span>
+>>>>>>> js
                     </div>
                   </label>
                 </div>
@@ -66,13 +78,13 @@
                 <div class="controls__inputs-group">
                   <div class="controls__switch">
                     <label class="controls__switch-title">Положение
-                      <div class="controls__switch-group"><a href="#four" class="four">4 watermarks</a><a href="#one" class="one active">1 watermark</a></div>
+                      <div class="controls__switch-group"><a href="#four" id="but-four" class="four controls__switch-group-but">4 watermarks</a><a href="#one" id="but-one" class="one controls__switch-group-but active">1 watermark</a></div>
                     </label>
                   </div>
                   <div id="four" class="position__four-watermark clearfix">
                     <div class="four-watermark__wrapper">
-                      <div class="margin-line horizontal"></div>
-                      <div class="margin-line vertical"></div>
+                      <div id="h-margin-line" class="margin-line horizontal"></div>
+                      <div id="v-margin-line" class="margin-line vertical"></div>
                       <div class="four-watermark__table">
                         <div class="four-watermark__row">
                           <div class="four-watermark__col"><a href="" id="lt" class="four-watermark__col-link"></a></div>
@@ -93,12 +105,12 @@
                     </div>
                     <div class="margin__property">
                       <div class="margin__property-block"><span class="margin__property-name">&nbsp;&#8597;</span>
-                        <input type="text" id="x-margin" name="x-margin" value="1" class="margin__property-input">
-                        <div class="margin__property-control"><a class="margin__property-btn plus"></a><a class="margin__property-btn minus"></a></div>
+                        <input type="text" name="x-margin" id="h-margin-val" class="margin__property-input">
+                        <div class="margin__property-control"><a id="h-margin-plus" class="margin__property-btn plus"></a><a id="h-margin-minus" class="margin__property-btn minus"></a></div>
                       </div>
                       <div class="margin__property-block"><span class="margin__property-name">&#8596;</span>
-                        <input type="text" id="y-margin" name="y-margin" value="1" class="margin__property-input">
-                        <div class="margin__property-control"><a class="margin__property-btn plus"></a><a class="margin__property-btn minus"></a></div>
+                        <input type="text" name="y-margin" id="v-margin-val" class="margin__property-input">
+                        <div class="margin__property-control"><a id="v-margin-plus" class="margin__property-btn plus"></a><a id="v-margin-minus" class="margin__property-btn minus"></a></div>
                       </div>
                     </div>
                   </div>
@@ -124,11 +136,11 @@
                     </div>
                     <div class="coordinate__property">
                       <div class="coordinate__property-block"><span class="coordinate__property-name">X</span>
-                        <input type="text" id="xVal" name="x" value="0" class="coordinate__property-input">
+                        <input type="text" id="x-val" name="x" value="0" class="coordinate__property-input">
                         <div class="coordinate__property-control"><a class="coordinate__property-btn plus"></a><a class="coordinate__property-btn minus"></a></div>
                       </div>
                       <div class="coordinate__property-block"><span class="coordinate__property-name">Y</span>
-                        <input type="text" id="yVal" name="y" value="0" class="coordinate__property-input">
+                        <input type="text" id="y-val" name="y" value="0" class="coordinate__property-input">
                         <div class="coordinate__property-control"><a class="coordinate__property-btn plus"></a><a class="coordinate__property-btn minus"></a></div>
                       </div>
                     </div>
@@ -144,8 +156,13 @@
               </fieldset>
               <fieldset class="noborder">
                 <div class="controls__inputs-group">
+<<<<<<< HEAD
                   <button type="reset" id="reset" class="button--reset">Сброс</button>
                   <button type="submit" id="submit" class="button--submit">Скачать</button>
+=======
+                  <button type="reset" id="but-reset" class="button--reset">Сброс</button>
+                  <button type="submit" id="but-send" class="button--submit">Скачать</button>
+>>>>>>> js
                 </div>
               </fieldset>
             </form>

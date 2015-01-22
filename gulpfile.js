@@ -27,7 +27,7 @@ gulp.task('less', function () {
         .pipe(less())
         .on('error', console.log) // Если есть ошибки, выводим и продолжаем
         .pipe(concatCss("main.css"))
-		.pipe(minifyCSS({keepBreaks:true}))
+		// .pipe(minifyCSS({keepBreaks:true}))
         .pipe(notify("<%= file.relative %> Less Complete!"))
         .pipe(gulp.dest('app/css'))
         .pipe(connect.reload());
@@ -38,7 +38,7 @@ gulp.task('jade', function () {
     gulp.src('_dev/_makeups/_pages/*.jade')
         .pipe(jade({pretty: true}))
         .on('error', console.log) // Если есть ошибки, выводим и продолжаем
-        .pipe(notify("<%= file.relative %> Jade Complete!"))
+        .pipe(notify("<%= file.relative %> Complete!"))
         .pipe(gulp.dest('./app')) // Записываем собранные файлы
         .pipe(connect.reload()); // даем команду на перезагрузку страницы
 });
@@ -84,6 +84,7 @@ gulp.task('jade', function () {
 gulp.task('js', function () {
     gulp.src(['./_dev/_scripts/_modules/*.js', '!./_dev/_scripts/vendor/**/*.js'])
         .pipe(concat('main.js')) // Собираем все JS, кроме тех которые находятся в /app/js/vendor/**
+        .on('error', console.log)
         .pipe(gulp.dest('./app/js'))
         .pipe(rename({suffix: '.min'}))
         // .pipe(uglify())

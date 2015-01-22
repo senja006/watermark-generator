@@ -28,6 +28,7 @@
     width: 650px;
     height: 534px;
     background: #fff url("../../img/bg/result-bg.png");
+    overflow: hidden;
     .drag{
       position: absolute;
       top: 0;
@@ -282,8 +283,11 @@
     height: 100%;
     display: block;
     &:hover{
-      background-color:  #f97e76;
+      background-color:  darken(#9eb2c0, 20%);
       cursor: pointer;
+    }
+    &__active {
+      background-color:  #f97e76;
     }
   }
 }
@@ -649,4 +653,13 @@
     border: 1px solid #9EB2C0;
     border-radius: 3px;
     box-sizing: border-box;
+.error {
+  display: none;
+}
+
+
+.drug__watermark {
+  float: left;
+  margin: 0;
+  padding: 0;
 }
