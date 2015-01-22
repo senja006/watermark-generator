@@ -136,9 +136,10 @@ gulp.task('watch', function(){
 gulp.task('connect', function () {
     connect.server({
         root: 'app',
+        port: 8800,
         livereload: true
     });
-    opn('http://localhost:8080/');
+    opn('http://localhost:8800/');
 });
 
 // Default
