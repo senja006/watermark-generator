@@ -62,8 +62,8 @@ block content
                                             a(href="#one").one.controls__switch-group-but.active#but-one 1 watermark
                                 .position__four-watermark.clearfix#four
                                     .four-watermark__wrapper
-                                        .margin-line.horizontal
-                                        .margin-line.vertical
+                                        .margin-line.horizontal#h-margin-line
+                                        .margin-line.vertical#v-margin-line
                                         .four-watermark__table
                                             .four-watermark__row
                                                 each val in ['lt', 'ct', 'rt']
@@ -80,16 +80,16 @@ block content
                                     .margin__property
                                         .margin__property-block
                                             span.margin__property-name &nbsp;&#8597;
-                                            input(type="text" id="" class="margin__property-input" name="x-margin")
+                                            input(type="text" class="margin__property-input" name="x-margin")#h-margin-val
                                             .margin__property-control
-                                                a.margin__property-btn.plus
-                                                a.margin__property-btn.minus
+                                                a.margin__property-btn.plus#h-margin-plus
+                                                a.margin__property-btn.minus#h-margin-minus
                                         .margin__property-block
                                             span.margin__property-name &#8596;
-                                            input(type="text" id="" class="margin__property-input" name="y-margin")
+                                            input(type="text" class="margin__property-input" name="y-margin")#v-margin-val
                                             .margin__property-control
-                                                a.margin__property-btn.plus
-                                                a.margin__property-btn.minus
+                                                a.margin__property-btn.plus#v-margin-plus
+                                                a.margin__property-btn.minus#v-margin-minus
                                 .position__one-watermark.clearfix#one
                                     .one-watermark__wrapper
                                         .one-watermark__table

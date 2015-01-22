@@ -5,8 +5,7 @@ var watermark = (function() {
 		$opacityVal = $('#opacity-val'), // поле значения прозрачности
 		$opacity = $('#opacity'), // ползунок прозрачности		
 		$xVal = $('#x-val'), // поле left
-		$yVal = $('#y-val'), // поле top
-		scaleImg = 1;
+		$yVal = $('#y-val'); // поле top
 
 		$btnLeftTop = $('#lt'), // кнопки фиксированых позиций
 		$btnCentTop = $('#ct'),
@@ -17,13 +16,25 @@ var watermark = (function() {
 		$btnLeftBottom = $('#lb'),
 		$btnCentBottom = $('#cb'),
 		$btnRightBottom = $('#rb'),
+
 		$btnFour = $('#but-four'),
-		$btnOne = $('#but-one');
+		$btnOne = $('#but-one'),
+
+		$hMarginVal = $('#h-margin-val'),
+		$vMarginVal = $('#v-margin-val'),
+		$btnHMarginPlus = $('#h-margin-plus'),
+		$btnHMarginMinus = $('#h-margin-minus'),
+		$btnVMarginPlus = $('#v-margin-plus'),
+		$btnVMarginMinus = $('#v-margin-minus'),
+		$hMarginLine = $('#h-margin-line'),
+		$vMarginLine = $('#v-margin-line');
 
 	var watermarkWidth = 0, 
 		watermarkHeight = 0,
 		bgWidth = 0,
 		bgHeight = 0,
+		scaleImg = 1,
+
 		fixedPositions = {},
 
 		currPos = {
@@ -33,8 +44,8 @@ var watermark = (function() {
 
 		currOpacity = 0.5,
 
-		vMargin = 10,
-		hMargin = 20;
+		vMargin = 0,
+		hMargin = 0;
 
 	// инициализация плагинов
 	function initPlugins() {
@@ -59,7 +70,6 @@ var watermark = (function() {
 	function addEventListeners() {
 		$('.one-watermark__col-link').on('click', onClickFixedButt);
 		$('#drag__img').on('load', function(){
-			console.log('wm load')
 			calcSizes();
 			calcPositions();
 		});
@@ -79,12 +89,28 @@ var watermark = (function() {
 			$('#one').show();
 			untile();
 		});
+		$btnHMarginPlus.on('click', function(e){
+			hMargin = hMargin + 1;
+			onChangeHMargin();
+		});
+		$btnHMarginMinus.on('click', function(e){
+			hMargin = hMargin - 1;
+			onChangeHMargin();
+		});
+		$btnVMarginPlus.on('click', function(e){
+			vMargin = vMargin + 1;
+			onChangeVMargin();
+		});
+		$btnVMarginMinus.on('click', function(e){
+			vMargin = vMargin - 1;
+			onChangeVMargin();
+		});
 	}
 
 	// замостить
 	function tile() {
-		var rows = bgHeight / watermarkHeight,
-			cols = bgWidth / watermarkWidth;
+		var rows = bgHeight / watermarkHeight + 1,
+			cols = bgWidth / watermarkWidth + 1;
 
 		$('#drag__img').css({
 			'float': 'left',
@@ -100,15 +126,27 @@ var watermark = (function() {
 				'width': $('#drag__img').width(),
 				'height': $('#drag__img').height()
 			});
+			img.addClass('drug__watermark');
 			$watermark.append(img);
 		}
 		$watermark.draggable('disable');
+	}
+
+	// размостить
+	function untile() {
 
 	}
 
-	// размоостить
-	function untile() {
+	function onChangeHMargin() {
+		$hMarginVal.val(hMargin);
+		$('.drug__watermark').css('marginBottom', hMargin);
+		$hMarginLine.css('height', hMargin);
+	}
 
+	function onChangeVMargin() {
+		$vMarginVal.val(vMargin);
+		$('.drug__watermark').css('marginRight', vMargin);
+		$vMarginLine.css('width', vMargin);
 	}
 
 	// обработчик смены прозрачности
