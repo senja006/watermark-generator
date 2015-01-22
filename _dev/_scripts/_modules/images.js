@@ -21,10 +21,22 @@ var images = (function() {
 
 	// установка обработчиков
 	function addEventListeners() {
-		$imgSource.on('load', onChangeImageSource);
-		$imgWatermark.on('load', onChangeImageWatermark);
+		$imgSource.on('change', onChangeImageSource);
+		$imgWatermark.on('change', onChangeImageWatermark);
+		$('#but-bg-load').on('click', onButBgLoad);
+		$('#but-wm-load').on('click', onButWmLoad);
 		$butGetImage.on('click', onSubmitImage);
 		$butReset.on('click', onResetForm);
+	}
+
+	function onButBgLoad(e) {
+		e.preventDefault();
+		console.log('bg load')
+	}
+
+	function onButWmLoad(e) {
+		e.preventDefault();
+		console.log('wm load')
 	}
 
 	// обработчик смены исходного изображения
@@ -158,6 +170,8 @@ var images = (function() {
 		$('#drag__img').remove();
 		$imgSource.val('');
 		$imgWatermark.val('');
+		watermark.calcSizes();
+		watermark.calcPositions();
 
 		onErrorMessage('Форма очищена');
 	}
