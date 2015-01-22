@@ -27,53 +27,31 @@
           </section>
           <section class="controls">
             <h3 class="controls__title">Настройка</h3>
-            <form id="download-img">
+            <form action="" method="post" enctype="multipart/form-data">
               <fieldset class="noborder">
                 <div class="controls__inputs-group">
                   <label class="controls__file-title">Исходное изображение
-<<<<<<< HEAD
-                    <div class="controls__file">
-                      <div class="input-file input-file--main">
-                        <div class="input-wrapper">
-                          <input type="text" name="name-main" placeholder="Загрузите изображение" readonly required class="input input__file-name">
-                          <input type="hidden" name="name-version-main" class="input__file-name-version">
-                        </div>
-                        <label for="input__file-main" class="label__file"><span class="icon icon--upload"></span>
-                          <input id="input__file-main" type="file" name="files" class="input__file">
-                        </label>
-                      </div>
-=======
                     <div id="bg-img-control" class="controls__file">
                       <input type="file" name="img-source" placeholder="Загрузите изображение" id="img-source" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
                       <button id="but-bg-load" class="controls__file-input--btn">Загрузить</button><span class="error">text text</span>
->>>>>>> js
                     </div>
                   </label>
                 </div>
               </fieldset>
+            </form>
+            <form action="" method="post" enctype="multipart/form-data">
               <fieldset>
                 <div class="controls__inputs-group">
                   <label class="controls__file-title">Водяной знак
-<<<<<<< HEAD
-                    <div class="controls__file">
-                      <div class="input-file input-file--watermark">
-                        <div class="input-wrapper">
-                          <input type="text" name="name-watermark" placeholder="Загрузите изображение" readonly required class="input input__file-name">
-                          <input type="hidden" name="name-version-watermark" class="input__file-name-version">
-                        </div>
-                        <label for="input__file-watermark" class="label__file"><span class="icon icon--upload"></span>
-                          <input id="input__file-watermark" type="file" name="files" class="input__file">
-                        </label>
-                      </div>
-=======
                     <div id="wm-img-control" class="controls__file">
                       <input type="file" name="img-watermark" placeholder="Загрузите изображение" id="img-watermark" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
                       <button id="but-wm-load" class="controls__file-input--btn">Загрузить</button><span class="error">error</span>
->>>>>>> js
                     </div>
                   </label>
                 </div>
               </fieldset>
+            </form>
+            <form>
               <fieldset>
                 <div class="controls__inputs-group">
                   <div class="controls__switch">
@@ -156,13 +134,8 @@
               </fieldset>
               <fieldset class="noborder">
                 <div class="controls__inputs-group">
-<<<<<<< HEAD
-                  <button type="reset" id="reset" class="button--reset">Сброс</button>
-                  <button type="submit" id="submit" class="button--submit">Скачать</button>
-=======
                   <button type="reset" id="but-reset" class="button--reset">Сброс</button>
                   <button type="submit" id="but-send" class="button--submit">Скачать</button>
->>>>>>> js
                 </div>
               </fieldset>
             </form>
@@ -194,7 +167,7 @@
       </div>
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/js/_vendor/jquery-1.11.0.min.js"><\/script>');</script>
+    <script>window.jQuery || document.write('<script src="../js/_vendor/jquery-1.11.0.min.js"><\/script>');</script>
     <script src="https://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
     <script src="js/_vendor/html5shiv.min.js"></script>
     <script src="js/plugins.min.js"></script>
