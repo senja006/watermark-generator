@@ -21,12 +21,18 @@ var images = (function() {
 
 	// установка обработчиков
 	function addEventListeners() {
-		$imgSource.on('change', onChangeImageSource);
-		$imgWatermark.on('change', onChangeImageWatermark);
+		$imgSource.on('change', onChangeImageSource)
+				  .on('focus', clearError);
+		$imgWatermark.on('change', onChangeImageWatermark)
+					 .on('focus', clearError);
 		$('#but-bg-load').on('click', onButBgLoad);
 		$('#but-wm-load').on('click', onButWmLoad);
 		$butGetImage.on('click', onSubmitImage);
 		$butReset.on('click', onResetForm);
+	}
+	
+	function clearError() {
+		$('.error').hide();
 	}
 
 	function onButBgLoad(e) {
@@ -43,8 +49,12 @@ var images = (function() {
 	function onChangeImageSource(e) {
 		var file = this.files[0],
 			fr = new FileReader();
+			error = errorImg(file);
 
-		if (!file || !validationImg(file)) return;
+		if (error !== '') {
+			onErrorMessage(error, $("#bg-img-control .error"));
+			return;
+		}
 
 		fr.onload = function(event) {
 			var $image = $(new Image());
@@ -91,9 +101,14 @@ var images = (function() {
 	// обработчик смены изображения ватермарки
 	function onChangeImageWatermark(e) {
 		var file = this.files[0],
-			fr = new FileReader();
+			fr = new FileReader(),
+			error = errorImg(file);
 
-		if (!validationImg(file)) return;
+		console.log(error);
+		if (error !== '') {
+			onErrorMessage(error, $("#wm-img-control .error"));
+			return;
+		}
 
 		fr.onload = function(event) {
 			var $image = $(new Image());
@@ -139,8 +154,8 @@ var images = (function() {
 	}
 
 	// валидация изображения
-	function validationImg(file) {
-		var errorMessage;
+	function errorImg(file) {
+		var errorMessage = '';
 
 		if (!file.type.match('image.*')) {
 			errorMessage = 'Файл должен быть изображением!';
@@ -148,20 +163,17 @@ var images = (function() {
 		if (file.size > MAX_FILE_SIZE) {
 			errorMessage = 'Размер файла не может быть больше ' + MAX_FILE_SIZE + ' байт (у этого - ' + file.size + ')';
 		}
-		if (errorMessage) {
-			onErrorMessage(errorMessage);
-			return false;
-		}
-		return true;
+
+		return errorMessage;
 	}
 
-	function onErrorMessage (message) {
-		console.log(message);
+	function onErrorMessage (message, $element) {
+		$element.text(message);
+		$element.show();
 	}
 
 	function onSubmitImage(e) {
 		e.preventDefault();
-		onErrorMessage('Форма передана');
 	}
 
 	function onResetForm(e) {
@@ -173,7 +185,6 @@ var images = (function() {
 		watermark.calcSizes();
 		watermark.calcPositions();
 
-		onErrorMessage('Форма очищена');
 	}
 
 
