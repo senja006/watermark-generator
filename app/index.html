@@ -21,37 +21,47 @@
           <section class="result">
             <h1 class="result__title">Генератор водяных знаков</h1>
             <div id="result-box" class="result__imagebox">
-              <div id="bg__wrapper"><img src="http://lorempixel.com/900/700/nature/8" id="bg__img" class="result__imagebox-image"></div>
-              <div id="watermark" class="drag"><img src="http://lorempixel.com/100/100/nature/9" id="drag__img" class="drug__watermark"></div>
+              <div id="bg__wrapper" class="img-main"><img src="" id="bg__img" class="result__imagebox-image"></div>
+              <div id="watermark" class="drag img-watermark"><img src="" id="drag__img" class="drug__watermark"></div>
             </div>
           </section>
           <section class="controls">
             <h3 class="controls__title">Настройка</h3>
-            <form action="" method="post" enctype="multipart/form-data">
+            <form id="download-img">
               <fieldset class="noborder">
                 <div class="controls__inputs-group">
                   <label class="controls__file-title">Исходное изображение
                     <div id="bg-img-control" class="controls__file">
-                      <input type="file" name="img-source" placeholder="Загрузите изображение" id="img-source" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
-                      <button id="but-bg-load" class="controls__file-input--btn">Загрузить</button><span class="error">text text</span>
+                      <div class="input-file input-file--main">
+                        <div class="input-wrapper">
+                          <input type="text" name="name-main" placeholder="Загрузите изображение" readonly required class="input input__file-name">
+                          <input type="hidden" name="name-version-main" class="input__file-name-version">
+                        </div>
+                        <label for="input__file-main" class="label__file"><span class="icon icon--upload"></span>
+                          <input id="input__file-main" type="file" name="files" class="input__file">
+                        </label>
+                      </div>
                     </div>
                   </label>
                 </div>
               </fieldset>
-            </form>
-            <form action="" method="post" enctype="multipart/form-data">
               <fieldset>
                 <div class="controls__inputs-group">
                   <label class="controls__file-title">Водяной знак
                     <div id="wm-img-control" class="controls__file">
-                      <input type="file" name="img-watermark" placeholder="Загрузите изображение" id="img-watermark" class="controls__file-input"><span id="file_name" class="controls__file-input--fake">Загрузите изображение</span>
-                      <button id="but-wm-load" class="controls__file-input--btn">Загрузить</button><span class="error">error</span>
+                      <div class="input-file input-file--watermark">
+                        <div class="input-wrapper">
+                          <input type="text" name="name-watermark" placeholder="Загрузите изображение" readonly required class="input input__file-name">
+                          <input type="hidden" name="name-version-watermark" class="input__file-name-version">
+                        </div>
+                        <label for="input__file-watermark" class="label__file"><span class="icon icon--upload"></span>
+                          <input id="input__file-watermark" type="file" name="files" class="input__file">
+                        </label>
+                      </div>
                     </div>
                   </label>
                 </div>
               </fieldset>
-            </form>
-            <form>
               <fieldset>
                 <div class="controls__inputs-group">
                   <div class="controls__switch">

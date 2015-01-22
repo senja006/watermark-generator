@@ -71,14 +71,14 @@ gulp.task('jade', function () {
 //		.pipe(gulp.dest('./js/_source/'))
 //});
 //
-//gulp.task('uglify-plugins', function() {
-//	gulp.src('./js/plugins.js')
-//		.pipe(uglify())
-//		.pipe(rename("plugins.min.js"))
-//		.pipe(gulp.dest('.app/js/'))
-//		.pipe(notify("Plugins.js Optimized!"))
-//        .pipe(connect.reload()); // даем команду на перезагрузку страницы
-//});
+gulp.task('uglify-plugins', function() {
+	gulp.src('./js/plugins.js')
+		.pipe(uglify())
+		.pipe(rename("plugins.min.js"))
+		.pipe(gulp.dest('.app/js/'))
+		.pipe(notify("Plugins.js Optimized!"))
+       .pipe(connect.reload()); // даем команду на перезагрузку страницы
+});
 
 // Собираем JS
 gulp.task('js', function () {
@@ -116,11 +116,20 @@ gulp.task('images', function () {
 //        .pipe(connect.reload());
 //})
 
+// перемещение php файлов
+gulp.task('move-php', function () {
+    gulp.src('_dev/*.php')
+        .pipe(gulp.dest('./app/'));
+    gulp.src('_dev/upload/**')
+        .pipe(gulp.dest('./app/upload/'));
+});
+
 gulp.task('watch', function(){
 	gulp.watch('_dev/_styles/**/*.less', ['less']);
     gulp.watch('_dev/_makeups/**/*.jade', ['jade']);
 	gulp.watch('_dev/_scripts/_modules/*.js', ['js', 'compress-plugins']);
 	gulp.watch('_dev/_scripts/_plugins/*.js', ['compress-plugins', 'uglify-plugins']);
+    gulp.watch('_dev/*.php', ['move-php']);
 });
 
 // Server
