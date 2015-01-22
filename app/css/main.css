@@ -1751,9 +1751,10 @@ input {
   display: none;
 }
 
-input:focus,
-button:focus {
-  outline: none;
+.drug__watermark {
+  float: left;
+  margin: 0;
+  padding: 0;
 }
 
 /* --------- fonts --------- */

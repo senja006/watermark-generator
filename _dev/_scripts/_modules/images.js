@@ -11,13 +11,18 @@ var images = (function() {
 		$bgImg = $('#bg__img'),
 		$wmImg = $('#drag__img'),
 		$butGetImage = $('#but-send'),
-		$butReset = $('#but-reset');
+		$butReset = $('#but-reset'),
+		$butFour = $('#but-four'),
+		$butOne = $('#but-one');
 
 	var bgImgWidth,
 		bgImgHeight,
 		wmImgWidth,
 		wmImgHeight,
-		bgImgScale = 1;
+		bgImgScale = 1,
+
+		vMargin = 0,
+		hMargin = 0;
 
 	// установка обработчиков
 	function addEventListeners() {
@@ -29,8 +34,32 @@ var images = (function() {
 		$('#but-wm-load').on('click', onButWmLoad);
 		$butGetImage.on('click', onSubmitImage);
 		$butReset.on('click', onResetForm);
+		$butFour.on('click', function(e){
+			e.preventDefault();
+			$('.controls__switch-group-but').removeClass('active');
+			$butFour.addClass('active');
+			$('#one').hide();
+			$('#four').show();
+			tile();
+		});
+		$butOne.on('click', function(e){
+			e.preventDefault();
+			$('.controls__switch-group-but').removeClass('active');
+			$butOne.addClass('active');
+			$('#four').hide();
+			$('#one').show();
+			untile();
+		});
 	}
 	
+	function tile() {
+		console.log('tiled');
+	}
+
+	function untile() {
+		console.log('untiled');
+	}
+
 	function clearError() {
 		$('.error').hide();
 	}
