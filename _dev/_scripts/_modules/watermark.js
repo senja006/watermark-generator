@@ -1,14 +1,18 @@
 var watermark = (function() {
 
-	var $watermark = $('#watermark'), // watermark
-		$bg = $('#bg__wrapper'), // original image
-		$opacityVal = $('#opacity-val'), // поле значения прозрачности
-		$opacity = $('#opacity'), // ползунок прозрачности		
-		$xVal = $('#x-val'), // поле left
-		$yVal = $('#y-val'); // поле top
+	var
+		$work = $('#work'),
+		$wm = $('#wm'),
+		$bg = $('#bg'),
+		$bgImg = $('#bg__img'),
+		$wmImg = $('#wm__img'),
 
-		$btnLeftTop = $('#lt'), // кнопки фиксированых позиций
-		$btnCentTop = $('#ct'),
+		$opacityVal = $('#opacity-val'),
+		$opacity = $('#opacity'),
+		$xVal = $('#x-val'),
+		$yVal = $('#y-val');
+
+		$btnLeftTop = $('#lt'),
 		$btnRightTop = $('#rt'),
 		$btnLeftMiddle = $('#lm'),
 		$btnCentMiddle = $('#cm'),
@@ -17,12 +21,10 @@ var watermark = (function() {
 		$btnCentBottom = $('#cb'),
 		$btnRightBottom = $('#rb'),
 
-		$xValPlus = $('#x-val-plus'),// кнопки изменения позиции
-		$yValPlus = $('#y-val-plus'),
-		$xValMinus = $('#x-val-minus'),
-		$yValMinus = $('#y-val-minus'),
-		correctionX = 0; // коорекция координат в зависимости от размера картинки
-		correctionY = 0;
+		$btnXPlus = $('#x-val-plus'), // кнопки изменения позиции
+		$btnYPlus = $('#y-val-plus'),
+		$btnXMinus = $('#x-val-minus'),
+		$btnYMinus = $('#y-val-minus'),
 
 		$btnFour = $('#but-four'), // кнопки замостить-размостить 
 		$btnOne = $('#but-one'),
@@ -33,35 +35,24 @@ var watermark = (function() {
 		$btnHMarginMinus = $('#h-margin-minus'),
 		$btnVMarginPlus = $('#v-margin-plus'),
 		$btnVMarginMinus = $('#v-margin-minus'),
-		$hMarginLine = $('#h-margin-line'), // красные линии
-		$vMarginLine = $('#v-margin-line');
+		$lineHMargin = $('#h-margin-line'), // красные линии
+		$lineVMargin = $('#v-margin-line');
 
-	var watermarkWidth = 0,  // размеры
-		watermarkHeight = 0,
-		bgWidth = 0,
-		bgHeight = 0,
-		scaleImg = 1, // масштаб
-
-		fixedPositions = {}, 
-
-		currPos = {    // текушее положение ватермарки top, left
-			left: 0,
-			top: 0
-		},
-
-		currOpacity = 0.5, // текущая прозрачность
-
-		vMargin = 0, // поля между ватермарками
-		hMargin = 0; // 
-
+	var param = {
+		wmWidth: 0,
+		wmHeight: 0,
+		bgWidth: 0,
+		bgHeight: 0,
+		scale: 1,
+		fixedPositions: {},
+		currPos: {left: 0, top: 0},
+		currOpacity: 0.5, 
+		vMargin: 0, 
+		hMargin: 0
+	}
+		 
 	// инициализация плагинов
 	function initPlugins() {
-		$watermark.draggable({
-			cursor: 'move',
-			snap: '#bg__wrapper',
-			drag: onDragWatermark // событие 'drag'
-		});
-
 		$(".slider__range").slider({
 			animate: true,
 			range: "min",
@@ -69,160 +60,43 @@ var watermark = (function() {
 			min: 5,
 			max: 100,
 			step: 1,
-			slide: onOpacityChange // событине на ползунке
+			slide: onOpacityChange 
 		});
 	}
 
-	// установка обработчиков
+	function initDrag() {
+		$work.width($('#bg').width());
+		$work.height($('#bg').height());
+		$wm.draggable({
+			containment: "parent",
+			cursor: 'move',
+			snap: $work.selector,
+			drag: onDragWatermark 
+		});
+	}
+
 	function addEventListeners() {
-		$('.one-watermark__col-link').on('click', onClickFixedButt);
-		// $('#drag__img').on('load', calcBasicParam);
-
-		// $('#bg__img').on('load', calcBasicParam);
-
-		// кнопки смены режима
-		$btnFour.on('click', function(e){
-			e.preventDefault();
-			$('.controls__switch-group-but').removeClass('active');
-			$btnFour.addClass('active');
-			$('#one').hide();
-			$('#four').show();
-			tile();
-		});
-		$btnOne.on('click', function(e){
-			e.preventDefault();
-			$('.controls__switch-group-but').removeClass('active');
-			$btnOne.addClass('active');
-			$('#four').hide();
-			$('#one').show();
-			untile();
-		});
-
-		// обработчики кнопок +/- координат
-		$xValPlus.on('click', function(e){ 
-			currPos.left = ++currPos.left;
-			onChangeVal();
-		});
-		$xValMinus.on('click', function(e){
-			currPos.left = --currPos.left;
-			onChangeVal();
-		});
-		$yValPlus.on('click', function(e){
-			currPos.top = ++currPos.top;
-			onChangeVal()
-		});
-		$yValMinus.on('click', function(e){
-			currPos.top = --currPos.top;
-			onChangeVal();
-		});
-
-		// обработчики кнопок +/- полей
-		$btnHMarginPlus.on('click', function(e){ 
-			hMargin = hMargin + 1;
-			onChangeHMargin();
-		});
-		$btnHMarginMinus.on('click', function(e){
-			hMargin = hMargin - 1;
-			onChangeHMargin();
-		});
-		$btnVMarginPlus.on('click', function(e){
-			vMargin = vMargin + 1;
-			onChangeVMargin();
-		});
-		$btnVMarginMinus.on('click', function(e){
-			vMargin = vMargin - 1;
-			onChangeVMargin();
-		});
+		$('img').on('load', initDrag);
 	}
 
-	
-	function calcBasicParam(){
-		calcSizes();
-		calcPositions();
-	}
-
-	// замостить
-	function tile() {
-		var rows = bgHeight / watermarkHeight + 1,
-			cols = bgWidth / watermarkWidth + 1;
-
-		$('#drag__img').css({
-			'float': 'left',
-			'margin': '0 ' + hMargin + 'px ' + vMargin + 'px ' + '0'
-		});
-
-		for(var i = 0; i < rows * cols; i++) {
-			var img = $('<img/>');
-
-			img.attr('src', $('#drag__img').attr('src'));
-			img.css({
-				'margin': '0 ' + hMargin + 'px ' + vMargin + 'px ' + '0',
-				'width': $('#drag__img').width(),
-				'height': $('#drag__img').height()
-			});
-			img.addClass('drug__watermark');
-			$watermark.append(img);
-		}
-		$watermark.draggable('disable');
-	}
-
-	// размостить
-	function untile() {
-
-	}
-
-	function onChangeHMargin() {
-		$hMarginVal.val(hMargin);
-		$('.drug__watermark').css('marginBottom', hMargin);
-		$hMarginLine.css('height', hMargin);
-	}
-
-	function onChangeVMargin() {
-		$vMarginVal.val(vMargin);
-		$('.drug__watermark').css('marginRight', vMargin);
-		$vMarginLine.css('width', vMargin);
-	}
-
-	// обработчик смены прозрачности
 	function onOpacityChange(e, ui) {
-		currOpacity = ui.value;
-		$watermark.css({
-			'opacity': currOpacity / 100
+		param.currOpacity = ui.value / 100;
+		$wm.css({
+			'opacity': param.currOpacity
 		});
-		$('#opacity').val(currOpacity / 100);
+
+		$opacity.val(param.currOpacity);
 	}
 
 
 	// обработчик изменения позиций drag'n'drop
 	function onDragWatermark(e, ui) {
-		currPos = {
-			left: ui.position.left / scaleImg,
-			top: ui.position.top / scaleImg
-		};
-		$('#x-val').val(currPos.left);
-		$('#y-val').val(currPos.top);
-		refreshPosInput();
+		console.log('onDragWatermark');
 	}
 
 	// обработчик клика по кнопке с фиксированой позицией
 	function onClickFixedButt(e) {
-		var id = $(e.target).attr('id');
-
-		e.preventDefault();
-		moveFixed(id);
-		$(this).addClass('one-watermark__col-link__active');
-	}
-
-	// обработчики изменения позиции кнопками
-	function onChangeVal() {
-		refreshPosInput();
-		setPos(currPos);
-	}
-
-	// просто обновляет инпуты позиции
-	function refreshPosInput() {
-		$xVal.val(parseInt(currPos.left / scaleImg) - correctionX);
-		$yVal.val(parseInt(currPos.top / scaleImg) - correctionY);
+		moveFixed($(this).attr('id'));
 	}
 
 	// перемещение ватермарки по фиксированым позициям
@@ -258,122 +132,72 @@ var watermark = (function() {
 			default:
 				break
 		}
-		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');
-		$watermark.css({
-			left: currPos.left * scaleImg,
-			top: currPos.top * scaleImg
-		});
-		refreshPosInput();
 	}
 
-	function calcSizes() {
-		$('#bg__img').on('load.img', function() {
-			var resultBoxWidth = $('#result-box').width(), // ширина контейнера
-				resultBoxHeight = $('#result-box').height(), // высота контейнера
-				// proportions = resultBoxWidth / resultBoxHeight; // 
-
-			bgWidth = $('#bg__img').width(); // ширина картинки
-			bgHeight = $('#bg__img').height(); // высота картинки
-			// watermarkWidth = $('#drag__img').width(); // ширина ватермарка
-			// watermarkHeight = $('#drag__img').height(); // высота ватермарка
-			correctionX = (resultBoxWidth - bgWidth) / 2;
-			correctionY = (resultBoxHeight - bgHeight) / 2;
-			console.log(bgWidth);
-
-			console.log('calc');
-			$('#result-box').off('load.img');
-		});
-			
-		// if (bgWidth / bgHeight > proportions){
-		// 	scaleImg = resultBoxWidth / bgWidth;
-		// 	$('#bg__img').css('width', resultBoxWidth);
-		// } else {
-		// 	scaleimg = resultBoxHeight / bgHeight;
-		// 	$('#bg__img').css('height', resultBoxHeight);
-		// }
-		// $('#drag__img').css('width', watermarkWidth * scaleImg);
-	}
-
-	// вычисление фиксированых позиций
 	function calcPositions() {
-		fixedPositions = {
+		param.fixedPositions = {
 			lt: {
 				left: 0,
 				top: 0
 			},
 			ct: {
-				left: parseInt((bgWidth - watermarkWidth) / 2),
+				left: parseInt((bgWidth - wmWidth) / 2),
 				top: 0
 			},
 			rt: {
-				left: bgWidth - watermarkWidth,
+				left: bgWidth - wmWidth,
 				top: 0
 			},
 			lm: {
 				left: 0,
-				top: parseInt((bgHeight - watermarkHeight)) / 2,
+				top: parseInt((bgHeight - wmHeight)) / 2,
 			},
 			cm: {
-				left: parseInt((bgWidth - watermarkWidth) / 2),
-				top: parseInt((bgHeight - watermarkHeight) / 2)
+				left: parseInt((bgWidth - wmWidth) / 2),
+				top: parseInt((bgHeight - wmHeight) / 2)
 			},
 			rm: {
-				left: bgWidth - watermarkWidth,
-				top: parseInt((bgHeight - watermarkHeight) / 2)
+				left: bgWidth - wmWidth,
+				top: parseInt((bgHeight - wmHeight) / 2)
 			},
 			lb: {
 				left: 0,
-				top: bgHeight - watermarkHeight,
+				top: bgHeight - wmHeight,
 			},
 			cb: {
-				left: parseInt((bgWidth - watermarkWidth) / 2),
-				top: bgHeight - watermarkHeight
+				left: parseInt((bgWidth - wmWidth) / 2),
+				top: bgHeight - wmHeight
 			},
 			rb: {
-				left: bgWidth - watermarkWidth,
-				top: bgHeight - watermarkHeight
+				left: bgWidth - wmWidth,
+				top: bgHeight - wmHeight
 			}
 		}
 	}
 
-	// геттеры
-	function getPos() {
-		return currPos;
+	function setParams(data) {
+		if (data) {
+			for (var key in data) {
+				param[key] = data[key];
+			}
+		}
+		console.log(param);
 	}
 
-	function getOpacity() {
-		return currOpacity;
-	}
-
-	// установка ватермарки в нужную позицию
-	function setPos(position) {
-		var position = position || {left: 0, top: 0};
-
-		currPos = position;
-		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');
-		$watermark.css({
-			left: position.left / scaleImg,
-			top: position.top / scaleImg
-		});
-	}
-
-	function setOpacity(opacity) {
-		var opacity = opacity || 0.5;
-
-		currOpacity = opacity;
+	function scaleImg() {
+		param.scale = $work.width() / param.bgWidth;
+		console.log('Scale: %s', param.scale);
+		$bgImg.css('width', param.bgWidth * param.scale);
+		$wmImg.css('width', param.wmWidth * param.scale);
 	}
 
 	return {
 		init: function() {
 			initPlugins();
 			addEventListeners();
-			console.log('<watermark> init!');
 		},
-		calcBasicParam: calcBasicParam,
-		position: getPos,
-		opacity: getOpacity,
-		setPos: setPos,
-		getPos: getPos
+		setParams: setParams,
+		scaleImg: scaleImg
 	};
 
 }());

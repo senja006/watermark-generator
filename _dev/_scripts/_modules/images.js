@@ -2,6 +2,12 @@ var images = (function() {
 
 	var IMG_SRC = 'upload/files/';
 
+	var $work = $('#work'),
+		$wm = $('#wm'),
+		$bg = $('#bg'),
+		$bgImg = $('#bg__img'),
+		$wmImg = $('#wm__img');
+
 	function addEventListeners() {
 		$('#download-img').on('submit', controlDownloadImg);
 		$('#but-reset').on('click', resetForm);
@@ -36,22 +42,21 @@ var images = (function() {
 
 	function initUploadImg(endId) {
 		$('#input__file-' + endId).fileupload({
-	        url: 'upload/upload.php',
-	        dataType: 'json',
-	        add: function(e, data) {
-	        	$.each(data.files, function (index, file) {
-	            	addNameFile(file.name, $('.input-file--' + endId));
-	            });
-	        	data.submit();
-	        },
-	        done: function(e, data){
-	         	 $.each(data.result.files, function (index, file) {
-	                addImg(file.name, $('.img-' + endId));
-	                addNameFileWithVersion(file.name, $('.input-file--' + endId));
-					watermark.calcBasicParam();
-	            });
-	        }
-	    });
+			url: 'upload/upload.php',
+			dataType: 'json',
+			add: function(e, data) {
+				$.each(data.files, function(index, file) {
+					addNameFile(file.name, $('.input-file--' + endId));
+				});
+				data.submit();
+			},
+			done: function(e, data) {
+				$.each(data.result.files, function(index, file) {
+					addImg(file.name, endId);
+					addNameFileWithVersion(file.name, $('.input-file--' + endId));
+				});
+			}
+		});
 	};
 
 	function addNameFile(name, container) {
@@ -64,29 +69,42 @@ var images = (function() {
 	};
 
 	function addImg(fileName, container) {
-		// var $img = new Image();
-		// $img.src = IMG_SRC + fileName;
 		var img = $('<img/>'),
 			src = IMG_SRC + fileName;
-			containerClass = container.attr('class');
 
-		container.find('img').remove();
+		if (container.match(/main/)) {
+			if ($bgImg) $bgImg.remove();
+			img.attr({
+				id: 'bg__img',
+				class: 'bg__img',
+				src: src
+			}).on('load', function() {
+				watermark.setParams({
+					bgWidth: $(this).width(),
+					bgHeight: $(this).height()
+				});
+				watermark.scaleImg();
+			}).appendTo($bg);
 
-		console.log(containerClass);
-		if (containerClass.match(/img-main/)) {
-			img.attr('id', 'bg__img')
-		} else if (containerClass.match(/img-watermark/)) {
-			img.attr('id', 'drag__img')
+		} else if (container.match(/watermark/)) {
+			if ($('#wm__img')) $('#wmImg').remove();
+			img.attr({
+				id: 'wm__img',
+				class: 'wm__img',
+				src: src
+			}).on('load', function() {
+				watermark.setParams({
+					wmWidth: $(this).width(),
+					wmHeight: $(this).height()
+				});
+				watermark.scaleImg();
+			}).appendTo($wm);
+
 		} else {
 			console.error('Чё за контейнер?!');
 			return;
 		}
-		img.attr('src', src).addClass(containerClass);
-		container.append(img);
-		// console.log($('#img-watermark'));
-		// container.empty().append($img);
 	};
-
 
 	function getObj(json) {
 		var obj = JSON.parse(json);
@@ -96,7 +114,7 @@ var images = (function() {
 	function downloadResImg(response) {
 		var href = 'download-img.php?file=' + response['src-res'];
 		window.downloadFile = function(url) {
-		    window.open(url, '_self');
+			window.open(url, '_self');
 		}
 		window.downloadFile(href);
 	};
