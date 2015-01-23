@@ -74,7 +74,7 @@ var watermark = (function() {
 	// установка обработчиков
 	function addEventListeners() {
 		$('.one-watermark__col-link').on('click', onClickFixedButt);
-		$('#drag__img').on('load', calcBasicParam);
+		// $('#drag__img').on('load', calcBasicParam);
 
 		// $('#bg__img').on('load', calcBasicParam);
 
@@ -265,15 +265,17 @@ var watermark = (function() {
 	}
 
 	function calcSizes() {
+
 		var resultBoxWidth = $('#result-box').width(),
 			resultBoxHeight = $('#result-box').height(),
 			proportions = resultBoxWidth / resultBoxHeight;
 
-		watermarkWidth = $('#drag__img').width();
-		watermarkHeight = $('#drag__img').height();
 		bgWidth = $('#bg__img').width();
 		bgHeight = $('#bg__img').height();
+		watermarkWidth = $('#drag__img').width();
+		watermarkHeight = $('#drag__img').height();
 
+		console.log('calc');
 		if (bgWidth / bgHeight > proportions){
 			scaleImg = resultBoxWidth / bgWidth;
 			$('#bg__img').css('width', resultBoxWidth);
@@ -359,8 +361,7 @@ var watermark = (function() {
 			addEventListeners();
 			console.log('<watermark> init!');
 		},
-		calcSizes: calcSizes,
-		calcPositions: calcPositions,
+		calcBasicParam: calcBasicParam,
 		position: getPos,
 		opacity: getOpacity,
 		setPos: setPos,

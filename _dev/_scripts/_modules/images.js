@@ -65,8 +65,23 @@ var images = (function() {
 	function addImg(fileName, container) {
 		// var $img = new Image();
 		// $img.src = IMG_SRC + fileName;
-		var src = IMG_SRC + fileName;
-		container.find('img').attr('src', src).css('width', '100%');
+		var img = $('<img/>'),
+			src = IMG_SRC + fileName;
+			containerClass = container.attr('class');
+
+		container.find('img').remove();
+
+		console.log(containerClass);
+		if (containerClass.match(/img-main/)) {
+			img.attr('id', 'bg__img')
+		} else if (containerClass.match(/img-watermark/)) {
+			img.attr('id', 'drag__img')
+		} else {
+			console.error('Чё за контейнер?!');
+			return;
+		}
+		img.attr('src', src).addClass(containerClass);
+		container.append(img);
 		// console.log($('#img-watermark'));
 		// container.empty().append($img);
 	};
