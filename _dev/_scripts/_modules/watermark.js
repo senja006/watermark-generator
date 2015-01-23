@@ -40,7 +40,8 @@ var watermark = (function() {
 		watermarkHeight = 0,
 		bgWidth = 0,
 		bgHeight = 0,
-		scaleImg = 1, // масштаб
+		scaleImgX = 1, // масштаб
+		scaleImgY = 1,
 
 		fixedPositions = {}, 
 
@@ -196,8 +197,10 @@ var watermark = (function() {
 	// обработчик изменения позиций drag'n'drop
 	function onDragWatermark(e, ui) {
 		currPos = {
-			left: ui.position.left / scaleImg,
-			top: ui.position.top / scaleImg
+			// left: ui.position.left / scaleImgX,
+			// top: ui.position.top / scaleImgY
+			left: ui.position.left,
+			top: ui.position.top
 		};
 		$('#x-val').val(currPos.left);
 		$('#y-val').val(currPos.top);
@@ -221,8 +224,8 @@ var watermark = (function() {
 
 	// просто обновляет инпуты позиции
 	function refreshPosInput() {
-		$xVal.val(parseInt(currPos.left / scaleImg) - correctionX);
-		$yVal.val(parseInt(currPos.top / scaleImg) - correctionY);
+		$xVal.val(parseInt(currPos.left / scaleImgX) - correctionX);
+		$yVal.val(parseInt(currPos.top / scaleImgY) - correctionY);
 	}
 
 	// перемещение ватермарки по фиксированым позициям
@@ -260,38 +263,67 @@ var watermark = (function() {
 		}
 		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');
 		$watermark.css({
-			left: currPos.left * scaleImg,
-			top: currPos.top * scaleImg
+			left: currPos.left * scaleImgX,
+			top: currPos.top * scaleImgY
 		});
 		refreshPosInput();
 	}
 
 	function calcSizes() {
-		$('#bg__img').on('load.img', function() {
+		$('#bg__img, #drag__img').on('load.img', function() {
 			var resultBoxWidth = $('#result-box').width(), // ширина контейнера
 				resultBoxHeight = $('#result-box').height(), // высота контейнера
 				// proportions = resultBoxWidth / resultBoxHeight; // 
 
 			bgWidth = $('#bg__img').width(); // ширина картинки
 			bgHeight = $('#bg__img').height(); // высота картинки
-			// watermarkWidth = $('#drag__img').width(); // ширина ватермарка
-			// watermarkHeight = $('#drag__img').height(); // высота ватермарка
+			watermarkWidth = $('#drag__img').css('width', 'auto').width(); // ширина ватермарка
+			watermarkHeight = $('#drag__img').css('height', 'auto').height(); // высота ватермарка
 			correctionX = (resultBoxWidth - bgWidth) / 2;
 			correctionY = (resultBoxHeight - bgHeight) / 2;
-			console.log(bgWidth);
+			console.log(correctionX);
+			console.log(correctionY);
 
-			console.log('calc');
-			$('#result-box').off('load.img');
+			// console.log(bgWidth);
+
+			// console.log('calc');
+			$('#bg__img, #drag__img').off('load.img');
+			$('#bg__img').css({
+				'max-width': '10000px',
+				'max-height': '10000px'
+			});
+			var correctionWatermarkWidth = bgWidth / $('#bg__img').width();
+			var correctionWatermarkHeight = bgHeight / $('#bg__img').height();
+			scaleImgX = correctionWatermarkWidth;
+			scaleImgY = correctionWatermarkHeight;
+			$('#drag__img').css({
+				'width': watermarkWidth * correctionWatermarkWidth,
+				'height': watermarkHeight * correctionWatermarkHeight
+			});
+			console.log(scaleImgX);
+			console.log(scaleImgY);
+			// console.log(correctionWatermarkWidth);
+			// console.log(correctionWatermarkHeight);
+			$('#bg__img').css({
+				'max-width': '100%',
+				'max-height': '100%'
+			});
+			if(correctionY === 0) {
+				correctionX = correctionX / scaleImgX;
+			}
+			if(correctionX === 0) {
+				correctionY = correctionY / scaleImgY;
+			}
 		});
 			
 		// if (bgWidth / bgHeight > proportions){
-		// 	scaleImg = resultBoxWidth / bgWidth;
-		// 	$('#bg__img').css('width', resultBoxWidth);
+		// 	scaleImgX = resultBoxWidth / bgWidth;
+		// 	$('#bg__iYmg').css('width', resultBoxWidth);
 		// } else {
-		// 	scaleimg = resultBoxHeight / bgHeight;
-		// 	$('#bg__img').css('height', resultBoxHeight);
+		// 	scaleimgX = resultBoxHeight / bgHeight;
+		// 	$('#bg__iYmg').css('height', resultBoxHeight);
 		// }
-		// $('#drag__img').css('width', watermarkWidth * scaleImg);
+		// $('#drag__img').css('width', watermarkWidth * scaleImgX);
 	}
 
 	// вычисление фиксированых позиций
@@ -352,8 +384,8 @@ var watermark = (function() {
 		currPos = position;
 		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');
 		$watermark.css({
-			left: position.left / scaleImg,
-			top: position.top / scaleImg
+			left: position.left / scaleImgX,
+			top: position.top / scaleImgY
 		});
 	}
 
