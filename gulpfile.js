@@ -10,7 +10,8 @@ var
 	uglify = require('gulp-uglify'),
     opn = require('opn'),
     jade = require('gulp-jade'),
-	rename = require("gulp-rename");
+	rename = require("gulp-rename"),
+    clean = require("gulp-clean");
 
 //gulp.task('concat', function () {
 //	gulp.src('./_dev/_styles/**/*.css')
@@ -21,6 +22,11 @@ var
 //});
 
 // Компилируем LESS
+
+gulp.task('clean', function(){
+    gulp.src('app/upload/files/*.*')
+        .pipe(clean());
+});
 
 gulp.task('less', function () {
     gulp.src(['./_dev/_styles/**/*.less'])
