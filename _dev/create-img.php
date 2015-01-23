@@ -3,11 +3,12 @@
 $img_path = "upload/files/";
 $name_main_img = $_POST['name-version-main'];
 $name_watermark = $_POST['name-version-watermark'];
+$opacity = $_POST['opacity'] * 100;
 $x = $_POST['x'];
 $y = $_POST['y'];
 $img_main = convertImgToPng($img_path.$name_main_img, "main-img.png");
 $img_watermark = convertImgToPng($img_path.$name_watermark, "watermark.png");
-$res_img = joinImg($img_main, $img_watermark, $x, $y, 75);
+$res_img = joinImg($img_main, $img_watermark, $x, $y, $opacity);
 
 $data = array();
 

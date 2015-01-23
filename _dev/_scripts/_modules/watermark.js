@@ -67,7 +67,7 @@ var watermark = (function() {
 			animate: true,
 			range: "min",
 			value: 50,
-			min: 5,
+			min: 0,
 			max: 100,
 			step: 1,
 			slide: onOpacityChange // событине на ползунке
@@ -405,15 +405,16 @@ var watermark = (function() {
 	}
 
 	function setOpacity(opacity) {
-		var opacity = opacity || 0.5;
-
-		currOpacity = opacity;
+		currOpacity = opacity || 0.5;
+		$watermark.css('opacity', currOpacity);
+		$('#opacity').val(currOpacity);
 	}
 
 	return {
 		init: function() {
 			initPlugins();
 			addEventListeners();
+			setOpacity();
 			console.log('<watermark> init!');
 		},
 		calcBasicParam: calcBasicParam,
