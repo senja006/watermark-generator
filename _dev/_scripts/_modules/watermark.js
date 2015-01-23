@@ -326,7 +326,9 @@ var watermark = (function() {
 				'max-height': watermarkHeight * correctionWatermarkHeight
 			}
 			console.log(dataCoordinates);
-			refreshPosInput();
+			if(bgHeight > 0 && watermarkHeight > 0) {
+				refreshPosInput();
+			}
 		});
 			
 		// if (bgWidth / bgHeight > proportions){
