@@ -81,7 +81,7 @@ var watermark = (function() {
 	}
 
 	function addEventListeners() {
-
+		$('.one-watermark__col-link').on('click', onClickFixedButt);
 	}
 
 	function onOpacityChange(e, ui) {
@@ -101,44 +101,52 @@ var watermark = (function() {
 
 	// обработчик клика по кнопке с фиксированой позицией
 	function onClickFixedButt(e) {
+		e.preventDefault();
 		moveFixed($(this).attr('id'));
 	}
 
 	// перемещение ватермарки по фиксированым позициям
 	function moveFixed(pos) {
+		console.log(pos);
+		if (!pos) return;
 		switch (pos) {
 			case 'lt':
-				currPos = fixedPositions.lt;
+				param.currPos = param.fixedPositions.lt;
 				break
 			case 'ct':
-				currPos = fixedPositions.ct;
+				param.currPos = param.fixedPositions.ct;
 				break
 			case 'rt':
-				currPos = fixedPositions.rt;
+				param.currPos = param.fixedPositions.rt;
 				break
 			case 'lm':
-				currPos = fixedPositions.lm;
+				param.currPos = param.fixedPositions.lm;
 				break
 			case 'cm':
-				currPos = fixedPositions.cm;
+				param.currPos = param.fixedPositions.cm;
 				break
 			case 'rm':
-				currPos = fixedPositions.rm;
+				param.currPos = param.fixedPositions.rm;
 				break
 			case 'lb':
-				currPos = fixedPositions.lb;
+				param.currPos = param.fixedPositions.lb;
 				break
 			case 'cb':
-				currPos = fixedPositions.cb;
+				param.currPos = param.fixedPositions.cb;
 				break
 			case 'rb':
-				currPos = fixedPositions.rb;
+				param.currPos = param.fixedPositions.rb;
 				break
 			default:
 				break
 		}
+		moveWm();
 	}
 
+	function moveWm() {
+		$('#wm').css('left', param.currPos.left * param.scale);
+		$('#wm').css('top', param.currPos.top * param.scale);
+	}
 	function calcPositions() {
 		param.fixedPositions = {
 			lt: {
@@ -146,36 +154,36 @@ var watermark = (function() {
 				top: 0
 			},
 			ct: {
-				left: parseInt((bgWidth - wmWidth) / 2),
+				left: parseInt((param.bgWidth - param.wmWidth) / 2),
 				top: 0
 			},
 			rt: {
-				left: bgWidth - wmWidth,
+				left: param.bgWidth - param.wmWidth,
 				top: 0
 			},
 			lm: {
 				left: 0,
-				top: parseInt((bgHeight - wmHeight)) / 2,
+				top: parseInt((param.bgHeight - param.wmHeight)) / 2,
 			},
 			cm: {
-				left: parseInt((bgWidth - wmWidth) / 2),
-				top: parseInt((bgHeight - wmHeight) / 2)
+				left: parseInt((param.bgWidth - param.wmWidth) / 2),
+				top: parseInt((param.bgHeight - param.wmHeight) / 2)
 			},
 			rm: {
-				left: bgWidth - wmWidth,
-				top: parseInt((bgHeight - wmHeight) / 2)
+				left: param.bgWidth - param.wmWidth,
+				top: parseInt((param.bgHeight - param.wmHeight) / 2)
 			},
 			lb: {
 				left: 0,
-				top: bgHeight - wmHeight,
+				top: param.bgHeight - param.wmHeight,
 			},
 			cb: {
-				left: parseInt((bgWidth - wmWidth) / 2),
-				top: bgHeight - wmHeight
+				left: parseInt((param.bgWidth - param.wmWidth) / 2),
+				top: param.bgHeight - param.wmHeight
 			},
 			rb: {
-				left: bgWidth - wmWidth,
-				top: bgHeight - wmHeight
+				left: param.bgWidth - param.wmWidth,
+				top: param.bgHeight - param.wmHeight
 			}
 		}
 	}
@@ -185,6 +193,7 @@ var watermark = (function() {
 			for (var key in data) {
 				param[key] = data[key];
 			}
+			calcPositions();
 		}
 		console.log(param);
 	}
