@@ -48,6 +48,7 @@ var images = (function() {
 	         	 $.each(data.result.files, function (index, file) {
 	                addImg(file.name, $('.img-' + endId));
 	                addNameFileWithVersion(file.name, $('.input-file--' + endId));
+					watermark.calcBasicParam();
 	            });
 	        }
 	    });

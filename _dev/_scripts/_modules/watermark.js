@@ -21,6 +21,8 @@ var watermark = (function() {
 		$yValPlus = $('#y-val-plus'),
 		$xValMinus = $('#x-val-minus'),
 		$yValMinus = $('#y-val-minus'),
+		correctionX = 0; // коорекция координат в зависимости от размера картинки
+		correctionY = 0;
 
 		$btnFour = $('#but-four'), // кнопки замостить-размостить 
 		$btnOne = $('#but-one'),
@@ -219,8 +221,8 @@ var watermark = (function() {
 
 	// просто обновляет инпуты позиции
 	function refreshPosInput() {
-		$xVal.val(parseInt(currPos.left / scaleImg));
-		$yVal.val(parseInt(currPos.top / scaleImg));
+		$xVal.val(parseInt(currPos.left / scaleImg) - correctionX);
+		$yVal.val(parseInt(currPos.top / scaleImg) - correctionY);
 	}
 
 	// перемещение ватермарки по фиксированым позициям
@@ -265,25 +267,31 @@ var watermark = (function() {
 	}
 
 	function calcSizes() {
+		$('#bg__img').on('load.img', function() {
+			var resultBoxWidth = $('#result-box').width(), // ширина контейнера
+				resultBoxHeight = $('#result-box').height(), // высота контейнера
+				// proportions = resultBoxWidth / resultBoxHeight; // 
 
-		var resultBoxWidth = $('#result-box').width(),
-			resultBoxHeight = $('#result-box').height(),
-			proportions = resultBoxWidth / resultBoxHeight;
+			bgWidth = $('#bg__img').width(); // ширина картинки
+			bgHeight = $('#bg__img').height(); // высота картинки
+			// watermarkWidth = $('#drag__img').width(); // ширина ватермарка
+			// watermarkHeight = $('#drag__img').height(); // высота ватермарка
+			correctionX = (resultBoxWidth - bgWidth) / 2;
+			correctionY = (resultBoxHeight - bgHeight) / 2;
+			console.log(bgWidth);
 
-		bgWidth = $('#bg__img').width();
-		bgHeight = $('#bg__img').height();
-		watermarkWidth = $('#drag__img').width();
-		watermarkHeight = $('#drag__img').height();
-
-		console.log('calc');
-		if (bgWidth / bgHeight > proportions){
-			scaleImg = resultBoxWidth / bgWidth;
-			$('#bg__img').css('width', resultBoxWidth);
-		} else {
-			scaleimg = resultBoxHeight / bgHeight;
-			$('#bg__img').css('height', resultBoxHeight);
-		}
-		$('#drag__img').css('width', watermarkWidth * scaleImg);
+			console.log('calc');
+			$('#result-box').off('load.img');
+		});
+			
+		// if (bgWidth / bgHeight > proportions){
+		// 	scaleImg = resultBoxWidth / bgWidth;
+		// 	$('#bg__img').css('width', resultBoxWidth);
+		// } else {
+		// 	scaleimg = resultBoxHeight / bgHeight;
+		// 	$('#bg__img').css('height', resultBoxHeight);
+		// }
+		// $('#drag__img').css('width', watermarkWidth * scaleImg);
 	}
 
 	// вычисление фиксированых позиций
