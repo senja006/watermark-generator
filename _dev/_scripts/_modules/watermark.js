@@ -80,6 +80,31 @@ var watermark = (function() {
 
 	function addEventListeners() {
 		$('.one-watermark__col-link').on('click', onClickFixedButt);
+		$btnXPlus.on('click', function(){
+			param.currPoss += checkPos(++param.currPos.left);
+			refreshPosVal();
+			moveWm();
+		}) 
+		$btnYPlus.on('click', function(){
+			param.currPoss += checkPos(--param.currPos.top);
+			refreshPosVal();
+			moveWm();
+		})  
+		$btnXMinus.on('click', function(){
+			param.currPoss += checkPos(--param.currPos.left);
+			refreshPosVal();
+			moveWm();
+		}) 
+		$btnYMinus.on('click', function(){
+			param.currPoss += checkPos(++param.currPos.top);
+			refreshPosVal();
+			moveWm();
+		}) 
+	}
+
+	function checkPos(position) {
+		if (position.left < 0 || position.top < 0) return 1;
+		if (position.left > param.fixedPositions.rt.left || position.top < 0 || position.top > param.fixedPositions.rb.top) return -1;
 	}
 
 	function onOpacityChange(e, ui) {
@@ -94,6 +119,7 @@ var watermark = (function() {
 
 	// обработчик изменения позиций drag'n'drop
 	function onDragWatermark(e, ui) {
+		rmClassActive();
 		param.currPos.left = ui.position.left / param.scale;
 		param.currPos.top = ui.position.top / param.scale;
 		refreshPosVal();
@@ -104,10 +130,16 @@ var watermark = (function() {
 		$yVal.val(parseInt(param.currPos.top))
 	}
 
+	function rmClassActive() {
+		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');		
+	}
+
 	// обработчик клика по кнопке с фиксированой позицией
 	function onClickFixedButt(e) {
 		e.preventDefault();
+		rmClassActive();
 		moveFixed($(this).attr('id'));
+		$(this).addClass('one-watermark__col-link__active');
 	}
 
 	// перемещение ватермарки по фиксированым позициям
@@ -150,9 +182,11 @@ var watermark = (function() {
 	}
 
 	function moveWm() {
+		rmClassActive();
 		$('#wm').css('left', param.currPos.left * param.scale);
 		$('#wm').css('top', param.currPos.top * param.scale);
 	}
+
 	function calcPositions() {
 		param.fixedPositions = {
 			lt: {
@@ -201,7 +235,6 @@ var watermark = (function() {
 			}
 			calcPositions();
 		}
-		console.log(param);
 	}
 
 	function scaleImg() {
@@ -213,11 +246,13 @@ var watermark = (function() {
 		}
 		$('#bg__img').css('width', param.bgWidth * param.scale);
 		$('#wm__img').css('width', param.wmWidth * param.scale);
+		centeredBg();
 		initDrag();
 	}
 
 	function centeredBg() {
-
+		$work.css('left', ($('#result-box').width() - param.bgWidth * param.scale) / 2);
+		$work.css('top', ($('#result-box').height() - param.bgHeight * param.scale) / 2);
 	}
 
 	return {
