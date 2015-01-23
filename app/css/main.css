@@ -1616,7 +1616,8 @@ input {
   transform: scale(0.9);
 }
 
-#input__file {
+#input__file-main,
+#input__file-watermark {
   position: absolute;
   z-index: -5;
   top: -100%;
