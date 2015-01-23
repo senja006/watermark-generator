@@ -17,35 +17,40 @@ var watermark = (function() {
 		$btnCentBottom = $('#cb'),
 		$btnRightBottom = $('#rb'),
 
-		$btnFour = $('#but-four'),
+		$xValPlus = $('#x-val-plus'),// кнопки изменения позиции
+		$yValPlus = $('#y-val-plus'),
+		$xValMinus = $('#x-val-minus'),
+		$yValMinus = $('#y-val-minus'),
+
+		$btnFour = $('#but-four'), // кнопки замостить-размостить 
 		$btnOne = $('#but-one'),
 
-		$hMarginVal = $('#h-margin-val'),
+		$hMarginVal = $('#h-margin-val'), // инпуты полей
 		$vMarginVal = $('#v-margin-val'),
-		$btnHMarginPlus = $('#h-margin-plus'),
+		$btnHMarginPlus = $('#h-margin-plus'), // кнопки полей
 		$btnHMarginMinus = $('#h-margin-minus'),
 		$btnVMarginPlus = $('#v-margin-plus'),
 		$btnVMarginMinus = $('#v-margin-minus'),
-		$hMarginLine = $('#h-margin-line'),
+		$hMarginLine = $('#h-margin-line'), // красные линии
 		$vMarginLine = $('#v-margin-line');
 
-	var watermarkWidth = 0, 
+	var watermarkWidth = 0,  // размеры
 		watermarkHeight = 0,
 		bgWidth = 0,
 		bgHeight = 0,
-		scaleImg = 1,
+		scaleImg = 1, // масштаб
 
-		fixedPositions = {},
+		fixedPositions = {}, 
 
-		currPos = {
+		currPos = {    // текушее положение ватермарки top, left
 			left: 0,
 			top: 0
 		},
 
-		currOpacity = 0.5,
+		currOpacity = 0.5, // текущая прозрачность
 
-		vMargin = 0,
-		hMargin = 0;
+		vMargin = 0, // поля между ватермарками
+		hMargin = 0; // 
 
 	// инициализация плагинов
 	function initPlugins() {
@@ -62,17 +67,18 @@ var watermark = (function() {
 			min: 5,
 			max: 100,
 			step: 1,
-			slide: onOpacityChange
+			slide: onOpacityChange // событине на ползунке
 		});
 	}
 
 	// установка обработчиков
 	function addEventListeners() {
 		$('.one-watermark__col-link').on('click', onClickFixedButt);
-		$('#drag__img').on('load', function(){
-			calcSizes();
-			calcPositions();
-		});
+		$('#drag__img').on('load', calcBasicParam);
+
+		// $('#bg__img').on('load', calcBasicParam);
+
+		// кнопки смены режима
 		$btnFour.on('click', function(e){
 			e.preventDefault();
 			$('.controls__switch-group-but').removeClass('active');
@@ -89,7 +95,27 @@ var watermark = (function() {
 			$('#one').show();
 			untile();
 		});
-		$btnHMarginPlus.on('click', function(e){
+
+		// обработчики кнопок +/- координат
+		$xValPlus.on('click', function(e){ 
+			currPos.left = ++currPos.left;
+			onChangeVal();
+		});
+		$xValMinus.on('click', function(e){
+			currPos.left = --currPos.left;
+			onChangeVal();
+		});
+		$yValPlus.on('click', function(e){
+			currPos.top = ++currPos.top;
+			onChangeVal()
+		});
+		$yValMinus.on('click', function(e){
+			currPos.top = --currPos.top;
+			onChangeVal();
+		});
+
+		// обработчики кнопок +/- полей
+		$btnHMarginPlus.on('click', function(e){ 
 			hMargin = hMargin + 1;
 			onChangeHMargin();
 		});
@@ -105,6 +131,12 @@ var watermark = (function() {
 			vMargin = vMargin - 1;
 			onChangeVMargin();
 		});
+	}
+
+	
+	function calcBasicParam(){
+		calcSizes();
+		calcPositions();
 	}
 
 	// замостить
@@ -155,14 +187,15 @@ var watermark = (function() {
 		$watermark.css({
 			'opacity': currOpacity / 100
 		});
+		$('#opacity').val(currOpacity / 100);
 	}
 
 
 	// обработчик изменения позиций drag'n'drop
 	function onDragWatermark(e, ui) {
 		currPos = {
-			left: ui.position.left,
-			top: ui.position.top
+			left: ui.position.left / scaleImg,
+			top: ui.position.top / scaleImg
 		};
 		$('#x-val').val(currPos.left);
 		$('#y-val').val(currPos.top);
@@ -178,19 +211,13 @@ var watermark = (function() {
 		$(this).addClass('one-watermark__col-link__active');
 	}
 
-	// обработчики изменения позиции кноаками
-	function onChangeValX() {
-		currPos.left = $xVal.val() * images.getScale();
-		$xVal.value(currPos.left);
+	// обработчики изменения позиции кнопками
+	function onChangeVal() {
+		refreshPosInput();
 		setPos(currPos);
 	}
 
-	function onChangeValY() {
-		currPos.top = $yVal.val() * images.getScale();
-		$yVal.value(currPos.top);
-		setPos(currPos);
-	}
-
+	// просто обновляет инпуты позиции
 	function refreshPosInput() {
 		$xVal.val(parseInt(currPos.left / scaleImg));
 		$yVal.val(parseInt(currPos.top / scaleImg));
@@ -332,6 +359,7 @@ var watermark = (function() {
 			addEventListeners();
 			console.log('<watermark> init!');
 		},
+		calcSizes: calcSizes,
 		calcPositions: calcPositions,
 		position: getPos,
 		opacity: getOpacity,

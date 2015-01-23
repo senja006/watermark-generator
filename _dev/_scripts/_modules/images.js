@@ -65,10 +65,11 @@ var images = (function() {
 		// var $img = new Image();
 		// $img.src = IMG_SRC + fileName;
 		var src = IMG_SRC + fileName;
-		container.find('img').attr('src', src);
+		container.find('img').attr('src', src).css('width', '100%');
 		// console.log($('#img-watermark'));
 		// container.empty().append($img);
 	};
+
 
 	function getObj(json) {
 		var obj = JSON.parse(json);
