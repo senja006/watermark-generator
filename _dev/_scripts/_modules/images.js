@@ -73,7 +73,7 @@ var images = (function() {
 			src = IMG_SRC + fileName;
 
 		if (container.match(/main/)) {
-			if ($bgImg) $bgImg.remove();
+			if ($('#bg__img')) $('#bg__img').remove();
 			img.attr({
 				id: 'bg__img',
 				class: 'bg__img',
@@ -87,7 +87,7 @@ var images = (function() {
 			}).appendTo($bg);
 
 		} else if (container.match(/watermark/)) {
-			if ($('#wm__img')) $('#wmImg').remove();
+			if ($('#wm__img')) $('#wm__img').remove();
 			img.attr({
 				id: 'wm__img',
 				class: 'wm__img',

@@ -36,7 +36,9 @@ var watermark = (function() {
 		$btnVMarginPlus = $('#v-margin-plus'),
 		$btnVMarginMinus = $('#v-margin-minus'),
 		$lineHMargin = $('#h-margin-line'), // красные линии
-		$lineVMargin = $('#v-margin-line');
+		$lineVMargin = $('#v-margin-line'),
+
+		draggable = false;
 
 	var param = {
 		wmWidth: 0,
@@ -65,6 +67,9 @@ var watermark = (function() {
 	}
 
 	function initDrag() {
+		if(draggable) {
+			$wm.draggable('destroy');
+		}
 		$work.width($('#bg').width());
 		$work.height($('#bg').height());
 		$wm.draggable({
@@ -76,7 +81,7 @@ var watermark = (function() {
 	}
 
 	function addEventListeners() {
-		$('img').on('load', initDrag);
+
 	}
 
 	function onOpacityChange(e, ui) {
@@ -185,10 +190,19 @@ var watermark = (function() {
 	}
 
 	function scaleImg() {
-		param.scale = $work.width() / param.bgWidth;
-		console.log('Scale: %s', param.scale);
-		$bgImg.css('width', param.bgWidth * param.scale);
-		$wmImg.css('width', param.wmWidth * param.scale);
+		if (param.bgWidth >= param.bgHeight) {
+			param.scale = $('#result-box').width() / param.bgWidth;
+		} else {
+			console.log('less');
+			param.scale = $('#result-box').height() / param.bgHeight;
+		}
+		$('#bg__img').css('width', param.bgWidth * param.scale);
+		$('#wm__img').css('width', param.wmWidth * param.scale);
+		initDrag();
+	}
+
+	function centeredBg() {
+
 	}
 
 	return {
