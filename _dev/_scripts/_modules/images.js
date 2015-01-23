@@ -23,15 +23,12 @@ var images = (function() {
 			data: data,
 			success: function(response) {
 				var response = getObj(response);
-				// console.log(response);
 				downloadResImg(response);
-				// console.log('отправлено');
 			},
 			error: function(response) {
-				// console.log('ошибка');
+				console.log('ошибка');
 			},
 		});
-		// console.log(data);
 		return false;
 	};
 
@@ -49,7 +46,7 @@ var images = (function() {
 	         	 $.each(data.result.files, function (index, file) {
 	                addImg(file.name, $('.img-' + endId));
 	                addNameFileWithVersion(file.name, $('.input-file--' + endId));
-					watermark.calcBasicParam();
+					watermark.getOptionsImg();
 	            });
 	        }
 	    });
