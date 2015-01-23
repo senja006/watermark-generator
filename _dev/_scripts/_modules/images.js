@@ -42,7 +42,6 @@ var images = (function() {
 	        add: function(e, data) {
 	        	$.each(data.files, function (index, file) {
 	            	addNameFile(file.name, $('.input-file--' + endId));
-	            	checkUploadImg();
 	            });
 	        	data.submit();
 	        },
@@ -58,7 +57,7 @@ var images = (function() {
 
 	function addNameFile(name, container) {
 		container.find('.input__file-name').val(name);
-		// hideTooltip.apply($inputFile);
+		container.parents('.is-error').removeClass('is-error');
 	};
 
 	function addNameFileWithVersion(name, container) {
@@ -88,7 +87,6 @@ var images = (function() {
 		// console.log($('#img-watermark'));
 		// container.empty().append($img);
 	};
-
 
 	function getObj(json) {
 		var obj = JSON.parse(json);
@@ -131,6 +129,7 @@ var images = (function() {
 			initJqueryFileUpload();
 			addEventListeners();
 		},
+		checkUploadImg: checkUploadImg,
 	};
 
 }());

@@ -100,20 +100,28 @@ var watermark = (function() {
 		});
 
 		// обработчики кнопок +/- координат
-		$xValPlus.on('click', function(e){ 
-			currPos.left = ++currPos.left;
+		$xValPlus.on('click', function(e){
+			if(!images.checkUploadImg()) return false;
+			// currPos.left = ++currPos.left;
+			currPos.left++;
 			onChangeVal();
 		});
 		$xValMinus.on('click', function(e){
-			currPos.left = --currPos.left;
+			if(!images.checkUploadImg()) return false;
+			// currPos.left = --currPos.left;
+			currPos.left--;
 			onChangeVal();
 		});
 		$yValPlus.on('click', function(e){
-			currPos.top = ++currPos.top;
+			if(!images.checkUploadImg()) return false;
+			// currPos.top = ++currPos.top;
+			currPos.top++;
 			onChangeVal()
 		});
 		$yValMinus.on('click', function(e){
-			currPos.top = --currPos.top;
+			if(!images.checkUploadImg()) return false;
+			// currPos.top = --currPos.top;
+			currPos.top--;
 			onChangeVal();
 		});
 
@@ -224,8 +232,8 @@ var watermark = (function() {
 
 	// просто обновляет инпуты позиции
 	function refreshPosInput() {
-		$xVal.val(parseInt(currPos.left / scaleImgX) - correctionX);
-		$yVal.val(parseInt(currPos.top / scaleImgY) - correctionY);
+		$xVal.val(Math.floor(parseInt(currPos.left / scaleImgX) - correctionX));
+		$yVal.val(Math.floor(parseInt(currPos.top / scaleImgY) - correctionY));
 	}
 
 	// перемещение ватермарки по фиксированым позициям
@@ -399,8 +407,10 @@ var watermark = (function() {
 		currPos = position;
 		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');
 		$watermark.css({
-			left: position.left / scaleImgX,
-			top: position.top / scaleImgY
+			// left: position.left / scaleImgX,
+			// top: position.top / scaleImgY
+			left: position.left,
+			top: position.top
 		});
 	}
 
