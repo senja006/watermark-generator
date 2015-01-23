@@ -13,6 +13,7 @@ var images = (function() {
 	};
 
 	function controlDownloadImg() {
+		if(!checkUploadImg()) return false;
 		var $form = $(this);
 		var data = $form.serialize();
 		$.ajax({
@@ -41,6 +42,7 @@ var images = (function() {
 	        add: function(e, data) {
 	        	$.each(data.files, function (index, file) {
 	            	addNameFile(file.name, $('.input-file--' + endId));
+	            	checkUploadImg();
 	            });
 	        	data.submit();
 	        },
@@ -105,6 +107,24 @@ var images = (function() {
 		$('#download-img').find('input').val('');
 		$('#bg__img, #drag__img').remove();
 	}
+
+	function checkUploadImg() {
+		$('.controls__file').each(function() {
+			var $this = $(this);
+			var $input = $this.find('.input__file-name');
+			var emptyVal = '';
+			if($input.val() === '') {
+				$this.addClass('is-error');
+			}else{
+				$this.removeClass('is-error');
+			}
+		});
+		if($('.is-error').length) {
+			return false;
+		}else{
+			return true;
+		}
+	};
 
 	return {
 		init: function() {

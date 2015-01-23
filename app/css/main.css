@@ -1674,6 +1674,10 @@ input {
   display: none;
 }
 
+.is-error .error {
+  display: block;
+}
+
 .drug__watermark {
   float: left;
   margin: 0;
