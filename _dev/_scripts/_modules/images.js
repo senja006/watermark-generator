@@ -4,6 +4,7 @@ var images = (function() {
 
 	function addEventListeners() {
 		$('#download-img').on('submit', controlDownloadImg);
+		$('#but-reset').on('click', resetForm);
 	};
 
 	function initJqueryFileUpload() {
@@ -83,6 +84,11 @@ var images = (function() {
 		}
 		window.downloadFile(href);
 	};
+
+	function resetForm() {
+		$('#download-img').find('input').val('');
+		$('#bg__img, #drag__img').remove();
+	}
 
 	return {
 		init: function() {
