@@ -67,9 +67,6 @@ var watermark = (function() {
 	}
 
 	function initDrag() {
-		if(draggable) {
-			$wm.draggable('destroy');
-		}
 		$work.width($('#bg').width());
 		$work.height($('#bg').height());
 		$wm.draggable({
@@ -78,6 +75,7 @@ var watermark = (function() {
 			snap: $work.selector,
 			drag: onDragWatermark 
 		});
+
 	}
 
 	function addEventListeners() {
@@ -96,7 +94,14 @@ var watermark = (function() {
 
 	// обработчик изменения позиций drag'n'drop
 	function onDragWatermark(e, ui) {
-		console.log('onDragWatermark');
+		param.currPos.left = ui.position.left / param.scale;
+		param.currPos.top = ui.position.top / param.scale;
+		refreshPosVal();
+	}
+
+	function refreshPosVal() {
+		$xVal.val(parseInt(param.currPos.left))
+		$yVal.val(parseInt(param.currPos.top))
 	}
 
 	// обработчик клика по кнопке с фиксированой позицией
@@ -141,6 +146,7 @@ var watermark = (function() {
 				break
 		}
 		moveWm();
+		refreshPosVal();
 	}
 
 	function moveWm() {
