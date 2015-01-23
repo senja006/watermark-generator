@@ -277,8 +277,8 @@ var watermark = (function() {
 
 			bgWidth = $('#bg__img').width(); // ширина картинки
 			bgHeight = $('#bg__img').height(); // высота картинки
-			watermarkWidth = $('#drag__img').css('width', 'auto').width(); // ширина ватермарка
-			watermarkHeight = $('#drag__img').css('height', 'auto').height(); // высота ватермарка
+			watermarkWidth = $('#drag__img').css('max-width', '100000px').width(); // ширина ватермарка
+			watermarkHeight = $('#drag__img').css('max-height', '100000px').height(); // высота ватермарка
 			correctionX = (resultBoxWidth - bgWidth) / 2;
 			correctionY = (resultBoxHeight - bgHeight) / 2;
 
@@ -287,16 +287,16 @@ var watermark = (function() {
 			console.log('calc');
 			$('#bg__img, #drag__img').off('load.img');
 			$('#bg__img').css({
-				'max-width': '10000px',
-				'max-height': '10000px'
+				'max-width': '100000px',
+				'max-height': '100000px'
 			});
 			var correctionWatermarkWidth = bgWidth / $('#bg__img').width();
 			var correctionWatermarkHeight = bgHeight / $('#bg__img').height();
 			scaleImgX = correctionWatermarkWidth;
 			scaleImgY = correctionWatermarkHeight;
 			$('#drag__img').css({
-				'width': watermarkWidth * correctionWatermarkWidth,
-				'height': watermarkHeight * correctionWatermarkHeight
+				'max-width': watermarkWidth * correctionWatermarkWidth,
+				// 'max-height': watermarkHeight * correctionWatermarkHeight
 			});
 			$('#bg__img').css({
 				'max-width': '100%',
@@ -308,6 +308,23 @@ var watermark = (function() {
 			if(correctionX === 0) {
 				correctionY = correctionY / scaleImgY;
 			}
+			var data = {
+				'resultBoxWidth': resultBoxWidth,
+				'resultBoxHeight': resultBoxHeight,
+				'bgWidth': bgWidth,
+				'bgHeight': bgHeight,
+				'watermarkWidth': watermarkWidth,
+				'watermarkHeight': watermarkHeight,
+				'correctionX': correctionX,
+				'correctionY': correctionY,
+				'correctionWatermarkWidth': correctionWatermarkWidth,
+				'correctionWatermarkHeight': correctionWatermarkHeight,
+				'scaleImgX': scaleImgX,
+				'scaleImgY': scaleImgY,
+				'max-width': watermarkWidth * correctionWatermarkWidth,
+				'max-height': watermarkHeight * correctionWatermarkHeight
+			}
+			console.log(data);
 		});
 			
 		// if (bgWidth / bgHeight > proportions){
