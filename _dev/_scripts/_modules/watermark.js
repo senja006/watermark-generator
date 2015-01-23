@@ -308,7 +308,8 @@ var watermark = (function() {
 			if(correctionX === 0) {
 				correctionY = correctionY / scaleImgY;
 			}
-			var data = {
+			// объект dataCoordinates для отладки координат
+			var dataCoordinates = {
 				'resultBoxWidth': resultBoxWidth,
 				'resultBoxHeight': resultBoxHeight,
 				'bgWidth': bgWidth,
@@ -324,7 +325,8 @@ var watermark = (function() {
 				'max-width': watermarkWidth * correctionWatermarkWidth,
 				'max-height': watermarkHeight * correctionWatermarkHeight
 			}
-			console.log(data);
+			console.log(dataCoordinates);
+			refreshPosInput();
 		});
 			
 		// if (bgWidth / bgHeight > proportions){
