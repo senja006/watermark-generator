@@ -281,12 +281,10 @@ var watermark = (function() {
 			watermarkHeight = $('#drag__img').css('height', 'auto').height(); // высота ватермарка
 			correctionX = (resultBoxWidth - bgWidth) / 2;
 			correctionY = (resultBoxHeight - bgHeight) / 2;
-			console.log(correctionX);
-			console.log(correctionY);
 
 			// console.log(bgWidth);
 
-			// console.log('calc');
+			console.log('calc');
 			$('#bg__img, #drag__img').off('load.img');
 			$('#bg__img').css({
 				'max-width': '10000px',
@@ -300,10 +298,6 @@ var watermark = (function() {
 				'width': watermarkWidth * correctionWatermarkWidth,
 				'height': watermarkHeight * correctionWatermarkHeight
 			});
-			console.log(scaleImgX);
-			console.log(scaleImgY);
-			// console.log(correctionWatermarkWidth);
-			// console.log(correctionWatermarkHeight);
 			$('#bg__img').css({
 				'max-width': '100%',
 				'max-height': '100%'
