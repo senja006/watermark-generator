@@ -69,6 +69,7 @@ block content
                                         .controls__switch-group
                                             a(href="#four").four.controls__switch-group-but#but-four 4 watermarks
                                             a(href="#one").one.controls__switch-group-but.active#but-one 1 watermark
+                                            input(type="hidden" name="mode" val="untile")#mode
                                 .position__four-watermark.clearfix#four
                                     .four-watermark__wrapper
                                         .margin-line.horizontal#h-margin-line
@@ -89,13 +90,13 @@ block content
                                     .margin__property
                                         .margin__property-block
                                             span.margin__property-name &nbsp;&#8597;
-                                            input(type="text" class="margin__property-input" name="x-margin")#h-margin-val
+                                            input(type="text" class="margin__property-input" name="x-margin" val="0")#h-margin-val
                                             .margin__property-control
                                                 a.margin__property-btn.plus#h-margin-plus
                                                 a.margin__property-btn.minus#h-margin-minus
                                         .margin__property-block
                                             span.margin__property-name &#8596;
-                                            input(type="text" class="margin__property-input" name="y-margin")#v-margin-val
+                                            input(type="text" class="margin__property-input" name="y-margin" val="0")#v-margin-val
                                             .margin__property-control
                                                 a.margin__property-btn.plus#v-margin-plus
                                                 a.margin__property-btn.minus#v-margin-minus
