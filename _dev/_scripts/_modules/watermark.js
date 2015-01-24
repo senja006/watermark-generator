@@ -64,6 +64,7 @@ var watermark = (function() {
 			step: 1,
 			slide: onOpacityChange 
 		});
+		$wm.css('opacity', param.currOpacity);
 	}
 
 	function initDrag() {
@@ -83,31 +84,29 @@ var watermark = (function() {
 		$('.one-watermark__col-link').on('click', onClickFixedButt);
 		
 		$btnXPlus.on('click', function(){
-			i = checkPos(++param.currPos.left);
-			param.currPoss =+ i;
+			++param.currPos.left;
+			if(param.currPos.left >= param.fixedPositions.rb.left) --param.currPos.left;
 			refreshPosVal();
 			moveWm();
 		}) 
 		$btnYPlus.on('click', function(){
-			param.currPoss += checkPos(--param.currPos.top);
+			++param.currPos.top;
+			if(param.currPos.top >= param.fixedPositions.rb.top) --param.currPos.top;
 			refreshPosVal();
 			moveWm();
 		})  
 		$btnXMinus.on('click', function(){
-			param.currPoss += checkPos(--param.currPos.left);
+			--param.currPos.left;
+			if(param.currPos.left < 0) ++param.currPos.left;
 			refreshPosVal();
 			moveWm();
 		}) 
 		$btnYMinus.on('click', function(){
-			param.currPoss += checkPos(++param.currPos.top);
+			--param.currPos.top;
+			if(param.currPos.top < 0) ++param.currPos.top;
 			refreshPosVal();
 			moveWm();
 		}) 
-	}
-
-	function checkPos(position) {
-		if (position.left < 0 || position.top < 0) return 1;
-		if (position.left > param.fixedPositions.rt.left || position.top < 0 || position.top > param.fixedPositions.rb.top) return -1;
 	}
 
 	function onOpacityChange(e, ui) {
@@ -123,14 +122,16 @@ var watermark = (function() {
 	// обработчик изменения позиций drag'n'drop
 	function onDragWatermark(e, ui) {
 		rmClassActive();
-		param.currPos.left = ui.position.left / param.scale;
-		param.currPos.top = ui.position.top / param.scale;
+		if(param.scale) {
+			param.currPos.left = ui.position.left / param.scale;
+			param.currPos.top = ui.position.top / param.scale;
+		}
 		refreshPosVal();
 	}
 
 	function refreshPosVal() {
-		$xVal.val(parseInt(param.currPos.left))
-		$yVal.val(parseInt(param.currPos.top))
+		$xVal.val(parseInt(param.currPos.left) || 0)
+		$yVal.val(parseInt(param.currPos.top) || 0)
 	}
 
 	function rmClassActive() {
