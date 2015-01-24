@@ -33,6 +33,8 @@ function convertImgToPng($img, $name) {
 	        break;
 	}
 	$new_img_name = $name;
+	// imagealphablending($new_img, false);
+	// imagesavealpha($new_img, true);
 	imagepng($new_img, $new_img_name);
 	imagedestroy($new_img);
 	return $new_img_name;
@@ -49,6 +51,10 @@ function joinImg($img_main, $watermark, $x, $y, $opacity) {
 	$img = imagecreatetruecolor($img_main_width, $img_main_height);
 	$main_img = imagecreatefrompng($img_main);
 	$watermark_img = imagecreatefrompng($watermark);
+	// imagealphablending($img, false);
+	// imagesavealpha($img, true);
+	// imagealphablending($watermark_img, false);
+	// imagesavealpha($watermark_img, true);
 	imagecopy($img, $main_img, 0, 0, 0, 0, $img_main_width, $img_main_height);
 	imagecopymerge($img, $watermark_img, $x, $y, 0, 0, $img_watermark_width, $img_watermark_height, $opacity);
 	imagejpeg($img, $new_img_name, "100");

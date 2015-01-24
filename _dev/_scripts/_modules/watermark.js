@@ -151,7 +151,7 @@ var watermark = (function() {
 			});
 
 			for (var i = 0; i < colsTiled * rowsTiled; i++) {
-				console.log(wmW * param.scale);
+				// console.log(wmW * param.scale);
 				var img = $('<img/>');
 				img.attr('src', $('#wm__img').attr('src'));
 				img.css ({
@@ -268,46 +268,65 @@ var watermark = (function() {
 		if (!pos) return;
 		switch (pos) {
 			case 'lt':
-				param.currPos = param.fixedPositions.lt;
+				// param.currPos = param.fixedPositions.lt;
+				param.currPos.left = param.fixedPositions.lt.left;
+				param.currPos.top = param.fixedPositions.lt.top;
 				break
 			case 'ct':
-				param.currPos = param.fixedPositions.ct;
+				// param.currPos = param.fixedPositions.ct;
+				param.currPos.left = param.fixedPositions.ct.left;
+				param.currPos.top = param.fixedPositions.ct.top;
 				break
 			case 'rt':
-				param.currPos = param.fixedPositions.rt;
+				// param.currPos = param.fixedPositions.rt;
+				param.currPos.left = param.fixedPositions.rt.left;
+				param.currPos.top = param.fixedPositions.rt.top;
 				break
 			case 'lm':
-				param.currPos = param.fixedPositions.lm;
+				// param.currPos = param.fixedPositions.lm;
+				param.currPos.left = param.fixedPositions.lm.left;
+				param.currPos.top = param.fixedPositions.lm.top;
 				break
 			case 'cm':
-				param.currPos = param.fixedPositions.cm;
+				// param.currPos = param.fixedPositions.cm;
+				param.currPos.left = param.fixedPositions.cm.left;
+				param.currPos.top = param.fixedPositions.cm.top;
 				break
 			case 'rm':
-				param.currPos = param.fixedPositions.rm;
+				// param.currPos = param.fixedPositions.rm;
+				param.currPos.left = param.fixedPositions.rm.left;
+				param.currPos.top = param.fixedPositions.rm.top;
 				break
 			case 'lb':
-				param.currPos = param.fixedPositions.lb;
+				// param.currPos = param.fixedPositions.lb;
+				param.currPos.left = param.fixedPositions.lb.left;
+				param.currPos.top = param.fixedPositions.lb.top;
 				break
 			case 'cb':
-				param.currPos = param.fixedPositions.cb;
+				// param.currPos = param.fixedPositions.cb;
+				param.currPos.left = param.fixedPositions.cb.left;
+				param.currPos.top = param.fixedPositions.cb.top;
 				break
 			case 'rb':
-				param.currPos = param.fixedPositions.rb;
+				// param.currPos = param.fixedPositions.rb;
+				param.currPos.left = param.fixedPositions.rb.left;
+				param.currPos.top = param.fixedPositions.rb.top;
 				break
 			default:
 				break
 		}
 		moveWm();
 		refreshPosVal();
+		console.log(param.fixedPositions.lt);
 	}
 
 	// перемещение в текущую позицию
 	function moveWm() {
 		rmClassActive();
-		$('#wm').animate({
+		$('#wm').stop().animate({
 			left: param.currPos.left * param.scale,
 			top: param.currPos.top * param.scale
-		});
+		}, 200);
 	}
 	
 	// вычисление фиксированых позиций
