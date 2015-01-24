@@ -12,24 +12,7 @@ var watermark = (function() {
 		$opacityVal = $('#opacity-val'), // поле прозрачности
 		$opacity = $('#opacity'), // 
 		$xVal = $('#x-val'),
-		$yVal = $('#y-val');
-
-	$btnLeftTop = $('#lt'),
-		$btnRightTop = $('#rt'),
-		$btnLeftMiddle = $('#lm'),
-		$btnCentMiddle = $('#cm'),
-		$btnRightMiddle = $('#rm'),
-		$btnLeftBottom = $('#lb'),
-		$btnCentBottom = $('#cb'),
-		$btnRightBottom = $('#rb'),
-
-		$btnXPlus = $('#x-val-plus'), // кнопки изменения позиции
-		$btnYPlus = $('#y-val-plus'),
-		$btnXMinus = $('#x-val-minus'),
-		$btnYMinus = $('#y-val-minus'),
-
-		$btnFour = $('#but-four'), // кнопки замостить-размостить 
-		$btnOne = $('#but-one'),
+		$yVal = $('#y-val'),
 
 		$hMarginVal = $('#h-margin-val'), // инпуты полей
 		$vMarginVal = $('#v-margin-val'),
@@ -88,47 +71,37 @@ var watermark = (function() {
 	}
 
 	function addEventListeners() {
-		var i = 0;
 		$('.one-watermark__col-link').on('click', onClickFixedButt);
-
-		$btnXPlus.on('click', function() {
-			if (!draggable) return;
-			++param.currPos.left;
-			if (param.currPos.left >= param.fixedPositions.rb.left) --param.currPos.left;
-			refreshPosVal();
-			moveWm();
-		});
-		$btnYPlus.on('click', function() {
-			if (!draggable) return;
-			++param.currPos.top;
-			if (param.currPos.top >= param.fixedPositions.rb.top) --param.currPos.top;
-			refreshPosVal();
-			moveWm();
-		});
-		$btnXMinus.on('click', function() {
-			if (!draggable) return;
-			--param.currPos.left;
-			if (param.currPos.left < 0) ++param.currPos.left;
-			refreshPosVal();
-			moveWm();
-		});
-		$btnYMinus.on('click', function() {
-			if (!draggable) return;
-			--param.currPos.top;
-			if (param.currPos.top < 0) ++param.currPos.top;
-			refreshPosVal();
-			moveWm();
-		});
-		$btnFour.on('click', function(e) {
-			e.preventDefault();
-			tile();
-		});
-		$btnOne.on('click', function(e) {
-			e.preventDefault();
-			untile();
-		});
+		$('.coordinate__property-btn').on('click', controlChangeCoordinates);
+		$('#but-four').on('click', tile);
+		$('#but-one').on('click', untile);
 		$('.margin__property-btn').on('click', onChangeMargin);
-	}
+	};
+
+	function controlChangeCoordinates() {
+		if (!draggable) return;
+		var id = $(this).attr('id');
+		switch(id) {
+			case 'x-val-plus':
+				++param.currPos.left;
+				if (param.currPos.left >= param.fixedPositions.rb.left) --param.currPos.left;
+				break;
+			case 'y-val-plus':
+				++param.currPos.top;
+				if (param.currPos.top >= param.fixedPositions.rb.top) --param.currPos.top;
+				break;
+			case 'x-val-minus':
+				--param.currPos.left;
+				if (param.currPos.left < 0) ++param.currPos.left;
+				break;
+			case 'y-val-minus':
+				--param.currPos.top;
+			if (param.currPos.top < 0) ++param.currPos.top;
+				break;
+		}
+		refreshPosVal();
+		moveWm();
+	};
 
 	// создание замощения
 	function createTiled () {
@@ -203,7 +176,8 @@ var watermark = (function() {
 	}
 
 	// замостить
-	function tile() {
+	function tile(e) {
+		e.preventDefault();
 		$('.controls__switch-group-but').removeClass('active');
 		$(this).addClass('active');
 		$('#mode').val('tile');
@@ -214,7 +188,8 @@ var watermark = (function() {
 	}
 	
 	// размостить
-	function untile() {
+	function untile(e) {
+		e.preventDefault();
 		$('.controls__switch-group-but').removeClass('active');
 		$(this).addClass('active');
 		$('#mode').val('untail');
@@ -268,47 +243,38 @@ var watermark = (function() {
 		if (!pos) return;
 		switch (pos) {
 			case 'lt':
-				// param.currPos = param.fixedPositions.lt;
 				param.currPos.left = param.fixedPositions.lt.left;
 				param.currPos.top = param.fixedPositions.lt.top;
 				break
 			case 'ct':
-				// param.currPos = param.fixedPositions.ct;
 				param.currPos.left = param.fixedPositions.ct.left;
 				param.currPos.top = param.fixedPositions.ct.top;
 				break
 			case 'rt':
-				// param.currPos = param.fixedPositions.rt;
 				param.currPos.left = param.fixedPositions.rt.left;
 				param.currPos.top = param.fixedPositions.rt.top;
 				break
 			case 'lm':
-				// param.currPos = param.fixedPositions.lm;
 				param.currPos.left = param.fixedPositions.lm.left;
 				param.currPos.top = param.fixedPositions.lm.top;
 				break
 			case 'cm':
-				// param.currPos = param.fixedPositions.cm;
 				param.currPos.left = param.fixedPositions.cm.left;
 				param.currPos.top = param.fixedPositions.cm.top;
 				break
 			case 'rm':
-				// param.currPos = param.fixedPositions.rm;
 				param.currPos.left = param.fixedPositions.rm.left;
 				param.currPos.top = param.fixedPositions.rm.top;
 				break
 			case 'lb':
-				// param.currPos = param.fixedPositions.lb;
 				param.currPos.left = param.fixedPositions.lb.left;
 				param.currPos.top = param.fixedPositions.lb.top;
 				break
 			case 'cb':
-				// param.currPos = param.fixedPositions.cb;
 				param.currPos.left = param.fixedPositions.cb.left;
 				param.currPos.top = param.fixedPositions.cb.top;
 				break
 			case 'rb':
-				// param.currPos = param.fixedPositions.rb;
 				param.currPos.left = param.fixedPositions.rb.left;
 				param.currPos.top = param.fixedPositions.rb.top;
 				break
