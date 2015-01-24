@@ -38,7 +38,9 @@ var watermark = (function() {
 		$lineHMargin = $('#h-margin-line'), // красные линии
 		$lineVMargin = $('#v-margin-line'),
 
-		draggable = false;
+		draggable = false,
+		hoverWork = false;
+
 
 	var param = {
 		wmWidth: 0,
@@ -77,6 +79,7 @@ var watermark = (function() {
 			snap: $work.selector,
 			drag: onDragWatermark 
 		});
+		draggable = true;
 	}
 
 	function addEventListeners() {
@@ -139,6 +142,7 @@ var watermark = (function() {
 	// обработчик клика по кнопке с фиксированой позицией
 	function onClickFixedButt(e) {
 		e.preventDefault();
+		if (!draggable) return;
 		rmClassActive();
 		moveFixed($(this).attr('id'));
 		$(this).addClass('one-watermark__col-link__active');
@@ -247,10 +251,15 @@ var watermark = (function() {
 			console.log('less');
 			param.scale = $('#result-box').height() / param.bgHeight;
 		}
-		$('#bg__img').css('width', param.bgWidth * param.scale);
-		$('#wm__img').css('width', param.wmWidth * param.scale);
+		zoom();
 		centeredBg();
 		initDrag();
+	}
+	
+	function zoom(scale) {
+		param.scale = scale || param.scale;
+		$('#bg__img').css('width', param.bgWidth * param.scale);
+		$('#wm__img').css('width', param.wmWidth * param.scale);
 	}
 
 	function centeredBg() {
