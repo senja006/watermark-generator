@@ -71,6 +71,7 @@ var watermark = (function() {
 		$work.width($('#bg').width());
 		$work.height($('#bg').height());
 		$wm.draggable({
+			snapTolerance: 5,
 			containment: "parent",
 			cursor: 'move',
 			snap: $work.selector,
