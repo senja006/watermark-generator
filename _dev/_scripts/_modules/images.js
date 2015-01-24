@@ -73,7 +73,7 @@ var images = (function() {
 			src = IMG_SRC + fileName;
 
 		if (container.match(/main/)) {
-			if ($('#bg__img')) $('#bg__img').remove();
+			if ($('#bg__img')) $('#bg__img').fadeOut().remove();
 			img.attr({
 				id: 'bg__img',
 				class: 'bg__img',
@@ -84,7 +84,7 @@ var images = (function() {
 					bgHeight: $(this).height()
 				});
 				watermark.scaleImg();
-			}).appendTo($bg);
+			}).appendTo($bg).hide().fadeIn();
 
 		} else if (container.match(/watermark/)) {
 			if ($('#wm__img')) $('#wm__img').remove();
@@ -98,7 +98,7 @@ var images = (function() {
 					wmHeight: $(this).height()
 				});
 				watermark.scaleImg();
-			}).appendTo($wm);
+			}).appendTo($wm).hide().fadeIn();
 
 		} else {
 			console.error('Чё за контейнер?!');
