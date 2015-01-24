@@ -1,14 +1,14 @@
 var watermark = (function() {
 
 	var
-		$work = $('#work'),
-		$wm = $('#wm'),
-		$bg = $('#bg'),
-		$bgImg = $('#bg__img'),
-		$wmImg = $('#wm__img'),
+		$work = $('#work'), 
+		$wm = $('#wm'),  // контейнер дла ватермарка
+		$bg = $('#bg'),  // контейнер для исходного изображкения
+		$bgImg = $('#bg__img'), // исходное изображение
+		$wmImg = $('#wm__img'), // изображение ватермарк
 
-		$opacityVal = $('#opacity-val'),
-		$opacity = $('#opacity'),
+		$opacityVal = $('#opacity-val'), // поле прозрачности
+		$opacity = $('#opacity'), // 
 		$xVal = $('#x-val'),
 		$yVal = $('#y-val');
 
@@ -58,7 +58,7 @@ var watermark = (function() {
 		$(".slider__range").slider({
 			animate: true,
 			range: "min",
-			value: 50,
+			value: parseInt(param.currOpacity * 100),
 			min: 5,
 			max: 100,
 			step: 1,
@@ -76,7 +76,6 @@ var watermark = (function() {
 			snap: $work.selector,
 			drag: onDragWatermark 
 		});
-
 	}
 
 	function addEventListeners() {
@@ -114,10 +113,8 @@ var watermark = (function() {
 		$wm.css({
 			'opacity': param.currOpacity
 		});
-
 		$opacity.val(param.currOpacity);
 	}
-
 
 	// обработчик изменения позиций drag'n'drop
 	function onDragWatermark(e, ui) {

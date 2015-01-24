@@ -1060,11 +1060,19 @@ input {
 
 #work {
   position: absolute;
+  padding: 0;
+  margin: 0;
 }
 
 #bg,
 #wm {
   position: absolute;
+  padding: 0;
+  margin: 0;
+}
+
+#wm {
+  cursor: move;
 }
 
 /* --------- CONTROLS --------- */
@@ -1397,7 +1405,7 @@ input {
   border-radius: 3px;
   background-color: #fff;
   color: #444a53;
-  font-size: 24px;
+  font-size: 18px;
   width: 44px;
   height: 44px;
   padding: 0;
