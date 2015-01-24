@@ -87,7 +87,8 @@ var images = (function() {
 			}).appendTo($bg).hide().fadeIn();
 
 		} else if (container.match(/watermark/)) {
-			if ($('#wm__img')) $('#wm__img').remove();
+			if ($('img', '#wm')) $('img', '#wm').remove();
+			if ($('img', '#wm-tiled')) $('img', '#wm-tiled').remove();
 			img.attr({
 				id: 'wm__img',
 				class: 'wm__img',

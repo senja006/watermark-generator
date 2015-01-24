@@ -138,10 +138,10 @@ var watermark = (function() {
 			rowsTiled = param.bgHeight / wmH + 2;
 
 			$('#wm-tiles-work').css({
-				'width': (colsTiled + 1) * wmW * param.scale,
-				'height': rowsTiled * wmH * param.scale,
-				'left': 0 - wmW * 1 * param.scale,
-				'top': 0 - wmH * 1 * param.scale
+				'width': (colsTiled + 2) * wmW * param.scale,
+				'height': (rowsTiled + 1) * wmH * param.scale,
+				'left': 0 - wmW * 2 * param.scale,
+				'top': 0 - wmH * 2 * param.scale
 			});
 			$('#wm-tiles').css({
 				'width': colsTiled * wmW * param.scale,
@@ -158,6 +158,8 @@ var watermark = (function() {
 					'dislay': 'block',
 					'width': wmW * param.scale,
 					'height': wmH * param.scale,
+					'margin-right': param.vMargin,
+					'margin-top': param.hMargin,
 					'float': 'left'
 				});
 				img.appendTo($('#wm-tiles'));
@@ -194,6 +196,10 @@ var watermark = (function() {
 		$vMarginVal.val(param.vMargin);
 		$lineHMargin.height(param.hMargin);
 		$lineVMargin.width(param.vMargin);
+		$('#wm-tiles img').css({
+			'marginRight': param.hMargin,	
+			'marginTop': param.vMargin,	
+		});
 	}
 
 	// замостить
