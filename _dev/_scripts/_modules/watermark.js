@@ -59,7 +59,7 @@ var watermark = (function() {
 			animate: true,
 			range: "min",
 			value: parseInt(param.currOpacity * 100),
-			min: 5,
+			min: 0,
 			max: 100,
 			step: 1,
 			slide: onOpacityChange 
