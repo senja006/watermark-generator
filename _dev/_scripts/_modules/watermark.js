@@ -162,10 +162,10 @@ var watermark = (function() {
 				});
 				img.appendTo($('#wm-tiles'));
 			}
-			$('#wm-tiles').css('opacity', param.opacity).draggable({
+			$('#wm-tiles').draggable({
 				containment: "parent",
 				cursor: 'move'
-			});
+			}).css('opacity', param.currOpacity);
 	}
 
 	// обработчик кнопок изменения полей
@@ -221,9 +221,8 @@ var watermark = (function() {
 	// обработчик смены прозрачности
 	function onOpacityChange(e, ui) {
 		param.currOpacity = ui.value / 100;
-		$wm.css({
-			'opacity': param.currOpacity
-		});
+		$wm.css('opacity', param.currOpacity);
+		$wmTiles.css('opacity', param.currOpacity);
 		$opacity.val(param.currOpacity);
 	}
 
