@@ -4,6 +4,7 @@ var watermark = (function() {
 		$work = $('#work'),
 		$wm = $('#wm'), // контейнер дла ватермарка
 		$bg = $('#bg'), // контейнер для исходного изображкения
+		$wmTiles = $('#wm-tiles');
 		$bgImg = $('#bg__img'), // исходное изображение
 		$wmImg = $('#wm__img'), // изображение ватермарк
 
@@ -48,14 +49,13 @@ var watermark = (function() {
 		bgHeight: 0,
 		scale: 1,
 		fixedPositions: {},
-		currPos: {
-			left: 0,
-			top: 0
-		},
 		currOpacity: 0.5,
 		vMargin: 0,
 		hMargin: 0,
-		scaleStep: 0.05
+		currPos: {
+			left: 0,
+			top: 0
+		}
 	}
 
 	// инициализация плагинов
@@ -72,6 +72,7 @@ var watermark = (function() {
 		$wm.css('opacity', param.currOpacity);
 	}
 
+	// инициализация плагина draggable
 	function initDrag() {
 		$work.width($('#bg').width());
 		$work.height($('#bg').height());
@@ -90,24 +91,28 @@ var watermark = (function() {
 		$('.one-watermark__col-link').on('click', onClickFixedButt);
 
 		$btnXPlus.on('click', function() {
+			if (!draggable) return;
 			++param.currPos.left;
 			if (param.currPos.left >= param.fixedPositions.rb.left) --param.currPos.left;
 			refreshPosVal();
 			moveWm();
 		});
 		$btnYPlus.on('click', function() {
+			if (!draggable) return;
 			++param.currPos.top;
 			if (param.currPos.top >= param.fixedPositions.rb.top) --param.currPos.top;
 			refreshPosVal();
 			moveWm();
 		});
 		$btnXMinus.on('click', function() {
+			if (!draggable) return;
 			--param.currPos.left;
 			if (param.currPos.left < 0) ++param.currPos.left;
 			refreshPosVal();
 			moveWm();
 		});
 		$btnYMinus.on('click', function() {
+			if (!draggable) return;
 			--param.currPos.top;
 			if (param.currPos.top < 0) ++param.currPos.top;
 			refreshPosVal();
@@ -115,22 +120,65 @@ var watermark = (function() {
 		});
 		$btnFour.on('click', function(e) {
 			e.preventDefault();
-			$('.controls__switch-group-but').removeClass('active');
-			$(this).addClass('active');
-			$('#mode').val('tile');
-			$('#one').hide();
-			$('#four').show();
+			tile();
 		});
 		$btnOne.on('click', function(e) {
 			e.preventDefault();
-			$('.controls__switch-group-but').removeClass('active');
-			$(this).addClass('active');
-			$('#mode').val('untail');
-			$('#four').hide();
-			$('#one').show();
+			untile();
 		});
+		$('.margin__property-btn').on('click', changeMargin);
 	}
 
+	function changeMargin (e) {
+		e.preventDefault();
+		switch (e.target.id) {
+			case 'h-margin-plus':
+				++param.hMargin;
+				break;
+			case 'v-margin-plus':
+				++param.vMargin;
+				break;
+			case 'h-margin-minus':
+				--param.hMargin;
+				break;
+			case 'v-margin-minus':
+				--param.vMargin;
+				break
+		}
+		refreshMarginVal();
+	}
+
+	// обновление инпутов полей
+	function refreshMarginVal() {
+		$hMarginVal.val(param.hMargin);
+		$vMarginVal.val(param.vMargin);
+		$lineHMargin.height(param.hMargin);
+		$lineVMargin.width(param.vMargin);
+	}
+
+	// замостить
+	function tile() {
+		$('.controls__switch-group-but').removeClass('active');
+		$(this).addClass('active');
+		$('#mode').val('tile');
+		$('#one').hide();
+		$('#four').show();
+		$wm.fadeOut();
+		$wmTile.fadeIn();
+	}
+	
+	// размостить
+	function untile() {
+		$('.controls__switch-group-but').removeClass('active');
+		$(this).addClass('active');
+		$('#mode').val('untail');
+		$('#four').hide();
+		$('#one').show();
+		$wmTile.fadeOut();
+		$wm.fadeIn();
+	}	
+
+	// обработчик смены прозрачности
 	function onOpacityChange(e, ui) {
 		param.currOpacity = ui.value / 100;
 		$wm.css({
@@ -143,17 +191,20 @@ var watermark = (function() {
 	function onDragWatermark(e, ui) {
 		rmClassActive();
 		if (param.scale) {
-			param.currPos.left = parseInt(ui.position.left / param.scale);
-			param.currPos.top = parseInt(ui.position.top / param.scale);
+			param.currPos.left = ui.position.left / param.scale;
+			param.currPos.top = ui.position.top / param.scale;
 		}
+		console.log(param.fixedPositions.cm.left);
 		refreshPosVal();
 	}
 
+	// обновление полей с координатами
 	function refreshPosVal() {
 		$xVal.val(parseInt(param.currPos.left));
 		$yVal.val(parseInt(param.currPos.top));
 	}
 
+	// удаление активного класса у кнопок с фикс позициями
 	function rmClassActive() {
 		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');
 	}
@@ -205,6 +256,7 @@ var watermark = (function() {
 		refreshPosVal();
 	}
 
+	// перемещение в текущую позицию
 	function moveWm() {
 		rmClassActive();
 		$('#wm').animate({
@@ -212,7 +264,8 @@ var watermark = (function() {
 			top: param.currPos.top * param.scale
 		});
 	}
-
+	
+	// вычисление фиксированых позиций
 	function calcPositions() {
 		param.fixedPositions = {
 			lt: {
@@ -254,6 +307,7 @@ var watermark = (function() {
 		}
 	}
 
+	// установка параметров
 	function setParams(data) {
 		if (data) {
 			for (var key in data) {
@@ -263,6 +317,7 @@ var watermark = (function() {
 		}
 	}
 
+	// масщтабирование
 	function scaleImg() {
 		if (param.bgWidth >= param.bgHeight) {
 			param.scale = $('#result-box').width() / param.bgWidth;
@@ -274,6 +329,7 @@ var watermark = (function() {
 		initDrag();
 	}
 
+	// масщтабирование с параметром
 	function zoom(scale) {
 		param.scale = scale || param.scale;
 		$('#bg__img').css('width', param.bgWidth * param.scale);
@@ -281,9 +337,15 @@ var watermark = (function() {
 		centeredBg();
 	}
 
+	// центрирование
 	function centeredBg() {
 		$work.css('left', ($('#result-box').width() - param.bgWidth * param.scale) / 2);
 		$work.css('top', ($('#result-box').height() - param.bgHeight * param.scale) / 2);
+	}
+
+	function reset() {
+		param.draggable = false;
+		untile();
 	}
 
 	return {
@@ -294,8 +356,9 @@ var watermark = (function() {
 		setParams: setParams,
 		scaleImg: scaleImg,
 		getParams: function() {
-			return param
-		}
+			return param;
+		},
+		reset: reset
 	};
 
 }());

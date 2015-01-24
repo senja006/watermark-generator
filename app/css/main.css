@@ -1060,6 +1060,7 @@ input {
 
 #work {
   position: absolute;
+  overflow: hidden;
   padding: 0;
   margin: 0;
 }
@@ -1073,6 +1074,10 @@ input {
 
 #wm {
   cursor: move;
+}
+
+#wm-tiles {
+  display: none;
 }
 
 /* --------- CONTROLS --------- */

@@ -121,7 +121,8 @@ var images = (function() {
 
 	function resetForm() {
 		$('#download-img').find('input').val('');
-		$('#bg__img, #drag__img').remove();
+		$('#bg__img, #wm__img').remove();
+		watermark.reset();
 	}
 
 	return {

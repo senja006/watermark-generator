@@ -13,6 +13,7 @@ block content
                         #work
                           #bg
                           #wm
+                          #wm-tiles
                 section.controls
                     h3.controls__title Настройки
                     form#download-img
@@ -118,13 +119,13 @@ block content
                                     .coordinate__property
                                         .coordinate__property-block
                                             span.coordinate__property-name X
-                                            input(type="text" id="x-val" class="coordinate__property-input" name="x" value="0")
+                                            input(type="text" id="x-val" class="coordinate__property-input" name="x" value="0" readonly)
                                             .coordinate__property-control
                                                 a.coordinate__property-btn.plus#x-val-plus
                                                 a.coordinate__property-btn.minus#x-val-minus
                                         .coordinate__property-block
                                             span.coordinate__property-name Y
-                                            input(type="text" id="y-val" class="coordinate__property-input" name="y" value="0")
+                                            input(type="text" id="y-val" class="coordinate__property-input" name="y" value="0" readonly)
                                             .coordinate__property-control
                                                 a.coordinate__property-btn.plus#y-val-plus
                                                 a.coordinate__property-btn.minus#y-val-minus
