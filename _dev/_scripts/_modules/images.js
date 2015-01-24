@@ -98,8 +98,8 @@ var images = (function() {
 					wmHeight: $(this).height()
 				});
 				watermark.scaleImg();
+				watermark.createTiled();
 			}).appendTo($wm).hide().fadeIn();
-
 		} else {
 			console.error('Чё за контейнер?!');
 			return;

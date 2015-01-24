@@ -4,7 +4,8 @@ var watermark = (function() {
 		$work = $('#work'),
 		$wm = $('#wm'), // контейнер дла ватермарка
 		$bg = $('#bg'), // контейнер для исходного изображкения
-		$wmTiles = $('#wm-tiles');
+		$wmTilesWork = $('#wm-tiles-work'); // границы для замощеного контенера
+		$wmTiles = $('#wm-tiles'); // замощеный контейнер
 		$bgImg = $('#bg__img'), // исходное изображение
 		$wmImg = $('#wm__img'), // изображение ватермарк
 
@@ -126,10 +127,49 @@ var watermark = (function() {
 			e.preventDefault();
 			untile();
 		});
-		$('.margin__property-btn').on('click', changeMargin);
+		$('.margin__property-btn').on('click', onChangeMargin);
 	}
 
-	function changeMargin (e) {
+	// создание замощения
+	function createTiled () {
+		var wmW = param.wmWidth,
+			wmH = param.wmHeight,
+			colsTiled = param.bgWidth / wmW + 2,
+			rowsTiled = param.bgHeight / wmH + 2;
+
+			$('#wm-tiles-work').css({
+				'width': (colsTiled + 1) * wmW * param.scale,
+				'height': rowsTiled * wmH * param.scale,
+				'left': 0 - wmW * 1 * param.scale,
+				'top': 0 - wmH * 1 * param.scale
+			});
+			$('#wm-tiles').css({
+				'width': colsTiled * wmW * param.scale,
+				'height': rowsTiled * wmH * param.scale,
+				'left': wmW * param.scale,
+				'top': wmH * param.scale
+			});
+
+			for (var i = 0; i < colsTiled * rowsTiled; i++) {
+				console.log(wmW * param.scale);
+				var img = $('<img/>');
+				img.attr('src', $('#wm__img').attr('src'));
+				img.css ({
+					'dislay': 'block',
+					'width': wmW * param.scale,
+					'height': wmH * param.scale,
+					'float': 'left'
+				});
+				img.appendTo($('#wm-tiles'));
+			}
+			$('#wm-tiles').css('opacity', param.opacity).draggable({
+				containment: "parent",
+				cursor: 'move'
+			});
+	}
+
+	// обработчик кнопок изменения полей
+	function onChangeMargin (e) {
 		e.preventDefault();
 		switch (e.target.id) {
 			case 'h-margin-plus':
@@ -164,7 +204,7 @@ var watermark = (function() {
 		$('#one').hide();
 		$('#four').show();
 		$wm.fadeOut();
-		$wmTile.fadeIn();
+		$('#wm-tiles-work').fadeIn();
 	}
 	
 	// размостить
@@ -174,7 +214,7 @@ var watermark = (function() {
 		$('#mode').val('untail');
 		$('#four').hide();
 		$('#one').show();
-		$wmTile.fadeOut();
+		$('#wm-tiles-work').fadeOut();
 		$wm.fadeIn();
 	}	
 
@@ -358,7 +398,8 @@ var watermark = (function() {
 		getParams: function() {
 			return param;
 		},
-		reset: reset
+		reset: reset,
+		createTiled: createTiled
 	};
 
 }());

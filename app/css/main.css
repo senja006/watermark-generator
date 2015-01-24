@@ -1066,7 +1066,9 @@ input {
 }
 
 #bg,
-#wm {
+#wm,
+#wm-tiles-work,
+#wm-tiles {
   position: absolute;
   padding: 0;
   margin: 0;
@@ -1076,8 +1078,9 @@ input {
   cursor: move;
 }
 
-#wm-tiles {
+#wm-tiles-work {
   display: none;
+  cursor: move;
 }
 
 /* --------- CONTROLS --------- */
