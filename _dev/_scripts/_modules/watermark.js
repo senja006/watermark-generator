@@ -38,9 +38,7 @@ var watermark = (function() {
 		$lineHMargin = $('#h-margin-line'), // красные линии
 		$lineVMargin = $('#v-margin-line'),
 
-		draggable = false,
-		hoverWork = false;
-
+		draggable = false;
 
 	var param = {
 		wmWidth: 0,
@@ -52,7 +50,8 @@ var watermark = (function() {
 		currPos: {left: 0, top: 0},
 		currOpacity: 0.5, 
 		vMargin: 0, 
-		hMargin: 0
+		hMargin: 0,
+		scaleStep: 0.05
 	}
 		 
 	// инициализация плагинов
@@ -91,25 +90,32 @@ var watermark = (function() {
 			if(param.currPos.left >= param.fixedPositions.rb.left) --param.currPos.left;
 			refreshPosVal();
 			moveWm();
-		}) 
+		}); 
 		$btnYPlus.on('click', function(){
 			++param.currPos.top;
 			if(param.currPos.top >= param.fixedPositions.rb.top) --param.currPos.top;
 			refreshPosVal();
 			moveWm();
-		})  
+		});  
 		$btnXMinus.on('click', function(){
 			--param.currPos.left;
 			if(param.currPos.left < 0) ++param.currPos.left;
 			refreshPosVal();
 			moveWm();
-		}) 
+		}); 
 		$btnYMinus.on('click', function(){
 			--param.currPos.top;
 			if(param.currPos.top < 0) ++param.currPos.top;
 			refreshPosVal();
 			moveWm();
-		}) 
+		});
+		$('#result-box').on('mousewheel', function(e){
+			if(e.originalEvent.deltaY > 0) {
+				zoom(param.scale+=param.scaleStep);
+				return;
+			}
+			zoom(param.scale-=param.scaleStep);
+		});
 	}
 
 	function onOpacityChange(e, ui) {
@@ -252,7 +258,6 @@ var watermark = (function() {
 			param.scale = $('#result-box').height() / param.bgHeight;
 		}
 		zoom();
-		centeredBg();
 		initDrag();
 	}
 	
@@ -260,6 +265,7 @@ var watermark = (function() {
 		param.scale = scale || param.scale;
 		$('#bg__img').css('width', param.bgWidth * param.scale);
 		$('#wm__img').css('width', param.wmWidth * param.scale);
+		centeredBg();
 	}
 
 	function centeredBg() {
