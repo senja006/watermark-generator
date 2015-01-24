@@ -49,6 +49,16 @@ gulp.task('jade', function () {
         .pipe(connect.reload()); // даем команду на перезагрузку страницы
 });
 
+
+// Сборка
+gulp.task('build', ['clean', 'jade', 'less', 'js', 'compress-plugins', 'images', 'move-php'], function() {
+    gulp.src('_dev/favicon.ico')
+        .pipe(gulp.dest('app/'));
+    gulp.src('_dev/fonts/**/*')
+        .pipe(gulp.dest('app/fonts/'));
+});
+
+
 //gulp.task('jade', function () {
 //	gulp.src('./_dev/_makeups/_pages/*.html')
 //	.pipe(gulp.dest('app/'))

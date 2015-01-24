@@ -47,5 +47,4 @@ Thumbs.db
 node_modules
 css
 app
-!app/fonts
 index.html
