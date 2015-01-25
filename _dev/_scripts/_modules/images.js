@@ -29,11 +29,15 @@ var images = (function() {
 			type: 'POST',
 			dataType: 'html',
 			data: data,
+			beforeSend: function(){
+				$('.preloader').show();
+			},
 			success: function(response) {
 				var response = getObj(response);
 				// console.log(response);
 				downloadResImg(response);
 				// console.log('отправлено');
+				$('.preloader').hide();
 			},
 			error: function(response) {
 				// console.log('ошибка');
@@ -52,6 +56,8 @@ var images = (function() {
 			add: function(e, data) {
 				var errorsText = '';
 		        var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
+		        
+		        $('.preloader').show();
 		        if(data.originalFiles[0]['size'] > MAX_FILE_SIZE) {
 		            errorsText = lang.getMsgText('maxfilesize') + (MAX_FILE_SIZE / 1000000) + lang.getMsgText('mb');
 		        }
@@ -106,7 +112,9 @@ var images = (function() {
 				});
 				watermark.scaleImg();
 				$(this).hide().fadeIn();
-			}).appendTo($bg);
+				$('.preloader').hide();
+			})
+			img.appendTo($bg);
 
 		} else if (container.match(/watermark/)) {
 			if ($('img', '#wm')) $('img', '#wm').remove();
@@ -123,7 +131,10 @@ var images = (function() {
 				watermark.scaleImg();
 				watermark.createTiled();
 				$(this).hide().fadeIn();
-			}).appendTo($wm);
+				$('.preloader').hide();
+			})
+			$('.preloader').show();
+			img.appendTo($wm);
 		} else {
 			console.error('Чё за контейнер?!');
 			return;

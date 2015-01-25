@@ -393,6 +393,7 @@ var watermark = (function() {
 		init: function() {
 			initPlugins();
 			addEventListeners();
+			$('.preloader').hide();
 		},
 		setParams: setParams,
 		scaleImg: scaleImg,
