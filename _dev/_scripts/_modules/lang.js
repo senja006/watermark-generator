@@ -46,14 +46,31 @@ var lang = (function() {
 				rus: "Загрузите изображение",
 				eng: "Upload image"
 			},
-			'.error': {
-				rus: "Вы не загрузили изображение",
-				eng: "You must upload image"
-			},
 			'.copy__p': {
 				rus: "2014, Это мой сайт, пожалуйста, не копируйте и не воруйте его",
 				eng: "2014, This is my site, please, don't stole it"
-			}
+			},
+			'--needfile': {
+				rus: "Вы должны загрузить изображение",
+				eng: "You have to download the image"
+			},
+			'--maxfilesize': {
+				rus: "Максимальный размер файда ",
+				eng: "Maximum file size "
+			},
+			'--mb': {
+				rus: "Mб",
+				eng: "Mb"
+			},
+			'--onlypicture': {
+				rus: "Загрузить можно только изображение - jpg, png, gif",
+				eng: "Upload picture only - jpg, png, gif"
+			},
+			'--cantload': {
+				rus: "Невозможно загрузить файл",
+				eng: "Unable to upload file"
+			},
+			
 
 		},
 
@@ -83,8 +100,19 @@ var lang = (function() {
 			if (selector.substr(0, 5) === 'input') {
 				$(selector).attr('placeholder', lang[selector][language]);
 			}
+			if (selector.substr(0, 2) === '--') {
+				break;
+			}
 			$(selector).text(lang[selector][language]);
 		}
+		translateMessages();
+	}
+
+	function getMsgText(msgId) {
+		var message = lang['--' + msgId][currLang];
+
+		if (!message) return 'Unkhnow Error';
+		return message;
 	}
 
 	function getLang() {
@@ -97,6 +125,7 @@ var lang = (function() {
 			setLang(currLang);
 		},
 		setLang: setLang,
-		getLang: getLang
+		getLang: getLang,
+		getMsgText: getMsgText
 	}
 }());

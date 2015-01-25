@@ -129,7 +129,10 @@ var watermark = (function() {
 		for (var i = 0; i < colsTiled * rowsTiled; i++) {
 			// console.log(wmW * param.scale);
 			var img = $('<img/>');
-			img.attr('src', $('#wm__img').attr('src'));
+			img.attr({
+				'src': $('#wm__img').attr('src'),
+				'class': 'wm__tile'
+			});
 			img.css({
 				'dislay': 'block',
 				'width': wmW * param.scale,

@@ -53,10 +53,10 @@ var images = (function() {
 				var errorsText = '';
 		        var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
 		        if(data.originalFiles[0]['size'] > MAX_FILE_SIZE) {
-		            errorsText = 'Максимальный размер файла ' + (MAX_FILE_SIZE / 1000000) + 'МБ';
+		            errorsText = lang.getMsgText('maxfilesize') + (MAX_FILE_SIZE / 1000000) + lang.getMsgText('mb');
 		        }
 		        if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
-		            errorsText = 'Загрузить можно только изображение - jpg, png, gif';
+		            errorsText = lang.getMsgText('onlypicture');
 		        }
 		        if(errorsText.length > 0) {
 		            showError($controlsFile, errorsText);
@@ -76,7 +76,7 @@ var images = (function() {
 				});
 			},
 			fail: function (e, data) {
-				showError($controlsFile, 'Невозможно загрузить файл');
+				showError($controlsFile, lang.getMsgText('cantload'));
 			},
 		});
 	};
@@ -110,7 +110,7 @@ var images = (function() {
 
 		} else if (container.match(/watermark/)) {
 			if ($('img', '#wm')) $('img', '#wm').remove();
-			if ($('img', '#wm-tiled')) $('img', '#wm-tiled').remove();
+			if ($('wm__tile')) $('wm__tile').remove();
 			img.attr({
 				id: 'wm__img',
 				class: 'wm__img',
@@ -122,7 +122,8 @@ var images = (function() {
 				});
 				watermark.scaleImg();
 				watermark.createTiled();
-			}).appendTo($wm).hide().fadeIn();
+				$(this).hide().fadeIn();
+			}).appendTo($wm);
 		} else {
 			console.error('Чё за контейнер?!');
 			return;
@@ -157,7 +158,7 @@ var images = (function() {
 			var $input = $this.find('.input__file-name');
 			var emptyVal = '';
 			if($input.val() === '') {
-				showError($this, 'Вы не загрузили изображение');
+				showError($this, lang.getMsgText('needfile'));
 			}else{
 				hideError($this);
 			}
