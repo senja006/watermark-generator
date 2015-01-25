@@ -49,7 +49,12 @@ var lang = (function() {
 			'.error': {
 				rus: "Вы не загрузили изображение",
 				eng: "You must upload image"
+			},
+			'.copy__p': {
+				rus: "2014, Это мой сайт, пожалуйста, не копируйте и не воруйте его",
+				eng: "2014, This is my site, please, don't stole it"
 			}
+
 		},
 
 		currLang = 'rus';
