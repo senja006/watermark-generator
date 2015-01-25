@@ -105,7 +105,8 @@ var images = (function() {
 					bgHeight: $(this).height()
 				});
 				watermark.scaleImg();
-			}).appendTo($bg).hide().fadeIn();
+				$(this).hide().fadeIn();
+			}).appendTo($bg);
 
 		} else if (container.match(/watermark/)) {
 			if ($('img', '#wm')) $('img', '#wm').remove();

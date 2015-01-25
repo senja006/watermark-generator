@@ -149,16 +149,16 @@ var watermark = (function() {
 		e.preventDefault();
 		switch (e.target.id) {
 			case 'h-margin-plus':
-				++param.vMargin;
+				param.vMargin = param.vMargin + param.scale;
 				break;
 			case 'v-margin-plus':
-				++param.hMargin;
+				param.hMargin = param.hMargin + param.scale;
 				break;
 			case 'h-margin-minus':
-				--param.vMargin;
+				param.vMargin = param.vMargin - param.scale;
 				break;
 			case 'v-margin-minus':
-				--param.hMargin;
+				param.hMargin = param.hMargin - param.scale;
 				break
 		}
 		refreshMarginVal();
@@ -166,13 +166,13 @@ var watermark = (function() {
 
 	// обновление инпутов полей
 	function refreshMarginVal() {
-		$vMarginVal.val(param.hMargin);
-		$hMarginVal.val(param.vMargin);
+		$vMarginVal.val(parseInt(param.hMargin));
+		$hMarginVal.val(parseInt(param.vMargin));
 		$lineHMargin.height(param.vMargin);
 		$lineVMargin.width(param.hMargin);
 		$('#wm-tiles img').css({
-			'marginRight': param.hMargin,	
-			'marginBottom': param.vMargin,	
+			'marginRight': param.hMargin * param.scale,	
+			'marginBottom': param.vMargin * param.scale,	
 		});
 	}
 
