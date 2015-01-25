@@ -106,43 +106,42 @@ var watermark = (function() {
 	};
 
 	// создание замощения
-	function createTiled () {
+	function createTiled() {
 		var wmW = param.wmWidth,
 			wmH = param.wmHeight,
-			colsTiled = param.bgWidth / wmW + 2,
-			rowsTiled = param.bgHeight / wmH + 2;
+			colsTiled = param.bgWidth / wmW + 3,
+			rowsTiled = param.bgHeight / wmH + 3;
 
-			$('#wm-tiles-work').css({
-				'width': (colsTiled + 2) * wmW * param.scale,
-				'height': (rowsTiled + 1) * wmH * param.scale,
-				'left': 0 - wmW * 2 * param.scale,
-				'top': 0 - wmH * 2 * param.scale
-			});
-			$('#wm-tiles').css({
-				'width': colsTiled * wmW * param.scale,
-				'height': rowsTiled * wmH * param.scale,
-				'left': wmW * param.scale,
-				'top': wmH * param.scale
-			});
+		$('#wm-tiles-work').css({
+			'width': param.bgWidth * param.scale,
+			'height': param.bgHeight * param.scale,
+			'left': 0,
+			'top': 0,
+			'overflow': 'hidden'
+		});
+		$('#wm-tiles').css({
+			'width': (colsTiled + 2) * wmW * param.scale,
+			'height': (rowsTiled + 2) * wmH * param.scale,
+			'left': 0,
+			'top': 0,
+		});
 
-			for (var i = 0; i < colsTiled * rowsTiled; i++) {
-				// console.log(wmW * param.scale);
-				var img = $('<img/>');
-				img.attr('src', $('#wm__img').attr('src'));
-				img.css ({
-					'dislay': 'block',
-					'width': wmW * param.scale,
-					'height': wmH * param.scale,
-					'margin-right': param.vMargin,
-					'margin-top': param.hMargin,
-					'float': 'left'
-				});
-				img.appendTo($('#wm-tiles'));
-			}
-			$('#wm-tiles').draggable({
-				containment: "parent",
-				cursor: 'move'
-			}).css('opacity', param.currOpacity);
+		for (var i = 0; i < colsTiled * rowsTiled; i++) {
+			// console.log(wmW * param.scale);
+			var img = $('<img/>');
+			img.attr('src', $('#wm__img').attr('src'));
+			img.css({
+				'dislay': 'block',
+				'width': wmW * param.scale,
+				'height': wmH * param.scale,
+				'margin-right': param.vMargin,
+				'margin-bottom': param.hMargin,
+				'float': 'left'
+			});
+			img.appendTo($('#wm-tiles'));
+		}
+		$('#wm-tiles').css('opacity', param.currOpacity);
+		refreshMarginVal();
 	}
 
 	// обработчик кнопок изменения полей
@@ -173,7 +172,7 @@ var watermark = (function() {
 		$lineVMargin.width(param.vMargin);
 		$('#wm-tiles img').css({
 			'marginRight': param.hMargin,	
-			'marginTop': param.vMargin,	
+			'marginBottom': param.vMargin,	
 		});
 	}
 
