@@ -50,11 +50,6 @@ var images = (function() {
 			url: 'upload/upload.php',
 			dataType: 'json',
 			add: function(e, data) {
-				// $.each(data.files, function(index, file) {
-				// 	addNameFile(file.name, $input);
-				// });
-				// data.submit();
-				console.log('add');
 				var errorsText = '';
 		        var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
 		        if(data.originalFiles[0]['size'] > MAX_FILE_SIZE) {
@@ -81,15 +76,13 @@ var images = (function() {
 				});
 			},
 			fail: function (e, data) {
-				console.log(e);
-				console.log(data);
+				showError($controlsFile, 'Невозможно загрузить файл');
 			},
 		});
 	};
 
 	function addNameFile(name, container) {
 		container.find('.input__file-name').val(name);
-		// hideTooltip.apply($inputFile);
 	};
 
 	function addNameFileWithVersion(name, container) {
@@ -176,9 +169,6 @@ var images = (function() {
 	};
 
 	function showError(container, text) {
-		// console.log('error');
-		// if(timerError) clearTimeout(timerError);
-		// var $input = input;
 		var $controlsFile = container;
 		var $error = $controlsFile.find('.error');
 		$error.text(text);
@@ -189,14 +179,10 @@ var images = (function() {
 				hideError($controlsFile);
 			}, 3000);
 		}
-		// $('html').on('click.error', function() {
-		// 	hideError($controlsFile);
-		// });
 	};
 
 	function hideError(container) {
 		container.removeClass('is-error').find('.error').fadeOut(300);
-		// $('html').off('click.error');
 	};
 
 	return {
