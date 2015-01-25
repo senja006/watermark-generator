@@ -379,7 +379,10 @@ var watermark = (function() {
 	}
 
 	function reset() {
-		param.draggable = false;
+		draggable = false;
+		param.currPos.left = 0;
+		param.currPos.top = 0;
+		refreshPosVal();
 		untile();
 	}
 
