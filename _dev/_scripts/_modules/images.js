@@ -62,14 +62,14 @@ var images = (function() {
 		            showError($controlsFile, errorsText);
 		        }else{
 		            data.submit();
-		        	$controlsFile.addClass('is-load');
-		        	$.each(data.files, function(index, file) {
-						addNameFile(file.name, $controlsFile);
-					});
 		        	hideError($controlsFile);
 		        }
 			},
 			done: function(e, data) {
+		        $controlsFile.addClass('is-load');
+	        	$.each(data.files, function(index, file) {
+					addNameFile(file.name, $controlsFile);
+				});
 				$.each(data.result.files, function(index, file) {
 					addImg(file.name, endId);
 					addNameFileWithVersion(file.name, $('.input-file--' + endId));
