@@ -45,6 +45,10 @@ var lang = (function() {
 			'input[name=name-watermark]': {
 				rus: "Загрузите изображение",
 				eng: "Upload image"
+			},
+			'.error': {
+				rus: "Вы не загрузили изображение",
+				eng: "You must upload image"
 			}
 		},
 
