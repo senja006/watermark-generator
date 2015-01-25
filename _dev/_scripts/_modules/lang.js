@@ -105,7 +105,6 @@ var lang = (function() {
 			}
 			$(selector).text(lang[selector][language]);
 		}
-		translateMessages();
 	}
 
 	function getMsgText(msgId) {
