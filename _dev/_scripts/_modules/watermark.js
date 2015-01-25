@@ -54,6 +54,7 @@ var watermark = (function() {
 			slide: onOpacityChange
 		});
 		$wm.css('opacity', param.currOpacity);
+		$opacity.val(param.currOpacity);
 	}
 
 	// инициализация плагина draggable
@@ -79,6 +80,7 @@ var watermark = (function() {
 	};
 
 	function controlChangeCoordinates() {
+		if(!images.checkUploadImg()) return;
 		if (!draggable) return;
 		var id = $(this).attr('id');
 		switch(id) {
@@ -178,6 +180,7 @@ var watermark = (function() {
 	// замостить
 	function tile(e) {
 		e.preventDefault();
+		if(!images.checkUploadImg()) return;
 		$('.controls__switch-group-but').removeClass('active');
 		$(this).addClass('active');
 		$('#mode').val('tile');
@@ -190,6 +193,7 @@ var watermark = (function() {
 	// размостить
 	function untile(e) {
 		e.preventDefault();
+		if(!images.checkUploadImg()) return;
 		$('.controls__switch-group-but').removeClass('active');
 		$(this).addClass('active');
 		$('#mode').val('untail');
@@ -201,6 +205,7 @@ var watermark = (function() {
 
 	// обработчик смены прозрачности
 	function onOpacityChange(e, ui) {
+		images.checkUploadImg();
 		param.currOpacity = ui.value / 100;
 		$wm.css('opacity', param.currOpacity);
 		$wmTiles.css('opacity', param.currOpacity);
@@ -232,6 +237,7 @@ var watermark = (function() {
 	// обработчик клика по кнопке с фиксированой позицией
 	function onClickFixedButt(e) {
 		e.preventDefault();
+		if(!images.checkUploadImg()) return;
 		if (!draggable) return;
 		rmClassActive();
 		moveFixed($(this).attr('id'));

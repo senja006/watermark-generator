@@ -949,6 +949,7 @@ input {
   white-space: nowrap;
   color: #fff;
   background-color: #f97e76;
+  display: none;
 }
 
 .controls form .error:after {
@@ -1602,7 +1603,6 @@ input {
   position: relative;
   z-index: 1;
   display: inline-block;
-  overflow: hidden;
 }
 
 .label__file {
@@ -1675,10 +1675,6 @@ input {
   border-radius: 3px;
   box-sizing: border-box;
   background: transparent;
-}
-
-.error {
-  display: none;
 }
 
 .drug__watermark {

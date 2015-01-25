@@ -41,6 +41,7 @@ block content
                                                 type="file",
                                                 name="files"
                                                 )
+                                            span.error Вы не загрузили изображение
                         fieldset
                             .controls__inputs-group
                                 label.controls__file-title Водяной знак
@@ -64,6 +65,7 @@ block content
                                                 type="file",
                                                 name="files"
                                                 )
+                                            span.error Вы не загрузили изображение
                         fieldset
                             .controls__inputs-group
                                 .controls__switch
@@ -134,7 +136,7 @@ block content
                             .slider__box
                                 label#opacity-field.slider__box-title Прозрачность
                                 div.slider__range
-                                input(id="opacity" type="hidden")
+                                input(id="opacity" type="hidden" name="opacity")
                         fieldset.noborder
                             .controls__inputs-group
                                 button(type="reset" id="but-reset").button--reset Сброс

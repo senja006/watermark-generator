@@ -1,6 +1,8 @@
 var images = (function() {
 
 	var IMG_SRC = 'upload/files/';
+	var MAX_FILE_SIZE = 2000000;
+	var timerError = null;
 
 	var $work = $('#work'),
 		$wm = $('#wm'),
@@ -19,6 +21,7 @@ var images = (function() {
 	};
 
 	function controlDownloadImg() {
+		if(!checkUploadImg()) return false;
 		var $form = $(this);
 		var data = $form.serialize();
 		$.ajax({
@@ -41,21 +44,46 @@ var images = (function() {
 	};
 
 	function initUploadImg(endId) {
-		$('#input__file-' + endId).fileupload({
+		var $input = $('#input__file-' + endId);
+		var $controlsFile = $input.parents('.controls__file');
+		$input.fileupload({
 			url: 'upload/upload.php',
 			dataType: 'json',
 			add: function(e, data) {
-				$.each(data.files, function(index, file) {
-					addNameFile(file.name, $('.input-file--' + endId));
-				});
-				data.submit();
+				// $.each(data.files, function(index, file) {
+				// 	addNameFile(file.name, $input);
+				// });
+				// data.submit();
+				console.log('add');
+				var errorsText = '';
+		        var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
+		        if(data.originalFiles[0]['size'] > MAX_FILE_SIZE) {
+		            errorsText = 'Максимальный размер файла ' + (MAX_FILE_SIZE / 1000000) + 'МБ';
+		        }
+		        if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
+		            errorsText = 'Загрузить можно только изображение - jpg, png, gif';
+		        }
+		        if(errorsText.length > 0) {
+		            showError($controlsFile, errorsText);
+		        }else{
+		            data.submit();
+		        	$controlsFile.addClass('is-load');
+		        	$.each(data.files, function(index, file) {
+						addNameFile(file.name, $controlsFile);
+					});
+		        	hideError($controlsFile);
+		        }
 			},
 			done: function(e, data) {
 				$.each(data.result.files, function(index, file) {
 					addImg(file.name, endId);
 					addNameFileWithVersion(file.name, $('.input-file--' + endId));
 				});
-			}
+			},
+			fail: function (e, data) {
+				console.log(e);
+				console.log(data);
+			},
 		});
 	};
 
@@ -122,15 +150,61 @@ var images = (function() {
 
 	function resetForm() {
 		$('#download-img').find('input').val('');
+		$('.is-load').removeClass('is-load');
+		$('.error').fadeOut(300);
 		$('#bg__img, #wm__img').remove();
 		watermark.reset();
-	}
+	};
+
+	function checkUploadImg() {
+		console.log('check');
+		$('.controls__file').each(function() {
+			var $this = $(this);
+			var $input = $this.find('.input__file-name');
+			var emptyVal = '';
+			if($input.val() === '') {
+				showError($this, 'Вы не загрузили изображение');
+			}else{
+				hideError($this);
+			}
+		});
+		if($('.is-error').length) {
+			return false;
+		}else{
+			return true;
+		};
+	};
+
+	function showError(container, text) {
+		// console.log('error');
+		// if(timerError) clearTimeout(timerError);
+		// var $input = input;
+		var $controlsFile = container;
+		var $error = $controlsFile.find('.error');
+		$error.text(text);
+		$controlsFile.addClass('is-error');
+		$error.fadeIn(300);
+		if($controlsFile.hasClass('is-load')) {
+			timerError = setTimeout(function() {
+				hideError($controlsFile);
+			}, 3000);
+		}
+		// $('html').on('click.error', function() {
+		// 	hideError($controlsFile);
+		// });
+	};
+
+	function hideError(container) {
+		container.removeClass('is-error').find('.error').fadeOut(300);
+		// $('html').off('click.error');
+	};
 
 	return {
 		init: function() {
 			initJqueryFileUpload();
 			addEventListeners();
 		},
+		checkUploadImg: checkUploadImg,
 	};
 
 }());
