@@ -63,6 +63,7 @@ var lang = (function() {
 		var	language = $(this).attr('class').substr(-3);
 
 		e.preventDefault();
+		console.log(language);
 		setLang(language);
 	}
 
