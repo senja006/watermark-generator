@@ -58,6 +58,7 @@ var images = (function() {
 		        var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
 		        
 		        $('.preloader').show();
+		        console.log('валидация');
 		        if(data.originalFiles[0]['size'] > MAX_FILE_SIZE) {
 		            errorsText = lang.getMsgText('maxfilesize') + (MAX_FILE_SIZE / 1000000) + lang.getMsgText('mb');
 		        }
@@ -114,27 +115,36 @@ var images = (function() {
 				$(this).hide().fadeIn();
 				$('.preloader').hide();
 			})
+			console.log('img.appendTo 117');
 			img.appendTo($bg);
 
 		} else if (container.match(/watermark/)) {
-			if ($('img', '#wm')) $('img', '#wm').remove();
-			if ($('wm__tile')) $('wm__tile').remove();
+			// if ($('img', '#wm')) $('img', '#wm').remove();
+			// if ($('wm__tile').length) $('wm__tile').remove();
+			$('#wm__img').remove()
+			$('#wm__tiles').empty();
 			img.attr({
 				id: 'wm__img',
 				class: 'wm__img',
 				src: src
-			}).on('load', function() {
+			});
+			$('.preloader').show();
+			img.appendTo($wm);
+			$('#wm__img').on('load.append', function() {
+				console.log($('#wm__img'));
 				watermark.setParams({
-					wmWidth: $(this).width(),
-					wmHeight: $(this).height()
+					wmWidth: $('#wm__img').width(),
+					wmHeight: $('#wm__img').height()
 				});
 				watermark.scaleImg();
+				console.log('watermark.createTiled 132');
 				watermark.createTiled();
 				$(this).hide().fadeIn();
 				$('.preloader').hide();
-			})
-			$('.preloader').show();
-			img.appendTo($wm);
+				$('#wm__img').off('load.append');
+			});
+			console.log('img.appendTo 138');
+			console.log('img= ' + img);
 		} else {
 			console.error('Чё за контейнер?!');
 			return;
