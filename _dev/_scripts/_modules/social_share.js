@@ -9,20 +9,20 @@ var socialShare = (function () {
         share_window_height = 500, // Высота окна шаринга
         marginleft = screen.availWidth/2 - share_window_width/2,
         margintop = screen.availHeight/2 - share_window_height/ 2,
-        $purl = document.url,
-        $ptitle = document.title,
-        $text = document.description,
-        $pimg = "http://" + window.location.host + "/img/watermark3.jpg";
+        $surl = document.url,
+        $stitle = document.title,
+        $stext = document.description,
+        $simg = "http://" + window.location.host + "/img/watermark3.jpg";
 
     //Отслеживание нажатий на кнопки
     $('#vk').on('click', function () {
-        Share.vk($purl,$ptitle,$text,$pimg)
+        Share.vk($surl,$stitle,$stext,$simg)
     });
     $('#fb').on('click', function () {
-        Share.facebook($purl,$ptitle,$text,$pimg)
+        Share.facebook($surl,$stitle,$stext,$simg)
     });
     $('#twitter').on('click', function () {
-        Share.twitter($purl,$ptitle)
+        Share.twitter($surl,$stitle)
     });
 
     Share = {
