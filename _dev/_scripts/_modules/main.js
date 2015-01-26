@@ -4,18 +4,13 @@ $(document).ready(function() {
 
     watermark.init();       // управление водяным знаком
     images.init();			// управление картинками
-    lang.init();          
+    lang.init();            // Смена языка
+    socialShare.init();     // Кнопки соц сетей
 
 });
 
  // * Created by FreeWay on 15.01.15.
  // */
-$(document).ready(function(){
-   
-    //tabs
-
-
-});
 //FILEUPLOAD
 //$(function(){
 //

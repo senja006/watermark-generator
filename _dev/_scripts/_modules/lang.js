@@ -35,7 +35,7 @@ var lang = (function() {
 				eng: "Clear"
 			},
 			'#but-send': {
-				rus: "Загрузить",
+				rus: "Скачать",
 				eng: "Download"
 			},
 			'input[name=name-main]': {
@@ -47,15 +47,15 @@ var lang = (function() {
 				eng: "Upload image"
 			},
 			'.copy__p': {
-				rus: "2014, Это мой сайт, пожалуйста, не копируйте и не воруйте его",
-				eng: "2014, This is my site, please, don't stole it"
+				rus: "2015, Это мой сайт, пожалуйста, не копируйте и не воруйте его",
+				eng: "2015, This is my site, please do not copy or steal"
 			},
 			'--needfile': {
 				rus: "Вы должны загрузить изображение",
-				eng: "You have to download the image"
+				eng: "You must upload an image"
 			},
 			'--maxfilesize': {
-				rus: "Максимальный размер файда ",
+				rus: "Максимальный размер файла ",
 				eng: "Maximum file size "
 			},
 			'--mb': {
@@ -64,7 +64,7 @@ var lang = (function() {
 			},
 			'--onlypicture': {
 				rus: "Загрузить можно только изображение - jpg, png, gif",
-				eng: "Upload picture only - jpg, png, gif"
+				eng: "You can upload only - jpg, png, gif"
 			},
 			'--cantload': {
 				rus: "Невозможно загрузить файл",
