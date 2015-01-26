@@ -89,8 +89,9 @@ var lang = (function() {
 		var	language = $(this).attr('class').substr(-3);
 
 		e.preventDefault();
-		console.log(language);
+
 		setLang(language);
+		$('.error').hide();
 	}
 
 	function setLang(language) {
@@ -101,7 +102,7 @@ var lang = (function() {
 				$(selector).attr('placeholder', lang[selector][language]);
 			}
 			if (selector.substr(0, 2) === '--') {
-				break;
+				continue;
 			}
 			$(selector).text(lang[selector][language]);
 		}
@@ -128,3 +129,5 @@ var lang = (function() {
 		getMsgText: getMsgText
 	}
 }());
+
+
