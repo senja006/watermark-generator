@@ -30,9 +30,10 @@
 .social{
   margin-top:19px;
   &__list{
-    float: left;
     list-style-type: none;
-    display: none;
+    position: absolute;
+    left: -43px;
+    -webkit-transition: left 0.5s ease-out;
     &-item{
       background-color:  rgba(241, 241, 245, 0.7);
       display: block;
@@ -50,10 +51,11 @@
     }
   }
   &:hover .social__list{
-    display: block;
+    left: 0;
   }
   &:hover .social__like{
     background-position: -40px -122px;
+    left: 43px;
   }
 }
 .fb{
@@ -75,15 +77,17 @@
   }
 }
 .social__like{
-  float:right;
+  left: 0;
+  position: absolute;
   height: 45px;
   width: 43px;
   display: block;
   text-indent: -9999px;
   cursor: pointer;
-  background:rgba(241, 241, 245, 0.7) url("../../img/icons/sprite.png") -40px 2px no-repeat;
-  &:hover{
-    background-position: -40px -122px;
-  }
+  background: rgba(241, 241, 245, 0.7) url("../../img/icons/sprite.png") -40px 2px no-repeat;
+  -webkit-transition: left 0.5s ease-out;
+//  &:hover{
+//    background-position: -40px -122px;
+//  }
 
 }
