@@ -1,342 +1,407 @@
 var watermark = (function() {
 
-	var $watermark = $('#watermark'), // watermark
-		$bg = $('#bg__wrapper'), // original image
-		$opacityVal = $('#opacity-val'), // поле значения прозрачности
-		$opacity = $('#opacity'), // ползунок прозрачности		
-		$xVal = $('#x-val'), // поле left
-		$yVal = $('#y-val'); // поле top
+	var
+		$work = $('#work'),
+		$wm = $('#wm'), // контейнер дла ватермарка
+		$bg = $('#bg'), // контейнер для исходного изображкения
+		$wmTilesWork = $('#wm-tiles-work'); // границы для замощеного контенера
+		$wmTiles = $('#wm-tiles'); // замощеный контейнер
+		$bgImg = $('#bg__img'), // исходное изображение
+		$wmImg = $('#wm__img'), // изображение ватермарк
 
-		$btnLeftTop = $('#lt'), // кнопки фиксированых позиций
-		$btnCentTop = $('#ct'),
-		$btnRightTop = $('#rt'),
-		$btnLeftMiddle = $('#lm'),
-		$btnCentMiddle = $('#cm'),
-		$btnRightMiddle = $('#rm'),
-		$btnLeftBottom = $('#lb'),
-		$btnCentBottom = $('#cb'),
-		$btnRightBottom = $('#rb'),
+		$opacityVal = $('#opacity-val'), // поле прозрачности
+		$opacity = $('#opacity'), // 
+		$xVal = $('#x-val'),
+		$yVal = $('#y-val'),
 
-		$btnFour = $('#but-four'),
-		$btnOne = $('#but-one'),
-
-		$hMarginVal = $('#h-margin-val'),
+		$hMarginVal = $('#h-margin-val'), // инпуты полей
 		$vMarginVal = $('#v-margin-val'),
-		$btnHMarginPlus = $('#h-margin-plus'),
+		$btnHMarginPlus = $('#h-margin-plus'), // кнопки полей
 		$btnHMarginMinus = $('#h-margin-minus'),
 		$btnVMarginPlus = $('#v-margin-plus'),
 		$btnVMarginMinus = $('#v-margin-minus'),
-		$hMarginLine = $('#h-margin-line'),
-		$vMarginLine = $('#v-margin-line');
+		$lineHMargin = $('#h-margin-line'), // красные линии
+		$lineVMargin = $('#v-margin-line'),
 
-	var watermarkWidth = 0, 
-		watermarkHeight = 0,
-		bgWidth = 0,
-		bgHeight = 0,
-		scaleImg = 1,
+		draggable = false,
+		mode = "untile";
 
-		fixedPositions = {},
-
-		currPos = {
+	var param = {
+		wmWidth: 0,
+		wmHeight: 0,
+		bgWidth: 0,
+		bgHeight: 0,
+		scale: 1,
+		fixedPositions: {},
+		currOpacity: 0.5,
+		vMargin: 0,
+		hMargin: 0,
+		currPos: {
 			left: 0,
 			top: 0
-		},
-
-		currOpacity = 0.5,
-
-		vMargin = 0,
-		hMargin = 0;
+		}
+	}
 
 	// инициализация плагинов
 	function initPlugins() {
-		$watermark.draggable({
-			cursor: 'move',
-			snap: '#bg__wrapper',
-			drag: onDragWatermark // событие 'drag'
-		});
-
 		$(".slider__range").slider({
 			animate: true,
 			range: "min",
-			value: 50,
-			min: 5,
+			value: parseInt(param.currOpacity * 100),
+			min: 0,
 			max: 100,
 			step: 1,
 			slide: onOpacityChange
 		});
+		$wm.css('opacity', param.currOpacity);
+		$opacity.val(param.currOpacity);
 	}
 
-	// установка обработчиков
+	// инициализация плагина draggable
+	function initDrag() {
+		$work.width($('#bg').width());
+		$work.height($('#bg').height());
+		$wm.draggable({
+			snapTolerance: 5,
+			containment: "parent",
+			cursor: 'move',
+			snap: $work.selector,
+			drag: onDragWatermark
+		});
+		draggable = true;
+	}
+
 	function addEventListeners() {
 		$('.one-watermark__col-link').on('click', onClickFixedButt);
-		$('#drag__img').on('load', function(){
-			calcSizes();
-			calcPositions();
+		$('.coordinate__property-btn').on('click', controlChangeCoordinates);
+		$('#but-four').on('click', tile);
+		$('#but-one').on('click', untile);
+		$('.margin__property-btn').on('click', onChangeMargin);
+	};
+
+	function controlChangeCoordinates() {
+		if(!images.checkUploadImg()) return;
+		if (!draggable) return;
+		var id = $(this).attr('id');
+		switch(id) {
+			case 'x-val-plus':
+				++param.currPos.left;
+				if (param.currPos.left >= param.fixedPositions.rb.left) --param.currPos.left;
+				break;
+			case 'y-val-plus':
+				++param.currPos.top;
+				if (param.currPos.top >= param.fixedPositions.rb.top) --param.currPos.top;
+				break;
+			case 'x-val-minus':
+				--param.currPos.left;
+				if (param.currPos.left < 0) ++param.currPos.left;
+				break;
+			case 'y-val-minus':
+				--param.currPos.top;
+			if (param.currPos.top < 0) ++param.currPos.top;
+				break;
+		}
+		refreshPosVal();
+		moveWm();
+	};
+
+	// создание замощения
+	function createTiled() {
+		var wmW = param.wmWidth,
+			wmH = param.wmHeight,
+			colsTiled = param.bgWidth / wmW + 3,
+			rowsTiled = param.bgHeight / wmH + 3;
+
+		$('#wm-tiles-work').css({
+			'width': param.bgWidth * param.scale,
+			'height': param.bgHeight * param.scale,
+			'left': 0,
+			'top': 0,
+			'overflow': 'hidden'
 		});
-		$btnFour.on('click', function(e){
-			e.preventDefault();
-			$('.controls__switch-group-but').removeClass('active');
-			$btnFour.addClass('active');
-			$('#one').hide();
-			$('#four').show();
-			tile();
+		$('#wm-tiles').css({
+			'width': (colsTiled + 2) * wmW * param.scale,
+			'height': (rowsTiled + 2) * wmH * param.scale,
+			'left': 0,
+			'top': 0,
 		});
-		$btnOne.on('click', function(e){
-			e.preventDefault();
-			$('.controls__switch-group-but').removeClass('active');
-			$btnOne.addClass('active');
-			$('#four').hide();
-			$('#one').show();
-			untile();
-		});
-		$btnHMarginPlus.on('click', function(e){
-			hMargin = hMargin + 1;
-			onChangeHMargin();
-		});
-		$btnHMarginMinus.on('click', function(e){
-			hMargin = hMargin - 1;
-			onChangeHMargin();
-		});
-		$btnVMarginPlus.on('click', function(e){
-			vMargin = vMargin + 1;
-			onChangeVMargin();
-		});
-		$btnVMarginMinus.on('click', function(e){
-			vMargin = vMargin - 1;
-			onChangeVMargin();
+
+		for (var i = 0; i < colsTiled * rowsTiled; i++) {
+			// console.log(wmW * param.scale);
+			var img = $('<img/>');
+			img.attr({
+				'src': $('#wm__img').attr('src'),
+				'class': 'wm__tile'
+			});
+			img.css({
+				'dislay': 'block',
+				'width': wmW * param.scale,
+				'height': wmH * param.scale,
+				'margin-right': param.vMargin,
+				'margin-bottom': param.hMargin,
+				'float': 'left'
+			});
+			img.appendTo($('#wm-tiles'));
+		}
+		$('#wm-tiles').css('opacity', param.currOpacity);
+		refreshMarginVal();
+	}
+
+	// обработчик кнопок изменения полей
+	function onChangeMargin (e) {
+		e.preventDefault();
+		switch (e.target.id) {
+			case 'h-margin-plus':
+				param.vMargin = param.vMargin + param.scale;
+				break;
+			case 'v-margin-plus':
+				param.hMargin = param.hMargin + param.scale;
+				break;
+			case 'h-margin-minus':
+				param.vMargin = param.vMargin - param.scale;
+				break;
+			case 'v-margin-minus':
+				param.hMargin = param.hMargin - param.scale;
+				break
+		}
+		refreshMarginVal();
+	}
+
+	// обновление инпутов полей
+	function refreshMarginVal() {
+		$vMarginVal.val(parseInt(param.hMargin));
+		$hMarginVal.val(parseInt(param.vMargin));
+		$lineHMargin.height(param.vMargin);
+		$lineVMargin.width(param.hMargin);
+		$('#wm-tiles img').css({
+			'marginRight': param.hMargin * param.scale,	
+			'marginBottom': param.vMargin * param.scale,	
 		});
 	}
 
 	// замостить
-	function tile() {
-		var rows = bgHeight / watermarkHeight + 1,
-			cols = bgWidth / watermarkWidth + 1;
-
-		$('#drag__img').css({
-			'float': 'left',
-			'margin': '0 ' + hMargin + 'px ' + vMargin + 'px ' + '0'
-		});
-
-		for(var i = 0; i < rows * cols; i++) {
-			var img = $('<img/>');
-
-			img.attr('src', $('#drag__img').attr('src'));
-			img.css({
-				'margin': '0 ' + hMargin + 'px ' + vMargin + 'px ' + '0',
-				'width': $('#drag__img').width(),
-				'height': $('#drag__img').height()
-			});
-			img.addClass('drug__watermark');
-			$watermark.append(img);
-		}
-		$watermark.draggable('disable');
+	function tile(e) {
+		e.preventDefault();
+		if(!images.checkUploadImg()) return;
+		$('.controls__switch-group-but').removeClass('active');
+		$(this).addClass('active');
+		$('#mode').val('tile');
+		$('#one').hide();
+		$('#four').show();
+		$wm.fadeOut();
+		$('#wm-tiles-work').fadeIn();
 	}
-
+	
 	// размостить
-	function untile() {
-
-	}
-
-	function onChangeHMargin() {
-		$hMarginVal.val(hMargin);
-		$('.drug__watermark').css('marginBottom', hMargin);
-		$hMarginLine.css('height', hMargin);
-	}
-
-	function onChangeVMargin() {
-		$vMarginVal.val(vMargin);
-		$('.drug__watermark').css('marginRight', vMargin);
-		$vMarginLine.css('width', vMargin);
-	}
+	function untile(e) {
+		e.preventDefault();
+		if(!images.checkUploadImg()) return;
+		$('.controls__switch-group-but').removeClass('active');
+		$(this).addClass('active');
+		$('#mode').val('untail');
+		$('#four').hide();
+		$('#one').show();
+		$('#wm-tiles-work').fadeOut();
+		$wm.fadeIn();
+	}	
 
 	// обработчик смены прозрачности
 	function onOpacityChange(e, ui) {
-		currOpacity = ui.value;
-		$watermark.css({
-			'opacity': currOpacity / 100
-		});
+		images.checkUploadImg();
+		param.currOpacity = ui.value / 100;
+		$wm.css('opacity', param.currOpacity);
+		$wmTiles.css('opacity', param.currOpacity);
+		$opacity.val(param.currOpacity);
 	}
-
 
 	// обработчик изменения позиций drag'n'drop
 	function onDragWatermark(e, ui) {
-		currPos = {
-			left: ui.position.left,
-			top: ui.position.top
-		};
-		$('#x-val').val(currPos.left);
-		$('#y-val').val(currPos.top);
-		refreshPosInput();
+		rmClassActive();
+		if (param.scale) {
+			param.currPos.left = ui.position.left / param.scale;
+			param.currPos.top = ui.position.top / param.scale;
+		}
+		console.log(param.fixedPositions.cm.left);
+		refreshPosVal();
+	}
+
+	// обновление полей с координатами
+	function refreshPosVal() {
+		$xVal.val(parseInt(param.currPos.left));
+		$yVal.val(parseInt(param.currPos.top));
+	}
+
+	// удаление активного класса у кнопок с фикс позициями
+	function rmClassActive() {
+		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');
 	}
 
 	// обработчик клика по кнопке с фиксированой позицией
 	function onClickFixedButt(e) {
-		var id = $(e.target).attr('id');
-
 		e.preventDefault();
-		moveFixed(id);
+		if(!images.checkUploadImg()) return;
+		if (!draggable) return;
+		rmClassActive();
+		moveFixed($(this).attr('id'));
 		$(this).addClass('one-watermark__col-link__active');
-	}
-
-	// обработчики изменения позиции кноаками
-	function onChangeValX() {
-		currPos.left = $xVal.val() * images.getScale();
-		$xVal.value(currPos.left);
-		setPos(currPos);
-	}
-
-	function onChangeValY() {
-		currPos.top = $yVal.val() * images.getScale();
-		$yVal.value(currPos.top);
-		setPos(currPos);
-	}
-
-	function refreshPosInput() {
-		$xVal.val(parseInt(currPos.left / scaleImg));
-		$yVal.val(parseInt(currPos.top / scaleImg));
 	}
 
 	// перемещение ватермарки по фиксированым позициям
 	function moveFixed(pos) {
+		if (!pos) return;
 		switch (pos) {
 			case 'lt':
-				currPos = fixedPositions.lt;
+				param.currPos.left = param.fixedPositions.lt.left;
+				param.currPos.top = param.fixedPositions.lt.top;
 				break
 			case 'ct':
-				currPos = fixedPositions.ct;
+				param.currPos.left = param.fixedPositions.ct.left;
+				param.currPos.top = param.fixedPositions.ct.top;
 				break
 			case 'rt':
-				currPos = fixedPositions.rt;
+				param.currPos.left = param.fixedPositions.rt.left;
+				param.currPos.top = param.fixedPositions.rt.top;
 				break
 			case 'lm':
-				currPos = fixedPositions.lm;
+				param.currPos.left = param.fixedPositions.lm.left;
+				param.currPos.top = param.fixedPositions.lm.top;
 				break
 			case 'cm':
-				currPos = fixedPositions.cm;
+				param.currPos.left = param.fixedPositions.cm.left;
+				param.currPos.top = param.fixedPositions.cm.top;
 				break
 			case 'rm':
-				currPos = fixedPositions.rm;
+				param.currPos.left = param.fixedPositions.rm.left;
+				param.currPos.top = param.fixedPositions.rm.top;
 				break
 			case 'lb':
-				currPos = fixedPositions.lb;
+				param.currPos.left = param.fixedPositions.lb.left;
+				param.currPos.top = param.fixedPositions.lb.top;
 				break
 			case 'cb':
-				currPos = fixedPositions.cb;
+				param.currPos.left = param.fixedPositions.cb.left;
+				param.currPos.top = param.fixedPositions.cb.top;
 				break
 			case 'rb':
-				currPos = fixedPositions.rb;
+				param.currPos.left = param.fixedPositions.rb.left;
+				param.currPos.top = param.fixedPositions.rb.top;
 				break
 			default:
 				break
 		}
-		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');
-		$watermark.css({
-			left: currPos.left * scaleImg,
-			top: currPos.top * scaleImg
-		});
-		refreshPosInput();
+		moveWm();
+		refreshPosVal();
+		console.log(param.fixedPositions.lt);
 	}
 
-	function calcSizes() {
-		var resultBoxWidth = $('#result-box').width(),
-			resultBoxHeight = $('#result-box').height(),
-			proportions = resultBoxWidth / resultBoxHeight;
-
-		watermarkWidth = $('#drag__img').width();
-		watermarkHeight = $('#drag__img').height();
-		bgWidth = $('#bg__img').width();
-		bgHeight = $('#bg__img').height();
-
-		if (bgWidth / bgHeight > proportions){
-			scaleImg = resultBoxWidth / bgWidth;
-			$('#bg__img').css('width', resultBoxWidth);
-		} else {
-			scaleimg = resultBoxHeight / bgHeight;
-			$('#bg__img').css('height', resultBoxHeight);
-		}
-		$('#drag__img').css('width', watermarkWidth * scaleImg);
+	// перемещение в текущую позицию
+	function moveWm() {
+		rmClassActive();
+		$('#wm').stop().animate({
+			left: param.currPos.left * param.scale,
+			top: param.currPos.top * param.scale
+		}, 200);
 	}
-
+	
 	// вычисление фиксированых позиций
 	function calcPositions() {
-		fixedPositions = {
+		param.fixedPositions = {
 			lt: {
 				left: 0,
 				top: 0
 			},
 			ct: {
-				left: parseInt((bgWidth - watermarkWidth) / 2),
+				left: parseInt((param.bgWidth - param.wmWidth) / 2),
 				top: 0
 			},
 			rt: {
-				left: bgWidth - watermarkWidth,
+				left: param.bgWidth - param.wmWidth,
 				top: 0
 			},
 			lm: {
 				left: 0,
-				top: parseInt((bgHeight - watermarkHeight)) / 2,
+				top: parseInt((param.bgHeight - param.wmHeight)) / 2,
 			},
 			cm: {
-				left: parseInt((bgWidth - watermarkWidth) / 2),
-				top: parseInt((bgHeight - watermarkHeight) / 2)
+				left: parseInt((param.bgWidth - param.wmWidth) / 2),
+				top: parseInt((param.bgHeight - param.wmHeight) / 2)
 			},
 			rm: {
-				left: bgWidth - watermarkWidth,
-				top: parseInt((bgHeight - watermarkHeight) / 2)
+				left: param.bgWidth - param.wmWidth,
+				top: parseInt((param.bgHeight - param.wmHeight) / 2)
 			},
 			lb: {
 				left: 0,
-				top: bgHeight - watermarkHeight,
+				top: param.bgHeight - param.wmHeight,
 			},
 			cb: {
-				left: parseInt((bgWidth - watermarkWidth) / 2),
-				top: bgHeight - watermarkHeight
+				left: parseInt((param.bgWidth - param.wmWidth) / 2),
+				top: param.bgHeight - param.wmHeight
 			},
 			rb: {
-				left: bgWidth - watermarkWidth,
-				top: bgHeight - watermarkHeight
+				left: param.bgWidth - param.wmWidth,
+				top: param.bgHeight - param.wmHeight
 			}
 		}
 	}
 
-	// геттеры
-	function getPos() {
-		return currPos;
+	// установка параметров
+	function setParams(data) {
+		if (data) {
+			for (var key in data) {
+				param[key] = data[key];
+			}
+			calcPositions();
+		}
 	}
 
-	function getOpacity() {
-		return currOpacity;
+	// масщтабирование
+	function scaleImg() {
+		if (param.bgWidth >= param.bgHeight) {
+			param.scale = $('#result-box').width() / param.bgWidth;
+		} else {
+			console.log('less');
+			param.scale = $('#result-box').height() / param.bgHeight;
+		}
+		zoom();
+		initDrag();
 	}
 
-	// установка ватермарки в нужную позицию
-	function setPos(position) {
-		var position = position || {left: 0, top: 0};
-
-		currPos = position;
-		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');
-		$watermark.css({
-			left: position.left / scaleImg,
-			top: position.top / scaleImg
-		});
+	// масщтабирование с параметром
+	function zoom(scale) {
+		param.scale = scale || param.scale;
+		$('#bg__img').css('width', param.bgWidth * param.scale);
+		$('#wm__img').css('width', param.wmWidth * param.scale);
+		centeredBg();
 	}
 
-	function setOpacity(opacity) {
-		var opacity = opacity || 0.5;
+	// центрирование
+	function centeredBg() {
+		$work.css('left', ($('#result-box').width() - param.bgWidth * param.scale) / 2);
+		$work.css('top', ($('#result-box').height() - param.bgHeight * param.scale) / 2);
+	}
 
-		currOpacity = opacity;
+	function reset() {
+		draggable = false;
+		param.currPos.left = 0;
+		param.currPos.top = 0;
+		refreshPosVal();
+		untile();
 	}
 
 	return {
 		init: function() {
 			initPlugins();
 			addEventListeners();
-			console.log('<watermark> init!');
+			$('.preloader').hide();
 		},
-		calcPositions: calcPositions,
-		position: getPos,
-		opacity: getOpacity,
-		setPos: setPos,
-		getPos: getPos
+		setParams: setParams,
+		scaleImg: scaleImg,
+		getParams: function() {
+			return param;
+		},
+		reset: reset,
+		createTiled: createTiled
 	};
 
 }());

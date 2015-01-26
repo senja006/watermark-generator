@@ -10,7 +10,8 @@ var
 	uglify = require('gulp-uglify'),
     opn = require('opn'),
     jade = require('gulp-jade'),
-	rename = require("gulp-rename");
+	rename = require("gulp-rename"),
+    clean = require("gulp-clean");
 
 //gulp.task('concat', function () {
 //	gulp.src('./_dev/_styles/**/*.css')
@@ -21,6 +22,11 @@ var
 //});
 
 // Компилируем LESS
+
+gulp.task('clean', function(){
+    gulp.src('app/upload/files/*.*')
+        .pipe(clean());
+});
 
 gulp.task('less', function () {
     gulp.src(['./_dev/_styles/**/*.less'])
@@ -42,6 +48,16 @@ gulp.task('jade', function () {
         .pipe(gulp.dest('./app')) // Записываем собранные файлы
         .pipe(connect.reload()); // даем команду на перезагрузку страницы
 });
+
+
+// Сборка
+gulp.task('build', ['clean', 'jade', 'less', 'js', 'compress-plugins', 'images', 'move-php'], function() {
+    gulp.src('_dev/favicon.ico')
+        .pipe(gulp.dest('app/'));
+    gulp.src('_dev/fonts/**/*')
+        .pipe(gulp.dest('app/fonts/'));
+});
+
 
 //gulp.task('jade', function () {
 //	gulp.src('./_dev/_makeups/_pages/*.html')
@@ -139,7 +155,7 @@ gulp.task('connect', function () {
         port: 8800,
         livereload: true
     });
-    opn('http://localhost:8080/');
+    opn('http://localhost:8800/');
 });
 
 // Default

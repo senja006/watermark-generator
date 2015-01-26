@@ -5,9 +5,13 @@ $name_main_img = $_POST['name-version-main'];
 $name_watermark = $_POST['name-version-watermark'];
 $x = $_POST['x'];
 $y = $_POST['y'];
+$opacity = $_POST['opacity'] * 100;
+$mode = $_POST['mode']; // tile, untile
+$x_margin = $_POST['x-margin'];
+$y_margin = $_POST['y-margin'];
 $img_main = convertImgToPng($img_path.$name_main_img, "main-img.png");
 $img_watermark = convertImgToPng($img_path.$name_watermark, "watermark.png");
-$res_img = joinImg($img_main, $img_watermark, $x, $y, 75);
+$res_img = joinImg($img_main, $img_watermark, $x, $y, $opacity, $mode, $x_margin, $y_margin);
 
 $data = array();
 
@@ -33,12 +37,14 @@ function convertImgToPng($img, $name) {
 	        break;
 	}
 	$new_img_name = $name;
+	// imagealphablending($new_img, false);
+	// imagesavealpha($new_img, true);
 	imagepng($new_img, $new_img_name);
 	imagedestroy($new_img);
 	return $new_img_name;
 };
 
-function joinImg($img_main, $watermark, $x, $y, $opacity) {
+function joinImg($img_main, $watermark, $x, $y, $opacity, $mode, $x_margin, $y_margin) {
 	$img_main_size = getimagesize($img_main);
 	$img_main_width = $img_main_size[0];
 	$img_main_height = $img_main_size[1];
@@ -46,11 +52,29 @@ function joinImg($img_main, $watermark, $x, $y, $opacity) {
 	$img_watermark_width = $img_watermark_size[0];
 	$img_watermark_height = $img_watermark_size[1];
 	$new_img_name = "result.jpg";
+	$row_height = $img_watermark_height + $y_margin;
+	$col_width = $img_watermark_width + $x_margin;
+	$row_num = ceil($img_main_height / $row_height);
+	$col_num = ceil($img_main_width / $col_width);
 	$img = imagecreatetruecolor($img_main_width, $img_main_height);
 	$main_img = imagecreatefrompng($img_main);
 	$watermark_img = imagecreatefrompng($watermark);
+	// imagealphablending($img, false);
+	// imagesavealpha($img, true);
+	// imagealphablending($watermark_img, false);
+	// imagesavealpha($watermark_img, true);
 	imagecopy($img, $main_img, 0, 0, 0, 0, $img_main_width, $img_main_height);
-	imagecopymerge($img, $watermark_img, $x, $y, 0, 0, $img_watermark_width, $img_watermark_height, $opacity);
+	if($mode === 'tile') {
+		for($r = 0; $r < $row_num; $r++) {
+			$y_tile = $row_height * $r;
+			for($c = 0; $c < $col_num; $c++) {
+				$x_tile = $col_width * $c;
+				imagecopymerge($img, $watermark_img, $x_tile, $y_tile, 0, 0, $img_watermark_width, $img_watermark_height, $opacity);
+			}
+		}
+	}else{
+		imagecopymerge($img, $watermark_img, $x, $y, 0, 0, $img_watermark_width, $img_watermark_height, $opacity);
+	}
 	imagejpeg($img, $new_img_name, "100");
 	imagedestroy($img);
 	return $new_img_name;
