@@ -12,39 +12,39 @@ var lang = (function() {
 			},
 			'.controls__title': {
 				rus: "Настройки",
-				eng: "Options"
+				eng: "Settings"
 			},
 			'#title-source-bg': {
 				rus: "Исходное изображение",
-				eng: "Source image"
+				eng: "Original image"
 			},
 			'#title-source-wm': {
 				rus: "Водяной знак",
-				eng: "Watermark image"
+				eng: "Watermark"
 			},
 			'#opacity-field': {
 				rus: "Прозрачность",
-				eng: "Opacity"
+				eng: "Transparency"
 			},
 			'#title-position': {
 				rus: "Положение",
-				eng: "Position"
+				eng: "Place"
 			},
 			'#but-reset': {
 				rus: "Сброс",
-				eng: "Clear"
+				eng: "Reset"
 			},
 			'#but-send': {
 				rus: "Скачать",
 				eng: "Download"
 			},
 			'input[name=name-main]': {
-				rus: "Загрузите изображение",
-				eng: "Upload image"
+				rus: "Загрузите исходное изображение",
+				eng: "Upload original image"
 			},
 			'input[name=name-watermark]': {
-				rus: "Загрузите изображение",
-				eng: "Upload image"
+				rus: "Загрузите водяной знак",
+				eng: "Upload watermark"
 			},
 			'.copy__p': {
 				rus: "2015, Это мой сайт, пожалуйста, не копируйте и не воруйте его",
@@ -89,8 +89,8 @@ var lang = (function() {
 		var	language = $(this).attr('class').substr(-3);
 
 		e.preventDefault();
-		console.log(language);
 		setLang(language);
+        $('.error').hide();
 	}
 
 	function setLang(language) {
