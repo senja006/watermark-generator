@@ -56,7 +56,7 @@ var images = (function() {
 			add: function(e, data) {
 				var errorsText = '';
 		        var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
-		        
+
 		        $('.preloader').show();
 		        if(data.originalFiles[0]['size'] > MAX_FILE_SIZE) {
 		            errorsText = lang.getMsgText('maxfilesize') + (MAX_FILE_SIZE / 1000000) + lang.getMsgText('mb');
@@ -117,8 +117,8 @@ var images = (function() {
 			img.appendTo($bg);
 
 		} else if (container.match(/watermark/)) {
-			if ($('img', '#wm')) $('img', '#wm').remove();
-			if ($('wm__tile')) $('wm__tile').remove();
+			if ($('#wm img')) $('#wm img').remove();
+			if ($('.wm__tile')) $('.wm__tile').remove();
 			img.attr({
 				id: 'wm__img',
 				class: 'wm__img',
@@ -132,9 +132,9 @@ var images = (function() {
 				watermark.createTiled();
 				$(this).hide().fadeIn();
 				$('.preloader').hide();
-			})
-			$('.preloader').show();
+			});
 			img.appendTo($wm);
+			
 		} else {
 			console.error('Чё за контейнер?!');
 			return;

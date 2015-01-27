@@ -9,10 +9,10 @@ var socialShare = (function () {
         share_window_height = 500, // Высота окна шаринга
         marginleft = screen.availWidth/2 - share_window_width/2,
         margintop = screen.availHeight/2 - share_window_height/ 2,
-        $surl = document.url,
+        $surl = document.location.origin,
         $stitle = document.title,
         $stext = document.description,
-        $simg = "http://" + window.location.host + "/img/watermark3.jpg";
+        $simg = "http://" + window.location.host + "/img/small-square.png";
 
     //Отслеживание нажатий на кнопки
     $('#vk').on('click', function () {

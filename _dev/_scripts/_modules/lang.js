@@ -101,7 +101,7 @@ var lang = (function() {
 				$(selector).attr('placeholder', lang[selector][language]);
 			}
 			if (selector.substr(0, 2) === '--') {
-				break;
+				continue;
 			}
 			$(selector).text(lang[selector][language]);
 		}
@@ -128,3 +128,5 @@ var lang = (function() {
 		getMsgText: getMsgText
 	}
 }());
+
+
