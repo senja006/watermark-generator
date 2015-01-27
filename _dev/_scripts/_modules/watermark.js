@@ -126,7 +126,7 @@ var watermark = (function() {
 			'top': 0,
 		});
 
-		for (var i = 0; i < colsTiled * rowsTiled; i++) {
+		for (var i = 0; i <= 50; i++) {
 			// console.log(wmW * param.scale);
 			var img = $('<img/>');
 			img.attr({
@@ -291,7 +291,6 @@ var watermark = (function() {
 		}
 		moveWm();
 		refreshPosVal();
-		console.log(param.fixedPositions.lt);
 	}
 
 	// перемещение в текущую позицию
@@ -357,11 +356,14 @@ var watermark = (function() {
 
 	// масщтабирование
 	function scaleImg() {
+		var
+			width =  $('#result-box').width(),
+			height =  $('#result-box').height();
+
 		if (param.bgWidth >= param.bgHeight) {
-			param.scale = $('#result-box').width() / param.bgWidth;
+			param.scale = width / param.bgWidth;
 		} else {
-			console.log('less');
-			param.scale = $('#result-box').height() / param.bgHeight;
+			param.scale = height / param.bgHeight;
 		}
 		zoom();
 		initDrag();
@@ -389,6 +391,10 @@ var watermark = (function() {
 		untile();
 	}
 
+	function getParams() {
+		return param;
+	}
+
 	return {
 		init: function() {
 			initPlugins();
@@ -397,9 +403,7 @@ var watermark = (function() {
 		},
 		setParams: setParams,
 		scaleImg: scaleImg,
-		getParams: function() {
-			return param;
-		},
+		getParams: getParams,
 		reset: reset,
 		createTiled: createTiled
 	};

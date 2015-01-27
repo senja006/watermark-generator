@@ -134,6 +134,7 @@ var images = (function() {
 				$('.preloader').hide();
 			});
 			img.appendTo($wm);
+			
 		} else {
 			console.error('Чё за контейнер?!');
 			return;
