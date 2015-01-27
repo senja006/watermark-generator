@@ -5,7 +5,6 @@ $(document).ready(function() {
     watermark.init();       // управление водяным знаком
     images.init();			// управление картинками
     lang.init();            // Смена языка
-   // Кнопки соц сетей
 
 });
 
