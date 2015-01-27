@@ -183,7 +183,8 @@ footer {
   clear: both;
 }
 
-input {
+input,
+button {
   outline: none;
 }
 /*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -806,7 +807,8 @@ table {
   clear: both;
 }
 
-input {
+input,
+button {
   outline: none;
 }
 
@@ -897,7 +899,8 @@ footer p {
   clear: both;
 }
 
-input {
+input,
+button {
   outline: none;
 }
 
@@ -985,7 +988,8 @@ body {
   clear: both;
 }
 
-input {
+input,
+button {
   outline: none;
 }
 
@@ -1864,7 +1868,7 @@ input {
   width: 100%;
   height: 100%;
   overflow: visible;
-  background: #333333 url(http://files.mimoymima.com/images/loading.gif) no-repeat center center;
+  background: #333333 url("../img/icons/preloader.gif") no-repeat center center;
 }
 /* --------- fonts --------- */
 
@@ -1936,7 +1940,8 @@ input {
   clear: both;
 }
 
-input {
+input,
+button {
   outline: none;
 }
 
@@ -1981,9 +1986,10 @@ input {
 }
 
 .social__list {
-  float: left;
   list-style-type: none;
-  display: none;
+  position: absolute;
+  left: -43px;
+  -webkit-transition: left 0.5s ease-out;
 }
 
 .social__list-item {
@@ -2004,47 +2010,46 @@ input {
 }
 
 .social:hover .social__list {
-  display: block;
+  left: 0;
 }
 
 .social:hover .social__like {
   background-position: -40px -122px;
+  left: 43px;
 }
 
-.fb {
+#fb {
   background: url("../img/icons/sprite.png") 5px 0px no-repeat;
 }
 
-.fb:hover {
+#fb:hover {
   background-position: 5px -124px;
 }
 
-.vk {
+#vk {
   background: url("../img/icons/sprite.png") 3px -80px no-repeat;
 }
 
-.vk:hover {
+#vk:hover {
   background-position: 3px -204px;
 }
 
-.twitter {
+#twitter {
   background: url("../img/icons/sprite.png") 3px -40px no-repeat;
 }
 
-.twitter:hover {
+#twitter:hover {
   background-position: 3px -164px;
 }
 
 .social__like {
-  float: right;
+  left: 0;
+  position: absolute;
   height: 45px;
   width: 43px;
   display: block;
   text-indent: -9999px;
   cursor: pointer;
   background: rgba(241, 241, 245, 0.7) url("../img/icons/sprite.png") -40px 2px no-repeat;
-}
-
-.social__like:hover {
-  background-position: -40px -122px;
+  -webkit-transition: left 0.5s ease-out;
 }
