@@ -101,10 +101,13 @@ var lang = (function() {
 				$(selector).attr('placeholder', lang[selector][language]);
 			}
 			if (selector.substr(0, 2) === '--') {
-				break;
+				continue;
 			}
 			$(selector).text(lang[selector][language]);
 		}
+		console.log('.language__link__' + currLang);
+		$('.language__link').removeClass('language__link__active');
+        $('.language__link__' + currLang).addClass('language__link__active');
 	}
 
 	function getMsgText(msgId) {
@@ -128,3 +131,5 @@ var lang = (function() {
 		getMsgText: getMsgText
 	}
 }());
+
+

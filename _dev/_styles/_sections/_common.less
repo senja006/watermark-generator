@@ -34,15 +34,11 @@
       left: 0;
       opacity: 0.5;
       z-index: 9999;
-      .drug__watermark{
-
-
-      }
       &:hover {
         cursor: move;
       }
   }
-  }
+}
 }
 #result-box {
   font-size: 0;
@@ -466,13 +462,13 @@
     }
     &-name{
       position: absolute;
-      top: 15px;
-      right: 92px;
+      top: 0px;
+      right: 94px;
       bottom: 0;
       width: 9px;
       height: 29px;
       font-size: 30px;
-
+      display: block;
     }
     &-control{
       position: relative;
@@ -687,13 +683,3 @@
   padding: 0;
 }
 
-.preloader {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 999;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  background: #333 url('../../img/icons/preloader.gif') no-repeat center center;
-}

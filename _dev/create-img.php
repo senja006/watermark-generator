@@ -52,8 +52,8 @@ function joinImg($img_main, $watermark, $x, $y, $opacity, $mode, $x_margin, $y_m
 	$img_watermark_width = $img_watermark_size[0];
 	$img_watermark_height = $img_watermark_size[1];
 	$new_img_name = "result.jpg";
-	$row_height = $img_watermark_height + $y_margin;
-	$col_width = $img_watermark_width + $x_margin;
+	$row_height = $img_watermark_height + $x_margin;
+	$col_width = $img_watermark_width + $y_margin;
 	$row_num = ceil($img_main_height / $row_height);
 	$col_num = ceil($img_main_width / $col_width);
 	$img = imagecreatetruecolor($img_main_width, $img_main_height);
@@ -65,9 +65,9 @@ function joinImg($img_main, $watermark, $x, $y, $opacity, $mode, $x_margin, $y_m
 	// imagesavealpha($watermark_img, true);
 	imagecopy($img, $main_img, 0, 0, 0, 0, $img_main_width, $img_main_height);
 	if($mode === 'tile') {
-		for($r = 0; $r < $row_num; $r++) {
+		for($r = 0; $r <= $row_num; $r++) {
 			$y_tile = $row_height * $r;
-			for($c = 0; $c < $col_num; $c++) {
+			for($c = 0; $c <= $col_num; $c++) {
 				$x_tile = $col_width * $c;
 				imagecopymerge($img, $watermark_img, $x_tile, $y_tile, 0, 0, $img_watermark_width, $img_watermark_height, $opacity);
 			}

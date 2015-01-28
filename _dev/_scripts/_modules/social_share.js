@@ -12,7 +12,7 @@ var socialShare = (function () {
         $surl = document.location.origin,
         $stitle = document.title,
         $stext = document.description,
-        $simg = "http://" + window.location.host + "/img/watermark3.jpg";
+        $simg = "http://" + window.location.host + "/img/small-square.png";
 
     //Отслеживание нажатий на кнопки
     $('#vk').on('click', function () {
