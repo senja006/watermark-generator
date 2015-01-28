@@ -91,6 +91,8 @@ var lang = (function() {
 		e.preventDefault();
 		setLang(language);
         $('.error').hide();
+        $('.language__link').removeClass('language__link__active');
+        $(this).addClass('language__link__active');
 	}
 
 	function setLang(language) {

@@ -169,6 +169,7 @@ var images = (function() {
 		$('.is-load').removeClass('is-load');
 		$('.error').fadeOut(300);
 		$('#bg__img, #wm__img').remove();
+		$('.wm__tile').remove();
 		watermark.reset();
 	};
 
