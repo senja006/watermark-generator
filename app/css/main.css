@@ -1144,11 +1144,11 @@ button {
   width: 30px;
   height: 30px;
   margin: 0 auto;
-  -webkit-animation: sk-rotatePlane 1.2s infinite ease-in-out;
-  animation: sk-rotatePlane 1.2s infinite ease-in-out;
+  -webkit-animation: rotatePlane 1.2s infinite ease-in-out;
+  animation: rotatePlane 1.2s infinite ease-in-out;
 }
 
-@-webkit-keyframes sk-rotatePlane {
+@-webkit-keyframes rotatePlane {
   0% {
     -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
     transform: perspective(120px) rotateX(0deg) rotateY(0deg);
@@ -1165,7 +1165,7 @@ button {
   }
 }
 
-@keyframes sk-rotatePlane {
+@keyframes rotatePlane {
   0% {
     -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
     transform: perspective(120px) rotateX(0deg) rotateY(0deg);
@@ -1304,15 +1304,18 @@ button {
 }
 
 .social {
+  width: 86px;
   margin-top: 19px;
-  position: relative;
+  position: absolute;
+  left: -43px;
+  -webkit-transition: left 0.5s ease;
 }
 
 .social__list {
+  padding: 0;
+  margin: 0;
   list-style-type: none;
-  position: absolute;
-  left: -43px;
-  -webkit-transition: left 0.5s ease-out;
+  float: left;
 }
 
 .social__list-item {
@@ -1332,7 +1335,7 @@ button {
   background: url("../img/icons/sprite.png");
 }
 
-.social:hover .social__list {
+.social:hover {
   left: 0;
 }
 
@@ -1366,10 +1369,9 @@ button {
 }
 
 .social__like {
-  left: 0;
-  position: absolute;
   height: 45px;
   width: 43px;
+  float: right;
   display: block;
   text-indent: -9999px;
   cursor: pointer;

@@ -91,8 +91,6 @@ var lang = (function() {
 		e.preventDefault();
 		setLang(language);
         $('.error').hide();
-        $('.language__link').removeClass('language__link__active');
-        $(this).addClass('language__link__active');
 	}
 
 	function setLang(language) {
@@ -107,6 +105,9 @@ var lang = (function() {
 			}
 			$(selector).text(lang[selector][language]);
 		}
+		console.log('.language__link__' + currLang);
+		$('.language__link').removeClass('language__link__active');
+        $('.language__link__' + currLang).addClass('language__link__active');
 	}
 
 	function getMsgText(msgId) {

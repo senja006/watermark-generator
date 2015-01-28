@@ -37,13 +37,15 @@
   }
 }
 .social{
-  margin-top:19px;
-  position: relative;
+  width: 86px;
+  margin-top: 19px;
+  position: absolute;
+  left: -43px;
+  -webkit-transition: left 0.5s ease;
   &__list{
+    .zero();
     list-style-type: none;
-    position: absolute;
-    left: -43px;
-    -webkit-transition: left 0.5s ease-out;
+    float: left;
     &-item{
       background-color:  rgba(241, 241, 245, 0.7);
       display: block;
@@ -60,7 +62,7 @@
       }
     }
   }
-  &:hover .social__list{
+  &:hover {
     left: 0;
   }
   &:hover .social__like{
@@ -87,10 +89,9 @@
   }
 }
 .social__like{
-  left: 0;
-  position: absolute;
   height: 45px;
   width: 43px;
+  float: right;
   display: block;
   text-indent: -9999px;
   cursor: pointer;
