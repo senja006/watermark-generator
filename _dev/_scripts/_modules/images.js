@@ -67,6 +67,7 @@ var images = (function() {
 		        }
 		        if(errorsText.length > 0) {
 		            showError($controlsFile, errorsText);
+		            $('.preloader').hide();
 		        }else{
 		            data.submit();
 		        	hideError($controlsFile);
@@ -128,7 +129,7 @@ var images = (function() {
 				class: 'wm__img',
 				src: src
 			});
-			$('.preloader').show();
+
 			img.appendTo($wm);
 			$('#wm__img').on('load.append', function() {
 				console.log($('#wm__img'));
@@ -137,14 +138,11 @@ var images = (function() {
 					wmHeight: $('#wm__img').height()
 				});
 				watermark.scaleImg();
-				console.log('watermark.createTiled 132');
 				watermark.createTiled();
 				$(this).hide().fadeIn();
 				$('.preloader').hide();
 				$('#wm__img').off('load.append');
 			});
-			console.log('img.appendTo 138');
-			console.log('img= ' + img);
 		} else {
 			console.error('Чё за контейнер?!');
 			return;
@@ -181,6 +179,7 @@ var images = (function() {
 			var emptyVal = '';
 			if($input.val() === '') {
 				showError($this, lang.getMsgText('needfile'));
+				$('.preloader').hide();
 			}else{
 				hideError($this);
 			}

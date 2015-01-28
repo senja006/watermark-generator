@@ -77,6 +77,10 @@ var watermark = (function() {
 		$('#but-four').on('click', tile);
 		$('#but-one').on('click', untile);
 		$('.margin__property-btn').on('click', onChangeMargin);
+		$('#h-margin-val').on('change', function(e) {
+			param.hMargin = $(this).val();
+			onChangeMargin(e);
+		});
 	};
 
 	function controlChangeCoordinates() {
@@ -118,7 +122,7 @@ var watermark = (function() {
 			'rowsTiled': rowsTiled,
 			'colsTiled * rowsTiled': colsTiled * rowsTiled,
 		};
-		console.log(data);
+
 
 		$('#wm-tiles-work').css({
 			'width': param.bgWidth * param.scale,
@@ -202,6 +206,7 @@ var watermark = (function() {
 		$('#four').show();
 		$wm.css('left', -9999);
 		$('#wm-tiles-work').show();
+		$('.four-watermark__col-link').addClass('disabled');
 	}
 
 	// размостить
@@ -214,7 +219,7 @@ var watermark = (function() {
 		$('#four').hide();
 		$('#one').show();
 		$('#wm-tiles-work').hide();
-		$wm.css('left', param.currPos.left);
+		$('.four-watermark__col-link').removeClass('disabled');
 	}
 
 	// обработчик смены прозрачности

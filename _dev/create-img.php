@@ -52,8 +52,8 @@ function joinImg($img_main, $watermark, $x, $y, $opacity, $mode, $x_margin, $y_m
 	$img_watermark_width = $img_watermark_size[0];
 	$img_watermark_height = $img_watermark_size[1];
 	$new_img_name = "result.jpg";
-	$row_height = $img_watermark_height + $y_margin;
-	$col_width = $img_watermark_width + $x_margin;
+	$row_height = $img_watermark_height + $x_margin;
+	$col_width = $img_watermark_width + $y_margin;
 	$row_num = ceil($img_main_height / $row_height);
 	$col_num = ceil($img_main_width / $col_width);
 	$img = imagecreatetruecolor($img_main_width, $img_main_height);
