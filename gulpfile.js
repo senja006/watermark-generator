@@ -17,14 +17,14 @@ var
 // сборка папки 'app/'
 gulp.task('build', ['clean', 'jade', 'less', 'js', 'compress-plugins', 'move-php'], function() {
     gulp.src('_dev/favicon.ico')
-        .pipe(gulp.dest('app/'));
+        .pipe(gulp.dest('app/'))
     gulp.src('_dev/fonts/**/*')
-        .pipe(gulp.dest('app/fonts/'));
+        .pipe(gulp.dest('app/fonts/'))
     gulp.src('_dev/_scripts/_vendor/**/*')
-        .pipe(gulp.dest('app/js/vendor/'));
+        .pipe(gulp.dest('app/js/vendor/'))
     gulp.src('_dev/img/**/*')
         .pipe(imagemin())
-        .pipe(gulp.dest('app/img'));
+        .pipe(gulp.dest('app/img'))
 });
 
 // компилируем Jade
@@ -65,7 +65,6 @@ gulp.task('js', function() {
         .on('error', console.log)
         .pipe(gulp.dest('app/js'))
         .pipe(uglify())
-        .on('error', console.log)
         .pipe(rename({
             suffix: '.min'
         }))
@@ -105,7 +104,7 @@ gulp.task('watch', function() {
     gulp.watch('_dev/_styles/**/*.less', ['less']);
     gulp.watch('_dev/_makeups/**/*.jade', ['jade']);
     gulp.watch('_dev/_scripts/_modules/*.js', ['js', 'compress-plugins']);
-    gulp.watch('_dev/_scripts/_plugins/*.js', ['compress-plugins']);
+    gulp.watch('_dev/_scripts/_plugins/*.js', ['compress-plugins', 'uglify-plugins']);
     gulp.watch('_dev/*.php', ['move-php']);
 });
 

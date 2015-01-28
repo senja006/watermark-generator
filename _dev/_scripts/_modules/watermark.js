@@ -4,9 +4,9 @@ var watermark = (function() {
 		$work = $('#work'),
 		$wm = $('#wm'), // контейнер дла ватермарка
 		$bg = $('#bg'), // контейнер для исходного изображкения
-		$wmTilesWork = $('#wm-tiles-work'), // границы для замощеного контенера
-		$wmTiles = $('#wm-tiles'), // замощеный контейнер
-		$bgImg = $('#bg__img'), // исходное изображение
+		$wmTilesWork = $('#wm-tiles-work'); // границы для замощеного контенера
+	$wmTiles = $('#wm-tiles'); // замощеный контейнер
+	$bgImg = $('#bg__img'), // исходное изображение
 		$wmImg = $('#wm__img'), // изображение ватермарк
 
 		$opacityVal = $('#opacity-val'), // поле прозрачности
@@ -77,9 +77,13 @@ var watermark = (function() {
 		$('#but-four').on('click', tile);
 		$('#but-one').on('click', untile);
 		$('.margin__property-btn').on('click', onChangeMargin);
-		$('#h-margin-val').on('change', function(e) {
+		$('#h-margin-val').on('keyup', function(e){
 			param.hMargin = $(this).val();
-			onChangeMargin(e);
+			refreshMarginVal();
+		});
+		$('#v-margin-val').on('keyup', function(e){
+			param.vMargin = $(this).val();
+			refreshMarginVal();
 		});
 	};
 
@@ -122,7 +126,7 @@ var watermark = (function() {
 			'rowsTiled': rowsTiled,
 			'colsTiled * rowsTiled': colsTiled * rowsTiled,
 		};
-
+		console.log(data);
 
 		$('#wm-tiles-work').css({
 			'width': param.bgWidth * param.scale,
@@ -190,8 +194,8 @@ var watermark = (function() {
 		$lineHMargin.height(param.vMargin);
 		$lineVMargin.width(param.hMargin);
 		$('#wm-tiles img').css({
-			'marginRight': param.hMargin * param.scale,
-			'marginBottom': param.vMargin * param.scale
+			'marginRight': param.hMargin,
+			'marginBottom': param.vMargin,
 		});
 	}
 
@@ -206,7 +210,6 @@ var watermark = (function() {
 		$('#four').show();
 		$wm.css('left', -9999);
 		$('#wm-tiles-work').show();
-		$('.four-watermark__col-link').addClass('disabled');
 	}
 
 	// размостить
@@ -219,7 +222,7 @@ var watermark = (function() {
 		$('#four').hide();
 		$('#one').show();
 		$('#wm-tiles-work').hide();
-		$('.four-watermark__col-link').removeClass('disabled');
+		$wm.css('left', param.currPos.left);
 	}
 
 	// обработчик смены прозрачности
