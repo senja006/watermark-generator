@@ -11,7 +11,8 @@ var
     opn = require('opn'),
     jade = require('gulp-jade'),
 	rename = require("gulp-rename"),
-    clean = require("gulp-clean");
+    clean = require("gulp-clean"),
+    prefixer = require("gulp-autoprefixer");
 
 //gulp.task('concat', function () {
 //	gulp.src('./_dev/_styles/**/*.css')
@@ -32,10 +33,13 @@ gulp.task('less', function () {
     gulp.src(['./_dev/_styles/**/*.less'])
         .pipe(less())
         .on('error', console.log) // Если есть ошибки, выводим и продолжаем
+        .pipe(prefixer())
         .pipe(concatCss("main.css"))
-		// .pipe(minifyCSS({keepBreaks:true}))
-        .pipe(notify("<%= file.relative %> Less Complete!"))
         .pipe(gulp.dest('app/css'))
+        .pipe(minifyCSS({keepBreaks:true}))
+        .pipe(rename({suffix: '.min'}))
+        .pipe(gulp.dest('app/css'))
+        .pipe(notify("<%= file.relative %> Less Complete!"))
         .pipe(connect.reload());
 });
 

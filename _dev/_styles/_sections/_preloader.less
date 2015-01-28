@@ -1,17 +1,22 @@
+@preloader-opacity: 0.5;
+@preloader-fc     : #f97e76;
+
 .preloader {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0, 0, 0, @preloader-opacity);
+  display: none;
 }
 
-.sk-spinner-rotating-plane.sk-spinner {
+.preloader__spin {
   position: absolute;
-  left: 317px;
-  top: 240px;
-  background-color: #f97e76;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: @preloader-fc;
   width: 30px;
   height: 30px;
   margin: 0 auto;
