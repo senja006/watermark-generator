@@ -1,3 +1,9 @@
+# Our #
+#######
+
+app
+
+
 # Compiled source #
 ###################
 *.com
@@ -45,7 +51,10 @@ Thumbs.db
 ######################
 
 node_modules
-css
-app
-index.html
+
+# bower #
+#########
+
 bower_components
+
+
