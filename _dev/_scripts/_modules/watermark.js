@@ -4,9 +4,9 @@ var watermark = (function() {
 		$work = $('#work'),
 		$wm = $('#wm'), // контейнер дла ватермарка
 		$bg = $('#bg'), // контейнер для исходного изображкения
-		$wmTilesWork = $('#wm-tiles-work'); // границы для замощеного контенера
-	$wmTiles = $('#wm-tiles'); // замощеный контейнер
-	$bgImg = $('#bg__img'), // исходное изображение
+		$wmTilesWork = $('#wm-tiles-work'), // границы для замощеного контенера
+		$wmTiles = $('#wm-tiles'), // замощеный контейнер
+		$bgImg = $('#bg__img'), // исходное изображение
 		$wmImg = $('#wm__img'), // изображение ватермарк
 
 		$opacityVal = $('#opacity-val'), // поле прозрачности
@@ -77,14 +77,6 @@ var watermark = (function() {
 		$('#but-four').on('click', tile);
 		$('#but-one').on('click', untile);
 		$('.margin__property-btn').on('click', onChangeMargin);
-		$('#h-margin-val').on('keyup', function(e){
-			param.hMargin = $(this).val();
-			refreshMarginVal();
-		});
-		$('#v-margin-val').on('keyup', function(e){
-			param.vMargin = $(this).val();
-			refreshMarginVal();
-		});
 	};
 
 	function controlChangeCoordinates() {
@@ -194,8 +186,8 @@ var watermark = (function() {
 		$lineHMargin.height(param.vMargin);
 		$lineVMargin.width(param.hMargin);
 		$('#wm-tiles img').css({
-			'marginRight': param.hMargin,
-			'marginBottom': param.vMargin,
+			'marginRight': param.hMargin * param.scale,
+			'marginBottom': param.vMargin * param.scale
 		});
 	}
 
