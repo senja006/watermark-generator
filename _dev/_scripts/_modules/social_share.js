@@ -62,7 +62,7 @@ var socialShare = (function() {
             url += 'text=' + encodeURIComponent(title);
             url += '&url=' + encodeURIComponent(serviceUrl);
             url += '&counturl=' + encodeURIComponent(url);
-
+            popup(url);
         }
         //mailru: function(purl, ptitle, pimg, text) {
         //    url  = 'http://connect.mail.ru/share?';
