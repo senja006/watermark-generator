@@ -1,6 +1,7 @@
 /**
  * Created by FreeWay on 26.01.15.
  */
+'use strict';
 
 var socialShare = (function() {
 
@@ -14,6 +15,7 @@ var socialShare = (function() {
         title = document.title,
         text = "Найкрутейший, бесплатный и очень удобный сервис наложения водяного знака"
         img = "http://" + host + "/img/small-square.png";
+
 
     function addEventListener() {
         $('#vk').on('click', vk);
@@ -60,7 +62,7 @@ var socialShare = (function() {
         url += 'text=' + encodeURIComponent(title);
         url += '&url=' + encodeURIComponent(serviceUrl);
         url += '&counturl=' + encodeURIComponent(url);
-        popup(url);
+
     }
     //mailru: function(purl, ptitle, pimg, text) {
         //    url  = 'http://connect.mail.ru/share?';
@@ -71,8 +73,8 @@ var socialShare = (function() {
         //    Share.popup(url)
         //},
 
-    function popup(url) {
-        window.open(url, '_blank', 'toolbar=0,status=0,width=650,height=500,left=' + marginLeft + ', top=' + marginTop + '');
+    function popup(linkUrl) {
+        window.open(linkUrl,'_blank','toolbar=0,status=0,width=650,height=500,left=' + marginLeft + ', top=' + marginTop);
     }
 
     return {

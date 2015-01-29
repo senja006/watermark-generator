@@ -104,7 +104,7 @@ gulp.task('watch', function() {
     gulp.watch('_dev/_styles/**/*.less', ['less']);
     gulp.watch('_dev/_makeups/**/*.jade', ['jade']);
     gulp.watch('_dev/_scripts/_modules/*.js', ['js', 'compress-plugins']);
-    gulp.watch('_dev/_scripts/_plugins/*.js', ['compress-plugins']);
+    gulp.watch('_dev/_scripts/_plugins/*.js', ['compress-plugins', 'uglify-plugins']);
     gulp.watch('_dev/*.php', ['move-php']);
 });
 
