@@ -55,6 +55,7 @@ var images = (function() {
 		        var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
 
 		        $('.preloader').show();
+		        $('.overlay-disabled').show();
 		        $('.controls__inputs-group').addClass('controls__inputs-group__disabled');
 		        if(data.originalFiles[0].size > MAX_FILE_SIZE) {
 		            errorsText = lang.getMsgText('maxfilesize') + (MAX_FILE_SIZE / 1000000) + lang.getMsgText('mb');
@@ -112,10 +113,11 @@ var images = (function() {
 				watermark.scaleImg();
 				$(this).hide().fadeIn();
 				$('.preloader').hide();
+				$('.controls__inputs-group .overlay-disabled').hide();
+				$('.controls__inputs-group').removeClass('controls__inputs-group__disabled');
+
 			})
 			img.appendTo($bg);
-			$('.overlay-disabled').hide();
-			$('.controls__inputs-group').removeClass('controls__inputs-group__disabled');
 		} else if (container.match(/watermark/)) {
 			$('#wm__img').remove()
 			$('#wm__tiles').empty();
@@ -125,8 +127,8 @@ var images = (function() {
 				class: 'wm__img',
 				src: src
 			});
-			$('.preloader').show();
-			$('.overlay-disabled').show();
+			// $('.preloader').show();
+			// $('.overlay-disabled').show();
 	
 			img.appendTo($wm);
 			$('.overlay-disabled').hide();
