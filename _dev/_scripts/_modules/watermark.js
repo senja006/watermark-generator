@@ -210,6 +210,7 @@ var watermark = (function() {
 		$('#four').show();
 		$wm.css('left', -9999);
 		$('#wm-tiles-work').show();
+		$('.four-watermark__col-link').addClass('disabled');
 	}
 
 	// размостить
@@ -223,6 +224,7 @@ var watermark = (function() {
 		$('#one').show();
 		$('#wm-tiles-work').hide();
 		$wm.css('left', param.currPos.left);
+		$('.four-watermark__col-link').removeClass('disabled');
 	}
 
 	// обработчик смены прозрачности

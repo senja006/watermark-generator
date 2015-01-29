@@ -89,6 +89,9 @@ var lang = (function() {
 		var	language = $(this).attr('class').substr(-3);
 
 		e.preventDefault();
+        if($(this).hasClass('language__link__active')) {
+        	return;
+        }
 		setLang(language);
         $('.error').hide();
 	}
