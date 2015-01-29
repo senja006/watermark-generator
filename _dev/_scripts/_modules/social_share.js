@@ -13,7 +13,8 @@ var socialShare = (function() {
         serviceLink = location.origin,
         title = document.title,
         text = window.document.description,
-        img = "http://" + window.location.host + "/img/small-square.png";
+        img = "http://" + window.location.host + "/img/small-square.png",
+        url;
 
     function addEventListener() {
         $('#vk').on('click', vk);
@@ -71,7 +72,6 @@ var socialShare = (function() {
     return {
         init: function() {
             addEventListener();
-            console.log('socialShare init!');
         }
     };
 }());
