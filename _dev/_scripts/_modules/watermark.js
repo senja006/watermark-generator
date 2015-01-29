@@ -194,8 +194,8 @@ var watermark = (function() {
 		$lineHMargin.height(param.vMargin);
 		$lineVMargin.width(param.hMargin);
 		$('#wm-tiles img').css({
-			'marginRight': param.hMargin,
-			'marginBottom': param.vMargin,
+			'marginRight': param.hMargin * param.scale,
+			'marginBottom': param.vMargin * param.scale,
 		});
 	}
 
