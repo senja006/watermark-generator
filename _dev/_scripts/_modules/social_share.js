@@ -71,6 +71,7 @@ var socialShare = (function() {
     return {
         init: function() {
             addEventListener();
+            console.log('socialShare init!');
         }
     };
 }());

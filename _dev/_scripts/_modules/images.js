@@ -34,16 +34,13 @@ var images = (function() {
 			},
 			success: function(response) {
 				var response = getObj(response);
-				// console.log(response);
+
 				downloadResImg(response);
-				// console.log('отправлено');
 				$('.preloader').hide();
 			},
 			error: function(response) {
-				// console.log('ошибка');
 			},
 		});
-		// console.log(data);
 		return false;
 	};
 
@@ -58,15 +55,16 @@ var images = (function() {
 		        var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
 
 		        $('.preloader').show();
-		        console.log('валидация');
-		        if(data.originalFiles[0]['size'] > MAX_FILE_SIZE) {
+		        $('.controls__inputs-group').addClass('controls__inputs-group__disabled');
+		        if(data.originalFiles[0].size > MAX_FILE_SIZE) {
 		            errorsText = lang.getMsgText('maxfilesize') + (MAX_FILE_SIZE / 1000000) + lang.getMsgText('mb');
 		        }
-		        if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
+		        if(data.originalFiles[0].type.length && !acceptFileTypes.test(data.originalFiles[0].type)) {
 		            errorsText = lang.getMsgText('onlypicture');
 		        }
 		        if(errorsText.length > 0) {
 		            showError($controlsFile, errorsText);
+		            $('.preloader').hide();
 		        }else{
 		            data.submit();
 		        	hideError($controlsFile);
@@ -115,11 +113,10 @@ var images = (function() {
 				$(this).hide().fadeIn();
 				$('.preloader').hide();
 			})
-			console.log('img.appendTo 117');
 			img.appendTo($bg);
-
+			$('.overlay-disabled').hide();
+			$('.controls__inputs-group').removeClass('controls__inputs-group__disabled');
 		} else if (container.match(/watermark/)) {
-
 			$('#wm__img').remove()
 			$('#wm__tiles').empty();
 
@@ -129,22 +126,24 @@ var images = (function() {
 				src: src
 			});
 			$('.preloader').show();
+			$('.overlay-disabled').show();
+	
 			img.appendTo($wm);
+			$('.overlay-disabled').hide();
+			$('.controls__inputs-group').removeClass('controls__inputs-group__disabled');
+
 			$('#wm__img').on('load.append', function() {
-				console.log($('#wm__img'));
 				watermark.setParams({
 					wmWidth: $('#wm__img').width(),
 					wmHeight: $('#wm__img').height()
 				});
 				watermark.scaleImg();
-				console.log('watermark.createTiled 132');
 				watermark.createTiled();
 				$(this).hide().fadeIn();
 				$('.preloader').hide();
+				$('.overlay-disabled').hide();
 				$('#wm__img').off('load.append');
 			});
-			console.log('img.appendTo 138');
-			console.log('img= ' + img);
 		} else {
 			console.error('Чё за контейнер?!');
 			return;
@@ -170,11 +169,12 @@ var images = (function() {
 		$('.error').fadeOut(300);
 		$('#bg__img, #wm__img').remove();
 		$('.wm__tile').remove();
+		$('.overlay-disabled').show();
+		$('.controls__inputs-group__wm').addClass('controls__inputs-group__disabled');
 		watermark.reset();
 	};
 
 	function checkUploadImg() {
-		console.log('check');
 		$('.controls__file').each(function() {
 			var $this = $(this);
 			var $input = $this.find('.input__file-name');

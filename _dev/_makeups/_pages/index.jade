@@ -23,7 +23,7 @@ block content
                     h3.controls__title Настройки
                     form#download-img
                         fieldset.noborder
-                            .controls__inputs-group
+                            .controls__inputs-group.controls__inputs-group__bg
                                 label.controls__file-title
                                     span#title-source-bg Исходное изображение
                                     .controls__file#bg-img-control
@@ -48,8 +48,9 @@ block content
                                                 )
                                             span.error Вы не загрузили изображение
                         fieldset
-                            .controls__inputs-group
+                            .controls__inputs-group.controls__inputs-group__wm.controls__inputs-group__disabled
                                 label.controls__file-title
+                                    .overlay-disabled
                                     span#title-source-wm Водяной знак
                                     .controls__file#wm-img-control
                                         .input-file.input-file--watermark
@@ -101,13 +102,13 @@ block content
                                     .margin__property
                                         .margin__property-block
                                             span.margin__property-name &nbsp;&#8597;
-                                            input(type="text" class="margin__property-input" name="x-margin" val="0")#h-margin-val
+                                            input(type="text" class="margin__property-input" name="y-margin" val="0" readonly)#h-margin-val
                                             .margin__property-control
                                                 a.margin__property-btn.plus#h-margin-plus
                                                 a.margin__property-btn.minus#h-margin-minus
                                         .margin__property-block
                                             span.margin__property-name &#8596;
-                                            input(type="text" class="margin__property-input" name="y-margin" val="0")#v-margin-val
+                                            input(type="text" class="margin__property-input" name="x-margin" val="0" readonly)#v-margin-val
                                             .margin__property-control
                                                 a.margin__property-btn.plus#v-margin-plus
                                                 a.margin__property-btn.minus#v-margin-minus
