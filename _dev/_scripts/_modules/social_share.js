@@ -10,9 +10,9 @@ var socialShare = (function() {
         shareWindowHeight = 500, // Высота окна шаринга
         marginLeft = screen.availWidth / 2 - shareWindowWidth / 2,
         marginTop = screen.availHeight / 2 - shareWindowHeight / 2,
-        url = window.location.href,
+        serviceLink = location.origin,
         title = document.title,
-        //text = window.document.description,
+        text = window.document.description,
         img = "http://" + window.location.host + "/img/small-square.png";
 
     function addEventListener() {
@@ -24,9 +24,9 @@ var socialShare = (function() {
     function vk(e) {
         e.preventDefault();
         url = 'http://vk.com/share.php?';
-        url += 'url=' + encodeURIComponent(url);
+        url += 'url=' + encodeURIComponent(serviceLink);
         url += '&title=' + encodeURIComponent(title);
-        //url += '&description=' + encodeURIComponent(text);
+        url += '&description=' + encodeURIComponent(text);
         url += '&image=' + encodeURIComponent(img);
         url += '&noparse=true';
         popup(url);
@@ -42,7 +42,7 @@ var socialShare = (function() {
         url = 'http://www.facebook.com/sharer.php?s=100';
         url += '&p[title]=' + encodeURIComponent(title);
         //url += '&p[summary]=' + encodeURIComponent(text);
-        url += '&p[url]=' + encodeURIComponent(url);
+        url += '&p[url]=' + encodeURIComponent(serviceLink);
         url += '&p[images][0]=' + encodeURIComponent(img);
         popup(url);
     }
@@ -51,8 +51,8 @@ var socialShare = (function() {
         e.preventDefault();
         url = 'http://twitter.com/share?';
         url += 'text=' + encodeURIComponent(title);
-        url += '&url=' + encodeURIComponent(url);
-        url += '&counturl=' + encodeURIComponent(url);
+        url += '&url=' + encodeURIComponent(serviceLink);
+        url += '&counturl=' + encodeURIComponent(serviceLink);
         popup(url);
     }
     //mailru: function(purl, ptitle, pimg, text) {
@@ -64,15 +64,14 @@ var socialShare = (function() {
         //    Share.popup(url)
         //},
 
-    function popup(uri) {
-        window.open(uri, '_blank', 'toolbar=0,status=0,width=650,height=500,left=' + marginLeft + ', top=' + marginTop + '');
+    function popup(linkUrl) {
+        window.open(linkUrl,'_blank','toolbar=0,status=0,width=650,height=500,left=' + marginLeft + ', top=' + marginTop);
     }
 
     return {
         init: function() {
             addEventListener();
             console.log('socialShare init!');
-            console.log(url,title,text,img);
         }
     };
 }());
