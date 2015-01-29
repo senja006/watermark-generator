@@ -6,15 +6,16 @@
 var socialShare = (function() {
 
     var
-        host = "wmgen.danratnikov.ru",
+        host = "http://wmgen.danratnikov.ru",
+
         shareWindowWidth = 650, // Ширина окна шаринга
         shareWindowHeight = 500, // Высота окна шаринга
         marginLeft = screen.availWidth / 2 - shareWindowWidth / 2,
         marginTop = screen.availHeight / 2 - shareWindowHeight / 2,
         serviceUrl = host,
         title = document.title,
-        text = "Найкрутейший, бесплатный и очень удобный сервис наложения водяного знака"
-        img = "http://" + host + "/img/small-square.png";
+        text = "Найкрутейший, бесплатный и очень удобный сервис наложения водяного знака",
+        img = host + "/img/social-post-img.jpg";
 
 
     function addEventListener() {
@@ -24,24 +25,23 @@ var socialShare = (function() {
     }
 
     function vk(e) {
-        var url = '';
+            var url = '';
 
-        e.preventDefault();
-        console.log(encodeURIComponent(text));
-        url = 'http://vk.com/share.php?';
-        url += 'url=' + encodeURIComponent(serviceUrl);
-        url += '&title=' + encodeURIComponent(title);
-        url += '&description=' + encodeURIComponent(text);
-        url += '&image=' + encodeURIComponent(img);
-        url += '&noparse=true';
-        popup(url);
-    }
-    //odnoklassniki: function(purl, text) {
-    //    url  = 'http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1';
-    //    url += '&st.comments=' + encodeURIComponent(text);
-    //    url += '&st._surl='    + encodeURIComponent(purl);
-    //    Share.popup(url);
-    //},
+            e.preventDefault();
+            url = 'http://vk.com/share.php?';
+            url += 'url=' + encodeURIComponent(serviceUrl);
+            url += '&title=' + encodeURIComponent(title);
+            url += '&description=' + encodeURIComponent(text);
+            url += '&image=' + encodeURIComponent(img);
+            url += '&noparse=true';
+            popup(url);
+        }
+        //odnoklassniki: function(purl, text) {
+        //    url  = 'http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1';
+        //    url += '&st.comments=' + encodeURIComponent(text);
+        //    url += '&st._surl='    + encodeURIComponent(purl);
+        //    Share.popup(url);
+        //},
     function fb(e) {
         var url = '';
 
@@ -55,16 +55,16 @@ var socialShare = (function() {
     }
 
     function twitter(e) {
-        var url = '';
+            var url = '';
 
-        e.preventDefault();
-        url = 'http://twitter.com/share?';
-        url += 'text=' + encodeURIComponent(title);
-        url += '&url=' + encodeURIComponent(serviceUrl);
-        url += '&counturl=' + encodeURIComponent(url);
+            e.preventDefault();
+            url = 'http://twitter.com/share?';
+            url += 'text=' + encodeURIComponent(title);
+            url += '&url=' + encodeURIComponent(serviceUrl);
+            url += '&counturl=' + encodeURIComponent(url);
 
-    }
-    //mailru: function(purl, ptitle, pimg, text) {
+        }
+        //mailru: function(purl, ptitle, pimg, text) {
         //    url  = 'http://connect.mail.ru/share?';
         //    url += 'url='          + encodeURIComponent(purl);
         //    url += '&title='       + encodeURIComponent(ptitle);
@@ -74,7 +74,7 @@ var socialShare = (function() {
         //},
 
     function popup(linkUrl) {
-        window.open(linkUrl,'_blank','toolbar=0,status=0,width=650,height=500,left=' + marginLeft + ', top=' + marginTop);
+        window.open(linkUrl, '_blank', 'toolbar=0,status=0,width=650,height=500,left=' + marginLeft + ', top=' + marginTop);
     }
 
     return {
