@@ -172,6 +172,7 @@ var images = (function() {
 		$('#bg__img, #wm__img').remove();
 		$('.wm__tile').remove();
 		$('.overlay-disabled').show();
+		$('.controls__inputs-group__bg .overlay-disabled').hide();
 		$('.controls__inputs-group__wm').addClass('controls__inputs-group__disabled');
 		watermark.reset();
 	};
