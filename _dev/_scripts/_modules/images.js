@@ -67,6 +67,7 @@ var images = (function() {
 		        }
 		        if(errorsText.length > 0) {
 		            showError($controlsFile, errorsText);
+		            $('.preloader').hide();
 		        }else{
 		            data.submit();
 		        	hideError($controlsFile);
