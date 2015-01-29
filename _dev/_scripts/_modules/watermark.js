@@ -118,7 +118,6 @@ var watermark = (function() {
 			'rowsTiled': rowsTiled,
 			'colsTiled * rowsTiled': colsTiled * rowsTiled,
 		};
-		console.log(data);
 
 		$('#wm-tiles-work').css({
 			'width': param.bgWidth * param.scale,

@@ -5,16 +5,16 @@
 var socialShare = (function() {
 
     var
+        host = "wmgen.danratnikov.ru",
         shareWindowWidth = 650, // Ширина окна шаринга
         shareWindowHeight = 500, // Высота окна шаринга
         marginLeft = screen.availWidth / 2 - shareWindowWidth / 2,
         marginTop = screen.availHeight / 2 - shareWindowHeight / 2,
-        url = window.location.href,
+        serviceUrl = host,
         title = document.title,
-        text = document.description,
-        img = "http://" + window.location.host + "small-square.png";
+        text = "Найкрутейший, бесплатный и очень удобный сервис наложения водяного знака"
+        img = "http://" + host + "/img/small-square.png";
 
-    console.log(window.location.origin);
     function addEventListener() {
         $('#vk').on('click', vk);
         $('#fb').on('click', fb);
@@ -22,9 +22,12 @@ var socialShare = (function() {
     }
 
     function vk(e) {
+        var url = '';
+
         e.preventDefault();
+        console.log(encodeURIComponent(text));
         url = 'http://vk.com/share.php?';
-        url += 'url=' + encodeURIComponent(url);
+        url += 'url=' + encodeURIComponent(serviceUrl);
         url += '&title=' + encodeURIComponent(title);
         url += '&description=' + encodeURIComponent(text);
         url += '&image=' + encodeURIComponent(img);
@@ -38,20 +41,24 @@ var socialShare = (function() {
     //    Share.popup(url);
     //},
     function fb(e) {
+        var url = '';
+
         e.preventDefault();
         url = 'http://www.facebook.com/sharer.php?s=100';
         url += '&p[title]=' + encodeURIComponent(title);
         url += '&p[summary]=' + encodeURIComponent(text);
-        url += '&p[url]=' + encodeURIComponent(url);
+        url += '&p[url]=' + encodeURIComponent(serviceUrl);
         url += '&p[images][0]=' + encodeURIComponent(img);
         popup(url);
     }
 
     function twitter(e) {
+        var url = '';
+
         e.preventDefault();
         url = 'http://twitter.com/share?';
         url += 'text=' + encodeURIComponent(title);
-        url += '&url=' + encodeURIComponent(url);
+        url += '&url=' + encodeURIComponent(serviceUrl);
         url += '&counturl=' + encodeURIComponent(url);
         popup(url);
     }
@@ -71,7 +78,6 @@ var socialShare = (function() {
     return {
         init: function() {
             addEventListener();
-            console.log('socialShare init!');
         }
     };
 }());

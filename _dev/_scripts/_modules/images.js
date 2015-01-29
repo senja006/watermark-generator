@@ -47,12 +47,15 @@ var images = (function() {
 	function initUploadImg(endId) {
 		var $input = $('#input__file-' + endId);
 		var $controlsFile = $input.parents('.controls__file');
+
 		$input.fileupload({
 			url: 'upload/upload.php',
 			dataType: 'json',
 			add: function(e, data) {
 				var errorsText = '';
 		        var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
+
+		        console.log(endId);
 
 		        $('.preloader').show();
 		        $('.overlay-disabled').show();
@@ -66,6 +69,14 @@ var images = (function() {
 		        if(errorsText.length > 0) {
 		            showError($controlsFile, errorsText);
 		            $('.preloader').hide();
+		            if (endId === 'main') {
+		            	$('.controls__inputs-group__bg .overlay-disabled').hide();
+			            $('.controls__inputs-group__bg').removeClass('controls__inputs-group__disabled');
+		            } else if (endId === 'watermark'){
+		            	$('.controls__inputs-group__wm .overlay-disabled').hide();
+			            $('.controls__inputs-group__wm').removeClass('controls__inputs-group__disabled');
+		            }
+		            
 		        }else{
 		            data.submit();
 		        	hideError($controlsFile);
