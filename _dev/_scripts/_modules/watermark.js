@@ -77,7 +77,7 @@ var watermark = (function() {
 		$('#but-four').on('click', tile);
 		$('#but-one').on('click', untile);
 		$('.margin__property-btn').on('click', onChangeMargin);
-	};
+	}
 
 	function controlChangeCoordinates() {
 		if (!images.checkUploadImg()) return;
@@ -103,7 +103,7 @@ var watermark = (function() {
 		}
 		refreshPosVal();
 		moveWm();
-	};
+	}
 
 	// создание замощения
 	function createTiled() {
@@ -174,7 +174,7 @@ var watermark = (function() {
 				break;
 			case 'v-margin-minus':
 				param.hMargin = param.hMargin - param.scale;
-				break
+				break;
 		}
 		refreshMarginVal();
 	}

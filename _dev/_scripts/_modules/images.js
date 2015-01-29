@@ -55,11 +55,11 @@ var images = (function() {
 		        var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
 
 		        $('.preloader').show();
-		        console.log('валидация');
-		        if(data.originalFiles[0]['size'] > MAX_FILE_SIZE) {
+		        $('.controls__inputs-group').addClass('controls__inputs-group__disabled');
+		        if(data.originalFiles[0].size > MAX_FILE_SIZE) {
 		            errorsText = lang.getMsgText('maxfilesize') + (MAX_FILE_SIZE / 1000000) + lang.getMsgText('mb');
 		        }
-		        if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
+		        if(data.originalFiles[0].type.length && !acceptFileTypes.test(data.originalFiles[0].type)) {
 		            errorsText = lang.getMsgText('onlypicture');
 		        }
 		        if(errorsText.length > 0) {
@@ -115,7 +115,7 @@ var images = (function() {
 			})
 			img.appendTo($bg);
 			$('.overlay-disabled').hide();
-			$('.controls__inputs-group__wm').removeClass('controls__inputs-group__disabled');
+			$('.controls__inputs-group').removeClass('controls__inputs-group__disabled');
 		} else if (container.match(/watermark/)) {
 			$('#wm__img').remove()
 			$('#wm__tiles').empty();
@@ -126,7 +126,12 @@ var images = (function() {
 				src: src
 			});
 			$('.preloader').show();
+			$('.overlay-disabled').show();
+	
 			img.appendTo($wm);
+			$('.overlay-disabled').hide();
+			$('.controls__inputs-group').removeClass('controls__inputs-group__disabled');
+
 			$('#wm__img').on('load.append', function() {
 				watermark.setParams({
 					wmWidth: $('#wm__img').width(),
@@ -136,6 +141,7 @@ var images = (function() {
 				watermark.createTiled();
 				$(this).hide().fadeIn();
 				$('.preloader').hide();
+				$('.overlay-disabled').hide();
 				$('#wm__img').off('load.append');
 			});
 		} else {

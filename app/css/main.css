@@ -1230,16 +1230,16 @@ button {
   border-left: 9px solid transparent;
 }
 
-.controls__inputs-group__wm.controls__inputs-group__disabled .input.input__file-name {
+.controls__inputs-group.controls__inputs-group__disabled .input.input__file-name {
   color: #dddddd;
   border-color: #dddddd;
 }
 
-.controls__inputs-group__wm.controls__inputs-group__disabled .input.input__file-name::-webkit-input-placeholder {
+.controls__inputs-group.controls__inputs-group__disabled .input.input__file-name::-webkit-input-placeholder {
   color: #dddddd;
 }
 
-.controls__inputs-group__wm.controls__inputs-group__disabled .label__file {
+.controls__inputs-group.controls__inputs-group__disabled .label__file {
   background-color: #dddddd;
 }
 
