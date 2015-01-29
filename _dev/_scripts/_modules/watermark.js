@@ -77,13 +77,8 @@ var watermark = (function() {
 		$('#but-four').on('click', tile);
 		$('#but-one').on('click', untile);
 		$('.margin__property-btn').on('click', onChangeMargin);
-		$('#h-margin-val').on('keyup', function(e){
-			param.hMargin = $(this).val();
-			refreshMarginVal();
-		});
-		$('#v-margin-val').on('keyup', function(e){
-			param.vMargin = $(this).val();
-			refreshMarginVal();
+		$('.overlay-disable').on('click', function(){
+			return;
 		});
 	};
 

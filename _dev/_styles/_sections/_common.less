@@ -79,6 +79,7 @@
   display: inline-block;
   &__title{
     .roboto-light;
+    position: relative;
     text-align: center;
     line-height: 1em;
     font-size: 26px;
@@ -147,6 +148,31 @@
 
     }
   }
+}
+
+@disable-color : #dddddd;
+
+.controls__inputs-group__wm.controls__inputs-group__disabled {
+  .input.input__file-name {
+    color: @disable-color;
+    border-color: @disable-color;
+    &::-webkit-input-placeholder {
+      color: @disable-color;
+    }
+  }
+  .label__file {
+    background-color: @disable-color;
+  }
+}
+
+.overlay-disabled {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  z-index: 9999;
 }
 
 .controls__inputs-group{
@@ -675,6 +701,9 @@
     border-radius: 3px;
     box-sizing: border-box;
     background: transparent;
+    &::-webkit-input-placeholder {
+      color: #9eb2c0;
+    }
 }
 .drug__watermark {
   float: left;

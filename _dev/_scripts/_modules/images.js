@@ -34,16 +34,13 @@ var images = (function() {
 			},
 			success: function(response) {
 				var response = getObj(response);
-				// console.log(response);
+
 				downloadResImg(response);
-				// console.log('отправлено');
 				$('.preloader').hide();
 			},
 			error: function(response) {
-				// console.log('ошибка');
 			},
 		});
-		// console.log(data);
 		return false;
 	};
 
@@ -116,11 +113,10 @@ var images = (function() {
 				$(this).hide().fadeIn();
 				$('.preloader').hide();
 			})
-			console.log('img.appendTo 117');
 			img.appendTo($bg);
-
+			$('.overlay-disabled').hide();
+			$('.controls__inputs-group__wm').removeClass('controls__inputs-group__disabled');
 		} else if (container.match(/watermark/)) {
-
 			$('#wm__img').remove()
 			$('#wm__tiles').empty();
 
@@ -132,20 +128,16 @@ var images = (function() {
 			$('.preloader').show();
 			img.appendTo($wm);
 			$('#wm__img').on('load.append', function() {
-				console.log($('#wm__img'));
 				watermark.setParams({
 					wmWidth: $('#wm__img').width(),
 					wmHeight: $('#wm__img').height()
 				});
 				watermark.scaleImg();
-				console.log('watermark.createTiled 132');
 				watermark.createTiled();
 				$(this).hide().fadeIn();
 				$('.preloader').hide();
 				$('#wm__img').off('load.append');
 			});
-			console.log('img.appendTo 138');
-			console.log('img= ' + img);
 		} else {
 			console.error('Чё за контейнер?!');
 			return;
@@ -175,7 +167,6 @@ var images = (function() {
 	};
 
 	function checkUploadImg() {
-		console.log('check');
 		$('.controls__file').each(function() {
 			var $this = $(this);
 			var $input = $this.find('.input__file-name');
