@@ -1,6 +1,7 @@
 /**
  * Created by FreeWay on 26.01.15.
  */
+'use strict';
 
 var socialShare = (function() {
 
@@ -11,10 +12,9 @@ var socialShare = (function() {
         marginTop = screen.availHeight / 2 - shareWindowHeight / 2,
         url = window.location.href,
         title = document.title,
-        text = document.description,
-        img = "http://" + window.location.host + "small-square.png";
+        //text = window.document.description,
+        img = "http://" + window.location.host + "/img/small-square.png";
 
-    console.log(window.location.origin);
     function addEventListener() {
         $('#vk').on('click', vk);
         $('#fb').on('click', fb);
@@ -26,7 +26,7 @@ var socialShare = (function() {
         url = 'http://vk.com/share.php?';
         url += 'url=' + encodeURIComponent(url);
         url += '&title=' + encodeURIComponent(title);
-        url += '&description=' + encodeURIComponent(text);
+        //url += '&description=' + encodeURIComponent(text);
         url += '&image=' + encodeURIComponent(img);
         url += '&noparse=true';
         popup(url);
@@ -41,7 +41,7 @@ var socialShare = (function() {
         e.preventDefault();
         url = 'http://www.facebook.com/sharer.php?s=100';
         url += '&p[title]=' + encodeURIComponent(title);
-        url += '&p[summary]=' + encodeURIComponent(text);
+        //url += '&p[summary]=' + encodeURIComponent(text);
         url += '&p[url]=' + encodeURIComponent(url);
         url += '&p[images][0]=' + encodeURIComponent(img);
         popup(url);
@@ -64,14 +64,15 @@ var socialShare = (function() {
         //    Share.popup(url)
         //},
 
-    function popup(url) {
-        window.open(url, '_blank', 'toolbar=0,status=0,width=650,height=500,left=' + marginLeft + ', top=' + marginTop + '');
+    function popup(uri) {
+        window.open(uri, '_blank', 'toolbar=0,status=0,width=650,height=500,left=' + marginLeft + ', top=' + marginTop + '');
     }
 
     return {
         init: function() {
             addEventListener();
             console.log('socialShare init!');
+            console.log(url,title,text,img);
         }
     };
 }());
