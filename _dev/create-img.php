@@ -25,6 +25,9 @@ $data['width_watermark'] = $img_watermark_width;
 $data['heigth_watermark'] = $img_watermark_height;
 
 function convertImgToPng($img, $name) {
+	$width = getimagesize($img)[0];
+	$height = getimagesize($img)[1];
+	$img_res = imagecreatetruecolor($width, $height);
 	switch (exif_imagetype($img)) {
 	    case IMAGETYPE_GIF :
 	        $new_img = imagecreatefromgif($img);
@@ -37,10 +40,13 @@ function convertImgToPng($img, $name) {
 	        break;
 	}
 	$new_img_name = $name;
-	// imagealphablending($new_img, false);
-	// imagesavealpha($new_img, true);
-	imagepng($new_img, $new_img_name);
-	imagedestroy($new_img);
+	imagealphablending($img_res, false);
+	imagesavealpha($img_res, true);
+	imagealphablending($new_img, false);
+	imagesavealpha($new_img, true);
+	imagecopy($img_res, $new_img, 0, 0, 0, 0, $width, $height);
+	imagepng($img_res, $new_img_name);
+	imagedestroy($img_res);
 	return $new_img_name;
 };
 
@@ -57,10 +63,10 @@ function joinImg($img_main, $watermark, $x, $y, $opacity, $mode, $x_margin, $y_m
 	$row_num = ceil($img_main_height / $row_height);
 	$col_num = ceil($img_main_width / $col_width);
 	$img = imagecreatetruecolor($img_main_width, $img_main_height);
+	imagealphablending($img, false);
+	imagesavealpha($img, true);
 	$main_img = imagecreatefrompng($img_main);
 	$watermark_img = imagecreatefrompng($watermark);
-	// imagealphablending($img, false);
-	// imagesavealpha($img, true);
 	// imagealphablending($watermark_img, false);
 	// imagesavealpha($watermark_img, true);
 	imagecopy($img, $main_img, 0, 0, 0, 0, $img_main_width, $img_main_height);
@@ -76,6 +82,7 @@ function joinImg($img_main, $watermark, $x, $y, $opacity, $mode, $x_margin, $y_m
 		imagecopymerge($img, $watermark_img, $x, $y, 0, 0, $img_watermark_width, $img_watermark_height, $opacity);
 	}
 	imagejpeg($img, $new_img_name, "100");
+	// imagepng($img, $new_img_name);
 	imagedestroy($img);
 	return $new_img_name;
 };
