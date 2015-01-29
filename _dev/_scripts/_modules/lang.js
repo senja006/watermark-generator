@@ -69,12 +69,21 @@ var lang = (function() {
 			'--cantload': {
 				rus: "Невозможно загрузить файл",
 				eng: "Unable to upload file"
-			},
+			}
 			
 
 		},
-
-		currLang = 'rus';
+        language = $.cookie('language');
+        // если не задан язык ставим Русский по умолчанию
+        if (!language){
+            language = 'rus';
+            $.cookie('language', language, { expires: 7 });
+            setLang(language);
+        }
+        else{
+            $.cookie('name');
+            setLang(language);
+        }
 
 	function addEventListeners() {
 		$('[class ^= language__link]').on('click', onSwitchLang);
@@ -94,7 +103,7 @@ var lang = (function() {
 	}
 
 	function setLang(language) {
-		language = language || 'eng';
+        $.cookie('language', language, { expires: 7 });
 		currLang = language;
 		for (var selector in lang) {
 			if (selector.substr(0, 5) === 'input') {
