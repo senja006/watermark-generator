@@ -163,6 +163,8 @@ var images = (function() {
 		$('.error').fadeOut(300);
 		$('#bg__img, #wm__img').remove();
 		$('.wm__tile').remove();
+		$('.overlay-disabled').show();
+		$('.controls__inputs-group__wm').addClass('controls__inputs-group__disabled');
 		watermark.reset();
 	};
 

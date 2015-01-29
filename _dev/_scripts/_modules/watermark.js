@@ -77,9 +77,6 @@ var watermark = (function() {
 		$('#but-four').on('click', tile);
 		$('#but-one').on('click', untile);
 		$('.margin__property-btn').on('click', onChangeMargin);
-		$('.overlay-disable').on('click', function(){
-			return;
-		});
 	};
 
 	function controlChangeCoordinates() {
