@@ -34,10 +34,6 @@ function ImgToPng($img, $destName) {
     return $destName;
 };
 
-//создание дубликатов для передачи в обработку функции
-$main_img = imagecreatefrompng($img_main);
-$watermark_img = imagecreatefrompng($img_watermark);
-
 /**
  * PNG ALPHA CHANNEL SUPPORT for imagecopymerge();
  * This is a function like imagecopymerge but it handle alpha channel well!!!
@@ -52,6 +48,9 @@ function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $pct, $x_margin,
         return false;
     }
     $pct /= 100;
+    //создание дубликатов для передачи в обработки
+    $dst_im = imagecreatefrompng($dst_im);
+    $src_im = imagecreatefrompng($src_im);
     // Get image width and height
     $w = imagesx( $src_im );
     $h = imagesy( $src_im );
@@ -109,7 +108,7 @@ function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $pct, $x_margin,
 }
 
 // SAME COMMANDS:
-imagecopymerge_alpha($main_img, $watermark_img, $x, $y, $opacity, $x_margin, $y_margin, $mode, $name_result_img);
+imagecopymerge_alpha($img_main, $img_watermark, $x, $y, $opacity, $x_margin, $y_margin, $mode, $name_result_img);
 
 $data = array();
 $data['src-res'] = $name_result_img;
