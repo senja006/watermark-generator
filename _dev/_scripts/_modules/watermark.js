@@ -77,6 +77,20 @@ var watermark = (function() {
 		$('#but-four').on('click', onTile);
 		$('#but-one').on('click', onUntile);
 		$('.margin__property-btn').on('click', onChangeMargin);
+		$('.icon-print').on('click', onPrint);
+	}
+
+	function onPrint(e) {
+		e.preventDefault();
+		printElem($('#work'));
+	}
+
+	function printElem(selector, opts) {
+		if (typeof opts === 'udefined') {
+			selector.print();
+		} else {
+			selector.print(opts);
+		}
 	}
 
 	function onTile(e) {
