@@ -14,7 +14,7 @@ var socialShare = (function() {
         marginTop = screen.availHeight / 2 - shareWindowHeight / 2,
         serviceUrl = host,
         title = document.title,
-        text = "Найкрутейший, бесплатный и очень удобный сервис наложения водяного знака",
+        text = document.getElementsByName('description')[0].getAttribute('content');
         img = host + "/img/social-post-img.jpg";
 
 

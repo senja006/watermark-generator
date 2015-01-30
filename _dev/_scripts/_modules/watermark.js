@@ -4,9 +4,9 @@ var watermark = (function() {
 		$work = $('#work'),
 		$wm = $('#wm'), // контейнер дла ватермарка
 		$bg = $('#bg'), // контейнер для исходного изображкения
-		$wmTilesWork = $('#wm-tiles-work'); // границы для замощеного контенера
-	$wmTiles = $('#wm-tiles'); // замощеный контейнер
-	$bgImg = $('#bg__img'), // исходное изображение
+		$wmTilesWork = $('#wm-tiles-work'), // границы для замощеного контенера
+		$wmTiles = $('#wm-tiles'), // замощеный контейнер
+		$bgImg = $('#bg__img'), // исходное изображение
 		$wmImg = $('#wm__img'), // изображение ватермарк
 
 		$opacityVal = $('#opacity-val'), // поле прозрачности
@@ -74,9 +74,25 @@ var watermark = (function() {
 	function addEventListeners() {
 		$('.one-watermark__col-link').on('click', onClickFixedButt);
 		$('.coordinate__property-btn').on('click', controlChangeCoordinates);
-		$('#but-four').on('click', tile);
-		$('#but-one').on('click', untile);
+		$('#but-four').on('click', onTile);
+		$('#but-one').on('click', onUntile);
 		$('.margin__property-btn').on('click', onChangeMargin);
+	}
+
+	function onTile(e) {
+		e.preventDefault();
+		if (!images.checkUploadImg()) return;
+		$('.controls__switch-group-but').removeClass('active');
+		$(this).addClass('active');
+		tile();
+	}
+
+	function onUntile(e) {
+		e.preventDefault(e);
+		if (!images.checkUploadImg()) return;
+		$('.controls__switch-group-but').removeClass('active');
+		$(this).addClass('active');
+		untile(e);
 	}
 
 	function controlChangeCoordinates() {
@@ -137,7 +153,6 @@ var watermark = (function() {
 		var $imgs = $();
 
 		for (var i = 0; i < colsTiled * rowsTiled; i++) {
-			// console.log(wmW * param.scale);
 			var img = $('<img/>');
 			img.attr({
 				'src': $('#wm__img').attr('src'),
@@ -191,11 +206,7 @@ var watermark = (function() {
 	}
 
 	// замостить
-	function tile(e) {
-		e.preventDefault();
-		if (!images.checkUploadImg()) return;
-		$('.controls__switch-group-but').removeClass('active');
-		$(this).addClass('active');
+	function tile() {
 		$('#mode').val('tile');
 		$('#one').hide();
 		$('#four').show();
@@ -205,11 +216,7 @@ var watermark = (function() {
 	}
 
 	// размостить
-	function untile(e) {
-		e.preventDefault();
-		if (!images.checkUploadImg()) return;
-		$('.controls__switch-group-but').removeClass('active');
-		$(this).addClass('active');
+	function untile() {
 		$('#mode').val('untail');
 		$('#four').hide();
 		$('#one').show();
@@ -234,7 +241,6 @@ var watermark = (function() {
 			param.currPos.left = ui.position.left / param.scale;
 			param.currPos.top = ui.position.top / param.scale;
 		}
-		console.log(param.fixedPositions.cm.left);
 		refreshPosVal();
 	}
 

@@ -55,8 +55,6 @@ var images = (function() {
 				var errorsText = '';
 		        var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
 
-		        console.log(endId);
-
 		        $('.preloader').show();
 		        $('.controls__inputs-group').addClass('controls__inputs-group__disabled');
 		        if(data.originalFiles[0].size > MAX_FILE_SIZE) {
