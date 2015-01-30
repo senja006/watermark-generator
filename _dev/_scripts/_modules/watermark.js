@@ -235,7 +235,7 @@ var watermark = (function() {
 		$('#four').hide();
 		$('#one').show();
 		$('#wm-tiles-work').hide();
-		$wm.css('left', param.currPos.left);
+		$wm.css('left', param.currPos.left * param.scale);
 		$('.four-watermark__col-link').removeClass('disabled');
 	}
 
