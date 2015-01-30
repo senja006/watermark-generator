@@ -34,7 +34,6 @@ var images = (function() {
 			},
 			success: function(response) {
 				var response = getObj(response);
-
 				downloadResImg(response);
 				$('.preloader').hide();
 			},
