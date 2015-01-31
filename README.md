@@ -17,7 +17,7 @@
 <p>Сервис позволяет накладывать два изображения произвольного формата с сохранение, либо изменением прозрачности</p>
 <h3><i>Над проектом работали:</i></h3>
 <ul>
-  <li>Сергей '<a href="https://github.com/senja006/">senja006</a>' Ярчук - <code>Тимлид</code>, <code>PHP</code>, <code>JavaScript</code></li>
+  <li>Сергей '<a href="https://github.com/senja006/">senja006</a>' Яркевич - <code>Тимлид</code>, <code>PHP</code>, <code>JavaScript</code></li>
   <li>Алексей '<a href="https://github.com/freewayspb">freewayspb</a>' Чырва  - <code>Верстка</code>, <code>JavaScript</code>, <code>PHP</code></li>
   <li>Данил '<a href="https://github.com/danratnikov">danratnikov</a>' Ратников  - <code>JavaScript</code></li>
 </ul>
