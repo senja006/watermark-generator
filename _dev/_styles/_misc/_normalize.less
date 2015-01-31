@@ -100,9 +100,11 @@ body {
  * Address `outline` inconsistency between Chrome and other browsers.
  */
 
-a:focus {
-    outline: thin dotted;
-}
+
+//a:focus {
+//    outline: thin dotted;
+//}
+
 
 /**
  * Improve readability when focused and also mouse hovered in all browsers.
@@ -306,7 +308,7 @@ dd {
 menu,
 ol,
 ul {
-    padding: 0 0 0 40px;
+    padding: 0 0 0 0px;
 }
 
 /**
@@ -410,9 +412,11 @@ textarea {
  * the UA stylesheet.
  */
 
-button,
+a,
+button, 
 input {
     line-height: normal;
+    outline: 0;
 }
 
 /**
@@ -525,4 +529,3 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-

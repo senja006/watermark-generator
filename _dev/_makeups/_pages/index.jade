@@ -1,7 +1,9 @@
 extends ../_layouts/layout
 
 block title
-    title Main Page
+    title Правильный сервис для наложения watermark на изображения
+block description
+    meta(name='description' content='Отличный сервис для быстрого наложения watermark на любое изображение, с гибкими настройками и сохранением результата')
 
 block content
     .wrapper
@@ -9,61 +11,83 @@ block content
             .container
                 section.result
                     h1.result__title Генератор водяных знаков
-                    .result__imagebox
-                        #bg__wrapper
-                            img(src="")#bg__img.result__imagebox-image
-                        .drag#watermark
-                            img(src="")#drag__img.drug__watermark
+                    .icon-print(title="Печать")
+                            a(href="#").icon-print__link 3
+                    .result__imagebox#result-box
+                        #work
+                          #bg
+                          #wm
+                          #wm-tiles-work
+                            #wm-tiles
+                        .preloader
+                            .preloader__spin
                 section.controls
-                    h3.controls__title Настройка
-                    form(
-                    action=""
-                    method="post"
-                    enctype="multipart/form-data"
-                    )
+                    h3.controls__title Настройки
+                    form#download-img
                         fieldset.noborder
-                            .controls__inputs-group
-                                label.controls__file-title Исходное изображение
-                                    .controls__file
-                                        input.controls__file-input(
-                                        type="file"
-                                        name="img-source"
-                                        placeholder="Загрузите изображение"
-                                        id="img-source"
-                                        )
-                                        span#file_name.controls__file-input--fake Загрузите изображение
-                                        button.controls__file-input--btn Загрузить
-                                        span.error text text
-                    form(
-                    action=""
-                    method="post"
-                    enctype="multipart/form-data"
-                    )
+                            .controls__inputs-group.controls__inputs-group__bg
+                                label.controls__file-title
+                                    span#title-source-bg Исходное изображение
+                                    .controls__file#bg-img-control
+                                        .input-file.input-file--main
+                                            .input-wrapper
+                                                input.input.input__file-name(
+                                                type='text',
+                                                name="name-main",
+                                                placeholder="Загрузите изображение",
+                                                readonly,
+                                                required
+                                                )
+                                                input.input__file-name-version(
+                                                type="hidden",
+                                                name="name-version-main"
+                                                )
+                                            label.label__file(for="input__file-main")
+                                                span.icon.icon--upload
+                                                input#input__file-main.input__file(
+                                                type="file",
+                                                name="files"
+                                                )
+                                            span.error Вы не загрузили изображение
                         fieldset
-                            .controls__inputs-group
-                                label.controls__file-title Водяной знак
-                                    .controls__file
-                                        input.controls__file-input(
-                                        type="file"
-                                        name="img-watermark"
-                                        placeholder="Загрузите изображение"
-                                        id="img-watermark"
-                                        )
-                                        span#file_name.controls__file-input--fake Загрузите изображение
-                                        button.controls__file-input--btn Загрузить
-                                        span.error error
-                    form
+                            .controls__inputs-group.controls__inputs-group__wm.controls__inputs-group__disabled
+                                label.controls__file-title
+                                    .overlay-disabled
+                                    span#title-source-wm Водяной знак
+                                    .controls__file#wm-img-control
+                                        .input-file.input-file--watermark
+                                            .input-wrapper
+                                                input.input.input__file-name(
+                                                type='text',
+                                                name="name-watermark",
+                                                placeholder="Загрузите изображение",
+                                                readonly,
+                                                required
+                                                )
+                                                input.input__file-name-version(
+                                                type="hidden",
+                                                name="name-version-watermark"
+                                                )
+                                            label.label__file(for="input__file-watermark")
+                                                span.icon.icon--upload
+                                                input#input__file-watermark.input__file(
+                                                type="file",
+                                                name="files"
+                                                )
+                                            span.error Вы не загрузили изображение
                         fieldset
                             .controls__inputs-group
                                 .controls__switch
-                                    label.controls__switch-title Положение
+                                    label.controls__switch-title
+                                        span#title-position Положение
                                         .controls__switch-group
-                                            a(class="four" href="#four") 4 watermarks
-                                            a(class="one" href="#one").active 1 watermark
+                                            a(href="#four").four.controls__switch-group-but#but-four 4 watermarks
+                                            a(href="#one").one.controls__switch-group-but.active#but-one 1 watermark
+                                            input(type="hidden" name="mode" val="untile")#mode
                                 .position__four-watermark.clearfix#four
                                     .four-watermark__wrapper
-                                        .margin-line.horizontal
-                                        .margin-line.vertical
+                                        .margin-line.horizontal#h-margin-line
+                                        .margin-line.vertical#v-margin-line
                                         .four-watermark__table
                                             .four-watermark__row
                                                 each val in ['lt', 'ct', 'rt']
@@ -80,16 +104,16 @@ block content
                                     .margin__property
                                         .margin__property-block
                                             span.margin__property-name &nbsp;&#8597;
-                                            input(type="text" id="x-margin" class="margin__property-input" name="x-margin" value="1")
+                                            input(type="text" class="margin__property-input" name="y-margin" val="0" readonly)#h-margin-val
                                             .margin__property-control
-                                                a.margin__property-btn.plus
-                                                a.margin__property-btn.minus
+                                                a.margin__property-btn.plus#h-margin-plus
+                                                a.margin__property-btn.minus#h-margin-minus
                                         .margin__property-block
                                             span.margin__property-name &#8596;
-                                            input(type="text" id="y-margin" class="margin__property-input" name="y-margin" value="1")
+                                            input(type="text" class="margin__property-input" name="x-margin" val="0" readonly)#v-margin-val
                                             .margin__property-control
-                                                a.margin__property-btn.plus
-                                                a.margin__property-btn.minus
+                                                a.margin__property-btn.plus#v-margin-plus
+                                                a.margin__property-btn.minus#v-margin-minus
                                 .position__one-watermark.clearfix#one
                                     .one-watermark__wrapper
                                         .one-watermark__table
@@ -108,22 +132,22 @@ block content
                                     .coordinate__property
                                         .coordinate__property-block
                                             span.coordinate__property-name X
-                                            input(type="text" id="xVal" class="coordinate__property-input" name="x" value="0")
+                                            input(type="text" id="x-val" class="coordinate__property-input" name="x" value="0" readonly)
                                             .coordinate__property-control
-                                                a.coordinate__property-btn.plus
-                                                a.coordinate__property-btn.minus
+                                                a.coordinate__property-btn.plus#x-val-plus
+                                                a.coordinate__property-btn.minus#x-val-minus
                                         .coordinate__property-block
                                             span.coordinate__property-name Y
-                                            input(type="text" id="yVal" class="coordinate__property-input" name="y" value="0")
+                                            input(type="text" id="y-val" class="coordinate__property-input" name="y" value="0" readonly)
                                             .coordinate__property-control
-                                                a.coordinate__property-btn.plus
-                                                a.coordinate__property-btn.minus
+                                                a.coordinate__property-btn.plus#y-val-plus
+                                                a.coordinate__property-btn.minus#y-val-minus
                         fieldset
                             .slider__box
                                 label#opacity-field.slider__box-title Прозрачность
                                 div.slider__range
-                                input(id="opacity" type="hidden")
+                                input(id="opacity" type="hidden" name="opacity" value="50")
                         fieldset.noborder
                             .controls__inputs-group
-                                button(type="reset" id="reset").button--reset Сброс
-                                button(type="submit" id="reset").button--submit Скачать
+                                button(type="reset" id="but-reset").button--reset Сброс
+                                button(type="submit" id="but-send").button--submit Скачать

@@ -55,8 +55,18 @@
 .clearfix:after {
   clear: both;
 }
-input {
+a,
+input,
+button {
   outline: none;
+}
+.disabled {
+  pointer-events: none;
+  cursor: default;
+  color: #999;
+}
+*::selection {
+  background: transparent;
 }
 /* --------- header --------- */
 body {

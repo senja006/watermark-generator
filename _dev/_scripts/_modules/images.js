@@ -1,200 +1,236 @@
 var images = (function() {
 
-	var MAX_FILE_SIZE = 10485760; // 10 Mb
+	var IMG_SRC = 'upload/files/';
+	var MAX_FILE_SIZE = 2000000;
+	var timerError = null;
 
-	var $imgSource = $('#img-source'),
-		$imgWatermark = $('#img-watermark'),
-		$formImg = $('#form-control'),
-		$result = $('#result'),
-		$bgImgWrapper = $('#bg__wrapper'),
-		$watermark = $('#watermark'),
+	var $work = $('#work'),
+		$wm = $('#wm'),
+		$bg = $('#bg'),
 		$bgImg = $('#bg__img'),
-		$wmImg = $('#drag__img'),
-		$butGetImage = $('#but-send'),
-		$butReset = $('#but-reset');
+		$wmImg = $('#wm__img');
 
-	var bgImgWidth,
-		bgImgHeight,
-		wmImgWidth,
-		wmImgHeight,
-		bgImgScale = 1;
-
-	// установка обработчиков
 	function addEventListeners() {
-		$imgSource.on('change', onChangeImageSource);
-		$imgWatermark.on('change', onChangeImageWatermark);
-		$('.modal').on('click', function() {
-			$(this).fadeOut('fast');
+		$('#download-img').on('submit', controlDownloadImg);
+		$('#but-reset').on('click', resetForm);
+	};
+
+	function initJqueryFileUpload() {
+		initUploadImg('main');
+		initUploadImg('watermark');
+	};
+
+	function controlDownloadImg() {
+		if(!checkUploadImg()) return false;
+		var $form = $(this);
+		var data = $form.serialize();
+		$.ajax({
+			url: 'create-img.php',
+			type: 'POST',
+			dataType: 'html',
+			data: data,
+			beforeSend: function(){
+				$('.preloader').show();
+			},
+			success: function(response) {
+				var response = getObj(response);
+				downloadResImg(response);
+				$('.preloader').hide();
+			},
+			error: function(response) {
+			},
 		});
-		$butGetImage.on('click', onSubmitImage);
-		$butReset.on('click', onResetForm);
-	}
+		return false;
+	};
 
-	// обработчик смены исходного изображения
-	function onChangeImageSource(e) {
-		var file = this.files[0],
-			fr = new FileReader();
+	function initUploadImg(endId) {
+		var $input = $('#input__file-' + endId);
+		var $controlsFile = $input.parents('.controls__file');
 
-		if (!file || !validationImg(file)) return;
+		$input.fileupload({
+			url: 'upload/upload.php',
+			dataType: 'json',
+			add: function(e, data) {
+				var errorsText = '';
+		        var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
 
-		fr.onload = function(event) {
-			var $image = $(new Image());
+		        $('.preloader').show();
+		        $('.controls__inputs-group').addClass('controls__inputs-group__disabled');
+		        if(data.originalFiles[0].size > MAX_FILE_SIZE) {
+		            errorsText = lang.getMsgText('maxfilesize') + (MAX_FILE_SIZE / 1000000) + lang.getMsgText('mb');
+		        }
+		        if(data.originalFiles[0].type.length && !acceptFileTypes.test(data.originalFiles[0].type)) {
+		            errorsText = lang.getMsgText('onlypicture');
+		        }
+		        if(errorsText.length > 0) {
+		            showError($controlsFile, errorsText);
+		            $('.preloader').hide();
+		            if (endId === 'main') {
+		            	$('.controls__inputs-group__bg .overlay-disabled').hide();
+			            $('.controls__inputs-group__bg').removeClass('controls__inputs-group__disabled');
+		            } else if (endId === 'watermark'){
+		            	$('.controls__inputs-group__wm .overlay-disabled').hide();
+			            $('.controls__inputs-group__wm').removeClass('controls__inputs-group__disabled');
+		            }
+		            
+		        }else{
+		            data.submit();
+		        	hideError($controlsFile);
+		        }
+			},
+			done: function(e, data) {
+		        $controlsFile.addClass('is-load');
+	        	$.each(data.files, function(index, file) {
+					addNameFile(file.name, $controlsFile);
+				});
+				$.each(data.result.files, function(index, file) {
+					addImg(file.name, endId);
+					addNameFileWithVersion(file.name, $('.input-file--' + endId));
+				});
+			},
+			fail: function (e, data) {
+				showError($controlsFile, lang.getMsgText('cantload'));
+			},
+		});
+	};
 
-			$('#bg__img').remove();
-			$image.attr({
-				src: event.target.result,
-				id: 'bg__img'
+	function addNameFile(name, container) {
+		container.find('.input__file-name').val(name);
+	};
+
+	function addNameFileWithVersion(name, container) {
+		container.find('.input__file-name-version').val(name);
+	};
+
+	function addImg(fileName, container) {
+		var img = $('<img/>'),
+			src = IMG_SRC + fileName;
+
+		if (container.match(/main/)) {
+			if ($('#bg__img')) $('#bg__img').fadeOut().remove();
+			img.attr({
+				id: 'bg__img',
+				class: 'bg__img',
+				src: src
+			}).on('load', function() {
+				watermark.setParams({
+					bgWidth: $(this).width(),
+					bgHeight: $(this).height()
+				});
+				watermark.scaleImg();
+				$(this).hide().fadeIn();
+				$('.preloader').hide();
+			})
+			img.appendTo($bg);
+			$('.error').fadeOut(200);
+			$('.overlay-disabled').hide();
+			$('.controls__inputs-group').removeClass('controls__inputs-group__disabled');
+		} else if (container.match(/watermark/)) {
+			$('#wm__img').remove()
+			$('#wm__tiles').empty();
+
+			img.attr({
+				id: 'wm__img',
+				class: 'wm__img',
+				src: src
 			});
+			$('.preloader').show();
+			$('.overlay-disabled').show();
+	
+			img.appendTo($wm);
+			$('.overlay-disabled').hide();
+			$('.controls__inputs-group').removeClass('controls__inputs-group__disabled');
 
-			bgImgWidth = $image[0].width;
-			bgImgHeight = $image[0].height;
-			bgImgScale = $bgImgWrapper.width() / bgImgWidth;
-			if ($('#drag__img').length) {
-				rescaleWmImg($('#drag__img'));
+			$('#wm__img').on('load.append', function() {
+				watermark.setParams({
+					wmWidth: $('#wm__img').width(),
+					wmHeight: $('#wm__img').height()
+				});
+				watermark.scaleImg();
+				watermark.createTiled();
+				$(this).hide().fadeIn();
+				$('.error').fadeOut(200);
+				$('.preloader').hide();
+				$('.overlay-disabled').hide();
+				$('#wm__img').off('load.append');
+			});
+		} else {
+			console.error('Чё за контейнер?!');
+			return;
+		}
+	};
+
+	function getObj(json) {
+		var obj = JSON.parse(json);
+		return obj;
+	};
+
+	function downloadResImg(response) {
+		var href = 'download-img.php?file=' + response['src-res'];
+		window.downloadFile = function(url) {
+			window.open(url, '_self');
+		}
+		window.downloadFile(href);
+	};
+
+	function resetForm() {
+		$('#download-img').find('input').val('');
+		$('.is-load').removeClass('is-load');
+		$('.error').fadeOut(300);
+		$('#bg__img, #wm__img').remove();
+		$('.wm__tile').remove();
+		$('.overlay-disabled').show();
+		$('.controls__inputs-group__wm').addClass('controls__inputs-group__disabled');
+		$('.one-watermark__col-link').removeClass('one-watermark__col-link__active');
+		$('.four, .one').removeClass('active');
+		$('.one').addClass('active');
+		watermark.reset();
+	};
+
+	function checkUploadImg() {
+		$('.controls__file').each(function() {
+			var $this = $(this);
+			var $input = $this.find('.input__file-name');
+			var emptyVal = '';
+			if($input.val() === '') {
+				showError($this, lang.getMsgText('needfile'));
+			}else{
+				hideError($this);
 			}
-			insertBgImg($image);
-		}
-
-		fr.onerror = function(event) {
-			console.error("Error: " + event.target.error.code);
-		};
-
-		fr.readAsDataURL(file);
-
-		verifyDisable();
-	}
-
-	// функция вставки исходного изображения
-	function insertBgImg($image) {
-		$image.css({
-			width: '100%'
-		}).appendTo($bgImgWrapper);
-		$result.css({
-			minHeight: 0,
-			height: $bgImgWrapper.height() - 4
 		});
-		watermark.calcPositions();
-		watermark.setPos({
-			left: 0,
-			top: 0
-		});
-	}
-
-	// обработчик смены изображения ватермарки
-	function onChangeImageWatermark(e) {
-		var file = this.files[0],
-			fr = new FileReader();
-
-		if (!validationImg(file)) return;
-
-		fr.onload = function(event) {
-			var $image = $(new Image());
-
-			$('#drag__img').remove();
-			$image.attr({
-				src: event.target.result,
-				id: 'drag__img'
-			});
-			wmImgWidth = $image[0].width;
-			wmImgHeight = $image[0].height;
-			insertWmImg($image);
-		}
-
-		fr.onerror = function(event) {
-			console.error("Error: " + event.target.error.code);
-		};
-
-		fr.readAsDataURL(file);
-		verifyDisable();
-	}
-
-	// массштабирование ватермарки относительно исходного изображения
-	function rescaleWmImg($image) {
-		var scaleWidth = 0;
-
-		scaleWidth = $image[0].width * bgImgScale;
-
-		$image.css({
-			width: scaleWidth
-		});
-
-		return $image;
-	}
-
-	// функция вставки изображения ватермарки
-	function insertWmImg($image) {
-		rescaleWmImg($image).appendTo($watermark);
-		watermark.calcPositions();
-		watermark.setPos({
-			left: 0,
-			top: 0
-		});
-	}
-
-	// валидация изображения
-	function validationImg(file) {
-		var errorMessage;
-
-		if (!file.type.match('image.*')) {
-			errorMessage = 'Файл должен быть изображением!';
-		}
-		if (file.size > MAX_FILE_SIZE) {
-			errorMessage = 'Размер файла не может быть больше ' + MAX_FILE_SIZE + ' байт (у этого - ' + file.size + ')';
-		}
-		if (errorMessage) {
-			onErrorMessage(errorMessage);
+		if($('.is-error').length) {
+			$('.four, .one').removeClass('active');
+			$('.one').addClass('active');
 			return false;
-		}
-		return true;
-	}
-
-	function onErrorMessage (message) {
-		$('.modal-error').text(message);
-		$('.modal').fadeIn('fast');
-	}
-
-	function onSubmitImage(e) {
-		e.preventDefault();
-		onErrorMessage('Форма передана');
-	}
-
-	function onResetForm(e) {
-		e.preventDefault();
-		$('#bg__img').remove();
-		$('#drag__img').remove();
-		$imgSource.val('');
-		$imgWatermark.val('');
-
-		verifyDisable();
-		onErrorMessage('Форма очищена');
-	}
-
-	function verifyDisable() {
-		var $options = $('.options'),
-			$source = $('.source');
-
-		if (typeof $('#img-watermark')[0].files[0] === 'object' && typeof $('#img-source')[0].files[0]) {
-			$options.show();
-			$source.hide();
-			return false;
-		}
-		else {
-			$options.hide();
-			$source.show();
+		}else{
 			return true;
-		}
-	}
+		};
+	};
 
+	function showError(container, text) {
+		var $controlsFile = container;
+		var $error = $controlsFile.find('.error');
+		$error.text(text);
+		document.getElementById('snd-error').play();
+		$controlsFile.addClass('is-error');
+		$error.fadeIn(300);
+		if($controlsFile.hasClass('is-load')) {
+			timerError = setTimeout(function() {
+				hideError($controlsFile);
+			}, 3000);
+		}
+	};
+
+	function hideError(container) {
+		container.removeClass('is-error').find('.error').fadeOut(300);
+	};
 
 	return {
 		init: function() {
+			initJqueryFileUpload();
 			addEventListeners();
-			verifyDisable();
-			console.log('<images> init!'); // дебаг
 		},
-		getScale: function() {
-			return bgImgScale;
-		}
+		checkUploadImg: checkUploadImg,
 	};
 
 }());

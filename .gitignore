@@ -1,4 +1,9 @@
-<<<<<<< HEAD
+# Our #
+#######
+
+app
+
+
 # Compiled source #
 ###################
 *.com
@@ -46,8 +51,10 @@ Thumbs.db
 ######################
 
 node_modules
-=======
-css
-app
-index.html
->>>>>>> d128153782f3e5fd2bdda37046331ccc9d59297b
+
+# bower #
+#########
+
+bower_components
+
+
