@@ -1,0 +1,101 @@
+@import "../_misc/mixins";
+
+.social__container{
+  position: absolute;
+  top:100px;
+  left:0;
+}
+.language{
+  .segoe-ui-light;
+  font-size: 20px;
+  line-height: 35px;
+  width:43px;
+  background-color:  rgba(241, 241, 245, 0.7);
+  margin: 0;
+  &__link__rus, &__link__eng{
+    outline: none;
+    color: #8e9298;
+    text-decoration: none;
+    height: 35px;
+    width: 43px;
+    display: block;
+    text-align: center;
+    transition: all 0.5s ease 0;
+    &:hover{
+      color:  #444a53;
+    }
+  }
+  &__link__rus{
+    border-bottom: 1px solid #a5a7ac;
+  }
+  &__link__active{
+    color: rgba(241, 241, 245, 0.7);
+    background-color: #8e9298;
+    &:hover {
+      color: rgba(241, 241, 245, 0.7);
+    }
+  }
+}
+.social{
+  width: 86px;
+  margin-top: 19px;
+  position: absolute;
+  left: -43px;
+  -webkit-transition: left 0.5s ease;
+  &__list{
+    .zero();
+    list-style-type: none;
+    float: left;
+    &-item{
+      background-color:  rgba(241, 241, 245, 0.7);
+      display: block;
+      height: 45px;
+      width: 43px;
+      transition: 0.3s transform 0 ease;
+      &-link{
+        display: inline-block;
+        overflow: hidden;
+        width:100%;
+        height:100%;
+        text-indent: -9999px;
+        cursor: pointer;
+        background: url("../../img/icons/sprite.png");
+      }
+    }
+  }
+  &:hover {
+    left: 0;
+  }
+  &:hover .social__like{
+    background-position: -40px -122px;
+    left: 43px;
+  }
+}
+#fb{
+  background: url("../../img/icons/sprite.png") 5px 0px no-repeat;
+  &:hover{
+    background-position: 5px -124px;
+  }
+}
+#vk{
+  background: url("../../img/icons/sprite.png") 3px -80px no-repeat;
+  &:hover{
+    background-position: 3px -204px;
+  }
+}
+#twitter{
+  background: url("../../img/icons/sprite.png") 3px -40px no-repeat;
+  &:hover{
+    background-position: 3px -164px;
+  }
+}
+.social__like{
+  height: 45px;
+  width: 43px;
+  float: right;
+  display: block;
+  text-indent: -9999px;
+  cursor: pointer;
+  background: rgba(241, 241, 245, 0.7) url("../../img/icons/sprite.png") -40px 2px no-repeat;
+  -webkit-transition: left 0.5s ease-out;
+}
