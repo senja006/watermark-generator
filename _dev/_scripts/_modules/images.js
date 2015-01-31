@@ -151,6 +151,7 @@ var images = (function() {
 				$(this).hide().fadeIn();
 				$('.error').fadeOut(200);
 				$('.preloader').hide();
+				$('#wm').css('opacity', watermark.getParams().currOpacity);
 				$('.overlay-disabled').hide();
 				$('#wm__img').off('load.append');
 			});
