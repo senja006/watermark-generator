@@ -139,6 +139,7 @@ var watermark = (function() {
 		if (val <= 100 || val >= 0) {
 			param.currOpacity = val / 100;
 			$(".slider__range").slider('value', val);
+			$('#opacity').val(param.currOpacity);
 			return;
 		}
 	}
