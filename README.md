@@ -97,4 +97,4 @@
 	<li><a href="http://plugins.jquery.com/cookie/">JQuery Cookie</a></li>
 </ul>
 
-<p><i>Отдельное спасибо Вове <a href="https://www.npmjs.com/package/gulp-notify">''</a> Сабанцеву за предоставленный стартовый <a href="https://www.npmjs.com/package/gulp-notify">шаблон</a>.</i><p>
+<p><i>Отдельное спасибо Вове <a href="https://github.com/wowua">wowua</a> Сабанцеву за предоставленный стартовый <a href="https://github.com/wowua/_blank-template">шаблон</a>.</i><p>
