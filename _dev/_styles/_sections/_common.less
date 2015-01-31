@@ -160,7 +160,7 @@
       color: @disable-color;
     }
   }
-  .label__file {
+  .icon{
     background-color: @disable-color;
   }
 }
@@ -270,10 +270,8 @@
   width: 20px;
   height: inherit;
   margin: 0 10px 0 0;
-  background-image: url("../../img/icons/controls.png");
-  background-repeat: no-repeat;
   text-indent: -9999px;
-  background-color: rgba(0, 0, 0, 0);
+  background: rgba(0, 0, 0, 0) url("../../img/icons/controls.png") no-repeat;
   border:0;
   cursor: pointer;
 }
@@ -391,8 +389,7 @@
     width: inherit;
     height: 10px;
     margin: auto;
-    background-image: url("../../img/icons/controls.png");
-    background-repeat: no-repeat;
+    background: url("../../img/icons/controls.png") no-repeat;
     position: absolute;
     overflow: hidden;
     text-align: left;
@@ -528,8 +525,7 @@
       width: inherit;
       height: 10px;
       margin: auto;
-      background-image: url("../../img/icons/controls.png");
-      background-repeat: no-repeat;
+      background: url("../../img/icons/controls.png") no-repeat;
       position: absolute;
       overflow: hidden;
       text-align: left;
@@ -589,9 +585,7 @@
   cursor: pointer;
   outline: none;
   border-radius: 50%;
-  border-width: 7px;
-  border-color:  #dbe1e8;
-  border-style: solid;
+  border: 7px solid #dbe1e8;
   background-color:  #9eb2c0;
   box-shadow: 0px 1px 1px 0.00px rgba(0, 0, 0, 0.38);
   width: 8px;
@@ -645,18 +639,18 @@
     // overflow: hidden;
 }
 .label__file {
-    font-size: 0;
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
-    cursor: pointer;
-    text-align: center;
-    width: 39px;
-    background-color: #f97e76;
-    border-radius: 0 3px 3px 0;
+  font-size: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 27px;
+  z-index: 1;
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: center;
+  width: 220px;
+  border-radius: 3px;
 }
 .ie-8 .label__file {
     bottom: 1px;
@@ -668,10 +662,13 @@
     vertical-align: middle;
 }
 .label__file .icon {
-  background: url(../../img/icons/icon-upload.png) no-repeat center;
-  width: 21px;
-  height: 16px;
+  background: #f97e76 url(../../img/icons/controls.png) 0 0 no-repeat;
+  width: 39px;
+  height: 27px;
   display: inline-block;
+  position: absolute;
+  right: 0;
+  border-radius:0 3px 3px 0;
   vertical-align: middle;
     transition: -webkit-transform .2s ease;
     transition:         transform .2s ease;
@@ -728,7 +725,7 @@
     font-size: 30px;
     text-decoration: none;
     color: #ccc;
-    transition: all 0.3s ease 0;
+    transition: all 0.3s ease;
     &:hover {
       color: #fff;
     }
