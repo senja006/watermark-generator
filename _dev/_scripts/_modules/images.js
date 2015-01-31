@@ -211,6 +211,7 @@ var images = (function() {
 		var $controlsFile = container;
 		var $error = $controlsFile.find('.error');
 		$error.text(text);
+		document.getElementById('snd-error').play();
 		$controlsFile.addClass('is-error');
 		$error.fadeIn(300);
 		if($controlsFile.hasClass('is-load')) {

@@ -17,14 +17,16 @@ var
 // сборка папки 'app/'
 gulp.task('build', ['clean', 'jade', 'less', 'js', 'compress-plugins', 'move-php'], function() {
     gulp.src('_dev/favicon.ico')
-        .pipe(gulp.dest('app/'))
+        .pipe(gulp.dest('app/'));
     gulp.src('_dev/fonts/**/*')
-        .pipe(gulp.dest('app/fonts/'))
+        .pipe(gulp.dest('app/fonts/'));
     gulp.src('_dev/_scripts/_vendor/**/*')
-        .pipe(gulp.dest('app/js/vendor/'))
+        .pipe(gulp.dest('app/js/vendor/'));
     gulp.src('_dev/img/**/*')
         .pipe(imagemin())
-        .pipe(gulp.dest('app/img'))
+        .pipe(gulp.dest('app/img'));
+    gulp.src('_dev/sound/**/*')
+        .pipe(gulp.dest('app/sound'));
 });
 
 // компилируем Jade
