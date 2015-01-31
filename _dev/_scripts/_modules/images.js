@@ -38,7 +38,7 @@ var images = (function() {
 				$('.preloader').hide();
 			},
 			error: function(response) {
-			},
+			}
 		});
 		return false;
 	};
@@ -55,7 +55,6 @@ var images = (function() {
 		        var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
 
 		        $('.preloader').show();
-		        $('.controls__inputs-group').addClass('controls__inputs-group__disabled');
 		        if(data.originalFiles[0].size > MAX_FILE_SIZE) {
 		            errorsText = lang.getMsgText('maxfilesize') + (MAX_FILE_SIZE / 1000000) + lang.getMsgText('mb');
 		        }
@@ -90,7 +89,7 @@ var images = (function() {
 			},
 			fail: function (e, data) {
 				showError($controlsFile, lang.getMsgText('cantload'));
-			},
+			}
 		});
 	};
 
