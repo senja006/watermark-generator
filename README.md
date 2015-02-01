@@ -3,7 +3,7 @@
 <a href="http://loftschool.ru">Школа веб-разработки <b>Loftschool</p></a>
 
 <img src="http://wmgen.danratnikov.ru/img/watermark3.jpg" style="width: 600px" />
-<p><a href="http://wmgen.danratnikov.ru/">http://wmgen.danratnikov.ru/</a></p>
+<p><a href="http://watermark.yarkevich.ru/">http://watermark.yarkevich.ru/</a></p>
 <h3><i>Что получилось</i></h3>
 <p>Самый лучший в настоящее время сервис генерации водяных знаков. Его отличетельной особенностями являются:</p>
 <ul>
